@@ -1,0 +1,44 @@
+//
+//  Answer-Prefix.pch
+//  Answer
+//
+//  Created by wuyj on 15/12/2.
+//  Copyright © 2015年 wuyj. All rights reserved.
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_5_0
+#warning "This project uses features only available in iOS SDK 5.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "NSString+Utility.h"
+#import "UIColor+Utility.h"
+#import "UIImage+Utility.h"
+#import "LineView.h"
+#import "WYJNavigationController.h"
+#import "FadePromptView.h"
+#endif
+
+#define screenStartY self.navigationController.navigationBarHidden ? 20:0
+#define IsIOS7 ([[[[UIDevice currentDevice] systemVersion] substringToIndex:1] intValue]>=7)
+#define navigationBarHeight (IsIOS7 ? 64 : 44)
+
+#define screenHeight [UIScreen mainScreen].bounds.size.height
+#define screenWidth [UIScreen mainScreen].bounds.size.width
+
+
+#define kNetworkAPIServer           @"https://mop.baidu.com/rest"
+
+#if DEBUG
+#define NSLog(...) NSLog(__VA_ARGS__)
+#else
+#define NSLog(...) {}
+#endif
+
+
+
+
