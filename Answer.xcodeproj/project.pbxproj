@@ -13,7 +13,14 @@
 		E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E501C0F0A910042E1F3 /* DiscoverVC.m */; };
 		E1C21E541C0F0AE80042E1F3 /* MeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E531C0F0AE80042E1F3 /* MeVC.m */; };
 		E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E561C0F16A40042E1F3 /* LoginVC.m */; };
-		E1C21E5A1C0F16F60042E1F3 /* ReditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E591C0F16F60042E1F3 /* ReditVC.m */; };
+		E1C21E5A1C0F16F60042E1F3 /* RegeditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E591C0F16F60042E1F3 /* RegeditVC.m */; };
+		E1C21E5D1C0F21BF0042E1F3 /* QuestionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E5C1C0F21BF0042E1F3 /* QuestionDetailVC.m */; };
+		E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E5F1C0F21E00042E1F3 /* AnswerVC.m */; };
+		E1C21E631C0F22BB0042E1F3 /* PublishQuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E621C0F22BB0042E1F3 /* PublishQuestionVC.m */; };
+		E1C21E661C0F23090042E1F3 /* SystemMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E651C0F23090042E1F3 /* SystemMessageVC.m */; };
+		E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E681C0F233F0042E1F3 /* MyFriendsVC.m */; };
+		E1C21E6C1C0F23940042E1F3 /* MyWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E6B1C0F23940042E1F3 /* MyWalletVC.m */; };
+		E1C21E6F1C0F23FF0042E1F3 /* QuestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */; };
 		E1D188BB1C0ED4880043DE9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188BA1C0ED4880043DE9C /* main.m */; };
 		E1D188BE1C0ED4880043DE9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188BD1C0ED4880043DE9C /* AppDelegate.m */; };
 		E1D188C61C0ED4880043DE9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D188C51C0ED4880043DE9C /* Assets.xcassets */; };
@@ -88,8 +95,22 @@
 		E1C21E531C0F0AE80042E1F3 /* MeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeVC.m; sourceTree = "<group>"; };
 		E1C21E551C0F16A40042E1F3 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		E1C21E561C0F16A40042E1F3 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
-		E1C21E581C0F16F60042E1F3 /* ReditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReditVC.h; sourceTree = "<group>"; };
-		E1C21E591C0F16F60042E1F3 /* ReditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReditVC.m; sourceTree = "<group>"; };
+		E1C21E581C0F16F60042E1F3 /* RegeditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegeditVC.h; sourceTree = "<group>"; };
+		E1C21E591C0F16F60042E1F3 /* RegeditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegeditVC.m; sourceTree = "<group>"; };
+		E1C21E5B1C0F21BF0042E1F3 /* QuestionDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailVC.h; sourceTree = "<group>"; };
+		E1C21E5C1C0F21BF0042E1F3 /* QuestionDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailVC.m; sourceTree = "<group>"; };
+		E1C21E5E1C0F21E00042E1F3 /* AnswerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerVC.h; sourceTree = "<group>"; };
+		E1C21E5F1C0F21E00042E1F3 /* AnswerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerVC.m; sourceTree = "<group>"; };
+		E1C21E611C0F22BB0042E1F3 /* PublishQuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishQuestionVC.h; sourceTree = "<group>"; };
+		E1C21E621C0F22BB0042E1F3 /* PublishQuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishQuestionVC.m; sourceTree = "<group>"; };
+		E1C21E641C0F23090042E1F3 /* SystemMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageVC.h; sourceTree = "<group>"; };
+		E1C21E651C0F23090042E1F3 /* SystemMessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SystemMessageVC.m; sourceTree = "<group>"; };
+		E1C21E671C0F233F0042E1F3 /* MyFriendsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendsVC.h; sourceTree = "<group>"; };
+		E1C21E681C0F233F0042E1F3 /* MyFriendsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendsVC.m; sourceTree = "<group>"; };
+		E1C21E6A1C0F23940042E1F3 /* MyWalletVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyWalletVC.h; sourceTree = "<group>"; };
+		E1C21E6B1C0F23940042E1F3 /* MyWalletVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletVC.m; sourceTree = "<group>"; };
+		E1C21E6D1C0F23FF0042E1F3 /* QuestionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsView.h; sourceTree = "<group>"; };
+		E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsView.m; sourceTree = "<group>"; };
 		E1D188B61C0ED4880043DE9C /* Answer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Answer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D188BA1C0ED4880043DE9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1D188BC1C0ED4880043DE9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -206,6 +227,83 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E1C21E701C0F242C0042E1F3 /* 图问圈 */ = {
+			isa = PBXGroup;
+			children = (
+				E1C21E5E1C0F21E00042E1F3 /* AnswerVC.h */,
+				E1C21E5F1C0F21E00042E1F3 /* AnswerVC.m */,
+				E1C21E5B1C0F21BF0042E1F3 /* QuestionDetailVC.h */,
+				E1C21E5C1C0F21BF0042E1F3 /* QuestionDetailVC.m */,
+				E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */,
+				E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */,
+			);
+			name = "图问圈";
+			sourceTree = "<group>";
+		};
+		E1C21E711C0F24690042E1F3 /* 发现 */ = {
+			isa = PBXGroup;
+			children = (
+				E1C21E4F1C0F0A910042E1F3 /* DiscoverVC.h */,
+				E1C21E501C0F0A910042E1F3 /* DiscoverVC.m */,
+			);
+			name = "发现";
+			sourceTree = "<group>";
+		};
+		E1C21E721C0F24850042E1F3 /* 图问 */ = {
+			isa = PBXGroup;
+			children = (
+				E1C21E611C0F22BB0042E1F3 /* PublishQuestionVC.h */,
+				E1C21E621C0F22BB0042E1F3 /* PublishQuestionVC.m */,
+				E1C21E491C0F0A430042E1F3 /* QuestionVC.h */,
+				E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */,
+			);
+			name = "图问";
+			sourceTree = "<group>";
+		};
+		E1C21E731C0F24A30042E1F3 /* 消息 */ = {
+			isa = PBXGroup;
+			children = (
+				E1C21E4C1C0F0A5A0042E1F3 /* MessageVC.h */,
+				E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */,
+				E1C21E641C0F23090042E1F3 /* SystemMessageVC.h */,
+				E1C21E651C0F23090042E1F3 /* SystemMessageVC.m */,
+			);
+			name = "消息";
+			sourceTree = "<group>";
+		};
+		E1C21E741C0F24BA0042E1F3 /* 我 */ = {
+			isa = PBXGroup;
+			children = (
+				E1C21E521C0F0AE80042E1F3 /* MeVC.h */,
+				E1C21E531C0F0AE80042E1F3 /* MeVC.m */,
+				E1C21E671C0F233F0042E1F3 /* MyFriendsVC.h */,
+				E1C21E681C0F233F0042E1F3 /* MyFriendsVC.m */,
+				E1C21E6A1C0F23940042E1F3 /* MyWalletVC.h */,
+				E1C21E6B1C0F23940042E1F3 /* MyWalletVC.m */,
+			);
+			name = "我";
+			sourceTree = "<group>";
+		};
+		E1C21E751C0F25390042E1F3 /* 登录&注册 */ = {
+			isa = PBXGroup;
+			children = (
+				E1C21E551C0F16A40042E1F3 /* LoginVC.h */,
+				E1C21E561C0F16A40042E1F3 /* LoginVC.m */,
+				E1C21E581C0F16F60042E1F3 /* RegeditVC.h */,
+				E1C21E591C0F16F60042E1F3 /* RegeditVC.m */,
+			);
+			name = "登录&注册";
+			sourceTree = "<group>";
+		};
+		E1C21E761C0F25510042E1F3 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				E1C21E6D1C0F23FF0042E1F3 /* QuestionsView.h */,
+				E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
 		E1D188AD1C0ED4870043DE9C = {
 			isa = PBXGroup;
 			children = (
@@ -231,8 +329,6 @@
 			children = (
 				E1D188F51C0EE6F60043DE9C /* Tools */,
 				E1D188F41C0EE6EA0043DE9C /* UI */,
-				E1D188BC1C0ED4880043DE9C /* AppDelegate.h */,
-				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
 				E1D188B91C0ED4880043DE9C /* Supporting Files */,
 			);
 			path = Answer;
@@ -241,6 +337,8 @@
 		E1D188B91C0ED4880043DE9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E1D188BC1C0ED4880043DE9C /* AppDelegate.h */,
+				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
 				E1D188CA1C0ED4880043DE9C /* Info.plist */,
 				E1D188C51C0ED4880043DE9C /* Assets.xcassets */,
 				E1D188BA1C0ED4880043DE9C /* main.m */,
@@ -271,20 +369,13 @@
 		E1D188F41C0EE6EA0043DE9C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */,
-				E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */,
-				E1C21E4F1C0F0A910042E1F3 /* DiscoverVC.h */,
-				E1C21E501C0F0A910042E1F3 /* DiscoverVC.m */,
-				E1C21E491C0F0A430042E1F3 /* QuestionVC.h */,
-				E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */,
-				E1C21E4C1C0F0A5A0042E1F3 /* MessageVC.h */,
-				E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */,
-				E1C21E521C0F0AE80042E1F3 /* MeVC.h */,
-				E1C21E531C0F0AE80042E1F3 /* MeVC.m */,
-				E1C21E551C0F16A40042E1F3 /* LoginVC.h */,
-				E1C21E561C0F16A40042E1F3 /* LoginVC.m */,
-				E1C21E581C0F16F60042E1F3 /* ReditVC.h */,
-				E1C21E591C0F16F60042E1F3 /* ReditVC.m */,
+				E1C21E761C0F25510042E1F3 /* common */,
+				E1C21E751C0F25390042E1F3 /* 登录&注册 */,
+				E1C21E741C0F24BA0042E1F3 /* 我 */,
+				E1C21E731C0F24A30042E1F3 /* 消息 */,
+				E1C21E721C0F24850042E1F3 /* 图问 */,
+				E1C21E711C0F24690042E1F3 /* 发现 */,
+				E1C21E701C0F242C0042E1F3 /* 图问圈 */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -579,18 +670,21 @@
 				E1D1894F1C0EE6F60043DE9C /* AFURLRequestSerialization.m in Sources */,
 				E1D189581C0EE6F60043DE9C /* LineView.m in Sources */,
 				E1D1894E1C0EE6F60043DE9C /* AFURLConnectionOperation.m in Sources */,
+				E1C21E631C0F22BB0042E1F3 /* PublishQuestionVC.m in Sources */,
 				E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */,
 				E1D1894D1C0EE6F60043DE9C /* AFSecurityPolicy.m in Sources */,
 				E1D189661C0EE6F60043DE9C /* UIButton+WebCache.m in Sources */,
 				E1C21E541C0F0AE80042E1F3 /* MeVC.m in Sources */,
 				E1D189591C0EE6F60043DE9C /* NetResultBase.m in Sources */,
+				E1C21E5D1C0F21BF0042E1F3 /* QuestionDetailVC.m in Sources */,
 				E1D189681C0EE6F60043DE9C /* UIImage+MultiFormat.m in Sources */,
 				E1D189551C0EE6F60043DE9C /* UIColor+Utility.m in Sources */,
 				E1D189611C0EE6F60043DE9C /* SDWebImageDecoder.m in Sources */,
+				E1C21E661C0F23090042E1F3 /* SystemMessageVC.m in Sources */,
 				E1D189521C0EE6F60043DE9C /* BaseVC.m in Sources */,
 				E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */,
 				E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */,
-				E1C21E5A1C0F16F60042E1F3 /* ReditVC.m in Sources */,
+				E1C21E5A1C0F16F60042E1F3 /* RegeditVC.m in Sources */,
 				E1D189571C0EE6F60043DE9C /* FadePromptView.m in Sources */,
 				E1D189491C0EE6F60043DE9C /* AFHTTPRequestOperation.m in Sources */,
 				E1D1895E1C0EE6F60043DE9C /* NSData+ImageContentType.m in Sources */,
@@ -598,23 +692,27 @@
 				E1D1895B1C0EE6F60043DE9C /* NSObject+Utility.m in Sources */,
 				E1D189511C0EE6F60043DE9C /* AFURLSessionManager.m in Sources */,
 				E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */,
+				E1C21E6F1C0F23FF0042E1F3 /* QuestionsView.m in Sources */,
 				E1D189531C0EE6F60043DE9C /* WYJNavigationController.m in Sources */,
 				E1D189501C0EE6F60043DE9C /* AFURLResponseSerialization.m in Sources */,
 				E1D1895C1C0EE6F60043DE9C /* Reachability.m in Sources */,
 				E1D188BE1C0ED4880043DE9C /* AppDelegate.m in Sources */,
 				E1D1896C1C0EE6F60043DE9C /* UIView+WebCacheOperation.m in Sources */,
 				E1D189601C0EE6F60043DE9C /* SDWebImageCompat.m in Sources */,
+				E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */,
 				E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */,
 				E1D1894B1C0EE6F60043DE9C /* AFHTTPSessionManager.m in Sources */,
 				E1D1895D1C0EE6F60043DE9C /* MKAnnotationView+WebCache.m in Sources */,
 				E1D189561C0EE6F60043DE9C /* UIImage+Utility.m in Sources */,
 				E1D1894A1C0EE6F60043DE9C /* AFHTTPRequestOperationManager.m in Sources */,
 				E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */,
+				E1C21E6C1C0F23940042E1F3 /* MyWalletVC.m in Sources */,
 				E1D189651C0EE6F60043DE9C /* SDWebImagePrefetcher.m in Sources */,
 				E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */,
 				E1D189631C0EE6F60043DE9C /* SDWebImageDownloaderOperation.m in Sources */,
 				E1D1894C1C0EE6F60043DE9C /* AFNetworkReachabilityManager.m in Sources */,
 				E1D189641C0EE6F60043DE9C /* SDWebImageManager.m in Sources */,
+				E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */,
 				E1D189691C0EE6F60043DE9C /* UIImage+WebP.m in Sources */,
 				E1D188BB1C0ED4880043DE9C /* main.m in Sources */,
 				E1D1895F1C0EE6F60043DE9C /* SDImageCache.m in Sources */,
