@@ -1,18 +1,18 @@
 //
-//  HomeVC.m
+//  LoginVC.m
 //  Answer
 //
 //  Created by wuyj on 15/12/2.
 //  Copyright © 2015年 wuyj. All rights reserved.
 //
 
-#import "HomeVC.h"
+#import "LoginVC.h"
 
-@interface HomeVC ()
+@interface LoginVC ()
 
 @end
 
-@implementation HomeVC
+@implementation LoginVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

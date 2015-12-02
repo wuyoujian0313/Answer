@@ -1,5 +1,5 @@
 //
-//  HomeVC.h
+//  QuestionVC.h
 //  Answer
 //
 //  Created by wuyj on 15/12/2.
@@ -8,6 +8,6 @@
 
 #import "BaseVC.h"
 
-@interface HomeVC : BaseVC
+@interface QuestionVC : BaseVC
 
 @end

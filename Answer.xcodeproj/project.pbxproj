@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */; };
+		E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */; };
+		E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */; };
+		E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E501C0F0A910042E1F3 /* DiscoverVC.m */; };
+		E1C21E541C0F0AE80042E1F3 /* MeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E531C0F0AE80042E1F3 /* MeVC.m */; };
+		E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E561C0F16A40042E1F3 /* LoginVC.m */; };
+		E1C21E5A1C0F16F60042E1F3 /* ReditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E591C0F16F60042E1F3 /* ReditVC.m */; };
 		E1D188BB1C0ED4880043DE9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188BA1C0ED4880043DE9C /* main.m */; };
 		E1D188BE1C0ED4880043DE9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188BD1C0ED4880043DE9C /* AppDelegate.m */; };
 		E1D188C61C0ED4880043DE9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D188C51C0ED4880043DE9C /* Assets.xcassets */; };
@@ -49,7 +56,6 @@
 		E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189441C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m */; };
 		E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189461C0EE6F60043DE9C /* UIImageView+WebCache.m */; };
 		E1D1896C1C0EE6F60043DE9C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189481C0EE6F60043DE9C /* UIView+WebCacheOperation.m */; };
-		E1D1896F1C0EE7E40043DE9C /* HomeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1896E1C0EE7E40043DE9C /* HomeVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +76,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCircleVC.h; sourceTree = "<group>"; };
+		E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCircleVC.m; sourceTree = "<group>"; };
+		E1C21E491C0F0A430042E1F3 /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
+		E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionVC.m; sourceTree = "<group>"; };
+		E1C21E4C1C0F0A5A0042E1F3 /* MessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageVC.h; sourceTree = "<group>"; };
+		E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageVC.m; sourceTree = "<group>"; };
+		E1C21E4F1C0F0A910042E1F3 /* DiscoverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverVC.h; sourceTree = "<group>"; };
+		E1C21E501C0F0A910042E1F3 /* DiscoverVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverVC.m; sourceTree = "<group>"; };
+		E1C21E521C0F0AE80042E1F3 /* MeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeVC.h; sourceTree = "<group>"; };
+		E1C21E531C0F0AE80042E1F3 /* MeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeVC.m; sourceTree = "<group>"; };
+		E1C21E551C0F16A40042E1F3 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
+		E1C21E561C0F16A40042E1F3 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
+		E1C21E581C0F16F60042E1F3 /* ReditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReditVC.h; sourceTree = "<group>"; };
+		E1C21E591C0F16F60042E1F3 /* ReditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReditVC.m; sourceTree = "<group>"; };
 		E1D188B61C0ED4880043DE9C /* Answer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Answer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D188BA1C0ED4880043DE9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1D188BC1C0ED4880043DE9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -158,8 +178,6 @@
 		E1D189461C0EE6F60043DE9C /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		E1D189471C0EE6F60043DE9C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		E1D189481C0EE6F60043DE9C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
-		E1D1896D1C0EE7E40043DE9C /* HomeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeVC.h; sourceTree = "<group>"; };
-		E1D1896E1C0EE7E40043DE9C /* HomeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeVC.m; sourceTree = "<group>"; };
 		E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer-Prefix.pch"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -253,8 +271,20 @@
 		E1D188F41C0EE6EA0043DE9C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				E1D1896D1C0EE7E40043DE9C /* HomeVC.h */,
-				E1D1896E1C0EE7E40043DE9C /* HomeVC.m */,
+				E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */,
+				E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */,
+				E1C21E4F1C0F0A910042E1F3 /* DiscoverVC.h */,
+				E1C21E501C0F0A910042E1F3 /* DiscoverVC.m */,
+				E1C21E491C0F0A430042E1F3 /* QuestionVC.h */,
+				E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */,
+				E1C21E4C1C0F0A5A0042E1F3 /* MessageVC.h */,
+				E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */,
+				E1C21E521C0F0AE80042E1F3 /* MeVC.h */,
+				E1C21E531C0F0AE80042E1F3 /* MeVC.m */,
+				E1C21E551C0F16A40042E1F3 /* LoginVC.h */,
+				E1C21E561C0F16A40042E1F3 /* LoginVC.m */,
+				E1C21E581C0F16F60042E1F3 /* ReditVC.h */,
+				E1C21E591C0F16F60042E1F3 /* ReditVC.m */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -545,17 +575,22 @@
 			files = (
 				E1D189671C0EE6F60043DE9C /* UIImage+GIF.m in Sources */,
 				E1D189541C0EE6F60043DE9C /* NSString+Utility.m in Sources */,
+				E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */,
 				E1D1894F1C0EE6F60043DE9C /* AFURLRequestSerialization.m in Sources */,
 				E1D189581C0EE6F60043DE9C /* LineView.m in Sources */,
 				E1D1894E1C0EE6F60043DE9C /* AFURLConnectionOperation.m in Sources */,
+				E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */,
 				E1D1894D1C0EE6F60043DE9C /* AFSecurityPolicy.m in Sources */,
 				E1D189661C0EE6F60043DE9C /* UIButton+WebCache.m in Sources */,
+				E1C21E541C0F0AE80042E1F3 /* MeVC.m in Sources */,
 				E1D189591C0EE6F60043DE9C /* NetResultBase.m in Sources */,
 				E1D189681C0EE6F60043DE9C /* UIImage+MultiFormat.m in Sources */,
 				E1D189551C0EE6F60043DE9C /* UIColor+Utility.m in Sources */,
 				E1D189611C0EE6F60043DE9C /* SDWebImageDecoder.m in Sources */,
 				E1D189521C0EE6F60043DE9C /* BaseVC.m in Sources */,
+				E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */,
 				E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */,
+				E1C21E5A1C0F16F60042E1F3 /* ReditVC.m in Sources */,
 				E1D189571C0EE6F60043DE9C /* FadePromptView.m in Sources */,
 				E1D189491C0EE6F60043DE9C /* AFHTTPRequestOperation.m in Sources */,
 				E1D1895E1C0EE6F60043DE9C /* NSData+ImageContentType.m in Sources */,
@@ -569,11 +604,12 @@
 				E1D188BE1C0ED4880043DE9C /* AppDelegate.m in Sources */,
 				E1D1896C1C0EE6F60043DE9C /* UIView+WebCacheOperation.m in Sources */,
 				E1D189601C0EE6F60043DE9C /* SDWebImageCompat.m in Sources */,
+				E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */,
 				E1D1894B1C0EE6F60043DE9C /* AFHTTPSessionManager.m in Sources */,
 				E1D1895D1C0EE6F60043DE9C /* MKAnnotationView+WebCache.m in Sources */,
 				E1D189561C0EE6F60043DE9C /* UIImage+Utility.m in Sources */,
 				E1D1894A1C0EE6F60043DE9C /* AFHTTPRequestOperationManager.m in Sources */,
-				E1D1896F1C0EE7E40043DE9C /* HomeVC.m in Sources */,
+				E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */,
 				E1D189651C0EE6F60043DE9C /* SDWebImagePrefetcher.m in Sources */,
 				E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */,
 				E1D189631C0EE6F60043DE9C /* SDWebImageDownloaderOperation.m in Sources */,
@@ -812,6 +848,7 @@
 				E1D188E51C0ED4880043DE9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1D188E61C0ED4880043DE9C /* Build configuration list for PBXNativeTarget "AnswerTests" */ = {
 			isa = XCConfigurationList;
@@ -820,6 +857,7 @@
 				E1D188E81C0ED4880043DE9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E1D188E91C0ED4880043DE9C /* Build configuration list for PBXNativeTarget "AnswerUITests" */ = {
 			isa = XCConfigurationList;
@@ -828,6 +866,7 @@
 				E1D188EB1C0ED4880043DE9C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
