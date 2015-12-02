@@ -1,18 +1,18 @@
 //
-//  RegeditVC.m
+//  RedPacketVC.m
 //  Answer
 //
 //  Created by wuyj on 15/12/2.
 //  Copyright © 2015年 wuyj. All rights reserved.
 //
 
-#import "RegeditVC.h"
+#import "RedPacketVC.h"
 
-@interface RegeditVC ()
+@interface RedPacketVC ()
 
 @end
 
-@implementation RegeditVC
+@implementation RedPacketVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

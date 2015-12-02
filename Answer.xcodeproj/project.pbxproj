@@ -21,6 +21,7 @@
 		E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E681C0F233F0042E1F3 /* MyFriendsVC.m */; };
 		E1C21E6C1C0F23940042E1F3 /* MyWalletVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E6B1C0F23940042E1F3 /* MyWalletVC.m */; };
 		E1C21E6F1C0F23FF0042E1F3 /* QuestionsView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */; };
+		E1C21E791C0F26B10042E1F3 /* RedPacketVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E781C0F26B10042E1F3 /* RedPacketVC.m */; };
 		E1D188BB1C0ED4880043DE9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188BA1C0ED4880043DE9C /* main.m */; };
 		E1D188BE1C0ED4880043DE9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188BD1C0ED4880043DE9C /* AppDelegate.m */; };
 		E1D188C61C0ED4880043DE9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D188C51C0ED4880043DE9C /* Assets.xcassets */; };
@@ -111,6 +112,8 @@
 		E1C21E6B1C0F23940042E1F3 /* MyWalletVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyWalletVC.m; sourceTree = "<group>"; };
 		E1C21E6D1C0F23FF0042E1F3 /* QuestionsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsView.h; sourceTree = "<group>"; };
 		E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsView.m; sourceTree = "<group>"; };
+		E1C21E771C0F26B10042E1F3 /* RedPacketVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RedPacketVC.h; sourceTree = "<group>"; };
+		E1C21E781C0F26B10042E1F3 /* RedPacketVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RedPacketVC.m; sourceTree = "<group>"; };
 		E1D188B61C0ED4880043DE9C /* Answer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Answer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D188BA1C0ED4880043DE9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1D188BC1C0ED4880043DE9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -256,6 +259,8 @@
 				E1C21E621C0F22BB0042E1F3 /* PublishQuestionVC.m */,
 				E1C21E491C0F0A430042E1F3 /* QuestionVC.h */,
 				E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */,
+				E1C21E771C0F26B10042E1F3 /* RedPacketVC.h */,
+				E1C21E781C0F26B10042E1F3 /* RedPacketVC.m */,
 			);
 			name = "图问";
 			sourceTree = "<group>";
@@ -688,6 +693,7 @@
 				E1D189571C0EE6F60043DE9C /* FadePromptView.m in Sources */,
 				E1D189491C0EE6F60043DE9C /* AFHTTPRequestOperation.m in Sources */,
 				E1D1895E1C0EE6F60043DE9C /* NSData+ImageContentType.m in Sources */,
+				E1C21E791C0F26B10042E1F3 /* RedPacketVC.m in Sources */,
 				E1D189621C0EE6F60043DE9C /* SDWebImageDownloader.m in Sources */,
 				E1D1895B1C0EE6F60043DE9C /* NSObject+Utility.m in Sources */,
 				E1D189511C0EE6F60043DE9C /* AFURLSessionManager.m in Sources */,
