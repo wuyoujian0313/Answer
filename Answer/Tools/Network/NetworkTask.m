@@ -10,6 +10,8 @@
 #import "NetResultBase.h"
 #import "AFNetworking.h"
 
+
+
 @interface AFHTTPRequestOperationManager (PUTForm)
 
 - (AFHTTPRequestOperation *)PUT:(NSString *)URLString
@@ -106,12 +108,12 @@
     
     [resultObj autoParseJsonData:responseObject];
     
-    if(resultObj.code != nil && ( [resultObj.code integerValue] == 1 || [resultObj.code integerValue] == 200)) {
+    if(resultObj.code != nil && [resultObj.code integerValue] == NetStatusCodeSuccess) {
         
         if (delegate != nil && [delegate respondsToSelector:@selector(netResultSuccessBack:forInfo:)]) {
             [delegate netResultSuccessBack:resultObj forInfo:customInfo];
         }
-    } else if(resultObj.code != nil &&  ( [resultObj.code integerValue] != 1 || [resultObj.code integerValue] == 200)) {
+    } else if(resultObj.code != nil && [resultObj.code integerValue] != NetStatusCodeSuccess ) {
         
         if (delegate != nil && [delegate respondsToSelector:@selector(netResultFailBack:errorCode:forInfo:)]) {
             NSString *errorDesc = [NetworkTask errerDescription:[resultObj.code integerValue]];
@@ -123,8 +125,10 @@
         }
         
     } else {
+        
+        NSString *errorDesc = [NetworkTask errerDescription:NetStatusCodeUnknown];
         if (delegate != nil && [delegate respondsToSelector:@selector(netResultFailBack:errorCode:forInfo:)]) {
-            [delegate netResultFailBack:@"未知错误，请重试" errorCode:100000 forInfo:customInfo];
+            [delegate netResultFailBack:errorDesc errorCode:NetStatusCodeUnknown forInfo:customInfo];
         }
     }
 }
@@ -295,8 +299,13 @@
     NSMutableString *desc = [[NSMutableString alloc] initWithCapacity:0];
     
     switch (statusCode) {
-        case 1: {
+        case NetStatusCodeSuccess: {
             [desc appendString:@"成功"];
+            break;
+        }
+            
+        case NetStatusCodeUnknown: {
+            [desc appendString:@"未知错误，请重试"];
             break;
         }
             

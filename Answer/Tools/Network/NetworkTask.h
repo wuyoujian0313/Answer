@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 
 
+typedef NS_ENUM(NSInteger, NetStatusCode) {
+    NetStatusCodeSuccess = 1000,
+    NetStatusCodeUnknown,
+};
+
+
 @class NetResultBase;
 @protocol NetworkTaskDelegate <NSObject>
 
