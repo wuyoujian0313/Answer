@@ -20,6 +20,10 @@
 		E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21081C1EF78E003925B5 /* CommitVoiceResult.m */; };
 		E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */; };
 		E14C210F1C1EF7C7003925B5 /* CommitPictureResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */; };
+		E14C21121C1EF969003925B5 /* MessageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21111C1EF969003925B5 /* MessageResult.m */; };
+		E14C21151C1EF9B4003925B5 /* MessageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21141C1EF9B4003925B5 /* MessageInfo.m */; };
+		E14C21181C1EFB02003925B5 /* DeleteMessageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21171C1EFB02003925B5 /* DeleteMessageResult.m */; };
+		E14C211B1C1EFB27003925B5 /* MyFriendsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */; };
 		E15E27AB1C102C2D0035A4ED /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E15E27AA1C102C2D0035A4ED /* FileCache.m */; };
 		E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */; };
 		E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */; };
@@ -124,6 +128,14 @@
 		E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitVideoResult.m; sourceTree = "<group>"; };
 		E14C210D1C1EF7C7003925B5 /* CommitPictureResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitPictureResult.h; sourceTree = "<group>"; };
 		E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitPictureResult.m; sourceTree = "<group>"; };
+		E14C21101C1EF969003925B5 /* MessageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageResult.h; sourceTree = "<group>"; };
+		E14C21111C1EF969003925B5 /* MessageResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageResult.m; sourceTree = "<group>"; };
+		E14C21131C1EF9B4003925B5 /* MessageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInfo.h; sourceTree = "<group>"; };
+		E14C21141C1EF9B4003925B5 /* MessageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInfo.m; sourceTree = "<group>"; };
+		E14C21161C1EFB02003925B5 /* DeleteMessageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteMessageResult.h; sourceTree = "<group>"; };
+		E14C21171C1EFB02003925B5 /* DeleteMessageResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteMessageResult.m; sourceTree = "<group>"; };
+		E14C21191C1EFB27003925B5 /* MyFriendsResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyFriendsResult.h; sourceTree = "<group>"; };
+		E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendsResult.m; sourceTree = "<group>"; };
 		E15E27A91C102C2D0035A4ED /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
 		E15E27AA1C102C2D0035A4ED /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
 		E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCircleVC.h; sourceTree = "<group>"; };
@@ -301,6 +313,14 @@
 				E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */,
 				E14C210D1C1EF7C7003925B5 /* CommitPictureResult.h */,
 				E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */,
+				E14C21101C1EF969003925B5 /* MessageResult.h */,
+				E14C21111C1EF969003925B5 /* MessageResult.m */,
+				E14C21131C1EF9B4003925B5 /* MessageInfo.h */,
+				E14C21141C1EF9B4003925B5 /* MessageInfo.m */,
+				E14C21161C1EFB02003925B5 /* DeleteMessageResult.h */,
+				E14C21171C1EFB02003925B5 /* DeleteMessageResult.m */,
+				E14C21191C1EFB27003925B5 /* MyFriendsResult.h */,
+				E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -780,11 +800,13 @@
 				E1C21E661C0F23090042E1F3 /* SystemMessageVC.m in Sources */,
 				E1D189521C0EE6F60043DE9C /* BaseVC.m in Sources */,
 				E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */,
+				E14C21181C1EFB02003925B5 /* DeleteMessageResult.m in Sources */,
 				E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */,
 				E1C21E5A1C0F16F60042E1F3 /* RegisterVC.m in Sources */,
 				E1D189571C0EE6F60043DE9C /* FadePromptView.m in Sources */,
 				E1D189491C0EE6F60043DE9C /* AFHTTPRequestOperation.m in Sources */,
 				E1D1895E1C0EE6F60043DE9C /* NSData+ImageContentType.m in Sources */,
+				E14C21151C1EF9B4003925B5 /* MessageInfo.m in Sources */,
 				E1C21E791C0F26B10042E1F3 /* RedPacketVC.m in Sources */,
 				E1D189621C0EE6F60043DE9C /* SDWebImageDownloader.m in Sources */,
 				E1D1895B1C0EE6F60043DE9C /* NSObject+Utility.m in Sources */,
@@ -812,11 +834,13 @@
 				E1D189651C0EE6F60043DE9C /* SDWebImagePrefetcher.m in Sources */,
 				E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */,
 				E1D189631C0EE6F60043DE9C /* SDWebImageDownloaderOperation.m in Sources */,
+				E14C211B1C1EFB27003925B5 /* MyFriendsResult.m in Sources */,
 				E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */,
 				E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */,
 				E1D1894C1C0EE6F60043DE9C /* AFNetworkReachabilityManager.m in Sources */,
 				E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */,
 				E1D189641C0EE6F60043DE9C /* SDWebImageManager.m in Sources */,
+				E14C21121C1EF969003925B5 /* MessageResult.m in Sources */,
 				E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */,
 				E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */,
 				E1D189691C0EE6F60043DE9C /* UIImage+WebP.m in Sources */,

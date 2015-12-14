@@ -11,6 +11,6 @@
 #import "QuestionInfo.h"
 
 @interface QuestionsResult : NetResultBase
-@property (nonatomic, strong) NSArray *BaiduParserArray(userList,UserInfo);
-@property (nonatomic, strong) NSArray *BaiduParserArray(twList,QuestionInfo);
+@property (nonatomic, strong,getter=userList) NSArray *BaiduParserArray(userList,UserInfo);
+@property (nonatomic, strong,getter=twList) NSArray *BaiduParserArray(twList,QuestionInfo);
 @end
