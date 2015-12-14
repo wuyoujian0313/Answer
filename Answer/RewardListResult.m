@@ -1,13 +1,13 @@
 //
-//  MessageResult.m
+//  RewardListResult.m
 //  Answer
 //
 //  Created by wuyj on 15/12/14.
 //  Copyright © 2015年 wuyj. All rights reserved.
 //
 
-#import "MessageResult.h"
+#import "RewardListResult.h"
 
-@implementation MessageResult
+@implementation RewardListResult
 
 @end

@@ -1,5 +1,5 @@
 //
-//  UserAccount.h
+//  UserAccountResult.h
 //  Answer
 //
 //  Created by wuyj on 15/12/14.
@@ -7,8 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "NetResultBase.h"
 
-@interface UserAccount : NSObject
+@interface UserAccountResult : NetResultBase
 
 @property (nonatomic, assign) CGFloat       balance;
 @property (nonatomic, assign) NSInteger     receivePacket;

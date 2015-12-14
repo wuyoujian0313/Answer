@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
 		E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20ED1C1EE8DB003925B5 /* UserInfo.m */; };
-		E14C20F11C1EEADC003925B5 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F01C1EEADC003925B5 /* UserAccount.m */; };
+		E14C20F11C1EEADC003925B5 /* UserAccountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F01C1EEADC003925B5 /* UserAccountResult.m */; };
 		E14C20F41C1EED5A003925B5 /* RegisterResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F31C1EED5A003925B5 /* RegisterResult.m */; };
 		E14C20F71C1EEE63003925B5 /* LoginoutResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F61C1EEE63003925B5 /* LoginoutResult.m */; };
 		E14C20FA1C1EF074003925B5 /* QuestionsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F91C1EF074003925B5 /* QuestionsResult.m */; };
@@ -20,11 +20,15 @@
 		E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21081C1EF78E003925B5 /* CommitVoiceResult.m */; };
 		E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */; };
 		E14C210F1C1EF7C7003925B5 /* CommitPictureResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */; };
-		E14C21121C1EF969003925B5 /* MessageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21111C1EF969003925B5 /* MessageResult.m */; };
+		E14C21121C1EF969003925B5 /* MessagesResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21111C1EF969003925B5 /* MessagesResult.m */; };
 		E14C21151C1EF9B4003925B5 /* MessageInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21141C1EF9B4003925B5 /* MessageInfo.m */; };
 		E14C21181C1EFB02003925B5 /* DeleteMessageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21171C1EFB02003925B5 /* DeleteMessageResult.m */; };
 		E14C211B1C1EFB27003925B5 /* MyFriendsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */; };
 		E15E27AB1C102C2D0035A4ED /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E15E27AA1C102C2D0035A4ED /* FileCache.m */; };
+		E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */; };
+		E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */; };
+		E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */; };
+		E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */; };
 		E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */; };
 		E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */; };
 		E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */; };
@@ -106,8 +110,8 @@
 		E14C20EA1C1EE8A6003925B5 /* LoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResult.m; sourceTree = "<group>"; };
 		E14C20EC1C1EE8DB003925B5 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
 		E14C20ED1C1EE8DB003925B5 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
-		E14C20EF1C1EEADC003925B5 /* UserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccount.h; sourceTree = "<group>"; };
-		E14C20F01C1EEADC003925B5 /* UserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccount.m; sourceTree = "<group>"; };
+		E14C20EF1C1EEADC003925B5 /* UserAccountResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccountResult.h; sourceTree = "<group>"; };
+		E14C20F01C1EEADC003925B5 /* UserAccountResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccountResult.m; sourceTree = "<group>"; };
 		E14C20F21C1EED5A003925B5 /* RegisterResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterResult.h; sourceTree = "<group>"; };
 		E14C20F31C1EED5A003925B5 /* RegisterResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterResult.m; sourceTree = "<group>"; };
 		E14C20F51C1EEE63003925B5 /* LoginoutResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginoutResult.h; sourceTree = "<group>"; };
@@ -128,8 +132,8 @@
 		E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitVideoResult.m; sourceTree = "<group>"; };
 		E14C210D1C1EF7C7003925B5 /* CommitPictureResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitPictureResult.h; sourceTree = "<group>"; };
 		E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitPictureResult.m; sourceTree = "<group>"; };
-		E14C21101C1EF969003925B5 /* MessageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageResult.h; sourceTree = "<group>"; };
-		E14C21111C1EF969003925B5 /* MessageResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageResult.m; sourceTree = "<group>"; };
+		E14C21101C1EF969003925B5 /* MessagesResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesResult.h; sourceTree = "<group>"; };
+		E14C21111C1EF969003925B5 /* MessagesResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesResult.m; sourceTree = "<group>"; };
 		E14C21131C1EF9B4003925B5 /* MessageInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageInfo.h; sourceTree = "<group>"; };
 		E14C21141C1EF9B4003925B5 /* MessageInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageInfo.m; sourceTree = "<group>"; };
 		E14C21161C1EFB02003925B5 /* DeleteMessageResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteMessageResult.h; sourceTree = "<group>"; };
@@ -138,6 +142,14 @@
 		E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendsResult.m; sourceTree = "<group>"; };
 		E15E27A91C102C2D0035A4ED /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
 		E15E27AA1C102C2D0035A4ED /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
+		E1A054A91C1F0D2500A6DD56 /* RewardListResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardListResult.h; sourceTree = "<group>"; };
+		E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardListResult.m; sourceTree = "<group>"; };
+		E1A054AC1C1F0D5500A6DD56 /* RewardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardInfo.h; sourceTree = "<group>"; };
+		E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardInfo.m; sourceTree = "<group>"; };
+		E1A054AF1C1F0EC400A6DD56 /* ChangeHeadImgResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeHeadImgResult.h; sourceTree = "<group>"; };
+		E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeHeadImgResult.m; sourceTree = "<group>"; };
+		E1A054B21C1F0EEB00A6DD56 /* ChangeNicknameResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNicknameResult.h; sourceTree = "<group>"; };
+		E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNicknameResult.m; sourceTree = "<group>"; };
 		E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCircleVC.h; sourceTree = "<group>"; };
 		E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCircleVC.m; sourceTree = "<group>"; };
 		E1C21E491C0F0A430042E1F3 /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
@@ -291,8 +303,8 @@
 				E14C20EA1C1EE8A6003925B5 /* LoginResult.m */,
 				E14C20EC1C1EE8DB003925B5 /* UserInfo.h */,
 				E14C20ED1C1EE8DB003925B5 /* UserInfo.m */,
-				E14C20EF1C1EEADC003925B5 /* UserAccount.h */,
-				E14C20F01C1EEADC003925B5 /* UserAccount.m */,
+				E14C20EF1C1EEADC003925B5 /* UserAccountResult.h */,
+				E14C20F01C1EEADC003925B5 /* UserAccountResult.m */,
 				E14C20F21C1EED5A003925B5 /* RegisterResult.h */,
 				E14C20F31C1EED5A003925B5 /* RegisterResult.m */,
 				E14C20F51C1EEE63003925B5 /* LoginoutResult.h */,
@@ -313,14 +325,22 @@
 				E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */,
 				E14C210D1C1EF7C7003925B5 /* CommitPictureResult.h */,
 				E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */,
-				E14C21101C1EF969003925B5 /* MessageResult.h */,
-				E14C21111C1EF969003925B5 /* MessageResult.m */,
+				E14C21101C1EF969003925B5 /* MessagesResult.h */,
+				E14C21111C1EF969003925B5 /* MessagesResult.m */,
 				E14C21131C1EF9B4003925B5 /* MessageInfo.h */,
 				E14C21141C1EF9B4003925B5 /* MessageInfo.m */,
 				E14C21161C1EFB02003925B5 /* DeleteMessageResult.h */,
 				E14C21171C1EFB02003925B5 /* DeleteMessageResult.m */,
 				E14C21191C1EFB27003925B5 /* MyFriendsResult.h */,
 				E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */,
+				E1A054A91C1F0D2500A6DD56 /* RewardListResult.h */,
+				E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */,
+				E1A054AC1C1F0D5500A6DD56 /* RewardInfo.h */,
+				E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */,
+				E1A054AF1C1F0EC400A6DD56 /* ChangeHeadImgResult.h */,
+				E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */,
+				E1A054B21C1F0EEB00A6DD56 /* ChangeNicknameResult.h */,
+				E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -446,13 +466,13 @@
 		E1D188B91C0ED4880043DE9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E1D188C51C0ED4880043DE9C /* Assets.xcassets */,
 				E1D188BC1C0ED4880043DE9C /* AppDelegate.h */,
 				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
+				E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */,
 				E1D188CA1C0ED4880043DE9C /* Info.plist */,
-				E1D188C51C0ED4880043DE9C /* Assets.xcassets */,
 				E1D188BA1C0ED4880043DE9C /* main.m */,
 				E1D188F01C0ED6630043DE9C /* InfoPlist.strings */,
-				E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -781,7 +801,7 @@
 				E14C20F71C1EEE63003925B5 /* LoginoutResult.m in Sources */,
 				E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */,
 				E1D1894F1C0EE6F60043DE9C /* AFURLRequestSerialization.m in Sources */,
-				E14C20F11C1EEADC003925B5 /* UserAccount.m in Sources */,
+				E14C20F11C1EEADC003925B5 /* UserAccountResult.m in Sources */,
 				E1D189581C0EE6F60043DE9C /* LineView.m in Sources */,
 				E1D1894E1C0EE6F60043DE9C /* AFURLConnectionOperation.m in Sources */,
 				E1C21E631C0F22BB0042E1F3 /* PublishQuestionVC.m in Sources */,
@@ -811,6 +831,7 @@
 				E1D189621C0EE6F60043DE9C /* SDWebImageDownloader.m in Sources */,
 				E1D1895B1C0EE6F60043DE9C /* NSObject+Utility.m in Sources */,
 				E1D189511C0EE6F60043DE9C /* AFURLSessionManager.m in Sources */,
+				E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */,
 				E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */,
 				E1C21E6F1C0F23FF0042E1F3 /* QuestionsView.m in Sources */,
 				E14C21061C1EF61B003925B5 /* AnswerInfo.m in Sources */,
@@ -823,16 +844,19 @@
 				E14C21031C1EF479003925B5 /* QuestionDetailResult.m in Sources */,
 				E1D189601C0EE6F60043DE9C /* SDWebImageCompat.m in Sources */,
 				E14C20FD1C1EF144003925B5 /* QuestionInfo.m in Sources */,
+				E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */,
 				E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */,
 				E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */,
 				E1D1894B1C0EE6F60043DE9C /* AFHTTPSessionManager.m in Sources */,
 				E1D1895D1C0EE6F60043DE9C /* MKAnnotationView+WebCache.m in Sources */,
 				E1D189561C0EE6F60043DE9C /* UIImage+Utility.m in Sources */,
+				E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */,
 				E1D1894A1C0EE6F60043DE9C /* AFHTTPRequestOperationManager.m in Sources */,
 				E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */,
 				E1C21E6C1C0F23940042E1F3 /* MyWalletVC.m in Sources */,
 				E1D189651C0EE6F60043DE9C /* SDWebImagePrefetcher.m in Sources */,
 				E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */,
+				E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */,
 				E1D189631C0EE6F60043DE9C /* SDWebImageDownloaderOperation.m in Sources */,
 				E14C211B1C1EFB27003925B5 /* MyFriendsResult.m in Sources */,
 				E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */,
@@ -840,7 +864,7 @@
 				E1D1894C1C0EE6F60043DE9C /* AFNetworkReachabilityManager.m in Sources */,
 				E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */,
 				E1D189641C0EE6F60043DE9C /* SDWebImageManager.m in Sources */,
-				E14C21121C1EF969003925B5 /* MessageResult.m in Sources */,
+				E14C21121C1EF969003925B5 /* MessagesResult.m in Sources */,
 				E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */,
 				E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */,
 				E1D189691C0EE6F60043DE9C /* UIImage+WebP.m in Sources */,

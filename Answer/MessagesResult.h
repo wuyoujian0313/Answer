@@ -1,5 +1,5 @@
 //
-//  MessageResult.h
+//  MessagesResult.h
 //  Answer
 //
 //  Created by wuyj on 15/12/14.
@@ -9,7 +9,7 @@
 #import "NetResultBase.h"
 #import "MessageInfo.h"
 
-@interface MessageResult : NetResultBase
+@interface MessagesResult : NetResultBase
 
 @property (nonatomic, strong, getter=sysMessageList) NSArray *BaiduParserArray(sysMessageList,MessageInfo);
 
