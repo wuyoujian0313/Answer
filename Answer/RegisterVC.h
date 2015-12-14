@@ -1,5 +1,5 @@
 //
-//  RegeditVC.h
+//  RegisterVC.h
 //  Answer
 //
 //  Created by wuyj on 15/12/2.
@@ -8,6 +8,6 @@
 
 #import "BaseVC.h"
 
-@interface RegeditVC : BaseVC
+@interface RegisterVC : BaseVC
 
 @end

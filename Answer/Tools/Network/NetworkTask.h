@@ -34,6 +34,21 @@ typedef NS_ENUM(NSInteger, NetStatusCode) {
 
 +(NSString *)errerDescription:(NSInteger)statusCode;
 
+// upload File 带上传文件的
+- (void)startUploadTaskApi:(NSString*)api
+                  forParam:(NSDictionary *)param
+                  fileData:(NSData*)fileData
+                  delegate:(id <NetworkTaskDelegate>)delegate
+                 resultObj:(NetResultBase*)resultObj
+                customInfo:(id)customInfo;
+
+- (void)startUploadTaskApi:(NSString*)api
+                  forParam:(NSDictionary *)param
+                  filePath:(NSString*)filePath
+                  delegate:(id <NetworkTaskDelegate>)delegate
+                 resultObj:(NetResultBase*)resultObj
+                customInfo:(id)customInfo;
+
 // GET
 - (void)startGETTaskURL:(NSString*)urlString
                delegate:(id <NetworkTaskDelegate>)delegate

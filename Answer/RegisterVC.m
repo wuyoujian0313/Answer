@@ -1,18 +1,18 @@
 //
-//  RegeditVC.m
+//  RegisterVC.m
 //  Answer
 //
 //  Created by wuyj on 15/12/2.
 //  Copyright © 2015年 wuyj. All rights reserved.
 //
 
-#import "RegeditVC.h"
+#import "RegisterVC.h"
 
-@interface RegeditVC ()
+@interface RegisterVC ()
 
 @end
 
-@implementation RegeditVC
+@implementation RegisterVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -7,6 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
+		E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20ED1C1EE8DB003925B5 /* UserInfo.m */; };
+		E14C20F11C1EEADC003925B5 /* UserAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F01C1EEADC003925B5 /* UserAccount.m */; };
+		E14C20F41C1EED5A003925B5 /* RegisterResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F31C1EED5A003925B5 /* RegisterResult.m */; };
+		E14C20F71C1EEE63003925B5 /* LoginoutResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F61C1EEE63003925B5 /* LoginoutResult.m */; };
+		E14C20FA1C1EF074003925B5 /* QuestionsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F91C1EF074003925B5 /* QuestionsResult.m */; };
+		E14C20FD1C1EF144003925B5 /* QuestionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20FC1C1EF144003925B5 /* QuestionInfo.m */; };
+		E14C21001C1EF37A003925B5 /* AnswerResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20FF1C1EF37A003925B5 /* AnswerResult.m */; };
+		E14C21031C1EF479003925B5 /* QuestionDetailResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21021C1EF479003925B5 /* QuestionDetailResult.m */; };
+		E14C21061C1EF61B003925B5 /* AnswerInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21051C1EF61B003925B5 /* AnswerInfo.m */; };
+		E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21081C1EF78E003925B5 /* CommitVoiceResult.m */; };
+		E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */; };
+		E14C210F1C1EF7C7003925B5 /* CommitPictureResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */; };
 		E15E27AB1C102C2D0035A4ED /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E15E27AA1C102C2D0035A4ED /* FileCache.m */; };
 		E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */; };
 		E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */; };
@@ -14,7 +27,7 @@
 		E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E501C0F0A910042E1F3 /* DiscoverVC.m */; };
 		E1C21E541C0F0AE80042E1F3 /* MeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E531C0F0AE80042E1F3 /* MeVC.m */; };
 		E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E561C0F16A40042E1F3 /* LoginVC.m */; };
-		E1C21E5A1C0F16F60042E1F3 /* RegeditVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E591C0F16F60042E1F3 /* RegeditVC.m */; };
+		E1C21E5A1C0F16F60042E1F3 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E591C0F16F60042E1F3 /* RegisterVC.m */; };
 		E1C21E5D1C0F21BF0042E1F3 /* QuestionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E5C1C0F21BF0042E1F3 /* QuestionDetailVC.m */; };
 		E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E5F1C0F21E00042E1F3 /* AnswerVC.m */; };
 		E1C21E631C0F22BB0042E1F3 /* PublishQuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E621C0F22BB0042E1F3 /* PublishQuestionVC.m */; };
@@ -85,6 +98,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E14C20E91C1EE8A6003925B5 /* LoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResult.h; sourceTree = "<group>"; };
+		E14C20EA1C1EE8A6003925B5 /* LoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResult.m; sourceTree = "<group>"; };
+		E14C20EC1C1EE8DB003925B5 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
+		E14C20ED1C1EE8DB003925B5 /* UserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfo.m; sourceTree = "<group>"; };
+		E14C20EF1C1EEADC003925B5 /* UserAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserAccount.h; sourceTree = "<group>"; };
+		E14C20F01C1EEADC003925B5 /* UserAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserAccount.m; sourceTree = "<group>"; };
+		E14C20F21C1EED5A003925B5 /* RegisterResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterResult.h; sourceTree = "<group>"; };
+		E14C20F31C1EED5A003925B5 /* RegisterResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterResult.m; sourceTree = "<group>"; };
+		E14C20F51C1EEE63003925B5 /* LoginoutResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginoutResult.h; sourceTree = "<group>"; };
+		E14C20F61C1EEE63003925B5 /* LoginoutResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginoutResult.m; sourceTree = "<group>"; };
+		E14C20F81C1EF074003925B5 /* QuestionsResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsResult.h; sourceTree = "<group>"; };
+		E14C20F91C1EF074003925B5 /* QuestionsResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsResult.m; sourceTree = "<group>"; };
+		E14C20FB1C1EF144003925B5 /* QuestionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionInfo.h; sourceTree = "<group>"; };
+		E14C20FC1C1EF144003925B5 /* QuestionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionInfo.m; sourceTree = "<group>"; };
+		E14C20FE1C1EF37A003925B5 /* AnswerResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerResult.h; sourceTree = "<group>"; };
+		E14C20FF1C1EF37A003925B5 /* AnswerResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerResult.m; sourceTree = "<group>"; };
+		E14C21011C1EF479003925B5 /* QuestionDetailResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailResult.h; sourceTree = "<group>"; };
+		E14C21021C1EF479003925B5 /* QuestionDetailResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailResult.m; sourceTree = "<group>"; };
+		E14C21041C1EF61B003925B5 /* AnswerInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerInfo.h; sourceTree = "<group>"; };
+		E14C21051C1EF61B003925B5 /* AnswerInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerInfo.m; sourceTree = "<group>"; };
+		E14C21071C1EF78E003925B5 /* CommitVoiceResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitVoiceResult.h; sourceTree = "<group>"; };
+		E14C21081C1EF78E003925B5 /* CommitVoiceResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitVoiceResult.m; sourceTree = "<group>"; };
+		E14C210A1C1EF7A3003925B5 /* CommitVideoResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitVideoResult.h; sourceTree = "<group>"; };
+		E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitVideoResult.m; sourceTree = "<group>"; };
+		E14C210D1C1EF7C7003925B5 /* CommitPictureResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommitPictureResult.h; sourceTree = "<group>"; };
+		E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommitPictureResult.m; sourceTree = "<group>"; };
 		E15E27A91C102C2D0035A4ED /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
 		E15E27AA1C102C2D0035A4ED /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
 		E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCircleVC.h; sourceTree = "<group>"; };
@@ -99,8 +138,8 @@
 		E1C21E531C0F0AE80042E1F3 /* MeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeVC.m; sourceTree = "<group>"; };
 		E1C21E551C0F16A40042E1F3 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
 		E1C21E561C0F16A40042E1F3 /* LoginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginVC.m; sourceTree = "<group>"; };
-		E1C21E581C0F16F60042E1F3 /* RegeditVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegeditVC.h; sourceTree = "<group>"; };
-		E1C21E591C0F16F60042E1F3 /* RegeditVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegeditVC.m; sourceTree = "<group>"; };
+		E1C21E581C0F16F60042E1F3 /* RegisterVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterVC.h; sourceTree = "<group>"; };
+		E1C21E591C0F16F60042E1F3 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
 		E1C21E5B1C0F21BF0042E1F3 /* QuestionDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailVC.h; sourceTree = "<group>"; };
 		E1C21E5C1C0F21BF0042E1F3 /* QuestionDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailVC.m; sourceTree = "<group>"; };
 		E1C21E5E1C0F21E00042E1F3 /* AnswerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerVC.h; sourceTree = "<group>"; };
@@ -233,6 +272,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E14C20E81C1EE6AC003925B5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E14C20E91C1EE8A6003925B5 /* LoginResult.h */,
+				E14C20EA1C1EE8A6003925B5 /* LoginResult.m */,
+				E14C20EC1C1EE8DB003925B5 /* UserInfo.h */,
+				E14C20ED1C1EE8DB003925B5 /* UserInfo.m */,
+				E14C20EF1C1EEADC003925B5 /* UserAccount.h */,
+				E14C20F01C1EEADC003925B5 /* UserAccount.m */,
+				E14C20F21C1EED5A003925B5 /* RegisterResult.h */,
+				E14C20F31C1EED5A003925B5 /* RegisterResult.m */,
+				E14C20F51C1EEE63003925B5 /* LoginoutResult.h */,
+				E14C20F61C1EEE63003925B5 /* LoginoutResult.m */,
+				E14C20F81C1EF074003925B5 /* QuestionsResult.h */,
+				E14C20F91C1EF074003925B5 /* QuestionsResult.m */,
+				E14C20FB1C1EF144003925B5 /* QuestionInfo.h */,
+				E14C20FC1C1EF144003925B5 /* QuestionInfo.m */,
+				E14C20FE1C1EF37A003925B5 /* AnswerResult.h */,
+				E14C20FF1C1EF37A003925B5 /* AnswerResult.m */,
+				E14C21011C1EF479003925B5 /* QuestionDetailResult.h */,
+				E14C21021C1EF479003925B5 /* QuestionDetailResult.m */,
+				E14C21041C1EF61B003925B5 /* AnswerInfo.h */,
+				E14C21051C1EF61B003925B5 /* AnswerInfo.m */,
+				E14C21071C1EF78E003925B5 /* CommitVoiceResult.h */,
+				E14C21081C1EF78E003925B5 /* CommitVoiceResult.m */,
+				E14C210A1C1EF7A3003925B5 /* CommitVideoResult.h */,
+				E14C210B1C1EF7A3003925B5 /* CommitVideoResult.m */,
+				E14C210D1C1EF7C7003925B5 /* CommitPictureResult.h */,
+				E14C210E1C1EF7C7003925B5 /* CommitPictureResult.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		E15E27A81C102C2D0035A4ED /* FileCache */ = {
 			isa = PBXGroup;
 			children = (
@@ -306,8 +378,8 @@
 			children = (
 				E1C21E551C0F16A40042E1F3 /* LoginVC.h */,
 				E1C21E561C0F16A40042E1F3 /* LoginVC.m */,
-				E1C21E581C0F16F60042E1F3 /* RegeditVC.h */,
-				E1C21E591C0F16F60042E1F3 /* RegeditVC.m */,
+				E1C21E581C0F16F60042E1F3 /* RegisterVC.h */,
+				E1C21E591C0F16F60042E1F3 /* RegisterVC.m */,
 			);
 			name = "登录&注册";
 			sourceTree = "<group>";
@@ -386,6 +458,7 @@
 		E1D188F41C0EE6EA0043DE9C /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				E14C20E81C1EE6AC003925B5 /* Models */,
 				E1C21E761C0F25510042E1F3 /* common */,
 				E1C21E751C0F25390042E1F3 /* 登录&注册 */,
 				E1C21E741C0F24BA0042E1F3 /* 我 */,
@@ -684,25 +757,31 @@
 			files = (
 				E1D189671C0EE6F60043DE9C /* UIImage+GIF.m in Sources */,
 				E1D189541C0EE6F60043DE9C /* NSString+Utility.m in Sources */,
+				E14C210F1C1EF7C7003925B5 /* CommitPictureResult.m in Sources */,
+				E14C20F71C1EEE63003925B5 /* LoginoutResult.m in Sources */,
 				E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */,
 				E1D1894F1C0EE6F60043DE9C /* AFURLRequestSerialization.m in Sources */,
+				E14C20F11C1EEADC003925B5 /* UserAccount.m in Sources */,
 				E1D189581C0EE6F60043DE9C /* LineView.m in Sources */,
 				E1D1894E1C0EE6F60043DE9C /* AFURLConnectionOperation.m in Sources */,
 				E1C21E631C0F22BB0042E1F3 /* PublishQuestionVC.m in Sources */,
 				E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */,
+				E14C20FA1C1EF074003925B5 /* QuestionsResult.m in Sources */,
 				E1D1894D1C0EE6F60043DE9C /* AFSecurityPolicy.m in Sources */,
 				E1D189661C0EE6F60043DE9C /* UIButton+WebCache.m in Sources */,
 				E1C21E541C0F0AE80042E1F3 /* MeVC.m in Sources */,
+				E14C21001C1EF37A003925B5 /* AnswerResult.m in Sources */,
 				E1D189591C0EE6F60043DE9C /* NetResultBase.m in Sources */,
 				E1C21E5D1C0F21BF0042E1F3 /* QuestionDetailVC.m in Sources */,
 				E1D189681C0EE6F60043DE9C /* UIImage+MultiFormat.m in Sources */,
+				E14C20F41C1EED5A003925B5 /* RegisterResult.m in Sources */,
 				E1D189551C0EE6F60043DE9C /* UIColor+Utility.m in Sources */,
 				E1D189611C0EE6F60043DE9C /* SDWebImageDecoder.m in Sources */,
 				E1C21E661C0F23090042E1F3 /* SystemMessageVC.m in Sources */,
 				E1D189521C0EE6F60043DE9C /* BaseVC.m in Sources */,
 				E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */,
 				E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */,
-				E1C21E5A1C0F16F60042E1F3 /* RegeditVC.m in Sources */,
+				E1C21E5A1C0F16F60042E1F3 /* RegisterVC.m in Sources */,
 				E1D189571C0EE6F60043DE9C /* FadePromptView.m in Sources */,
 				E1D189491C0EE6F60043DE9C /* AFHTTPRequestOperation.m in Sources */,
 				E1D1895E1C0EE6F60043DE9C /* NSData+ImageContentType.m in Sources */,
@@ -712,13 +791,16 @@
 				E1D189511C0EE6F60043DE9C /* AFURLSessionManager.m in Sources */,
 				E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */,
 				E1C21E6F1C0F23FF0042E1F3 /* QuestionsView.m in Sources */,
+				E14C21061C1EF61B003925B5 /* AnswerInfo.m in Sources */,
 				E15E27AB1C102C2D0035A4ED /* FileCache.m in Sources */,
 				E1D189531C0EE6F60043DE9C /* WYJNavigationController.m in Sources */,
 				E1D189501C0EE6F60043DE9C /* AFURLResponseSerialization.m in Sources */,
 				E1D1895C1C0EE6F60043DE9C /* Reachability.m in Sources */,
 				E1D188BE1C0ED4880043DE9C /* AppDelegate.m in Sources */,
 				E1D1896C1C0EE6F60043DE9C /* UIView+WebCacheOperation.m in Sources */,
+				E14C21031C1EF479003925B5 /* QuestionDetailResult.m in Sources */,
 				E1D189601C0EE6F60043DE9C /* SDWebImageCompat.m in Sources */,
+				E14C20FD1C1EF144003925B5 /* QuestionInfo.m in Sources */,
 				E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */,
 				E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */,
 				E1D1894B1C0EE6F60043DE9C /* AFHTTPSessionManager.m in Sources */,
@@ -730,8 +812,12 @@
 				E1D189651C0EE6F60043DE9C /* SDWebImagePrefetcher.m in Sources */,
 				E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */,
 				E1D189631C0EE6F60043DE9C /* SDWebImageDownloaderOperation.m in Sources */,
+				E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */,
+				E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */,
 				E1D1894C1C0EE6F60043DE9C /* AFNetworkReachabilityManager.m in Sources */,
+				E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */,
 				E1D189641C0EE6F60043DE9C /* SDWebImageManager.m in Sources */,
+				E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */,
 				E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */,
 				E1D189691C0EE6F60043DE9C /* UIImage+WebP.m in Sources */,
 				E1D188BB1C0ED4880043DE9C /* main.m in Sources */,

@@ -20,9 +20,9 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
     NSFileManager *_fileManager;
 }
 
-@property(strong, nonatomic) NSCache *memoryCache;
-@property(strong, nonatomic) dispatch_queue_t rwQueue;
-@property(copy, nonatomic) NSString *diskCachePath;
+@property(strong, nonatomic) NSCache            *memoryCache;
+@property(strong, nonatomic) dispatch_queue_t   rwQueue;
+@property(copy, nonatomic) NSString             *diskCachePath;
 
 @end
 

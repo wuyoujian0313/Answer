@@ -46,4 +46,5 @@
  * 清除内存缓存数据
  */
 - (void)cleanCacheMemory;
+
 @end

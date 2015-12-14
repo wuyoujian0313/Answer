@@ -82,7 +82,6 @@
         self.afManager = [AFHTTPRequestOperationManager manager];
         
         [_afManager setRequestSerializer:[AFHTTPRequestSerializer serializer]];
-        [_afManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         [_afManager.requestSerializer setHTTPMethodsEncodingParametersInURI:[NSSet setWithObjects:@"GET",@"DELETE",nil]];
         [_afManager setResponseSerializer:[AFHTTPResponseSerializer serializer]];
         
@@ -94,6 +93,7 @@
         [acceptContentTypes addObject:@"application/json"];
         [acceptContentTypes addObject:@"application/json; charset=utf-8"];
         [_afManager.responseSerializer setAcceptableContentTypes:acceptContentTypes];
+
     }
     
     return self;
@@ -156,6 +156,7 @@
                customInfo:(id)customInfo {
     
     [_afManager.requestSerializer setTimeoutInterval:_taskTimeout];
+    [_afManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
     __weak NetworkTask *weakSelf = self;
     NSString * urlString = [NSString stringWithFormat:@"%@/%@",kNetworkAPIServer,api];
@@ -215,12 +216,73 @@
 
 
 #pragma mark - 公开API
+- (void)startUploadTaskApi:(NSString*)api
+                  forParam:(NSDictionary *)param
+                  fileData:(NSData*)fileData
+                  delegate:(id <NetworkTaskDelegate>)delegate
+                 resultObj:(NetResultBase*)resultObj
+                customInfo:(id)customInfo {
+    
+    
+    [_afManager.requestSerializer setTimeoutInterval:_taskTimeout];
+    [_afManager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    
+    __weak NetworkTask *weakSelf = self;
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@",kNetworkAPIServer,api];
+    [_afManager POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        [formData appendPartWithFormData:fileData name:@"content"];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"response:%@",operation.responseString);
+        [weakSelf analyzeData:responseObject delegate:delegate resultObj:resultObj customInfo:customInfo];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"response:%@",operation.responseString);
+        
+        [weakSelf handleError:operation error:error delegate:delegate receiveResultObj:resultObj customInfo:customInfo];
+    }];
+}
+
+
+- (void)startUploadTaskApi:(NSString*)api
+                  forParam:(NSDictionary *)param
+                  filePath:(NSString*)filePath
+                  delegate:(id <NetworkTaskDelegate>)delegate
+                 resultObj:(NetResultBase*)resultObj
+                customInfo:(id)customInfo {
+    
+    
+    [_afManager.requestSerializer setTimeoutInterval:_taskTimeout];
+    [_afManager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    
+    __weak NetworkTask *weakSelf = self;
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@",kNetworkAPIServer,api];
+    [_afManager POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+        [formData appendPartWithFileURL:fileURL name:@"content" error:nil];
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"response:%@",operation.responseString);
+        [weakSelf analyzeData:responseObject delegate:delegate resultObj:resultObj customInfo:customInfo];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"response:%@",operation.responseString);
+        
+        [weakSelf handleError:operation error:error delegate:delegate receiveResultObj:resultObj customInfo:customInfo];
+    }];
+}
+
+
+
 - (void)startGETTaskURL:(NSString*)urlString
                delegate:(id <NetworkTaskDelegate>)delegate
               resultObj:( NetResultBase*)resultObj
              customInfo:(id)customInfo {
     
     [_afManager.requestSerializer setTimeoutInterval:_taskTimeout];
+    [_afManager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     __weak NetworkTask *weakSelf = self;
     [_afManager GET:urlString parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
