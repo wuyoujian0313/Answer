@@ -25,6 +25,7 @@
 		E14C21181C1EFB02003925B5 /* DeleteMessageResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C21171C1EFB02003925B5 /* DeleteMessageResult.m */; };
 		E14C211B1C1EFB27003925B5 /* MyFriendsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */; };
 		E15E27AB1C102C2D0035A4ED /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E15E27AA1C102C2D0035A4ED /* FileCache.m */; };
+		E16E6D321C2198A000751E1D /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */; };
 		E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */; };
 		E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */; };
 		E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */; };
@@ -142,6 +143,8 @@
 		E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendsResult.m; sourceTree = "<group>"; };
 		E15E27A91C102C2D0035A4ED /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
 		E15E27AA1C102C2D0035A4ED /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
+		E16E6D301C2198A000751E1D /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
+		E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
 		E1A054A91C1F0D2500A6DD56 /* RewardListResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardListResult.h; sourceTree = "<group>"; };
 		E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardListResult.m; sourceTree = "<group>"; };
 		E1A054AC1C1F0D5500A6DD56 /* RewardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardInfo.h; sourceTree = "<group>"; };
@@ -429,6 +432,8 @@
 			children = (
 				E1C21E6D1C0F23FF0042E1F3 /* QuestionsView.h */,
 				E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */,
+				E16E6D301C2198A000751E1D /* QuestionTableViewCell.h */,
+				E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -808,6 +813,7 @@
 				E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */,
 				E14C20FA1C1EF074003925B5 /* QuestionsResult.m in Sources */,
 				E1D1894D1C0EE6F60043DE9C /* AFSecurityPolicy.m in Sources */,
+				E16E6D321C2198A000751E1D /* QuestionTableViewCell.m in Sources */,
 				E1D189661C0EE6F60043DE9C /* UIButton+WebCache.m in Sources */,
 				E1C21E541C0F0AE80042E1F3 /* MeVC.m in Sources */,
 				E14C21001C1EF37A003925B5 /* AnswerResult.m in Sources */,

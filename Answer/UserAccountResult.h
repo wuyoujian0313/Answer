@@ -11,7 +11,7 @@
 
 @interface UserAccountResult : NetResultBase
 
-@property (nonatomic, assign) CGFloat       balance;
-@property (nonatomic, assign) NSInteger     receivePacket;
-@property (nonatomic, assign) NSInteger     sendPacket;
+@property (nonatomic, strong) NSNumber     *balance;
+@property (nonatomic, strong) NSNumber     *receivePacket;
+@property (nonatomic, strong) NSNumber     *sendPacket;
 @end

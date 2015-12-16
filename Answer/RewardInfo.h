@@ -10,12 +10,12 @@
 
 @interface RewardInfo : NSObject
 
-@property (nonatomic, assign) NSInteger         uuid;
+@property (nonatomic, strong) NSNumber          *uuid;
 @property (nonatomic, copy) NSString            *uId;
-@property (nonatomic, assign) NSInteger         tuwenId;
-@property (nonatomic, assign) NSInteger         type;
-@property (nonatomic, assign) CGFloat           amount;
-@property (nonatomic, copy) NSString            *updateDate;
+@property (nonatomic, strong) NSNumber          *tuwenId;
+@property (nonatomic, strong) NSNumber          *type;
+@property (nonatomic, strong) NSNumber          *amount;
+@property (nonatomic, strong) NSNumber          *updateDate;
 
 
 @end

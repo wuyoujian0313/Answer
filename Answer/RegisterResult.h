@@ -8,9 +8,9 @@
 
 #import "NetResultBase.h"
 #import "UserInfo.h"
-#import "UserAccount.h"
+#import "UserAccountResult.h"
 
 @interface RegisterResult : NetResultBase
-@property (nonatomic, strong) UserInfo      *user;
-@property (nonatomic, strong) UserAccount   *account;
+@property (nonatomic, strong) UserInfo              *user;
+@property (nonatomic, strong) UserAccountResult     *account;
 @end

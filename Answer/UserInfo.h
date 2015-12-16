@@ -10,16 +10,16 @@
 
 @interface UserInfo : NSObject
 
-@property (nonatomic, assign) NSInteger     uuid;
+@property (nonatomic, strong) NSNumber      *uuid;
 @property (nonatomic, copy) NSString        *userName;
 @property (nonatomic, copy) NSString        *uId;
 @property (nonatomic, copy) NSString        *nickName;
 @property (nonatomic, copy) NSString        *phoneNumber;
 @property (nonatomic, copy) NSString        *password;
-@property (nonatomic, assign) NSInteger     level;
+@property (nonatomic, strong) NSNumber      *level;
 @property (nonatomic, copy) NSString        *qq;
 @property (nonatomic, copy) NSString        *weixin;
 @property (nonatomic, copy) NSString        *headImage;
-@property (nonatomic, copy) NSString        *updateDate;
+@property (nonatomic, strong) NSNumber      *updateDate;
 
 @end

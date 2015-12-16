@@ -10,18 +10,18 @@
 
 @interface QuestionInfo : NSObject
 
-@property (nonatomic, assign) NSInteger     uuid;
+@property (nonatomic, strong) NSNumber      *uuid;
 @property (nonatomic, copy) NSString        *uId;
-@property (nonatomic, assign) NSInteger     *mediaType;
+@property (nonatomic, strong) NSNumber      *mediaType;
 @property (nonatomic, copy) NSString        *mediaURL;
 @property (nonatomic, copy) NSString        *thumbnail;
 @property (nonatomic, copy) NSString        *content;
-@property (nonatomic, assign) CGFloat       *longitude;
-@property (nonatomic, assign) CGFloat       *latitude;
+@property (nonatomic, strong) NSNumber      *longitude;
+@property (nonatomic, strong) NSNumber      *latitude;
 @property (nonatomic, copy) NSString        *address;
-@property (nonatomic, assign) NSInteger     isAnonymous;
-@property (nonatomic, assign) NSInteger     hasBestAnswer;
+@property (nonatomic, strong) NSNumber      *isAnonymous;
+@property (nonatomic, strong) NSNumber      *hasBestAnswer;
 @property (nonatomic, copy) NSString        *reward;
-@property (nonatomic, copy) NSString        *updateDate;
+@property (nonatomic, strong) NSNumber      *updateDate;
 
 @end
