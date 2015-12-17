@@ -11,7 +11,19 @@
 #import "UserInfo.h"
 
 
+typedef NS_ENUM(NSInteger,QuestionTableViewCellAction) {
+    QuestionTableViewCellAction_PlayAudio,
+    QuestionTableViewCellAction_PlayVideo,
+    QuestionTableViewCellAction_ScanDetail,
+    QuestionTableViewCellAction_Sharing,
+    QuestionTableViewCellAction_RedPackage,
+    QuestionTableViewCellAction_Location,
+};
+
+
+@class QuestionTableViewCell;
 @protocol QuestionTableViewCellDelegate <NSObject>
+- (void)questionTableViewCellAction:(QuestionTableViewCellAction)action questionInfo:(QuestionInfo*)question;
 @end
 
 @interface QuestionTableViewCell : UITableViewCell

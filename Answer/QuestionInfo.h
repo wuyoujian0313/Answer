@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSNumber      *uuid;
 @property (nonatomic, copy) NSString        *uId;
-@property (nonatomic, strong) NSNumber      *mediaType;
+@property (nonatomic, strong) NSNumber      *mediaType;//0 图片，1 视频 ，2音频
 @property (nonatomic, copy) NSString        *mediaURL;
 @property (nonatomic, copy) NSString        *thumbnail;
 @property (nonatomic, copy) NSString        *content;

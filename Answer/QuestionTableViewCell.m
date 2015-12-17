@@ -10,6 +10,7 @@
 #import "UIImageView+WebCache.h"
 #import "SDImageCache.h"
 #import "TTTTimeIntervalFormatter.h"
+#import "AudioPlayControl.h"
 
 @interface QuestionTableViewCell ()
 
@@ -19,6 +20,10 @@
 @property (nonatomic, strong) QuestionInfo          *questionInfo;
 @property (nonatomic, strong) UserInfo              *userInfo;
 @property (nonatomic, assign) BOOL                  haveUserInfo;
+
+@property (nonatomic, assign) CGFloat               userInfoViewHeight;
+@property (nonatomic, assign) CGFloat               wtContentViewHeight;
+@property (nonatomic, assign) CGFloat               funcViewHeight;
 
 @end
 
@@ -46,6 +51,8 @@
     return self;
 }
 
+
+// tag == 100
 - (void)layoutUserView:(UIView *)viewParent {
     if (viewParent != nil) {
         
@@ -89,35 +96,109 @@
         
         
         
-    } else {
+    }
+}
+
+
+// tag == 200
+- (void)layoutWtContentView:(UIView *)viewParent {
+    if (viewParent != nil) {
+        
+        if (self.wtContentView == nil) {
+            self.wtContentView = [[UIView alloc] initWithFrame:CGRectZero];
+            [_wtContentView setBackgroundColor:[UIColor whiteColor]];
+            [viewParent addSubview:_wtContentView];
+        }
+        
+        // 语音播放按钮 200
+        AudioPlayControl *audioControl = (AudioPlayControl *)[_wtContentView viewWithTag:200];
+        if (audioControl == nil) {
+            audioControl = [[AudioPlayControl alloc] initWithFrame:CGRectZero];
+            [audioControl setTag:200];
+            [audioControl addTarget:self action:@selector(playAudio:) forControlEvents:UIControlEventTouchUpInside];
+            [_wtContentView addSubview:audioControl];
+        }
+
+        // 图片 & 视频图片
+        UIImageView *contentImage = (UIImageView *)[_wtContentView viewWithTag:201];
+        if (contentImage == nil) {
+            contentImage = [[UIImageView alloc] initWithFrame:CGRectZero];
+            [contentImage setUserInteractionEnabled:YES];
+            [contentImage setTag:201];
+            [_wtContentView addSubview:contentImage];
+        }
+        
+        // 视频播放按钮
+        UIButton *playBtn = (UIButton*)[_wtContentView viewWithTag:202];
+        if (playBtn == nil) {
+            playBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [playBtn setTag:202];
+            [playBtn setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+            [playBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
+            [_wtContentView addSubview:playBtn];
+        }
+        
+        //
         
     }
 }
 
-- (void)layoutWtContentView:(UIView *)viewParent {
+- (void)playVideo:(UIButton *)sender {
     
 }
 
+- (void)playAudio:(AudioPlayControl*)sender {
+    
+}
+
+
+// tag == 300
 - (void)layoutFuncView:(UIView *)viewParent {
     
+    if (viewParent != nil) {
+        
+        if (self.funcView == nil) {
+            self.funcView = [[UIView alloc] initWithFrame:CGRectZero];
+            [_funcView setBackgroundColor:[UIColor whiteColor]];
+            [viewParent addSubview:_funcView];
+        }
+        
+    }
 }
 
 - (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo {
     
     if (userInfo) {
-        
+        _haveUserInfo = YES;
+    } else {
+        _haveUserInfo = NO;
     }
+    
+    _userInfoViewHeight = 0;
+    _wtContentViewHeight = 0;
+    _funcViewHeight = 0;
+    
+    self.questionInfo = questionInfo;
+    self.userInfo = userInfo;
     
     [self layoutUserView:self.contentView];
     [self layoutWtContentView:self.contentView];
     [self layoutFuncView:self.contentView];
     
-    
-    
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.bounds.size.width, [self cellHeight]);
 }
 
 - (CGFloat)cellHeight {
-    return 0;
+    return _userInfoViewHeight + _wtContentViewHeight + _funcViewHeight;
+}
+
+- (void)layoutSubviews {
+    
+    [super layoutSubviews];
+    [self layoutUserView:self.contentView];
+    [self layoutWtContentView:self.contentView];
+    [self layoutFuncView:self.contentView];
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.bounds.size.width, [self cellHeight]);
 }
 
 @end

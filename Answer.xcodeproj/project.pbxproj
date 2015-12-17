@@ -52,6 +52,7 @@
 		E1B78A601C2263B600A2E384 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A591C2263B600A2E384 /* MJRefreshConst.m */; };
 		E1B78A611C2263B600A2E384 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A5B1C2263B600A2E384 /* MJRefreshFooterView.m */; };
 		E1B78A621C2263B600A2E384 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A5D1C2263B600A2E384 /* MJRefreshHeaderView.m */; };
+		E1B78A651C228CC700A2E384 /* AudioPlayControl.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A641C228CC700A2E384 /* AudioPlayControl.m */; };
 		E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */; };
 		E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */; };
 		E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */; };
@@ -218,6 +219,8 @@
 		E1B78A5B1C2263B600A2E384 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
 		E1B78A5C1C2263B600A2E384 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
 		E1B78A5D1C2263B600A2E384 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
+		E1B78A631C228CC700A2E384 /* AudioPlayControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayControl.h; sourceTree = "<group>"; };
+		E1B78A641C228CC700A2E384 /* AudioPlayControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayControl.m; sourceTree = "<group>"; };
 		E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCircleVC.h; sourceTree = "<group>"; };
 		E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCircleVC.m; sourceTree = "<group>"; };
 		E1C21E491C0F0A430042E1F3 /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
@@ -568,6 +571,8 @@
 				E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */,
 				E16E6D301C2198A000751E1D /* QuestionTableViewCell.h */,
 				E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */,
+				E1B78A631C228CC700A2E384 /* AudioPlayControl.h */,
+				E1B78A641C228CC700A2E384 /* AudioPlayControl.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -946,6 +951,7 @@
 				E1D189671C0EE6F60043DE9C /* UIImage+GIF.m in Sources */,
 				E1D189541C0EE6F60043DE9C /* NSString+Utility.m in Sources */,
 				E14C210F1C1EF7C7003925B5 /* CommitPictureResult.m in Sources */,
+				E1B78A651C228CC700A2E384 /* AudioPlayControl.m in Sources */,
 				E14C20F71C1EEE63003925B5 /* LoginoutResult.m in Sources */,
 				E1B78A511C22623900A2E384 /* XHViewState.m in Sources */,
 				E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */,
