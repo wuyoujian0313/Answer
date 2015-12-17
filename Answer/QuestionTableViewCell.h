@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuestionInfo.h"
+#import "UserInfo.h"
 
 
 @protocol QuestionTableViewCellDelegate <NSObject>
@@ -14,14 +16,9 @@
 
 @interface QuestionTableViewCell : UITableViewCell
 
-@property(nonatomic,weak) id <QuestionTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id<QuestionTableViewCellDelegate>  delegate;
 
-// 默认布局用户信息
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-- (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier haveUserView:(BOOL)isHave;
-
-
-
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo;
 - (CGFloat)cellHeight;
 
 @end

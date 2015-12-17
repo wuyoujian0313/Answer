@@ -30,6 +30,23 @@
 		E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */; };
 		E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */; };
 		E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */; };
+		E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A1D1C22608300A2E384 /* FormatterKit.strings */; };
+		E1B78A331C22608300A2E384 /* TTTAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */; };
+		E1B78A341C22608300A2E384 /* TTTArrayFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A221C22608300A2E384 /* TTTArrayFormatter.m */; };
+		E1B78A351C22608300A2E384 /* TTTColorFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A241C22608300A2E384 /* TTTColorFormatter.m */; };
+		E1B78A361C22608300A2E384 /* TTTLocationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A261C22608300A2E384 /* TTTLocationFormatter.m */; };
+		E1B78A371C22608300A2E384 /* TTTNameFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A281C22608300A2E384 /* TTTNameFormatter.m */; };
+		E1B78A381C22608300A2E384 /* TTTOrdinalNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A2A1C22608300A2E384 /* TTTOrdinalNumberFormatter.m */; };
+		E1B78A391C22608300A2E384 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A2C1C22608300A2E384 /* TTTTimeIntervalFormatter.m */; };
+		E1B78A3A1C22608300A2E384 /* TTTUnitOfInformationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A2E1C22608300A2E384 /* TTTUnitOfInformationFormatter.m */; };
+		E1B78A3B1C22608300A2E384 /* TTTURLRequestFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A301C22608300A2E384 /* TTTURLRequestFormatter.m */; };
+		E1B78A4C1C22623900A2E384 /* CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A3E1C22623900A2E384 /* CTAssetsPickerController.m */; };
+		E1B78A4D1C22623900A2E384 /* CTAssetsPickerController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A3F1C22623900A2E384 /* CTAssetsPickerController.strings */; };
+		E1B78A4E1C22623900A2E384 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A411C22623900A2E384 /* Images.xcassets */; };
+		E1B78A4F1C22623900A2E384 /* NSDate+TimeInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A431C22623900A2E384 /* NSDate+TimeInterval.m */; };
+		E1B78A501C22623900A2E384 /* XHImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A471C22623900A2E384 /* XHImageViewer.m */; };
+		E1B78A511C22623900A2E384 /* XHViewState.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A491C22623900A2E384 /* XHViewState.m */; };
+		E1B78A521C22623900A2E384 /* XHZoomingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A4B1C22623900A2E384 /* XHZoomingImageView.m */; };
 		E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */; };
 		E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4A1C0F0A430042E1F3 /* QuestionVC.m */; };
 		E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */; };
@@ -153,6 +170,39 @@
 		E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeHeadImgResult.m; sourceTree = "<group>"; };
 		E1A054B21C1F0EEB00A6DD56 /* ChangeNicknameResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNicknameResult.h; sourceTree = "<group>"; };
 		E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNicknameResult.m; sourceTree = "<group>"; };
+		E1B78A1E1C22608300A2E384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FormatterKit.strings; sourceTree = "<group>"; };
+		E1B78A1F1C22608300A2E384 /* TTTAddressFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAddressFormatter.h; sourceTree = "<group>"; };
+		E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAddressFormatter.m; sourceTree = "<group>"; };
+		E1B78A211C22608300A2E384 /* TTTArrayFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTArrayFormatter.h; sourceTree = "<group>"; };
+		E1B78A221C22608300A2E384 /* TTTArrayFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTArrayFormatter.m; sourceTree = "<group>"; };
+		E1B78A231C22608300A2E384 /* TTTColorFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTColorFormatter.h; sourceTree = "<group>"; };
+		E1B78A241C22608300A2E384 /* TTTColorFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTColorFormatter.m; sourceTree = "<group>"; };
+		E1B78A251C22608300A2E384 /* TTTLocationFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTLocationFormatter.h; sourceTree = "<group>"; };
+		E1B78A261C22608300A2E384 /* TTTLocationFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTLocationFormatter.m; sourceTree = "<group>"; };
+		E1B78A271C22608300A2E384 /* TTTNameFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTNameFormatter.h; sourceTree = "<group>"; };
+		E1B78A281C22608300A2E384 /* TTTNameFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTNameFormatter.m; sourceTree = "<group>"; };
+		E1B78A291C22608300A2E384 /* TTTOrdinalNumberFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTOrdinalNumberFormatter.h; sourceTree = "<group>"; };
+		E1B78A2A1C22608300A2E384 /* TTTOrdinalNumberFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTOrdinalNumberFormatter.m; sourceTree = "<group>"; };
+		E1B78A2B1C22608300A2E384 /* TTTTimeIntervalFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTTimeIntervalFormatter.h; sourceTree = "<group>"; };
+		E1B78A2C1C22608300A2E384 /* TTTTimeIntervalFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTTimeIntervalFormatter.m; sourceTree = "<group>"; };
+		E1B78A2D1C22608300A2E384 /* TTTUnitOfInformationFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTUnitOfInformationFormatter.h; sourceTree = "<group>"; };
+		E1B78A2E1C22608300A2E384 /* TTTUnitOfInformationFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTUnitOfInformationFormatter.m; sourceTree = "<group>"; };
+		E1B78A2F1C22608300A2E384 /* TTTURLRequestFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTURLRequestFormatter.h; sourceTree = "<group>"; };
+		E1B78A301C22608300A2E384 /* TTTURLRequestFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTURLRequestFormatter.m; sourceTree = "<group>"; };
+		E1B78A311C22608300A2E384 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FormatterKit.strings"; sourceTree = "<group>"; };
+		E1B78A3D1C22623900A2E384 /* CTAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsPickerController.h; sourceTree = "<group>"; };
+		E1B78A3E1C22623900A2E384 /* CTAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsPickerController.m; sourceTree = "<group>"; };
+		E1B78A401C22623900A2E384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CTAssetsPickerController.strings; sourceTree = "<group>"; };
+		E1B78A411C22623900A2E384 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		E1B78A421C22623900A2E384 /* NSDate+TimeInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeInterval.h"; sourceTree = "<group>"; };
+		E1B78A431C22623900A2E384 /* NSDate+TimeInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeInterval.m"; sourceTree = "<group>"; };
+		E1B78A441C22623900A2E384 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CTAssetsPickerController.strings"; sourceTree = "<group>"; };
+		E1B78A461C22623900A2E384 /* XHImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHImageViewer.h; sourceTree = "<group>"; };
+		E1B78A471C22623900A2E384 /* XHImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHImageViewer.m; sourceTree = "<group>"; };
+		E1B78A481C22623900A2E384 /* XHViewState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHViewState.h; sourceTree = "<group>"; };
+		E1B78A491C22623900A2E384 /* XHViewState.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHViewState.m; sourceTree = "<group>"; };
+		E1B78A4A1C22623900A2E384 /* XHZoomingImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHZoomingImageView.h; sourceTree = "<group>"; };
+		E1B78A4B1C22623900A2E384 /* XHZoomingImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHZoomingImageView.m; sourceTree = "<group>"; };
 		E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCircleVC.h; sourceTree = "<group>"; };
 		E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCircleVC.m; sourceTree = "<group>"; };
 		E1C21E491C0F0A430042E1F3 /* QuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionVC.h; sourceTree = "<group>"; };
@@ -357,6 +407,58 @@
 			path = FileCache;
 			sourceTree = "<group>";
 		};
+		E1B78A1C1C22608300A2E384 /* FormatterKit */ = {
+			isa = PBXGroup;
+			children = (
+				E1B78A1D1C22608300A2E384 /* FormatterKit.strings */,
+				E1B78A1F1C22608300A2E384 /* TTTAddressFormatter.h */,
+				E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */,
+				E1B78A211C22608300A2E384 /* TTTArrayFormatter.h */,
+				E1B78A221C22608300A2E384 /* TTTArrayFormatter.m */,
+				E1B78A231C22608300A2E384 /* TTTColorFormatter.h */,
+				E1B78A241C22608300A2E384 /* TTTColorFormatter.m */,
+				E1B78A251C22608300A2E384 /* TTTLocationFormatter.h */,
+				E1B78A261C22608300A2E384 /* TTTLocationFormatter.m */,
+				E1B78A271C22608300A2E384 /* TTTNameFormatter.h */,
+				E1B78A281C22608300A2E384 /* TTTNameFormatter.m */,
+				E1B78A291C22608300A2E384 /* TTTOrdinalNumberFormatter.h */,
+				E1B78A2A1C22608300A2E384 /* TTTOrdinalNumberFormatter.m */,
+				E1B78A2B1C22608300A2E384 /* TTTTimeIntervalFormatter.h */,
+				E1B78A2C1C22608300A2E384 /* TTTTimeIntervalFormatter.m */,
+				E1B78A2D1C22608300A2E384 /* TTTUnitOfInformationFormatter.h */,
+				E1B78A2E1C22608300A2E384 /* TTTUnitOfInformationFormatter.m */,
+				E1B78A2F1C22608300A2E384 /* TTTURLRequestFormatter.h */,
+				E1B78A301C22608300A2E384 /* TTTURLRequestFormatter.m */,
+			);
+			path = FormatterKit;
+			sourceTree = "<group>";
+		};
+		E1B78A3C1C22623900A2E384 /* CTAssetsPickerController */ = {
+			isa = PBXGroup;
+			children = (
+				E1B78A3D1C22623900A2E384 /* CTAssetsPickerController.h */,
+				E1B78A3E1C22623900A2E384 /* CTAssetsPickerController.m */,
+				E1B78A3F1C22623900A2E384 /* CTAssetsPickerController.strings */,
+				E1B78A411C22623900A2E384 /* Images.xcassets */,
+				E1B78A421C22623900A2E384 /* NSDate+TimeInterval.h */,
+				E1B78A431C22623900A2E384 /* NSDate+TimeInterval.m */,
+			);
+			path = CTAssetsPickerController;
+			sourceTree = "<group>";
+		};
+		E1B78A451C22623900A2E384 /* XHImageViewer */ = {
+			isa = PBXGroup;
+			children = (
+				E1B78A461C22623900A2E384 /* XHImageViewer.h */,
+				E1B78A471C22623900A2E384 /* XHImageViewer.m */,
+				E1B78A481C22623900A2E384 /* XHViewState.h */,
+				E1B78A491C22623900A2E384 /* XHViewState.m */,
+				E1B78A4A1C22623900A2E384 /* XHZoomingImageView.h */,
+				E1B78A4B1C22623900A2E384 /* XHZoomingImageView.m */,
+			);
+			path = XHImageViewer;
+			sourceTree = "<group>";
+		};
 		E1C21E701C0F242C0042E1F3 /* 图问圈 */ = {
 			isa = PBXGroup;
 			children = (
@@ -518,6 +620,9 @@
 		E1D188F51C0EE6F60043DE9C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				E1B78A3C1C22623900A2E384 /* CTAssetsPickerController */,
+				E1B78A451C22623900A2E384 /* XHImageViewer */,
+				E1B78A1C1C22608300A2E384 /* FormatterKit */,
 				E15E27A81C102C2D0035A4ED /* FileCache */,
 				E1D188F61C0EE6F60043DE9C /* AFNetworking */,
 				E1D1890A1C0EE6F60043DE9C /* BaseViewControler */,
@@ -774,7 +879,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1B78A4D1C22623900A2E384 /* CTAssetsPickerController.strings in Resources */,
+				E1B78A4E1C22623900A2E384 /* Images.xcassets in Resources */,
 				E1D188C61C0ED4880043DE9C /* Assets.xcassets in Resources */,
+				E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */,
 				E1D188EE1C0ED6630043DE9C /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -804,6 +912,7 @@
 				E1D189541C0EE6F60043DE9C /* NSString+Utility.m in Sources */,
 				E14C210F1C1EF7C7003925B5 /* CommitPictureResult.m in Sources */,
 				E14C20F71C1EEE63003925B5 /* LoginoutResult.m in Sources */,
+				E1B78A511C22623900A2E384 /* XHViewState.m in Sources */,
 				E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */,
 				E1D1894F1C0EE6F60043DE9C /* AFURLRequestSerialization.m in Sources */,
 				E14C20F11C1EEADC003925B5 /* UserAccountResult.m in Sources */,
@@ -817,6 +926,7 @@
 				E1D189661C0EE6F60043DE9C /* UIButton+WebCache.m in Sources */,
 				E1C21E541C0F0AE80042E1F3 /* MeVC.m in Sources */,
 				E14C21001C1EF37A003925B5 /* AnswerResult.m in Sources */,
+				E1B78A521C22623900A2E384 /* XHZoomingImageView.m in Sources */,
 				E1D189591C0EE6F60043DE9C /* NetResultBase.m in Sources */,
 				E1C21E5D1C0F21BF0042E1F3 /* QuestionDetailVC.m in Sources */,
 				E1D189681C0EE6F60043DE9C /* UIImage+MultiFormat.m in Sources */,
@@ -837,10 +947,15 @@
 				E1D189621C0EE6F60043DE9C /* SDWebImageDownloader.m in Sources */,
 				E1D1895B1C0EE6F60043DE9C /* NSObject+Utility.m in Sources */,
 				E1D189511C0EE6F60043DE9C /* AFURLSessionManager.m in Sources */,
+				E1B78A3A1C22608300A2E384 /* TTTUnitOfInformationFormatter.m in Sources */,
 				E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */,
+				E1B78A501C22623900A2E384 /* XHImageViewer.m in Sources */,
+				E1B78A3B1C22608300A2E384 /* TTTURLRequestFormatter.m in Sources */,
 				E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */,
 				E1C21E6F1C0F23FF0042E1F3 /* QuestionsView.m in Sources */,
 				E14C21061C1EF61B003925B5 /* AnswerInfo.m in Sources */,
+				E1B78A341C22608300A2E384 /* TTTArrayFormatter.m in Sources */,
+				E1B78A361C22608300A2E384 /* TTTLocationFormatter.m in Sources */,
 				E15E27AB1C102C2D0035A4ED /* FileCache.m in Sources */,
 				E1D189531C0EE6F60043DE9C /* WYJNavigationController.m in Sources */,
 				E1D189501C0EE6F60043DE9C /* AFURLResponseSerialization.m in Sources */,
@@ -851,17 +966,23 @@
 				E1D189601C0EE6F60043DE9C /* SDWebImageCompat.m in Sources */,
 				E14C20FD1C1EF144003925B5 /* QuestionInfo.m in Sources */,
 				E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */,
+				E1B78A4C1C22623900A2E384 /* CTAssetsPickerController.m in Sources */,
 				E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */,
 				E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */,
 				E1D1894B1C0EE6F60043DE9C /* AFHTTPSessionManager.m in Sources */,
+				E1B78A331C22608300A2E384 /* TTTAddressFormatter.m in Sources */,
 				E1D1895D1C0EE6F60043DE9C /* MKAnnotationView+WebCache.m in Sources */,
 				E1D189561C0EE6F60043DE9C /* UIImage+Utility.m in Sources */,
 				E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */,
 				E1D1894A1C0EE6F60043DE9C /* AFHTTPRequestOperationManager.m in Sources */,
 				E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */,
+				E1B78A381C22608300A2E384 /* TTTOrdinalNumberFormatter.m in Sources */,
+				E1B78A391C22608300A2E384 /* TTTTimeIntervalFormatter.m in Sources */,
 				E1C21E6C1C0F23940042E1F3 /* MyWalletVC.m in Sources */,
 				E1D189651C0EE6F60043DE9C /* SDWebImagePrefetcher.m in Sources */,
+				E1B78A4F1C22623900A2E384 /* NSDate+TimeInterval.m in Sources */,
 				E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */,
+				E1B78A351C22608300A2E384 /* TTTColorFormatter.m in Sources */,
 				E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */,
 				E1D189631C0EE6F60043DE9C /* SDWebImageDownloaderOperation.m in Sources */,
 				E14C211B1C1EFB27003925B5 /* MyFriendsResult.m in Sources */,
@@ -873,6 +994,7 @@
 				E14C21121C1EF969003925B5 /* MessagesResult.m in Sources */,
 				E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */,
 				E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */,
+				E1B78A371C22608300A2E384 /* TTTNameFormatter.m in Sources */,
 				E1D189691C0EE6F60043DE9C /* UIImage+WebP.m in Sources */,
 				E1D188BB1C0ED4880043DE9C /* main.m in Sources */,
 				E1D1895F1C0EE6F60043DE9C /* SDImageCache.m in Sources */,
@@ -911,6 +1033,24 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		E1B78A1D1C22608300A2E384 /* FormatterKit.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1B78A1E1C22608300A2E384 /* en */,
+				E1B78A311C22608300A2E384 /* zh-Hans */,
+			);
+			name = FormatterKit.strings;
+			sourceTree = "<group>";
+		};
+		E1B78A3F1C22623900A2E384 /* CTAssetsPickerController.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E1B78A401C22623900A2E384 /* en */,
+				E1B78A441C22623900A2E384 /* zh-Hans */,
+			);
+			name = CTAssetsPickerController.strings;
+			sourceTree = "<group>";
+		};
 		E1D188F01C0ED6630043DE9C /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
