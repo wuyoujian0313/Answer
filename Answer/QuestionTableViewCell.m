@@ -18,6 +18,7 @@
 @property (nonatomic, strong) UIView                *userInfoView;
 @property (nonatomic, strong) UIView                *wtContentView;
 @property (nonatomic, strong) UIView                *funcView;
+@property (nonatomic, strong) UIView                *spaceView;
 @property (nonatomic, strong) QuestionInfo          *questionInfo;
 @property (nonatomic, strong) UserInfo              *userInfo;
 @property (nonatomic, assign) BOOL                  haveUserInfo;
@@ -25,7 +26,7 @@
 @property (nonatomic, assign) CGFloat               userInfoViewHeight;
 @property (nonatomic, assign) CGFloat               wtContentViewHeight;
 @property (nonatomic, assign) CGFloat               funcViewHeight;
-
+@property (nonatomic, assign) CGFloat               spaceViewHeight;
 @end
 
 @implementation QuestionTableViewCell
@@ -43,10 +44,10 @@
     if (self) {
         //
         self.haveUserInfo = NO;
+        [self layoutSpaceView:self.contentView];
         [self layoutUserView:self.contentView];
         [self layoutWtContentView:self.contentView];
         [self layoutFuncView:self.contentView];
-        
     }
     
     return self;
@@ -151,7 +152,7 @@
         
         //
         if (_haveUserInfo) {
-            [_userInfoView setFrame:CGRectMake(0, 0, self.frame.size.width, 40)];
+            [_userInfoView setFrame:CGRectMake(0, _spaceViewHeight, self.frame.size.width, 40)];
             _userInfoViewHeight = 40;
         } else {
             [_userInfoView setFrame:CGRectZero];
@@ -238,7 +239,7 @@
             UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
             
             if (cacheimage == nil) {
-                cacheimage = [UIImage imageNamed:@""];
+//                cacheimage = [UIImage imageNamed:nil];
                 
                 [contentImage  sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     if (image) {
@@ -257,7 +258,7 @@
             _wtContentViewHeight = 120 + 45;
         } else if ([_questionInfo.mediaType integerValue] == 2) {
             audioControl.hidden = NO;
-            [audioControl.timeLabel setText:@"20\""];
+            [audioControl.timeLabel setText:[NSString stringWithFormat:@"%d\"",[_questionInfo.duration intValue]]];
             CGFloat left = 10;
             CGFloat top = 0;
             [audioControl setFrame:CGRectMake(left, top, screenWidth - 20, 55)];
@@ -269,7 +270,7 @@
             _wtContentViewHeight = 55 + 45;
         }
         
-        [_wtContentView setFrame:CGRectMake(0, _userInfoViewHeight, self.frame.size.width, _wtContentViewHeight)];
+        [_wtContentView setFrame:CGRectMake(0, _userInfoViewHeight + _spaceViewHeight, self.frame.size.width, _wtContentViewHeight)];
     }
 }
 
@@ -397,8 +398,6 @@
             [rewardBtn setTitle:_questionInfo.reward forState:UIControlStateNormal];
             
             UIImage *image = [UIImage imageNamed:@"reward"];
-            
-            
             left = screenWidth - 10 - image.size.width/2.0 - sizeText1.width - 6;
             [rewardBtn setFrame:CGRectMake(left, top, image.size.width + sizeText1.width + 6, 20)];
             
@@ -433,7 +432,22 @@
         
         _funcViewHeight = 60;
         
-        [_funcView setFrame:CGRectMake(0, _userInfoViewHeight + _wtContentViewHeight, self.frame.size.width, _funcViewHeight)];
+        [_funcView setFrame:CGRectMake(0, _userInfoViewHeight + _wtContentViewHeight + _spaceViewHeight, self.frame.size.width, _funcViewHeight)];
+    }
+}
+
+- (void)layoutSpaceView:(UIView *)viewParent {
+    
+    if (viewParent != nil) {
+        
+        if (self.spaceView == nil) {
+            self.spaceView = [[UIView alloc] initWithFrame:CGRectZero];
+            [_spaceView setBackgroundColor:[UIColor colorWithHex:0xebeef0]];
+            [viewParent addSubview:_spaceView];
+        }
+        
+        [_spaceView setFrame:CGRectMake(0, 0, self.frame.size.width, 12)];
+        _spaceViewHeight = 12;
     }
 }
 
@@ -469,27 +483,31 @@
     _userInfoViewHeight = 0;
     _wtContentViewHeight = 0;
     _funcViewHeight = 0;
+    _spaceViewHeight = 0;
     
     self.questionInfo = questionInfo;
     self.userInfo = userInfo;
-    
+    [self layoutSpaceView:self.contentView];
     [self layoutUserView:self.contentView];
     [self layoutWtContentView:self.contentView];
     [self layoutFuncView:self.contentView];
+    
     
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.bounds.size.width, [self cellHeight]);
 }
 
 - (CGFloat)cellHeight {
-    return _userInfoViewHeight + _wtContentViewHeight + _funcViewHeight;
+    return _userInfoViewHeight + _wtContentViewHeight + _funcViewHeight + _spaceViewHeight;
 }
 
 - (void)layoutSubviews {
     
     [super layoutSubviews];
+    [self layoutSpaceView:self.contentView];
     [self layoutUserView:self.contentView];
     [self layoutWtContentView:self.contentView];
     [self layoutFuncView:self.contentView];
+   
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.bounds.size.width, [self cellHeight]);
 }
 

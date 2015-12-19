@@ -66,7 +66,7 @@
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning wuyoujian
-    return 1;
+    return 2;
     //return [[_questions twList] count];
 }
 
@@ -115,7 +115,7 @@
         
         
         QuestionInfo *q = [[QuestionInfo alloc] init];
-        q.mediaType = [NSNumber numberWithInt:1];
+        q.mediaType = [NSNumber numberWithInt:2];
         q.mediaURL = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
         q.thumbnail = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
         q.content = @"北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京";
@@ -123,6 +123,7 @@
         q.reward = @"5元";
         q.address = @"北京 奎科大厦";
         q.updateDate  = @"12:00";
+        q.duration = [NSNumber numberWithInt:20];
         
         UserInfo *info = [[UserInfo alloc] init];
         info.nickName = @"老武";
@@ -156,7 +157,7 @@
     QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
     
     QuestionInfo *q = [[QuestionInfo alloc] init];
-    q.mediaType = [NSNumber numberWithInt:1];
+    q.mediaType = [NSNumber numberWithInt:2];
     q.mediaURL = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
     q.thumbnail = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
     q.content = @"北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京";
@@ -164,6 +165,7 @@
     q.reward = @"5元";
     q.address = @"北京 奎科大厦";
     q.updateDate  = @"12:00";
+    q.duration = [NSNumber numberWithInt:20];
     
     UserInfo *info = [[UserInfo alloc] init];
     info.nickName = @"老武";
@@ -196,6 +198,7 @@
 
 
 #pragma mark - UITableViewDelegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (1||indexPath.row < [[_questions twList] count]) {

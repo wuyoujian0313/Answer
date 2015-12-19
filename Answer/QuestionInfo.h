@@ -24,5 +24,6 @@
 @property (nonatomic, copy) NSString        *reward;
 @property (nonatomic, copy) NSString      *updateDate;
 @property (nonatomic, copy) NSString        *type;
+@property (nonatomic, strong) NSNumber      *duration;
 
 @end
