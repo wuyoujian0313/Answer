@@ -7,8 +7,11 @@
 //
 
 #import "AnswerCircleVC.h"
+#import "QuestionsView.h"
+#import "QuestionTableViewCell.h"
 
-@interface AnswerCircleVC ()
+@interface AnswerCircleVC ()<QuestionTableViewCellDelegate>
+@property (nonatomic, strong) QuestionsView *questionView;
 
 @end
 
@@ -17,21 +20,27 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.leftBarButtonItem = nil;
+    [self layoutQuestionView];
 }
+
+- (void)layoutQuestionView {
+    self.questionView = [[QuestionsView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, screenWidth, screenHeight - navigationBarHeight - 49) delegate:self];
+    
+    [self.view addSubview:_questionView];
+}
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - QuestionTableViewCellDelegate
+- (void)questionTableViewCellAction:(QuestionTableViewCellAction)action questionInfo:(QuestionInfo*)question {
+    
 }
-*/
+
 
 @end

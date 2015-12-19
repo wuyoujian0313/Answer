@@ -12,16 +12,16 @@
 
 
 typedef NS_ENUM(NSInteger,QuestionTableViewCellAction) {
-    QuestionTableViewCellAction_PlayAudio,
-    QuestionTableViewCellAction_PlayVideo,
+    QuestionTableViewCellAction_Attention = 103,
+    QuestionTableViewCellAction_PlayAudio = 200,
+    QuestionTableViewCellAction_PlayVideo = 202,
     QuestionTableViewCellAction_ScanDetail,
-    QuestionTableViewCellAction_Sharing,
+    QuestionTableViewCellAction_Answer = 308,
+    QuestionTableViewCellAction_Sharing = 309,
     QuestionTableViewCellAction_RedPackage,
     QuestionTableViewCellAction_Location,
 };
 
-
-@class QuestionTableViewCell;
 @protocol QuestionTableViewCellDelegate <NSObject>
 - (void)questionTableViewCellAction:(QuestionTableViewCellAction)action questionInfo:(QuestionInfo*)question;
 @end

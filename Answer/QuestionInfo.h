@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSNumber      *isAnonymous;
 @property (nonatomic, strong) NSNumber      *hasBestAnswer;
 @property (nonatomic, copy) NSString        *reward;
-@property (nonatomic, strong) NSNumber      *updateDate;
+@property (nonatomic, copy) NSString      *updateDate;
+@property (nonatomic, copy) NSString        *type;
 
 @end

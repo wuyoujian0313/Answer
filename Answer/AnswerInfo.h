@@ -15,6 +15,6 @@
 @property (nonatomic, strong) NSNumber          *tuwenId;
 @property (nonatomic, strong) NSNumber          *isBestAnswer;
 @property (nonatomic, copy) NSString            *content;
-@property (nonatomic, strong) NSNumber          *updateDate;
+@property (nonatomic, copy) NSString      *updateDate;
 
 @end

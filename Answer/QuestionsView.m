@@ -65,7 +65,9 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[_questions twList] count];
+#warning wuyoujian
+    return 1;
+    //return [[_questions twList] count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -75,7 +77,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if (indexPath.row < [[_questions twList] count]) {
+    if (1||indexPath.row < [[_questions twList] count]) {
         return [self tableView:tableView preparedCellForIndexPath:indexPath];
     }
     
@@ -87,6 +89,7 @@
     }
     return cell;
 }
+
 
 - (QuestionTableViewCell *)tableView:(UITableView *)tableView preparedCellForIndexPath:(NSIndexPath *)indexPath {
     
@@ -108,19 +111,94 @@
         
         // 设置数据
         [_cellCache setObject:cell forKey:key];
+        QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
         
+        
+        QuestionInfo *q = [[QuestionInfo alloc] init];
+        q.mediaType = [NSNumber numberWithInt:1];
+        q.mediaURL = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
+        q.thumbnail = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
+        q.content = @"北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京";
+        q.type = @"军事 武器";
+        q.reward = @"5元";
+        q.address = @"北京 奎科大厦";
+        q.updateDate  = @"12:00";
+        
+        UserInfo *info = [[UserInfo alloc] init];
+        info.nickName = @"老武";
+        info.headImage = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
+        info.level = [NSNumber numberWithInt:5];
+        
+        questionInfo = q;
+        [cell setQuestionInfo:questionInfo userInfo:info];
+        return cell;
+        
+        if (_haveUserView) {
+            //
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.uId];
+            // 理论上只有一个
+            NSArray *users = [[_questions userList] filteredArrayUsingPredicate:predicate];
+            if (users && [users count]) {
+                [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
+            } else {
+                [cell setQuestionInfo:questionInfo userInfo:nil];
+            }
+        } else {
+            [cell setQuestionInfo:questionInfo userInfo:nil];
+        }
+    
         return cell;
     }
     
     // 设置数据
 
+    [_cellCache setObject:cell forKey:key];
+    QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
+    
+    QuestionInfo *q = [[QuestionInfo alloc] init];
+    q.mediaType = [NSNumber numberWithInt:1];
+    q.mediaURL = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
+    q.thumbnail = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
+    q.content = @"北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京";
+    q.type = @"军事 武器";
+    q.reward = @"5元";
+    q.address = @"北京 奎科大厦";
+    q.updateDate  = @"12:00";
+    
+    UserInfo *info = [[UserInfo alloc] init];
+    info.nickName = @"老武";
+    info.headImage = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
+    info.level = [NSNumber numberWithInt:5];
+    
+    questionInfo = q;
+    [cell setQuestionInfo:questionInfo userInfo:info];
+    
+    return cell;
+    
+    
+    if (_haveUserView) {
+        //
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.uId];
+        
+        // 理论上只有一个
+        NSArray *users = [[_questions userList] filteredArrayUsingPredicate:predicate];
+        if (users && [users count]) {
+            [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
+        } else {
+            [cell setQuestionInfo:questionInfo userInfo:nil];
+        }
+    } else {
+        [cell setQuestionInfo:questionInfo userInfo:nil];
+    }
+    
     return cell;
 }
 
 
 #pragma mark - UITableViewDelegate
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < [[_questions twList] count]) {
+    
+    if (1||indexPath.row < [[_questions twList] count]) {
         QuestionTableViewCell *cell = [self tableView:tableView preparedCellForIndexPath:indexPath];
         return [cell cellHeight];
     }
@@ -129,7 +207,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < [[_questions twList] count]) {
+    if (1||indexPath.row < [[_questions twList] count]) {
         QuestionTableViewCell *cell = [self tableView:tableView preparedCellForIndexPath:indexPath];
         return [cell cellHeight];
     }

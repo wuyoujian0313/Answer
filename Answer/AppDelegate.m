@@ -31,47 +31,47 @@
     
     UITabBarController *tabController = [[UITabBarController alloc] init];
     [tabController.tabBar setBarTintColor:[UIColor lightTextColor]];
-    [tabController.tabBar setTintColor:[UIColor blackColor]];
+    [tabController.tabBar setTintColor:[UIColor colorWithHex:0x12b8f6]];
     [tabController setDelegate:self];
     
     AnswerCircleVC * answerVC = [[AnswerCircleVC alloc] init];
-    UITabBarItem * itemObj1 = [[UITabBarItem alloc] initWithTitle:@"图问圈"
-                                                            image:[UIImage imageNamed:@"circle-default"]
-                                                    selectedImage:[UIImage imageNamed:@"circle-press"]];
+    UITabBarItem * itemObj1 = [[UITabBarItem alloc] initWithTitle:@"首页"
+                                                            image:[UIImage imageNamed:@"tabbar_home"]
+                                                    selectedImage:nil];
     [itemObj1 setTag:0];
     [answerVC setNavTitle:itemObj1.title];
     [answerVC setTabBarItem:itemObj1];
     
     DiscoverVC * discoverVC = [[DiscoverVC alloc] init];
-    UITabBarItem * itemObj2 = [[UITabBarItem alloc] initWithTitle:@"发现"
-                                                            image:[UIImage imageNamed:@"discover-default"]
-                                                    selectedImage:[UIImage imageNamed:@"discover-press"]];
+    UITabBarItem * itemObj2 = [[UITabBarItem alloc] initWithTitle:@"图问圈"
+                                                            image:[UIImage imageNamed:@"tabbar_circle"]
+                                                    selectedImage:nil];
     [itemObj2 setTag:1];
     [discoverVC setNavTitle:itemObj2.title];
     [discoverVC setTabBarItem:itemObj2];
     
     QuestionVC * questionVC = [[QuestionVC alloc] init];
-    UITabBarItem * itemObj3 = [[UITabBarItem alloc] initWithTitle:@"图问"
-                                                            image:[UIImage imageNamed:@"question-default"]
-                                                    selectedImage:[UIImage imageNamed:@"question-press"]];
+    UITabBarItem * itemObj3 = [[UITabBarItem alloc] initWithTitle:@"发问题"
+                                                            image:[UIImage imageNamed:@"tabbar_question"]
+                                                    selectedImage:nil];
     [itemObj3 setTag:2];
     [questionVC setNavTitle:itemObj3.title];
     [questionVC setTabBarItem:itemObj3];
     
     MessageVC * messageVC = [[MessageVC alloc] init];
     UITabBarItem * itemObj4 = [[UITabBarItem alloc] initWithTitle:@"消息"
-                                                            image:[UIImage imageNamed:@"message-default"]
-                                                    selectedImage:[UIImage imageNamed:@"message-press"]];
-    [itemObj4 setTag:2];
+                                                            image:[UIImage imageNamed:@"tabbar_message"]
+                                                    selectedImage:nil];
+    [itemObj4 setTag:3];
     [messageVC setNavTitle:itemObj4.title];
     [messageVC setTabBarItem:itemObj4];
     
     
     MeVC * meVC = [[MeVC alloc] init];
     UITabBarItem * itemObj5 = [[UITabBarItem alloc] initWithTitle:@"我"
-                                                            image:[UIImage imageNamed:@"me-default"]
-                                                    selectedImage:[UIImage imageNamed:@"me-press"]];
-    [itemObj5 setTag:2];
+                                                            image:[UIImage imageNamed:@"tabbar_me"]
+                                                    selectedImage:nil];
+    [itemObj5 setTag:4];
     [meVC setNavTitle:itemObj5.title];
     [meVC setTabBarItem:itemObj5];
     

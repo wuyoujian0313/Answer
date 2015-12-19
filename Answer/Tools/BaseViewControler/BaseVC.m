@@ -41,7 +41,7 @@
     
     
     UIView *rootView = [[UIView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
-    [rootView setBackgroundColor:[UIColor colorWithHex:0xf1f3f4]];
+    [rootView setBackgroundColor:[UIColor colorWithHex:0xebeef0]];
     [self.view addSubview:rootView];
     
     
@@ -125,7 +125,7 @@
 
 #pragma mark - Config Top Bar Button
 - (UIBarButtonItem*)configBackButton {
-    UIBarButtonItem *itemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    UIBarButtonItem *itemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
     
     self.navigationItem.leftBarButtonItem = itemBtn;
 

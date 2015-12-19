@@ -70,7 +70,7 @@
 		E1C21E791C0F26B10042E1F3 /* RedPacketVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E781C0F26B10042E1F3 /* RedPacketVC.m */; };
 		E1D188BB1C0ED4880043DE9C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188BA1C0ED4880043DE9C /* main.m */; };
 		E1D188BE1C0ED4880043DE9C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188BD1C0ED4880043DE9C /* AppDelegate.m */; };
-		E1D188C61C0ED4880043DE9C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D188C51C0ED4880043DE9C /* Assets.xcassets */; };
+		E1D188C61C0ED4880043DE9C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1D188C51C0ED4880043DE9C /* Images.xcassets */; };
 		E1D188D41C0ED4880043DE9C /* AnswerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188D31C0ED4880043DE9C /* AnswerTests.m */; };
 		E1D188DF1C0ED4880043DE9C /* AnswerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D188DE1C0ED4880043DE9C /* AnswerUITests.m */; };
 		E1D188EE1C0ED6630043DE9C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1D188F01C0ED6630043DE9C /* InfoPlist.strings */; };
@@ -255,7 +255,7 @@
 		E1D188BA1C0ED4880043DE9C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E1D188BC1C0ED4880043DE9C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E1D188BD1C0ED4880043DE9C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E1D188C51C0ED4880043DE9C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E1D188C51C0ED4880043DE9C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E1D188CA1C0ED4880043DE9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E1D188CF1C0ED4880043DE9C /* AnswerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AnswerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1D188D31C0ED4880043DE9C /* AnswerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AnswerTests.m; sourceTree = "<group>"; };
@@ -601,6 +601,7 @@
 			isa = PBXGroup;
 			children = (
 				E1D188F51C0EE6F60043DE9C /* Tools */,
+				E14C20E81C1EE6AC003925B5 /* Models */,
 				E1D188F41C0EE6EA0043DE9C /* UI */,
 				E1D188B91C0ED4880043DE9C /* Supporting Files */,
 			);
@@ -610,7 +611,7 @@
 		E1D188B91C0ED4880043DE9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E1D188C51C0ED4880043DE9C /* Assets.xcassets */,
+				E1D188C51C0ED4880043DE9C /* Images.xcassets */,
 				E1D188BC1C0ED4880043DE9C /* AppDelegate.h */,
 				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
 				E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */,
@@ -642,7 +643,6 @@
 		E1D188F41C0EE6EA0043DE9C /* UI */ = {
 			isa = PBXGroup;
 			children = (
-				E14C20E81C1EE6AC003925B5 /* Models */,
 				E1C21E761C0F25510042E1F3 /* common */,
 				E1C21E751C0F25390042E1F3 /* 登录&注册 */,
 				E1C21E741C0F24BA0042E1F3 /* 我 */,
@@ -920,7 +920,7 @@
 				E1B78A4D1C22623900A2E384 /* CTAssetsPickerController.strings in Resources */,
 				E1B78A4E1C22623900A2E384 /* Images.xcassets in Resources */,
 				E1B78A5E1C2263B600A2E384 /* MJRefresh.bundle in Resources */,
-				E1D188C61C0ED4880043DE9C /* Assets.xcassets in Resources */,
+				E1D188C61C0ED4880043DE9C /* Images.xcassets in Resources */,
 				E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */,
 				E1D188EE1C0ED6630043DE9C /* InfoPlist.strings in Resources */,
 			);

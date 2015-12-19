@@ -20,6 +20,6 @@
 @property (nonatomic, copy) NSString        *qq;
 @property (nonatomic, copy) NSString        *weixin;
 @property (nonatomic, copy) NSString        *headImage;
-@property (nonatomic, strong) NSNumber      *updateDate;
+@property (nonatomic, copy) NSString      *updateDate;
 
 @end

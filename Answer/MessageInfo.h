@@ -12,7 +12,7 @@
 
 @property (nonatomic, strong) NSNumber          *uuid;
 @property (nonatomic, copy) NSString            *uId;
-@property (nonatomic, strong) NSNumber          *updateDate;
+@property (nonatomic, copy) NSString      *updateDate;
 @property (nonatomic, strong) NSNumber          *isRead;
 @property (nonatomic, copy) NSString            *content;
 @property (nonatomic, copy) NSString            *reward;

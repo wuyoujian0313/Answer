@@ -15,7 +15,7 @@
 @property (nonatomic, strong) NSNumber          *tuwenId;
 @property (nonatomic, strong) NSNumber          *type;
 @property (nonatomic, strong) NSNumber          *amount;
-@property (nonatomic, strong) NSNumber          *updateDate;
+@property (nonatomic, copy) NSString      *updateDate;
 
 
 @end
