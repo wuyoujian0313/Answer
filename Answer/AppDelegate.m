@@ -12,27 +12,43 @@
 #import "QuestionVC.h"
 #import "MessageVC.h"
 #import "MeVC.h"
+#import "LoginVC.h"
 
 @interface AppDelegate ()<UITabBarControllerDelegate>
+
 @end
 
 @implementation AppDelegate
 
 
++ (AppDelegate*)shareMyApplication {
+    return (AppDelegate*)[UIApplication sharedApplication].delegate;
+}
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self setupVCs];
+    //[self login];
     return YES;
+}
+
+- (void)login {
+    LoginVC *controller = [[LoginVC alloc] init];
+    WYJNavigationController *loginnavigationController = [[WYJNavigationController alloc] initWithRootViewController:controller];
+    //    loginnavigationController.navigationBar.barTintColor = [UIColor whiteColor];
+    //    loginnavigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [_tabController presentViewController:loginnavigationController animated:YES completion:^{}];
 }
 
 - (void)setupVCs {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
-    UITabBarController *tabController = [[UITabBarController alloc] init];
-    [tabController.tabBar setBarTintColor:[UIColor lightTextColor]];
-    [tabController.tabBar setTintColor:[UIColor colorWithHex:0x12b8f6]];
-    [tabController setDelegate:self];
+    self.tabController = [[UITabBarController alloc] init];
+    [_tabController.tabBar setBarTintColor:[UIColor lightTextColor]];
+    [_tabController.tabBar setTintColor:[UIColor colorWithHex:0x12b8f6]];
+    [_tabController setDelegate:self];
     
     AnswerCircleVC * answerVC = [[AnswerCircleVC alloc] init];
     UITabBarItem * itemObj1 = [[UITabBarItem alloc] initWithTitle:@"首页"
@@ -81,9 +97,9 @@
     WYJNavigationController *nav4 = [[WYJNavigationController alloc] initWithRootViewController:messageVC];
     WYJNavigationController *nav5 = [[WYJNavigationController alloc] initWithRootViewController:meVC];
     
-    [tabController setViewControllers:[[NSArray alloc] initWithObjects:nav1,nav2,nav3,nav4,nav5,nil]];
-    [tabController setSelectedIndex:0];
-    self.window.rootViewController = tabController;
+    [_tabController setViewControllers:[[NSArray alloc] initWithObjects:nav1,nav2,nav3,nav4,nav5,nil]];
+    [_tabController setSelectedIndex:0];
+    self.window.rootViewController = _tabController;
     [_window makeKeyAndVisible];
 }
 

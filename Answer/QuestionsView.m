@@ -115,7 +115,7 @@
         
         
         QuestionInfo *q = [[QuestionInfo alloc] init];
-        q.mediaType = [NSNumber numberWithInt:2];
+        q.mediaType = [NSNumber numberWithInt:0];
         q.mediaURL = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
         q.thumbnail = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
         q.content = @"北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京";
@@ -157,7 +157,7 @@
     QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
     
     QuestionInfo *q = [[QuestionInfo alloc] init];
-    q.mediaType = [NSNumber numberWithInt:2];
+    q.mediaType = [NSNumber numberWithInt:0];
     q.mediaURL = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
     q.thumbnail = @"http://d.hiphotos.baidu.com/image/h%3D220/sign=8ac0a7ed217f9e2f6f351a0a2f30e962/d8f9d72a6059252dff61080f329b033b5bb5b942.jpg";
     q.content = @"北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京北京";

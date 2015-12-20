@@ -1,14 +1,14 @@
 //
-//  UserInfo.h
+//  User.h
 //  Answer
 //
-//  Created by wuyj on 15/12/14.
+//  Created by wuyj on 15/12/20.
 //  Copyright © 2015年 wuyj. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface UserInfo : NSObject
+@interface User : NSObject
 
 @property (nonatomic, strong) NSNumber      *uuid;
 @property (nonatomic, copy) NSString        *userName;
@@ -21,5 +21,9 @@
 @property (nonatomic, copy) NSString        *weixin;
 @property (nonatomic, copy) NSString        *headImage;
 @property (nonatomic, copy) NSString        *updateDate;
+
+
++ (User*)sharedUser;
+
 
 @end

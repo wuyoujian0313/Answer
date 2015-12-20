@@ -80,7 +80,7 @@
             [nameLabel setBackgroundColor:[UIColor clearColor]];
             [nameLabel setTag:101];
             [nameLabel setTextAlignment:NSTextAlignmentLeft];
-            [nameLabel setTextColor:[UIColor colorWithHex:0x666666]];
+            [nameLabel setTextColor:[UIColor grayColor]];
             [nameLabel setFont:[UIFont systemFontOfSize:14]];
             [_userInfoView addSubview:nameLabel];
         }
@@ -91,7 +91,7 @@
             [levelLabel setBackgroundColor:[UIColor clearColor]];
             [levelLabel setTag:102];
             [levelLabel setTextAlignment:NSTextAlignmentCenter];
-            [levelLabel setTextColor:[UIColor colorWithHex:0xcccccc]];
+            [levelLabel setTextColor:[UIColor grayColor]];
             [levelLabel setFont:[UIFont systemFontOfSize:14]];
             [_userInfoView addSubview:levelLabel];
         }

@@ -21,6 +21,7 @@
 #import "LineView.h"
 #import "WYJNavigationController.h"
 #import "FadePromptView.h"
+#import "SVProgressHUD.h"
 #endif
 
 #define screenStartY self.navigationController.navigationBarHidden ? 20:0
