@@ -43,6 +43,8 @@
 		E197621B1C2695120093A935 /* myPacket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E19762171C2695120093A935 /* myPacket@2x.png */; };
 		E197621C1C2695120093A935 /* myQuestion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E19762181C2695120093A935 /* myQuestion@2x.png */; };
 		E197621D1C2695120093A935 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E19762191C2695120093A935 /* setting@2x.png */; };
+		E19762201C26B2FC0093A935 /* SetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E197621F1C26B2FC0093A935 /* SetVC.m */; };
+		E19762231C26B6B30093A935 /* MenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E19762221C26B6B30093A935 /* MenuCollectionViewCell.m */; };
 		E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */; };
 		E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */; };
 		E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */; };
@@ -213,6 +215,10 @@
 		E19762171C2695120093A935 /* myPacket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myPacket@2x.png"; sourceTree = "<group>"; };
 		E19762181C2695120093A935 /* myQuestion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myQuestion@2x.png"; sourceTree = "<group>"; };
 		E19762191C2695120093A935 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
+		E197621E1C26B2FC0093A935 /* SetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetVC.h; sourceTree = "<group>"; };
+		E197621F1C26B2FC0093A935 /* SetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetVC.m; sourceTree = "<group>"; };
+		E19762211C26B6B30093A935 /* MenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCollectionViewCell.h; sourceTree = "<group>"; };
+		E19762221C26B6B30093A935 /* MenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCollectionViewCell.m; sourceTree = "<group>"; };
 		E1A054A91C1F0D2500A6DD56 /* RewardListResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardListResult.h; sourceTree = "<group>"; };
 		E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardListResult.m; sourceTree = "<group>"; };
 		E1A054AC1C1F0D5500A6DD56 /* RewardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardInfo.h; sourceTree = "<group>"; };
@@ -664,6 +670,10 @@
 				E1C21E681C0F233F0042E1F3 /* MyFriendsVC.m */,
 				E1C21E6A1C0F23940042E1F3 /* MyWalletVC.h */,
 				E1C21E6B1C0F23940042E1F3 /* MyWalletVC.m */,
+				E19762211C26B6B30093A935 /* MenuCollectionViewCell.h */,
+				E19762221C26B6B30093A935 /* MenuCollectionViewCell.m */,
+				E197621E1C26B2FC0093A935 /* SetVC.h */,
+				E197621F1C26B2FC0093A935 /* SetVC.m */,
 			);
 			name = "我";
 			sourceTree = "<group>";
@@ -1152,7 +1162,9 @@
 				E1D189561C0EE6F60043DE9C /* UIImage+Utility.m in Sources */,
 				E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */,
 				E1D1894A1C0EE6F60043DE9C /* AFHTTPRequestOperationManager.m in Sources */,
+				E19762201C26B2FC0093A935 /* SetVC.m in Sources */,
 				E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */,
+				E19762231C26B6B30093A935 /* MenuCollectionViewCell.m in Sources */,
 				E1B78A381C22608300A2E384 /* TTTOrdinalNumberFormatter.m in Sources */,
 				E19762001C2673220093A935 /* CoreTextUtils.m in Sources */,
 				E1B78A391C22608300A2E384 /* TTTTimeIntervalFormatter.m in Sources */,

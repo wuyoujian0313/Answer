@@ -13,6 +13,8 @@
 #import "MyWalletVC.h"
 #import "LineView.h"
 #import "User.h"
+#import "SetVC.h"
+#import "MyWalletVC.h"
 
 @interface MeVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -191,13 +193,15 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0: {
-            
             // 我的问题
             break;
         }
         case 1: {
             
             // 我的钱包
+            MyWalletVC *vc = [[MyWalletVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 2: {
@@ -206,6 +210,9 @@
         }
         case 3: {
             // 设置
+            SetVC * vc = [[SetVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
             
