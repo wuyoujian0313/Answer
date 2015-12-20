@@ -15,6 +15,8 @@
 @property (nonatomic, copy) NSString        *uId;
 @property (nonatomic, copy) NSString        *nickName;
 @property (nonatomic, copy) NSString        *phoneNumber;
+@property (nonatomic, strong) NSNumber      *attentionNum;
+@property (nonatomic, strong) NSNumber      *fansNum;
 @property (nonatomic, copy) NSString        *password;
 @property (nonatomic, strong) NSNumber      *level;
 @property (nonatomic, copy) NSString        *qq;

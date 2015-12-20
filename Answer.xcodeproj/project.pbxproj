@@ -49,6 +49,7 @@
 		E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */; };
 		E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */; };
 		E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */; };
+		E1AC52271C26EE7B00172965 /* MyQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */; };
 		E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A1D1C22608300A2E384 /* FormatterKit.strings */; };
 		E1B78A331C22608300A2E384 /* TTTAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */; };
 		E1B78A341C22608300A2E384 /* TTTArrayFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A221C22608300A2E384 /* TTTArrayFormatter.m */; };
@@ -227,6 +228,8 @@
 		E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeHeadImgResult.m; sourceTree = "<group>"; };
 		E1A054B21C1F0EEB00A6DD56 /* ChangeNicknameResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNicknameResult.h; sourceTree = "<group>"; };
 		E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNicknameResult.m; sourceTree = "<group>"; };
+		E1AC52251C26EE7B00172965 /* MyQuestionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQuestionsVC.h; sourceTree = "<group>"; };
+		E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQuestionsVC.m; sourceTree = "<group>"; };
 		E1B78A1E1C22608300A2E384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FormatterKit.strings; sourceTree = "<group>"; };
 		E1B78A1F1C22608300A2E384 /* TTTAddressFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAddressFormatter.h; sourceTree = "<group>"; };
 		E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAddressFormatter.m; sourceTree = "<group>"; };
@@ -666,6 +669,8 @@
 			children = (
 				E1C21E521C0F0AE80042E1F3 /* MeVC.h */,
 				E1C21E531C0F0AE80042E1F3 /* MeVC.m */,
+				E1AC52251C26EE7B00172965 /* MyQuestionsVC.h */,
+				E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */,
 				E1C21E671C0F233F0042E1F3 /* MyFriendsVC.h */,
 				E1C21E681C0F233F0042E1F3 /* MyFriendsVC.m */,
 				E1C21E6A1C0F23940042E1F3 /* MyWalletVC.h */,
@@ -1182,6 +1187,7 @@
 				E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */,
 				E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */,
 				E1D1894C1C0EE6F60043DE9C /* AFNetworkReachabilityManager.m in Sources */,
+				E1AC52271C26EE7B00172965 /* MyQuestionsVC.m in Sources */,
 				E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */,
 				E1D189641C0EE6F60043DE9C /* SDWebImageManager.m in Sources */,
 				E14C21121C1EF969003925B5 /* MessagesResult.m in Sources */,

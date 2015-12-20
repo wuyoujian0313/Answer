@@ -15,6 +15,7 @@
 #import "User.h"
 #import "SetVC.h"
 #import "MyWalletVC.h"
+#import "MyQuestionsVC.h"
 
 @interface MeVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -48,8 +49,8 @@
 }
 
 -(void)loadHeadImageAndNickName {
-    _userNicknameLabel.text = [NSString stringWithFormat:@"%@",@"帅到掉渣的老武"];
     
+    _userNicknameLabel.text = [User sharedUser].nickName ? [User sharedUser].nickName : [User sharedUser].userName;
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
@@ -85,15 +86,61 @@
 //    [imageView.layer setCornerRadius:75/2.0];
     [view addSubview:imageView];
     
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(10 + 75 + 10, 25, _meTableView.frame.size.width, 16)];
-    [self setUserNicknameLabel:titleLabel];
-    titleLabel.backgroundColor = [UIColor clearColor];
-    titleLabel.font = [UIFont systemFontOfSize:16];
-    titleLabel.textColor = [UIColor colorWithHex:0x666666];
-    [view addSubview:titleLabel];
+    CGFloat left = 10;
+    left += 75 + 10;
+    UILabel *nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 25, _meTableView.frame.size.width, 16)];
+    [self setUserNicknameLabel:nickNameLabel];
+    nickNameLabel.backgroundColor = [UIColor clearColor];
+    nickNameLabel.font = [UIFont systemFontOfSize:16];
+    nickNameLabel.textColor = [UIColor colorWithHex:0x666666];
+    [view addSubview:nickNameLabel];
     
-    titleLabel.text = [User sharedUser].nickName;
+    [User sharedUser].nickName = @"帅到掉渣的老武";
+    [User sharedUser].level = @5;
+    [User sharedUser].uId = @"123456";
+    [User sharedUser].attentionNum = @5;
+    [User sharedUser].fansNum = @5;
+    
+    nickNameLabel.text = [User sharedUser].nickName ? [User sharedUser].nickName : [User sharedUser].userName;
+    CGSize sizeText = [nickNameLabel.text sizeWithFontCompatible:nickNameLabel.font];
+    left += 10 + sizeText.width;
     [_meTableView setTableHeaderView:view];
+    
+    UILabel *levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 25, _meTableView.frame.size.width, 16)];
+    levelLabel.backgroundColor = [UIColor clearColor];
+    levelLabel.font = [UIFont systemFontOfSize:16];
+    levelLabel.textColor = [UIColor redColor];
+    levelLabel.text = [NSString stringWithFormat:@"%d级",[[User sharedUser].level intValue]];
+    [view addSubview:levelLabel];
+    
+
+    left = 10 + 75 + 10;
+    UILabel *idLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 60, _meTableView.frame.size.width, 16)];
+    idLabel.backgroundColor = [UIColor clearColor];
+    idLabel.font = [UIFont systemFontOfSize:16];
+    idLabel.textColor = [UIColor grayColor];
+    idLabel.text = [NSString stringWithFormat:@"ID:%@",[User sharedUser].uId];
+    [view addSubview:idLabel];
+    
+    sizeText = [idLabel.text sizeWithFontCompatible:idLabel.font];
+    left += sizeText.width + 10;
+    
+    UILabel *attentionLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 60, _meTableView.frame.size.width, 16)];
+    attentionLabel.backgroundColor = [UIColor clearColor];
+    attentionLabel.font = [UIFont systemFontOfSize:16];
+    attentionLabel.textColor = [UIColor grayColor];
+    attentionLabel.text = [NSString stringWithFormat:@"关注:%d",[[User sharedUser].attentionNum intValue]];
+    [view addSubview:attentionLabel];
+    
+    sizeText = [attentionLabel.text sizeWithFontCompatible:attentionLabel.font];
+    left += sizeText.width + 10;
+    
+    UILabel *fansLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 60, _meTableView.frame.size.width, 16)];
+    fansLabel.backgroundColor = [UIColor clearColor];
+    fansLabel.font = [UIFont systemFontOfSize:16];
+    fansLabel.textColor = [UIColor grayColor];
+    fansLabel.text = [NSString stringWithFormat:@"粉丝:%d",[[User sharedUser].fansNum intValue]];
+    [view addSubview:fansLabel];
     
     [self loadHeadImageAndNickName];
 }
@@ -194,6 +241,9 @@
     switch (row) {
         case 0: {
             // 我的问题
+            MyQuestionsVC *vc = [[MyQuestionsVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 1: {
@@ -206,6 +256,9 @@
         }
         case 2: {
             // 我的好友
+            MyFriendsVC *vc = [[MyFriendsVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 3: {

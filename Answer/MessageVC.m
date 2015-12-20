@@ -8,6 +8,7 @@
 
 #import "MessageVC.h"
 #import "LineView.h"
+#import "SystemMessageVC.h"
 
 @interface MessageVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView          *meassageTableView;
@@ -137,16 +138,20 @@
     switch (row) {
         case 0: {
             
-            // 我的问题
+            // 回答我的问题
             break;
         }
         case 1: {
             
-            // 我的钱包
+            // @我的问题
             break;
         }
         case 2: {
-            // 我的好友
+            // 系统消息
+            SystemMessageVC *vc = [[SystemMessageVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            
             break;
         }
             

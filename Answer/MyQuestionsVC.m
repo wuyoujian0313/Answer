@@ -1,23 +1,23 @@
 //
-//  MyFriendsVC.m
+//  MyQuestionsVC.m
 //  Answer
 //
-//  Created by wuyj on 15/12/2.
+//  Created by wuyj on 15/12/20.
 //  Copyright © 2015年 wuyj. All rights reserved.
 //
 
-#import "MyFriendsVC.h"
+#import "MyQuestionsVC.h"
 
-@interface MyFriendsVC ()
+@interface MyQuestionsVC ()
 
 @end
 
-@implementation MyFriendsVC
+@implementation MyQuestionsVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setNavTitle:@"我的好友"];
+    [self setNavTitle:@"我的问题"];
 }
 
 - (void)didReceiveMemoryWarning {
