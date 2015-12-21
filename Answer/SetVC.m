@@ -8,6 +8,7 @@
 
 #import "SetVC.h"
 #import "LineView.h"
+#import "AppDelegate.h"
 
 @interface SetVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView          *setTableView;
@@ -138,6 +139,8 @@
         }
         case 2: {
             // 退出
+            AppDelegate *app = [AppDelegate shareMyApplication];
+            [app.mainVC switchToLoginVC];
             break;
         }
             

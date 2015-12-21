@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
+		E14410651C282EA8000EE19A /* redPacket.png in Resources */ = {isa = PBXBuildFile; fileRef = E14410641C282EA8000EE19A /* redPacket.png */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
 		E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20ED1C1EE8DB003925B5 /* UserInfo.m */; };
 		E14C20F11C1EEADC003925B5 /* UserAccountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F01C1EEADC003925B5 /* UserAccountResult.m */; };
@@ -153,6 +154,7 @@
 /* Begin PBXFileReference section */
 		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
 		E14410621C27DAF1000EE19A /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainController.m; path = Answer/MainController.m; sourceTree = SOURCE_ROOT; };
+		E14410641C282EA8000EE19A /* redPacket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redPacket.png; sourceTree = "<group>"; };
 		E14C20E91C1EE8A6003925B5 /* LoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResult.h; sourceTree = "<group>"; };
 		E14C20EA1C1EE8A6003925B5 /* LoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResult.m; sourceTree = "<group>"; };
 		E14C20EC1C1EE8DB003925B5 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -748,6 +750,7 @@
 				E19762171C2695120093A935 /* myPacket@2x.png */,
 				E19762181C2695120093A935 /* myQuestion@2x.png */,
 				E19762191C2695120093A935 /* setting@2x.png */,
+				E14410641C282EA8000EE19A /* redPacket.png */,
 				E1D188C51C0ED4880043DE9C /* Images.xcassets */,
 				E1D188BC1C0ED4880043DE9C /* AppDelegate.h */,
 				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
@@ -1066,6 +1069,7 @@
 				E197621A1C2695120093A935 /* myFriend@2x.png in Resources */,
 				E197620D1C26825F0093A935 /* SVProgressHUD.bundle in Resources */,
 				E197621C1C2695120093A935 /* myQuestion@2x.png in Resources */,
+				E14410651C282EA8000EE19A /* redPacket.png in Resources */,
 				E19761FF1C2673220093A935 /* LICENSE in Resources */,
 				E197621D1C2695120093A935 /* setting@2x.png in Resources */,
 				E1D188C61C0ED4880043DE9C /* Images.xcassets in Resources */,

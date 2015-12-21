@@ -8,6 +8,15 @@
 
 #import "BaseVC.h"
 
+typedef NS_ENUM(NSInteger,EnterType) {
+    EnterType_FromPublishQuestion,
+    EnterType_FromMe,
+};
+
 @interface MyFriendsVC : BaseVC
+
+@property (nonatomic, assign) EnterType     enterType;
+
+
 
 @end

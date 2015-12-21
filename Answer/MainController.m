@@ -15,6 +15,8 @@
 #import "LoginVC.h"
 
 @interface MainController ()<UITabBarControllerDelegate>
+
+@property (nonatomic, strong) UIViewController              *rootVC;
 @property (nonatomic, strong) UITabBarController            *homeVC;
 @property (nonatomic, strong) WYJNavigationController       *loginNav;
 @end
@@ -24,34 +26,49 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setupLoginVC];
-    [self setupTabController];
-    [self switchToLoginVC];
+    [self setupRootVC];
+    [self switchToLoginVCFrom:_rootVC];
+}
+
+- (void)setupRootVC {
+    UIViewController *rootVC = [[UIViewController alloc] init];
+    rootVC.view.backgroundColor = [UIColor whiteColor];
+    self.rootVC = rootVC;
+    [self addChildViewController:_rootVC];
 }
 
 - (void)switchToHomeVC {
-    [self transitionFromViewController:_loginNav toViewController:_homeVC duration:1.5 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
+    [self setupTabController];
+    [self.view addSubview:_homeVC.view];
+    [self transitionFromViewController:_loginNav toViewController:_homeVC duration:1.0 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
         //
+        [_loginNav removeFromParentViewController];
     } completion:^(BOOL finished) {
         //
     }];
 }
 
 - (void)switchToLoginVC {
-    [self transitionFromViewController:_homeVC toViewController:_loginNav duration:0.5 options:UIViewAnimationOptionTransitionNone animations:^{
+    [self switchToLoginVCFrom:_homeVC];
+}
+
+- (void)switchToLoginVCFrom:(UIViewController*)fromVC {
+    [self setupLoginVC];
+    [self.view addSubview:_loginNav.view];
+    [self transitionFromViewController:fromVC toViewController:_loginNav duration:1.0 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
         //
+        [_homeVC removeFromParentViewController];
     } completion:^(BOOL finished) {
         //
     }];
 }
 
 - (void)setupLoginVC {
-    
     LoginVC *controller = [[LoginVC alloc] init];
     WYJNavigationController *loginNav = [[WYJNavigationController alloc] initWithRootViewController:controller];
     self.loginNav = loginNav;
     [self addChildViewController:_loginNav];
-    [self.view addSubview:_loginNav.view];
+    
 }
 
 - (void)setupTabController {
@@ -108,7 +125,6 @@
     [_homeVC setSelectedIndex:0];
     
     [self addChildViewController:_homeVC];
-    [self.view addSubview:_homeVC.view];
 }
 
 #pragma UITabBarControllerDelegate
