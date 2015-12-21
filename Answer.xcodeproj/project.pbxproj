@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
 		E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20ED1C1EE8DB003925B5 /* UserInfo.m */; };
 		E14C20F11C1EEADC003925B5 /* UserAccountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F01C1EEADC003925B5 /* UserAccountResult.m */; };
@@ -150,6 +151,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
+		E14410621C27DAF1000EE19A /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainController.m; path = Answer/MainController.m; sourceTree = SOURCE_ROOT; };
 		E14C20E91C1EE8A6003925B5 /* LoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResult.h; sourceTree = "<group>"; };
 		E14C20EA1C1EE8A6003925B5 /* LoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResult.m; sourceTree = "<group>"; };
 		E14C20EC1C1EE8DB003925B5 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -748,6 +751,8 @@
 				E1D188C51C0ED4880043DE9C /* Images.xcassets */,
 				E1D188BC1C0ED4880043DE9C /* AppDelegate.h */,
 				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
+				E14410611C27DAF1000EE19A /* MainController.h */,
+				E14410621C27DAF1000EE19A /* MainController.m */,
 				E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */,
 				E1D188CA1C0ED4880043DE9C /* Info.plist */,
 				E1D188BA1C0ED4880043DE9C /* main.m */,
@@ -1158,6 +1163,7 @@
 				E14C20FD1C1EF144003925B5 /* QuestionInfo.m in Sources */,
 				E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */,
 				E1B78A4C1C22623900A2E384 /* CTAssetsPickerController.m in Sources */,
+				E14410631C27DAF1000EE19A /* MainController.m in Sources */,
 				E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */,
 				E19762051C2673220093A935 /* OHTouchesGestureRecognizer.m in Sources */,
 				E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */,

@@ -191,10 +191,7 @@
         
         
         AppDelegate *app = [AppDelegate shareMyApplication];
-        [app.tabController dismissViewControllerAnimated:YES completion:^{
-            //
-        }];
-        
+        [app.mainVC switchToHomeVC];
     }
 }
 

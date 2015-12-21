@@ -48,6 +48,7 @@
     // 默认增加back 按钮
     [self configBackButton];
     
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didEnterBackgroundNotification:)
                                                  name:UIApplicationDidEnterBackgroundNotification
