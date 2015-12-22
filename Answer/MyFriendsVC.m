@@ -109,18 +109,17 @@
     if (default_image == nil) {
         default_image = [UIImage imageNamed:@"defaultHeadImage"];
         
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
-                          placeholderImage:default_image
-                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                     if (image) {
-                                         cell.imageView.image = image;
-                                         [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
-                                     }
-                                 }
-         ];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:default_image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+            
+            if (image) {
+                cell.imageView.image = image;
+                [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+            }
+        }];
     } else {
         cell.imageView.image = default_image;
     }
+    
     
     cell.textLabel.text = @"帅到掉渣的老武";
     

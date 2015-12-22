@@ -23,8 +23,11 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
     
+    [self.imageView.layer setCornerRadius:4];
+    [self.imageView setClipsToBounds:YES];
     [self.imageView setFrame:CGRectMake(10, 10, 30, 30)];
     [self.textLabel setFrame:CGRectMake(50, 0, self.frame.size.width - 50 - 60, self.frame.size.height)];
+    self.detailTextLabel.hidden = YES;
     [self.accessoryView setFrame:CGRectMake(self.frame.size.width - 60, 0, 50, 50)];
 }
 
