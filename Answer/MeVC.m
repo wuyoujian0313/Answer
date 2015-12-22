@@ -258,6 +258,7 @@
         case 2: {
             // 我的好友
             MyFriendsVC *vc = [[MyFriendsVC alloc] init];
+            vc.enterType = EnterType_FromMe;
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
