@@ -53,6 +53,8 @@
 		E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */; };
 		E1AC52271C26EE7B00172965 /* MyQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */; };
 		E1AE75301C290CAE0035AAEE /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */; };
+		E1AE759B1C2973EE0035AAEE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AE759A1C2973EE0035AAEE /* AVFoundation.framework */; };
+		E1AE759F1C2977570035AAEE /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */; };
 		E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A1D1C22608300A2E384 /* FormatterKit.strings */; };
 		E1B78A331C22608300A2E384 /* TTTAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */; };
 		E1B78A341C22608300A2E384 /* TTTArrayFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A221C22608300A2E384 /* TTTArrayFormatter.m */; };
@@ -63,10 +65,6 @@
 		E1B78A391C22608300A2E384 /* TTTTimeIntervalFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A2C1C22608300A2E384 /* TTTTimeIntervalFormatter.m */; };
 		E1B78A3A1C22608300A2E384 /* TTTUnitOfInformationFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A2E1C22608300A2E384 /* TTTUnitOfInformationFormatter.m */; };
 		E1B78A3B1C22608300A2E384 /* TTTURLRequestFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A301C22608300A2E384 /* TTTURLRequestFormatter.m */; };
-		E1B78A4C1C22623900A2E384 /* CTAssetsPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A3E1C22623900A2E384 /* CTAssetsPickerController.m */; };
-		E1B78A4D1C22623900A2E384 /* CTAssetsPickerController.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A3F1C22623900A2E384 /* CTAssetsPickerController.strings */; };
-		E1B78A4E1C22623900A2E384 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A411C22623900A2E384 /* Images.xcassets */; };
-		E1B78A4F1C22623900A2E384 /* NSDate+TimeInterval.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A431C22623900A2E384 /* NSDate+TimeInterval.m */; };
 		E1B78A501C22623900A2E384 /* XHImageViewer.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A471C22623900A2E384 /* XHImageViewer.m */; };
 		E1B78A511C22623900A2E384 /* XHViewState.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A491C22623900A2E384 /* XHViewState.m */; };
 		E1B78A521C22623900A2E384 /* XHZoomingImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A4B1C22623900A2E384 /* XHZoomingImageView.m */; };
@@ -238,6 +236,9 @@
 		E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQuestionsVC.m; sourceTree = "<group>"; };
 		E1AE752E1C290CAE0035AAEE /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
+		E1AE759A1C2973EE0035AAEE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E1AE759D1C2977570035AAEE /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
+		E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeMagick.m"; sourceTree = "<group>"; };
 		E1B78A1E1C22608300A2E384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FormatterKit.strings; sourceTree = "<group>"; };
 		E1B78A1F1C22608300A2E384 /* TTTAddressFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAddressFormatter.h; sourceTree = "<group>"; };
 		E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAddressFormatter.m; sourceTree = "<group>"; };
@@ -258,13 +259,6 @@
 		E1B78A2F1C22608300A2E384 /* TTTURLRequestFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTURLRequestFormatter.h; sourceTree = "<group>"; };
 		E1B78A301C22608300A2E384 /* TTTURLRequestFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTURLRequestFormatter.m; sourceTree = "<group>"; };
 		E1B78A311C22608300A2E384 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/FormatterKit.strings"; sourceTree = "<group>"; };
-		E1B78A3D1C22623900A2E384 /* CTAssetsPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTAssetsPickerController.h; sourceTree = "<group>"; };
-		E1B78A3E1C22623900A2E384 /* CTAssetsPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTAssetsPickerController.m; sourceTree = "<group>"; };
-		E1B78A401C22623900A2E384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/CTAssetsPickerController.strings; sourceTree = "<group>"; };
-		E1B78A411C22623900A2E384 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		E1B78A421C22623900A2E384 /* NSDate+TimeInterval.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+TimeInterval.h"; sourceTree = "<group>"; };
-		E1B78A431C22623900A2E384 /* NSDate+TimeInterval.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+TimeInterval.m"; sourceTree = "<group>"; };
-		E1B78A441C22623900A2E384 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/CTAssetsPickerController.strings"; sourceTree = "<group>"; };
 		E1B78A461C22623900A2E384 /* XHImageViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHImageViewer.h; sourceTree = "<group>"; };
 		E1B78A471C22623900A2E384 /* XHImageViewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XHImageViewer.m; sourceTree = "<group>"; };
 		E1B78A481C22623900A2E384 /* XHViewState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XHViewState.h; sourceTree = "<group>"; };
@@ -409,6 +403,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1AE759B1C2973EE0035AAEE /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -557,6 +552,14 @@
 			name = APIModels;
 			sourceTree = "<group>";
 		};
+		E1AE759C1C2973FE0035AAEE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1AE759A1C2973EE0035AAEE /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E1B78A1C1C22608300A2E384 /* FormatterKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,19 +584,6 @@
 				E1B78A301C22608300A2E384 /* TTTURLRequestFormatter.m */,
 			);
 			path = FormatterKit;
-			sourceTree = "<group>";
-		};
-		E1B78A3C1C22623900A2E384 /* CTAssetsPickerController */ = {
-			isa = PBXGroup;
-			children = (
-				E1B78A3D1C22623900A2E384 /* CTAssetsPickerController.h */,
-				E1B78A3E1C22623900A2E384 /* CTAssetsPickerController.m */,
-				E1B78A3F1C22623900A2E384 /* CTAssetsPickerController.strings */,
-				E1B78A411C22623900A2E384 /* Images.xcassets */,
-				E1B78A421C22623900A2E384 /* NSDate+TimeInterval.h */,
-				E1B78A431C22623900A2E384 /* NSDate+TimeInterval.m */,
-			);
-			path = CTAssetsPickerController;
 			sourceTree = "<group>";
 		};
 		E1B78A451C22623900A2E384 /* XHImageViewer */ = {
@@ -751,6 +741,7 @@
 		E1D188B91C0ED4880043DE9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E1AE759C1C2973FE0035AAEE /* Frameworks */,
 				E19762161C2695120093A935 /* myFriend@2x.png */,
 				E19762171C2695120093A935 /* myPacket@2x.png */,
 				E19762181C2695120093A935 /* myQuestion@2x.png */,
@@ -807,7 +798,6 @@
 				E19762091C26825F0093A935 /* SVProgressHUD */,
 				E19761E81C2673220093A935 /* OHAttributedLabel */,
 				E1B78A531C2263B600A2E384 /* MJRefresh */,
-				E1B78A3C1C22623900A2E384 /* CTAssetsPickerController */,
 				E1B78A451C22623900A2E384 /* XHImageViewer */,
 				E1B78A1C1C22608300A2E384 /* FormatterKit */,
 				E15E27A81C102C2D0035A4ED /* FileCache */,
@@ -868,6 +858,8 @@
 				E1D189131C0EE6F60043DE9C /* UIColor+Utility.m */,
 				E1D189141C0EE6F60043DE9C /* UIImage+Utility.h */,
 				E1D189151C0EE6F60043DE9C /* UIImage+Utility.m */,
+				E1AE759D1C2977570035AAEE /* UIImage+ResizeMagick.h */,
+				E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */,
 			);
 			path = Category;
 			sourceTree = "<group>";
@@ -1067,9 +1059,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1B78A4D1C22623900A2E384 /* CTAssetsPickerController.strings in Resources */,
 				E197621B1C2695120093A935 /* myPacket@2x.png in Resources */,
-				E1B78A4E1C22623900A2E384 /* Images.xcassets in Resources */,
 				E1B78A5E1C2263B600A2E384 /* MJRefresh.bundle in Resources */,
 				E197621A1C2695120093A935 /* myFriend@2x.png in Resources */,
 				E197620D1C26825F0093A935 /* SVProgressHUD.bundle in Resources */,
@@ -1171,11 +1161,11 @@
 				E1D189601C0EE6F60043DE9C /* SDWebImageCompat.m in Sources */,
 				E14C20FD1C1EF144003925B5 /* QuestionInfo.m in Sources */,
 				E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */,
-				E1B78A4C1C22623900A2E384 /* CTAssetsPickerController.m in Sources */,
 				E14410631C27DAF1000EE19A /* MainController.m in Sources */,
 				E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */,
 				E19762051C2673220093A935 /* OHTouchesGestureRecognizer.m in Sources */,
 				E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */,
+				E1AE759F1C2977570035AAEE /* UIImage+ResizeMagick.m in Sources */,
 				E1D1894B1C0EE6F60043DE9C /* AFHTTPSessionManager.m in Sources */,
 				E1B78A331C22608300A2E384 /* TTTAddressFormatter.m in Sources */,
 				E1D1895D1C0EE6F60043DE9C /* MKAnnotationView+WebCache.m in Sources */,
@@ -1191,7 +1181,6 @@
 				E1B78A391C22608300A2E384 /* TTTTimeIntervalFormatter.m in Sources */,
 				E1C21E6C1C0F23940042E1F3 /* MyWalletVC.m in Sources */,
 				E1D189651C0EE6F60043DE9C /* SDWebImagePrefetcher.m in Sources */,
-				E1B78A4F1C22623900A2E384 /* NSDate+TimeInterval.m in Sources */,
 				E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */,
 				E19762061C2673220093A935 /* OHASBasicHTMLParser.m in Sources */,
 				E1B78A351C22608300A2E384 /* TTTColorFormatter.m in Sources */,
@@ -1257,15 +1246,6 @@
 				E1B78A311C22608300A2E384 /* zh-Hans */,
 			);
 			name = FormatterKit.strings;
-			sourceTree = "<group>";
-		};
-		E1B78A3F1C22623900A2E384 /* CTAssetsPickerController.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E1B78A401C22623900A2E384 /* en */,
-				E1B78A441C22623900A2E384 /* zh-Hans */,
-			);
-			name = CTAssetsPickerController.strings;
 			sourceTree = "<group>";
 		};
 		E1D188F01C0ED6630043DE9C /* InfoPlist.strings */ = {

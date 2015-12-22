@@ -76,7 +76,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+#warning wuyoujian
     if (1||indexPath.row < [[_questions twList] count]) {
         return [self tableView:tableView preparedCellForIndexPath:indexPath];
     }
@@ -106,10 +106,12 @@
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
             cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
         
         // 设置数据
+        cell.delegate = _delegate;
         [_cellCache setObject:cell forKey:key];
         QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
         
@@ -153,6 +155,7 @@
     
     // 设置数据
 
+    cell.delegate = _delegate;
     [_cellCache setObject:cell forKey:key];
     QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
     
@@ -173,6 +176,7 @@
     info.level = [NSNumber numberWithInt:5];
     
     questionInfo = q;
+    
     [cell setQuestionInfo:questionInfo userInfo:info];
     
     return cell;
@@ -200,7 +204,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
+#warning wuyoujian
     if (1||indexPath.row < [[_questions twList] count]) {
         QuestionTableViewCell *cell = [self tableView:tableView preparedCellForIndexPath:indexPath];
         return [cell cellHeight];
@@ -210,6 +214,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    #warning wuyoujian
     if (1||indexPath.row < [[_questions twList] count]) {
         QuestionTableViewCell *cell = [self tableView:tableView preparedCellForIndexPath:indexPath];
         return [cell cellHeight];

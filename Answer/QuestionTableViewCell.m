@@ -12,6 +12,7 @@
 #import "TTTTimeIntervalFormatter.h"
 #import "AudioPlayControl.h"
 #import "LineView.h"
+#import "XHImageViewer.h"
 
 @interface QuestionTableViewCell ()
 
@@ -19,6 +20,7 @@
 @property (nonatomic, strong) UIView                *wtContentView;
 @property (nonatomic, strong) UIView                *funcView;
 @property (nonatomic, strong) UIView                *spaceView;
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) QuestionInfo          *questionInfo;
 @property (nonatomic, strong) UserInfo              *userInfo;
 @property (nonatomic, assign) BOOL                  haveUserInfo;
@@ -44,6 +46,9 @@
     if (self) {
         //
         self.haveUserInfo = NO;
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPhotoAction:)];
+        self.tapGesture = tap;
+        
         [self layoutSpaceView:self.contentView];
         [self layoutUserView:self.contentView];
         [self layoutWtContentView:self.contentView];
@@ -188,6 +193,7 @@
             contentImage = [[UIImageView alloc] initWithFrame:CGRectZero];
             [contentImage setContentMode:UIViewContentModeScaleAspectFill];
             [contentImage setClipsToBounds:YES];
+            [contentImage setUserInteractionEnabled:YES];
             [contentImage setTag:201];
             [_wtContentView addSubview:contentImage];
         }
@@ -220,9 +226,16 @@
         audioControl.hidden = YES;
         contentImage.hidden = YES;
         playBtn.hidden = YES;
+        if ([contentImage.gestureRecognizers containsObject:_tapGesture]) {
+            [contentImage removeGestureRecognizer:_tapGesture];
+        }
         if ([_questionInfo.mediaType integerValue] == 0 || [_questionInfo.mediaType integerValue] == 1) {
             contentImage.hidden = NO;
             playBtn.hidden = ![_questionInfo.mediaType integerValue] == 1;
+            
+            if ([_questionInfo.mediaType integerValue] == 0) {
+                [contentImage addGestureRecognizer:_tapGesture];
+            }
             
             NSString *imageUrlString = [_questionInfo.mediaType integerValue] == 0 ? _questionInfo.mediaURL : _questionInfo.thumbnail;
             
@@ -449,6 +462,13 @@
         [_spaceView setFrame:CGRectMake(0, 0, self.frame.size.width, 12)];
         _spaceViewHeight = 12;
     }
+}
+
+- (void)tapPhotoAction:(UITapGestureRecognizer *)sender {
+    UIImageView *senderImageView = (UIImageView*)sender.view;
+    
+    XHImageViewer *imageViewer = [[XHImageViewer alloc] init];
+    [imageViewer showWithImageViews:[NSArray arrayWithObject:senderImageView] selectedView:senderImageView];
 }
 
 - (void)cellAction:(UIControl*)sender {

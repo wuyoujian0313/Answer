@@ -18,6 +18,7 @@
 #import "NSString+Utility.h"
 #import "UIColor+Utility.h"
 #import "UIImage+Utility.h"
+#import "UIImage+ResizeMagick.h"
 #import "LineView.h"
 #import "WYJNavigationController.h"
 #import "FadePromptView.h"

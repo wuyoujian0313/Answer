@@ -91,10 +91,11 @@
         cell.selectedBackgroundView = selBGView;
         
         UIImageView * accessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 50,(50-15)/2.0, 15, 15)];
-        [accessoryView.layer setCornerRadius:7.5];
+        [accessoryView setImage:[UIImage imageFromColor:[UIColor redColor]]];
         accessoryView.tag = 102;
         accessoryView.clipsToBounds = YES;
-        [accessoryView setImage:[UIImage imageFromColor:[UIColor redColor]]];
+        [accessoryView.layer setCornerRadius:7.5];
+        
         [cell.contentView addSubview:accessoryView];
     }
     
@@ -138,7 +139,6 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0: {
-            
             // 回答我的问题
             break;
         }
