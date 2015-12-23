@@ -10,9 +10,10 @@
 #import "LineView.h"
 #import "NetworkTask.h"
 #import "RegisterVC.h"
-#import "LoginoutResult.h"
+#import "LoginResult.h"
 #import "AppDelegate.h"
 #import "OHAttributedLabel.h"
+#import "User.h"
 
 @interface LoginVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
 
@@ -20,7 +21,7 @@
 @property(nonatomic,strong)UITextField          *nameTextField;
 @property(nonatomic,strong)UITextField          *pwdTextField;
 @property(nonatomic,strong)UIButton             *loginBtn;
-@property(nonatomic,strong)NSIndexPath          *indexPathCell;
+
 @end
 
 @implementation LoginVC
@@ -89,7 +90,7 @@
     [tableView setBounces:NO];
     [self.view addSubview:tableView];
     
-    [self setTableViewHeaderView:140];
+    [self setTableViewHeaderView:200];
     [self setTableViewFooterView:180];
 }
 
@@ -173,25 +174,16 @@
         [_pwdTextField resignFirstResponder];
         NSString *nameString = [NSString stringWithFormat:@"%@",_nameTextField.text];
         NSString *pwdString = [NSString stringWithFormat:@"%@",_pwdTextField.text];
+
+        NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                             nameString,@"phoneNumber",
+                             pwdString,@"password",nil];
         
-//        NSDictionary* parm =[[NSDictionary alloc] initWithObjectsAndKeys:
-//                             nameString,@"username",
-//                             pwdString,@"password",
-//                             CLIENT_ID,@"client_id",
-//                             CLIENT_SECRET,@"client_secret",
-//                             @"password",@"grant_type",nil];
-//        
-//        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-//        [[NetworkTask sharedNetworkTask] addPOSTTaskApi:@"oauth2/access_token"
-//                                               forParam:parm
-//                                                  token:nil
-//                                               delegate:self
-//                                       receiveResultObj:[User sharedUser]
-//                                             customInfo:@"login"];
-        
-        
-        AppDelegate *app = [AppDelegate shareMyApplication];
-        [app.mainVC switchToHomeVC];
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Login
+                                                 forParam:param
+                                                 delegate:self
+                                                resultObj:[[LoginResult alloc] init] customInfo:@"login"];
     }
 }
 
@@ -205,7 +197,7 @@
     [_loginTableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
 }
 
--(void)keyboardDidShow:(NSNotification *)note{
+-(void)keyboardDidShow:(NSNotification *)note {
     
     [super keyboardDidShow:note];
     CGRect keyboardBounds;
@@ -223,6 +215,13 @@
     [SVProgressHUD dismiss];
     
     if ([customInfo isEqualToString:@"login"]) {
+        
+        LoginResult *loginRes = (LoginResult*)result;
+        [User sharedUser].user = loginRes.user;
+        [User sharedUser].account = loginRes.account;
+        
+        AppDelegate *app = [AppDelegate shareMyApplication];
+        [app.mainVC switchToHomeVC];
     }
 }
 
@@ -288,6 +287,7 @@
             [textField setReturnKeyType:UIReturnKeyNext];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
             [textField setTextAlignment:NSTextAlignmentCenter];
+            [textField setKeyboardType:UIKeyboardTypePhonePad];
             [textField setClearsOnBeginEditing:YES];
             [textField setPlaceholder:@"手机号码"];
             

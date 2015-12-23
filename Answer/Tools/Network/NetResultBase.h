@@ -10,25 +10,10 @@
 
 #define BaiduParserArray(key,type)    key##__Array__##type
 
-/*
- {
-    code: ***,
-    message:***,
-    data: {json}
- }
- */
+@interface NetResultBase : NSObject<NSCopying>
 
-@interface NetResultBase : NSObject
-
-// 老式的格式
-@property (nonatomic, strong)NSNumber   *status;                  // 返回代码
-@property (nonatomic, copy)NSString     *errorMessage;            // 返回描述
-
-// 最新的格式
 @property (nonatomic, copy)NSNumber     *code;                    // 返回代码
 @property (nonatomic, copy)NSString     *message;                 // 返回描述
-
-
 
 
 // 自动解析Json

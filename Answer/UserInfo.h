@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UserInfo : NSObject
+@interface UserInfo : NSObject<NSCopying>
 
-@property (nonatomic, strong) NSNumber      *uuid;
+@property (nonatomic, copy) NSString        *uuid;
 @property (nonatomic, copy) NSString        *userName;
 @property (nonatomic, copy) NSString        *uId;
 @property (nonatomic, copy) NSString        *nickName;

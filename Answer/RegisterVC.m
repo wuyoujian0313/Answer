@@ -10,6 +10,9 @@
 #import "LineView.h"
 #import "OHAttributedLabel.h"
 #import "NetworkTask.h"
+#import "NetResultBase.h"
+#import "LoginoutResult.h"
+#import "User.h"
 
 @interface RegisterVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
 
@@ -83,7 +86,6 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
     ohLabel.attributedText = attrStr;
     
     [self.view addSubview:rootview];
-    
 }
 
 - (void)layoutRegisterTableView {
@@ -185,18 +187,21 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
             return;
         }
         
+        //
         NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
         NSString *phoneString = [NSString stringWithFormat:@"%@",_phoneTextField.text];
+        [param setObject:phoneString forKey:@"phoneNumber"];
         NSString *codeString = [NSString stringWithFormat:@"%@",_codeTextField.text];
-        [param setObject:codeString forKey:@"vcode"];
+        [param setObject:codeString forKey:@"verifyCode"];
+        
+        NSString *pwdString = [NSString stringWithFormat:@"%@",_pwdTextField.text];
+        [param setObject:pwdString forKey:@"password"];
         
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-//        [[NetworkTask sharedNetworkTask] addPUTTaskApi:apiString
-//                                              forParam:param
-//                                                 token:nil
-//                                              delegate:self
-//                                      receiveResultObj:[[NetResultBase alloc] init]
-//                                            customInfo:@"verify"];
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Register
+                                                 forParam:param
+                                                 delegate:self
+                                                resultObj:[[LoginoutResult alloc] init] customInfo:@"register"];
         
     }
 }
@@ -248,7 +253,6 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
 // 获取手机验证码
 - (void)phoneCodeStart:(id)sender {
     //
-    NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
     NSString *codeString = [NSString stringWithFormat:@"%@",_phoneTextField.text];
     
     BOOL isPhoneNumber = [codeString isValidateMobile];
@@ -260,12 +264,11 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         return;
     }
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-//    [[NetworkTask sharedNetworkTask] addPOSTTaskApi:apiString
-//                                           forParam:param
-//                                              token:nil
-//                                           delegate:self
-//                                   receiveResultObj:[[NetResultBase alloc] init]
-//                                         customInfo:@"registerCode"];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetVerifyCode
+                                             forParam:[NSDictionary dictionaryWithObject:codeString forKey:@"phoneNumber"]
+                                             delegate:self
+                                            resultObj:[[NetResultBase alloc] init] customInfo:@"registerCode"];
+
 }
 
 
@@ -305,29 +308,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         // 启动倒计时
         [self timerStart];
         
-    } else if ([customInfo isEqualToString:@"verify"]) {
-        //
-        NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
-        NSString *phoneString = [NSString stringWithFormat:@"%@",_phoneTextField.text];
-        
-        NSString *codeString = [NSString stringWithFormat:@"%@",_codeTextField.text];
-        [param setObject:codeString forKey:@"vcode"];
-        
-        NSString *pwdString = [NSString stringWithFormat:@"%@",_pwdTextField.text];
-        [param setObject:pwdString forKey:@"passwd"];
-        
-        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-//        [[NetworkTask sharedNetworkTask] addPOSTTaskApi:apiString
-//                                               forParam:param
-//                                                  token:nil
-//                                               delegate:self
-//                                       receiveResultObj:[User sharedUser]
-//                                             customInfo:@"getPassword"];
-        
-        
-        
-    } else if ([customInfo isEqualToString:@"getPassword"]) {
-        
+    } else if ([customInfo isEqualToString:@"register"]) {
         [FadePromptView showPromptStatus:@"谢谢您，注册成功！" duration:1.0 positionY:screenHeight- 300 finishBlock:^{
             //
             [self.navigationController popToRootViewControllerAnimated:YES];
@@ -337,7 +318,11 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
 
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
-    [SVProgressHUD showErrorWithStatus:errorDesc];
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
+
 }
 
 
@@ -436,7 +421,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
             [textField setDelegate:self];
             [textField setFont:[UIFont systemFontOfSize:14]];
             [textField setReturnKeyType:UIReturnKeyNext];
-            [textField setKeyboardType:UIKeyboardTypeDefault];
+            [textField setKeyboardType:UIKeyboardTypePhonePad];
             //[textField setTextAlignment:NSTextAlignmentCenter];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
@@ -464,7 +449,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
             [textField setDelegate:self];
             [textField setFont:[UIFont systemFontOfSize:14]];
             [textField setReturnKeyType:UIReturnKeyNext];
-            [textField setKeyboardType:UIKeyboardTypeNumberPad];
+            [textField setKeyboardType:UIKeyboardTypeDefault];
             //[textField setTextAlignment:NSTextAlignmentCenter];
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField setClearButtonMode:UITextFieldViewModeAlways];

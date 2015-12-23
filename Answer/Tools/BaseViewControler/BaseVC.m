@@ -103,7 +103,7 @@
 - (void)setNavTitle:(NSString*)title {
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
     label.backgroundColor=[UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:17];
+    label.font = [UIFont systemFontOfSize:18];
     label.textColor = [UIColor colorWithHex:0x333333];
     label.text=title;
     label.textAlignment=NSTextAlignmentCenter;

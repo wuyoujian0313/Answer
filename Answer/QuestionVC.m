@@ -22,6 +22,9 @@
 @property(nonatomic,copy)NSString                       *photoKey;
 @property(nonatomic,copy)NSString                       *videoUrlString;
 @property(nonatomic,copy)NSString                       *mp4KeyString;
+@property(nonatomic,strong)NSURL                        *recordedFile;
+@property(nonatomic,copy)NSString                       *recordFileKey;
+@property(nonatomic,strong)AVAudioRecorder              *audioRecoder;
 
 @end
 

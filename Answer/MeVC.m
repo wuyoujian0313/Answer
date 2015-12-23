@@ -51,12 +51,12 @@
 
 -(void)loadHeadImageAndNickName {
     
-    _userNicknameLabel.text = [User sharedUser].nickName ? [User sharedUser].nickName : [User sharedUser].userName;
+    _userNicknameLabel.text = [User sharedUser].user.nickName ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    [User sharedUser].headImage = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
-    NSString *imageUrl  = [User sharedUser].headImage;
+    [User sharedUser].user.headImage = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
+    NSString *imageUrl  = [User sharedUser].user.headImage;
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
     
     if (default_image == nil) {
@@ -96,13 +96,7 @@
     nickNameLabel.textColor = [UIColor colorWithHex:0x666666];
     [view addSubview:nickNameLabel];
     
-    [User sharedUser].nickName = @"帅到掉渣的老武";
-    [User sharedUser].level = @5;
-    [User sharedUser].uId = @"123456";
-    [User sharedUser].attentionNum = @5;
-    [User sharedUser].fansNum = @5;
-    
-    nickNameLabel.text = [User sharedUser].nickName ? [User sharedUser].nickName : [User sharedUser].userName;
+    nickNameLabel.text = [User sharedUser].user.nickName ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
     CGSize sizeText = [nickNameLabel.text sizeWithFontCompatible:nickNameLabel.font];
     left += 10 + sizeText.width;
     [_meTableView setTableHeaderView:view];
@@ -111,7 +105,7 @@
     levelLabel.backgroundColor = [UIColor clearColor];
     levelLabel.font = [UIFont systemFontOfSize:16];
     levelLabel.textColor = [UIColor redColor];
-    levelLabel.text = [NSString stringWithFormat:@"%d级",[[User sharedUser].level intValue]];
+    levelLabel.text = [NSString stringWithFormat:@"%d级",[[User sharedUser].user.level intValue]];
     [view addSubview:levelLabel];
     
 
@@ -120,7 +114,7 @@
     idLabel.backgroundColor = [UIColor clearColor];
     idLabel.font = [UIFont systemFontOfSize:16];
     idLabel.textColor = [UIColor grayColor];
-    idLabel.text = [NSString stringWithFormat:@"ID:%@",[User sharedUser].uId];
+    idLabel.text = [NSString stringWithFormat:@"ID:%@",[User sharedUser].user.uId];
     [view addSubview:idLabel];
     
     sizeText = [idLabel.text sizeWithFontCompatible:idLabel.font];
@@ -130,7 +124,7 @@
     attentionLabel.backgroundColor = [UIColor clearColor];
     attentionLabel.font = [UIFont systemFontOfSize:16];
     attentionLabel.textColor = [UIColor grayColor];
-    attentionLabel.text = [NSString stringWithFormat:@"关注:%d",[[User sharedUser].attentionNum intValue]];
+    attentionLabel.text = [NSString stringWithFormat:@"关注:%d",[[User sharedUser].user.attentionNum intValue]];
     [view addSubview:attentionLabel];
     
     sizeText = [attentionLabel.text sizeWithFontCompatible:attentionLabel.font];
@@ -140,7 +134,7 @@
     fansLabel.backgroundColor = [UIColor clearColor];
     fansLabel.font = [UIFont systemFontOfSize:16];
     fansLabel.textColor = [UIColor grayColor];
-    fansLabel.text = [NSString stringWithFormat:@"粉丝:%d",[[User sharedUser].fansNum intValue]];
+    fansLabel.text = [NSString stringWithFormat:@"粉丝:%d",[[User sharedUser].user.fansNum intValue]];
     [view addSubview:fansLabel];
     
     [self loadHeadImageAndNickName];

@@ -53,7 +53,6 @@
 		E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */; };
 		E1AC52271C26EE7B00172965 /* MyQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */; };
 		E1AE75301C290CAE0035AAEE /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */; };
-		E1AE759B1C2973EE0035AAEE /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AE759A1C2973EE0035AAEE /* AVFoundation.framework */; };
 		E1AE759F1C2977570035AAEE /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */; };
 		E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A1D1C22608300A2E384 /* FormatterKit.strings */; };
 		E1B78A331C22608300A2E384 /* TTTAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */; };
@@ -236,7 +235,6 @@
 		E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQuestionsVC.m; sourceTree = "<group>"; };
 		E1AE752E1C290CAE0035AAEE /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
-		E1AE759A1C2973EE0035AAEE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		E1AE759D1C2977570035AAEE /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
 		E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeMagick.m"; sourceTree = "<group>"; };
 		E1B78A1E1C22608300A2E384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FormatterKit.strings; sourceTree = "<group>"; };
@@ -403,7 +401,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E1AE759B1C2973EE0035AAEE /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -550,14 +547,6 @@
 				E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */,
 			);
 			name = APIModels;
-			sourceTree = "<group>";
-		};
-		E1AE759C1C2973FE0035AAEE /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E1AE759A1C2973EE0035AAEE /* AVFoundation.framework */,
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E1B78A1C1C22608300A2E384 /* FormatterKit */ = {
@@ -741,7 +730,6 @@
 		E1D188B91C0ED4880043DE9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E1AE759C1C2973FE0035AAEE /* Frameworks */,
 				E19762161C2695120093A935 /* myFriend@2x.png */,
 				E19762171C2695120093A935 /* myPacket@2x.png */,
 				E19762181C2695120093A935 /* myQuestion@2x.png */,

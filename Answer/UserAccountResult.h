@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NetResultBase.h"
 
-@interface UserAccountResult : NetResultBase
+@interface UserAccountResult : NetResultBase<NSCopying>
 
 @property (nonatomic, strong) NSNumber     *balance;
 @property (nonatomic, strong) NSNumber     *receivePacket;

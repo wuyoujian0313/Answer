@@ -8,6 +8,21 @@
 
 #import "UserAccountResult.h"
 
+//@property (nonatomic, strong) NSNumber     *balance;
+//@property (nonatomic, strong) NSNumber     *receivePacket;
+//@property (nonatomic, strong) NSNumber     *sendPacket;
+
 @implementation UserAccountResult
+
+- (id)copyWithZone:(nullable NSZone *)zone {
+    [super copyWithZone:zone];
+    
+    UserAccountResult * temp = [[UserAccountResult alloc] init];
+    [temp setBalance:_balance];
+    [temp setReceivePacket:_receivePacket];
+    [temp setSendPacket:_sendPacket];
+    
+    return temp;
+}
 
 @end

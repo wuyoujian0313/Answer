@@ -9,8 +9,11 @@
 #import "SetVC.h"
 #import "LineView.h"
 #import "AppDelegate.h"
+#import "LoginoutResult.h"
+#import "NetworkTask.h"
+#import "User.h"
 
-@interface SetVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface SetVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 @property(nonatomic,strong)UITableView          *setTableView;
 @end
 
@@ -139,14 +142,43 @@
         }
         case 2: {
             // 退出
-            AppDelegate *app = [AppDelegate shareMyApplication];
-            [app.mainVC switchToLoginVC];
+            NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                                 [User sharedUser].user.uuid,@"uuid",
+                                 [User sharedUser].user.uId,@"uId",nil];
+            
+            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+            [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Loginout
+                                                     forParam:param
+                                                     delegate:self
+                                                    resultObj:[[LoginoutResult alloc] init] customInfo:@"loginout"];
+            
+            
+            
             break;
         }
             
         default:
             break;
     }
+}
+
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:@"退出成功" duration:1.0 positionY:screenHeight- 300 finishBlock:^{
+        //
+        AppDelegate *app = [AppDelegate shareMyApplication];
+        [app.mainVC switchToLoginVC];
+    }];
+}
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
+    
 }
 
 @end

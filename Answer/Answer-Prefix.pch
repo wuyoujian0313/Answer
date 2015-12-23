@@ -35,7 +35,7 @@
 #define NeedAudio
 
 
-#define kNetworkAPIServer           @"https://mop.baidu.com/rest"
+#define kNetworkAPIServer           @"http://122.226.44.97/tuwen_web/service"
 
 #if DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)
@@ -43,6 +43,11 @@
 #define NSLog(...) {}
 #endif
 
+
+#define API_Login                   @"login"
+#define API_GetVerifyCode           @"getVerifyCode"
+#define API_Register                @"register"
+#define API_Loginout                @"loginout"
 
 
 
