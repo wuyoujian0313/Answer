@@ -549,6 +549,18 @@
 			name = APIModels;
 			sourceTree = "<group>";
 		};
+		E1A4E7DD1C2A8F2E0067CF3F /* demo图片 */ = {
+			isa = PBXGroup;
+			children = (
+				E19762161C2695120093A935 /* myFriend@2x.png */,
+				E19762171C2695120093A935 /* myPacket@2x.png */,
+				E19762181C2695120093A935 /* myQuestion@2x.png */,
+				E19762191C2695120093A935 /* setting@2x.png */,
+				E14410641C282EA8000EE19A /* redPacket.png */,
+			);
+			name = "demo图片";
+			sourceTree = "<group>";
+		};
 		E1B78A1C1C22608300A2E384 /* FormatterKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -730,12 +742,8 @@
 		E1D188B91C0ED4880043DE9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E19762161C2695120093A935 /* myFriend@2x.png */,
-				E19762171C2695120093A935 /* myPacket@2x.png */,
-				E19762181C2695120093A935 /* myQuestion@2x.png */,
-				E19762191C2695120093A935 /* setting@2x.png */,
-				E14410641C282EA8000EE19A /* redPacket.png */,
 				E1D188C51C0ED4880043DE9C /* Images.xcassets */,
+				E1A4E7DD1C2A8F2E0067CF3F /* demo图片 */,
 				E1D188BC1C0ED4880043DE9C /* AppDelegate.h */,
 				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
 				E14410611C27DAF1000EE19A /* MainController.h */,

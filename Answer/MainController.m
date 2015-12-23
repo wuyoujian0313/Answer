@@ -127,6 +127,10 @@
     [self addChildViewController:_homeVC];
 }
 
+- (void)setShowHomeVC {
+    [_homeVC setSelectedIndex:0];
+}
+
 #pragma UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
 }

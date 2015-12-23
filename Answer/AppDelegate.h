@@ -11,9 +11,10 @@
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
-@property (strong, nonatomic) UIWindow *window;
-@property (nonatomic, strong) MainController *mainVC;
+@property (nonatomic, strong) UIWindow          *window;
+@property (nonatomic, strong) MainController    *mainVC;
 
 + (AppDelegate*)shareMyApplication;
+
 @end
 

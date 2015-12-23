@@ -13,4 +13,6 @@
 - (void)switchToHomeVC;
 - (void)switchToLoginVC;
 
+- (void)setShowHomeVC;
+
 @end

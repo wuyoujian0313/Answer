@@ -14,6 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SDImageCache.h"
+#import "AppDelegate.h"
 
 @interface QuestionVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate>
 
@@ -33,9 +34,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.navigationItem.leftBarButtonItem = nil;
+    
+    UIBarButtonItem * leftItem = [self configBarButtonWithTitle:@"取消" target:self selector:@selector(cancelSend)];
+    self.navigationItem.leftBarButtonItem = leftItem;
     [self setNavTitle:self.tabBarItem.title];
     [self layoutFuncView];
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+
+    [UIView animateWithDuration:0.6 animations:^{
+        //
+        [self.tabBarController.tabBar setFrame:CGRectMake(0, screenHeight, screenWidth, 49)];
+    }];
+}
+
+- (void)cancelSend {
+    
+    
+    AppDelegate *app = [AppDelegate shareMyApplication];
+    [app.mainVC setShowHomeVC];
+    
+    [UIView animateWithDuration:0.6 animations:^{
+        //
+        [self.tabBarController.tabBar setFrame:CGRectMake(0, screenHeight - 49, screenWidth, 49)];
+    }];
 }
 
 - (UIButton *)createButton:(UIImage*)image target:(id)target selector:(SEL)selector frame:(CGRect)frame {
@@ -51,7 +74,7 @@
 
 - (void)layoutFuncView {
     
-    UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(20, 200, screenWidth - 40, 60)];
+    UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(20, screenHeight - 60, screenWidth - 40, 60)];
     [panelView.layer setCornerRadius:4.0];
     [panelView setBackgroundColor:[UIColor colorWithHex:0xdddddd]];
     [self.view addSubview:panelView];
