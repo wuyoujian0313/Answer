@@ -51,7 +51,6 @@
 		E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */; };
 		E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */; };
 		E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */; };
-		E1AC52271C26EE7B00172965 /* MyQuestionsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */; };
 		E1AE75301C290CAE0035AAEE /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */; };
 		E1AE759F1C2977570035AAEE /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */; };
 		E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A1D1C22608300A2E384 /* FormatterKit.strings */; };
@@ -130,6 +129,7 @@
 		E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189441C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m */; };
 		E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189461C0EE6F60043DE9C /* UIImageView+WebCache.m */; };
 		E1D1896C1C0EE6F60043DE9C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189481C0EE6F60043DE9C /* UIView+WebCacheOperation.m */; };
+		E1EB9A161C2C091A00200059 /* QuestionListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EB9A151C2C091A00200059 /* QuestionListVC.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -231,8 +231,6 @@
 		E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeHeadImgResult.m; sourceTree = "<group>"; };
 		E1A054B21C1F0EEB00A6DD56 /* ChangeNicknameResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNicknameResult.h; sourceTree = "<group>"; };
 		E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNicknameResult.m; sourceTree = "<group>"; };
-		E1AC52251C26EE7B00172965 /* MyQuestionsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyQuestionsVC.h; sourceTree = "<group>"; };
-		E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyQuestionsVC.m; sourceTree = "<group>"; };
 		E1AE752E1C290CAE0035AAEE /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		E1AE759D1C2977570035AAEE /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
@@ -394,6 +392,8 @@
 		E1D189471C0EE6F60043DE9C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		E1D189481C0EE6F60043DE9C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer-Prefix.pch"; sourceTree = "<group>"; };
+		E1EB9A141C2C091A00200059 /* QuestionListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionListVC.h; sourceTree = "<group>"; };
+		E1EB9A151C2C091A00200059 /* QuestionListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionListVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -668,8 +668,6 @@
 			children = (
 				E1C21E521C0F0AE80042E1F3 /* MeVC.h */,
 				E1C21E531C0F0AE80042E1F3 /* MeVC.m */,
-				E1AC52251C26EE7B00172965 /* MyQuestionsVC.h */,
-				E1AC52261C26EE7B00172965 /* MyQuestionsVC.m */,
 				E1C21E671C0F233F0042E1F3 /* MyFriendsVC.h */,
 				E1C21E681C0F233F0042E1F3 /* MyFriendsVC.m */,
 				E1AE752E1C290CAE0035AAEE /* FriendTableViewCell.h */,
@@ -704,6 +702,8 @@
 				E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */,
 				E1B78A631C228CC700A2E384 /* AudioPlayControl.h */,
 				E1B78A641C228CC700A2E384 /* AudioPlayControl.m */,
+				E1EB9A141C2C091A00200059 /* QuestionListVC.h */,
+				E1EB9A151C2C091A00200059 /* QuestionListVC.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -1188,10 +1188,10 @@
 				E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */,
 				E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */,
 				E1D1894C1C0EE6F60043DE9C /* AFNetworkReachabilityManager.m in Sources */,
-				E1AC52271C26EE7B00172965 /* MyQuestionsVC.m in Sources */,
 				E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */,
 				E1D189641C0EE6F60043DE9C /* SDWebImageManager.m in Sources */,
 				E14C21121C1EF969003925B5 /* MessagesResult.m in Sources */,
+				E1EB9A161C2C091A00200059 /* QuestionListVC.m in Sources */,
 				E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */,
 				E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */,
 				E19762021C2673220093A935 /* NSTextCheckingResult+ExtendedURL.m in Sources */,

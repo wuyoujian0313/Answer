@@ -8,6 +8,7 @@
 
 #import "DiscoverVC.h"
 #import "LineView.h"
+#import "QuestionListVC.h"
 
 @interface DiscoverVC ()<UITableViewDataSource,UITableViewDelegate>
 @property(nonatomic,strong)UITableView          *discoverTableView;
@@ -126,10 +127,17 @@
         case 0: {
             
             // 附近问题
+            QuestionListVC *vc = [[QuestionListVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
+            
             break;
         }
         case 1: {
             // 好友问题
+            QuestionListVC *vc = [[QuestionListVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
             

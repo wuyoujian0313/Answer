@@ -15,7 +15,7 @@
 #import "User.h"
 #import "SetVC.h"
 #import "MyWalletVC.h"
-#import "MyQuestionsVC.h"
+#import "QuestionListVC.h"
 
 @interface MeVC ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -236,7 +236,7 @@
     switch (row) {
         case 0: {
             // 我的问题
-            MyQuestionsVC *vc = [[MyQuestionsVC alloc] init];
+            QuestionListVC *vc = [[QuestionListVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;

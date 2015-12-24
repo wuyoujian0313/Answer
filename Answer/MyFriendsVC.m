@@ -13,6 +13,7 @@
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "FriendTableViewCell.h"
+#import "QuestionListVC.h"
 
 @interface MyFriendsVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 @property(nonatomic,strong)UITableView          *friendTableView;
@@ -133,8 +134,10 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    QuestionListVC *vc = [[QuestionListVC alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - NetworkTaskDelegate
