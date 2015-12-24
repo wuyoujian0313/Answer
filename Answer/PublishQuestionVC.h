@@ -10,4 +10,7 @@
 
 @interface PublishQuestionVC : BaseVC
 
+@property(nonatomic,copy)NSString       *videoKeyString;
+@property(nonatomic,copy)NSString       *videoScanImageKey;
+
 @end

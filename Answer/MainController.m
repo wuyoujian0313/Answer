@@ -19,9 +19,9 @@
 
 @property (nonatomic, strong) UIViewController              *rootVC;
 @property (nonatomic, strong) UITabBarController            *homeVC;
-@property (nonatomic, strong) WYJNavigationController       *loginNav;
-
 @property (nonatomic, strong) UIViewController              *currentVC;
+
+@property (nonatomic, strong) WYJNavigationController       *loginNav;
 @end
 
 @implementation MainController

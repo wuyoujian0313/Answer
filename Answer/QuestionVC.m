@@ -7,7 +7,6 @@
 //
 
 #import "QuestionVC.h"
-#import "RedPacketVC.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <CoreMedia/CoreMedia.h>
 #import <MobileCoreServices/MobileCoreServices.h>
@@ -15,8 +14,10 @@
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "SDImageCache.h"
 #import "AppDelegate.h"
+#import "PublishQuestionVC.h"
 
-@interface QuestionVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate>
+
+@interface QuestionVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>
 
 @property(nonatomic,strong)UIImagePickerController      *picker;
 @property(nonatomic,copy)NSString                       *videoScanImageKey;
@@ -26,6 +27,8 @@
 @property(nonatomic,strong)NSURL                        *recordedFile;
 @property(nonatomic,copy)NSString                       *recordFileKey;
 @property(nonatomic,strong)AVAudioRecorder              *audioRecoder;
+@property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
+@property(nonatomic,strong)NSTimer                      *timer;
 
 @end
 
@@ -50,8 +53,7 @@
 }
 
 - (void)cancelSend {
-    
-    
+
     AppDelegate *app = [AppDelegate shareMyApplication];
     [app.mainVC setShowHomeVC];
     
@@ -60,6 +62,128 @@
         [self.tabBarController.tabBar setFrame:CGRectMake(0, screenHeight - 49, screenWidth, 49)];
     }];
 }
+
+- (BOOL)canRecord {
+    __block BOOL bCanRecord = YES;
+    if ([[[UIDevice currentDevice] systemVersion] compare:@"7.0"] != NSOrderedAscending)
+    {
+        AVAudioSession *audioSession = [AVAudioSession sharedInstance];
+        if ([audioSession respondsToSelector:@selector(requestRecordPermission:)]) {
+            [audioSession performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) {
+                if (granted) {
+                    bCanRecord = YES;
+                } else {
+                    bCanRecord = NO;
+                }
+            }];
+        }
+    }
+    
+    return bCanRecord;
+}
+
+-(void)playReordFile {
+    
+//#if TARGET_IPHONE_SIMULATOR
+//#elif TARGET_OS_IPHONE
+    // 播放
+    NSError *playerError;
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:_recordedFile error:&playerError];
+    if (_audioPlayer) {
+        _audioPlayer.delegate = self;
+        [_audioPlayer prepareToPlay];
+        [_audioPlayer play];
+    } else {
+        NSLog(@"ERror creating player: %@", [playerError description]);
+    }
+//#endif
+    
+}
+
+- (void)recordAudioFile {
+    // 录音
+    AVAudioSession *session = [AVAudioSession sharedInstance];
+    
+    if (IsIOS8) {
+        AVAudioSessionRecordPermission permission = [session recordPermission];
+        if (permission == AVAudioSessionRecordPermissionDenied) {
+            
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"麦克风被禁用" message:@"请在iPhone的“设置-隐私-麦克风”中允许访问麦克风" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+            [alertView show];
+            return;
+        }
+    } else if (![self canRecord]) {
+        return;
+    }
+    
+    NSError *sessionError;
+    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+    [session setActive:YES error:nil];
+    
+    //
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtURL:_recordedFile error:nil];
+    
+//#if TARGET_IPHONE_SIMULATOR
+//#elif TARGET_OS_IPHONE
+    
+    NSMutableDictionary* recordSetting = [[NSMutableDictionary alloc] init];
+    [recordSetting setValue:[NSNumber numberWithInt:kAudioFormatMPEG4AAC] forKey:AVFormatIDKey];
+    [recordSetting setValue:[NSNumber numberWithFloat:44100.0] forKey:AVSampleRateKey];
+    [recordSetting setValue:[NSNumber numberWithInt:1] forKey:AVNumberOfChannelsKey];
+    
+    NSError *error;
+    [self.audioRecoder stop];
+    self.audioRecoder = [[AVAudioRecorder alloc] initWithURL:_recordedFile settings:recordSetting error:&error];
+    if (_audioRecoder) {
+        [_audioRecoder prepareToRecord];
+        [_audioRecoder record];
+        //开启音量检测
+        _audioRecoder.meteringEnabled = YES;
+        _audioRecoder.delegate = self;
+        
+        //设置定时检测
+        _timer = [NSTimer scheduledTimerWithTimeInterval:0 target:self selector:@selector(detectionVoice) userInfo:nil repeats:YES];
+    } else {
+        [session setActive:NO error:nil];
+        NSLog(@"%@", error.description);
+    }
+//#endif
+}
+
+- (void)detectionVoice {
+    [_audioRecoder updateMeters];//刷新音量数据
+    
+    double cTime = _audioRecoder.currentTime;
+    if (cTime >= 60) {
+        
+        [_audioRecoder stop];
+        [_timer invalidate];
+        
+        return;
+    }
+    
+    //获取音量的平均值  [recorder averagePowerForChannel:0];
+    //音量的最大值  [recorder peakPowerForChannel:0];
+    double lowPassResults = pow(10, (0.05 * [_audioRecoder peakPowerForChannel:0]));
+    NSLog(@"%lf",lowPassResults);
+    //最大50  0
+    //图片 小-》大
+    if ( 0 < lowPassResults <= 0.06 ) {
+    } else if (0.06<lowPassResults<=0.13) {
+    } else if (0.13<lowPassResults<=0.20) {
+    } else if (0.20<lowPassResults<=0.27) {
+    } else if (0.27<lowPassResults<=0.34) {
+    } else if (0.34<lowPassResults<=0.41) {
+    } else if (0.55<lowPassResults<=0.62) {
+    } else if (0.48<lowPassResults<=0.55) {
+    } else if (0.69<lowPassResults<=0.76) {
+    } else if (0.76<lowPassResults<=0.83) {
+    } else if (0.83<lowPassResults<=0.9)  {
+    } else {
+    }
+}
+
 
 - (UIButton *)createButton:(UIImage*)image target:(id)target selector:(SEL)selector frame:(CGRect)frame {
     
@@ -299,6 +423,24 @@
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:YES completion:^{}];
+}
+
+#pragma mark - AVAudioPlayerDelegate
+- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
+    [_audioPlayer stop];
+}
+
+- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
+    [_audioPlayer stop];
+}
+
+#pragma mark - AVAudioRecorderDelegate
+- (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
+    //    [recorder stop];
+}
+
+- (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error {
+    [recorder stop];
 }
 
 - (void)didReceiveMemoryWarning {
