@@ -168,6 +168,7 @@
     [SVProgressHUD dismiss];
     [FadePromptView showPromptStatus:@"退出成功" duration:1.0 positionY:screenHeight- 300 finishBlock:^{
         //
+        [[User sharedUser] clearUser];
         AppDelegate *app = [AppDelegate shareMyApplication];
         [app.mainVC switchToLoginVC];
     }];

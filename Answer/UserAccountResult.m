@@ -8,11 +8,27 @@
 
 #import "UserAccountResult.h"
 
-//@property (nonatomic, strong) NSNumber     *balance;
-//@property (nonatomic, strong) NSNumber     *receivePacket;
-//@property (nonatomic, strong) NSNumber     *sendPacket;
-
 @implementation UserAccountResult
+
+
+- (id)initWithCoder:(NSCoder*)coder {
+    if (self = [super init]) {
+        
+        self.balance               = [coder decodeObjectForKey:@"balance"];
+        self.receivePacket         = [coder decodeObjectForKey:@"receivePacket"];
+        self.sendPacket            = [coder decodeObjectForKey:@"sendPacket"];
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [coder encodeObject:_balance forKey:@"balance"];
+    [coder encodeObject:_receivePacket forKey:@"receivePacket"];
+    [coder encodeObject:_sendPacket forKey:@"sendPacket"];
+}
+
 
 - (id)copyWithZone:(nullable NSZone *)zone {
     [super copyWithZone:zone];

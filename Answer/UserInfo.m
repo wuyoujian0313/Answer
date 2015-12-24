@@ -10,6 +10,44 @@
 
 @implementation UserInfo
 
+- (id)initWithCoder:(NSCoder*)coder {
+    if (self = [super init]) {
+        
+        self.uuid               = [coder decodeObjectForKey:@"uuid"];
+        self.userName           = [coder decodeObjectForKey:@"userName"];
+        self.uId                = [coder decodeObjectForKey:@"uId"];
+        self.nickName           = [coder decodeObjectForKey:@"nickName"];
+        self.phoneNumber        = [coder decodeObjectForKey:@"phoneNumber"];
+        self.attentionNum       = [coder decodeObjectForKey:@"attentionNum"];
+        self.fansNum            = [coder decodeObjectForKey:@"fansNum"];
+        self.password           = [coder decodeObjectForKey:@"password"];
+        self.level              = [coder decodeObjectForKey:@"level"];
+        self.qq                 = [coder decodeObjectForKey:@"qq"];
+        self.weixin             = [coder decodeObjectForKey:@"weixin"];
+        self.headImage          = [coder decodeObjectForKey:@"headImage"];
+        self.updateDate         = [coder decodeObjectForKey:@"updateDate"];
+        
+    }
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)coder {
+    
+    [coder encodeObject:_uuid forKey:@"uuid"];
+    [coder encodeObject:_userName forKey:@"userName"];
+    [coder encodeObject:_uId forKey:@"uId"];
+    [coder encodeObject:_nickName forKey:@"nickName"];
+    [coder encodeObject:_phoneNumber forKey:@"phoneNumber"];
+    [coder encodeObject:_attentionNum forKey:@"attentionNum"];
+    [coder encodeObject:_fansNum forKey:@"fansNum"];
+    [coder encodeObject:_password forKey:@"password"];
+    [coder encodeObject:_level forKey:@"level"];
+    [coder encodeObject:_qq forKey:@"qq"];
+    [coder encodeObject:_weixin forKey:@"weixin"];
+    [coder encodeObject:_headImage forKey:@"headImage"];
+    [coder encodeObject:_updateDate forKey:@"updateDate"];
+    
+}
 
 - (id)copyWithZone:(nullable NSZone *)zone {
     UserInfo * temp = [[UserInfo alloc] init];

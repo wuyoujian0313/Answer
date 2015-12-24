@@ -45,6 +45,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidLoad {

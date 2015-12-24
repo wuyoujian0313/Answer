@@ -14,6 +14,8 @@
 #import "AppDelegate.h"
 #import "OHAttributedLabel.h"
 #import "User.h"
+#import "SDImageCache.h"
+#import "UIImageView+WebCache.h"
 
 @interface LoginVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
 
@@ -21,16 +23,20 @@
 @property(nonatomic,strong)UITextField          *nameTextField;
 @property(nonatomic,strong)UITextField          *pwdTextField;
 @property(nonatomic,strong)UIButton             *loginBtn;
+@property(nonatomic,strong)UIImageView          *headImageView;
 
 @end
 
 @implementation LoginVC
 
--(void)dealloc {
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    [self.navigationController setNavigationBarHidden:YES];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -94,21 +100,48 @@
     [self setTableViewFooterView:180];
 }
 
--(void)setTableViewHeaderView:(NSInteger)height {
+- (void)loadHeadImage {
+    //从缓存取
+    //取图片缓存
+    SDImageCache * imageCache = [SDImageCache sharedImageCache];
+    [User sharedUser].user.headImage = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
+    NSString *imageUrl  = [User sharedUser].user.headImage;
+    UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
+    
+    if (default_image == nil) {
+        default_image = [UIImage imageNamed:@"defaultHeadImage"];
+        
+        [_headImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
+                          placeholderImage:default_image
+                                 completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                     if (image) {
+                                         _headImageView.image = image;
+                                         [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+                                     }
+                                 }
+         ];
+    } else {
+        _headImageView.image = default_image;
+    }
+}
+
+- (void)setTableViewHeaderView:(NSInteger)height {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _loginTableView.frame.size.width, height)];
-    view.backgroundColor = [UIColor clearColor];
+    view.backgroundColor = [UIColor colorWithHex:0xebeef0];
     
-    CGFloat left = (_loginTableView.frame.size.width - 90)/2.0;
-    CGFloat top = 45;
-    UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(left, top, 90, 75)];
-    imageView.image = [UIImage imageNamed:@"login_logo"];
-    [view addSubview:imageView];
-    
+    CGFloat left = (_loginTableView.frame.size.width - 75)/2.0;
+    CGFloat top = 85;
+    UIImageView *headImageView = [[UIImageView alloc] initWithFrame:CGRectMake(left, top, 75, 75)];
+    headImageView.clipsToBounds = YES;
+    [headImageView.layer setCornerRadius:75/2.0];
+    [view addSubview:headImageView];
+    self.headImageView = headImageView;
     
     LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, height - kLineHeight1px, view.frame.size.width, kLineHeight1px)];
     [view addSubview:line1];
-    
     [_loginTableView setTableHeaderView:view];
+    
+    [self loadHeadImage];
 }
 
 
@@ -219,6 +252,7 @@
         LoginResult *loginRes = (LoginResult*)result;
         [User sharedUser].user = loginRes.user;
         [User sharedUser].account = loginRes.account;
+        [[User sharedUser] saveToUserDefault];
         
         AppDelegate *app = [AppDelegate shareMyApplication];
         [app.mainVC switchToHomeVC];
@@ -290,6 +324,7 @@
             [textField setKeyboardType:UIKeyboardTypePhonePad];
             [textField setClearsOnBeginEditing:YES];
             [textField setPlaceholder:@"手机号码"];
+            [textField setText:[User sharedUser].phoneNumber];
             
             [cell.contentView addSubview:textField];
             

@@ -235,7 +235,7 @@
         __weak QuestionVC *weakSelf = self;
         
         dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
-            UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+            UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
             CGSize scaleSize = [[UIScreen mainScreen] bounds].size;
             UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%ldx%ld",(long)scaleSize.width,(long)scaleSize.height]];
             

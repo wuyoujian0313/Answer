@@ -12,11 +12,15 @@
 
 @interface User : NSObject
 
+@property (nonatomic, copy) NSString              *phoneNumber;
 @property (nonatomic, copy) UserInfo              *user;
 @property (nonatomic, copy) UserAccountResult     *account;
 
 
 + (User*)sharedUser;
 
+- (void)clearUser;
+- (void)saveToUserDefault;
+- (void)loadFromUserDefault;
 
 @end
