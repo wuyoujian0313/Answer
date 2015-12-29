@@ -52,6 +52,7 @@
     rootVC.view.backgroundColor = [UIColor whiteColor];
     self.rootVC = rootVC;
     [self addChildViewController:_rootVC];
+    [_rootVC didMoveToParentViewController:self];
 }
 
 - (void)switchToHomeVC {
@@ -64,11 +65,12 @@
 
 - (void)switchToHomeVCFrom:(UIViewController*)fromVC {
     [self setupTabController];
-    [self.view addSubview:_homeVC.view];
+    
     [self transitionFromViewController:fromVC toViewController:_homeVC duration:1.0 options:UIViewAnimationOptionTransitionFlipFromLeft animations:^{
         //
         _currentVC = _homeVC;
         [_loginNav removeFromParentViewController];
+        [_currentVC didMoveToParentViewController:self];
     } completion:^(BOOL finished) {
         //
     }];
@@ -76,11 +78,12 @@
 
 - (void)switchToLoginVCFrom:(UIViewController*)fromVC {
     [self setupLoginVC];
-    [self.view addSubview:_loginNav.view];
+    
     [self transitionFromViewController:fromVC toViewController:_loginNav duration:1.0 options:UIViewAnimationOptionTransitionFlipFromRight animations:^{
         //
         _currentVC = _loginNav;
         [_homeVC removeFromParentViewController];
+        [_currentVC didMoveToParentViewController:self];
     } completion:^(BOOL finished) {
         //
     }];
@@ -91,7 +94,7 @@
     WYJNavigationController *loginNav = [[WYJNavigationController alloc] initWithRootViewController:controller];
     self.loginNav = loginNav;
     [self addChildViewController:_loginNav];
-    
+    [self.view addSubview:_loginNav.view];
 }
 
 - (void)setupTabController {
@@ -148,6 +151,7 @@
     [_homeVC setSelectedIndex:0];
     
     [self addChildViewController:_homeVC];
+    [self.view addSubview:_homeVC.view];
 }
 
 - (void)setShowHomeVC {

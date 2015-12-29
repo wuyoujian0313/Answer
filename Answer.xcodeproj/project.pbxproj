@@ -189,6 +189,7 @@
 		E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyFriendsResult.m; sourceTree = "<group>"; };
 		E15E27A91C102C2D0035A4ED /* FileCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileCache.h; sourceTree = "<group>"; };
 		E15E27AA1C102C2D0035A4ED /* FileCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileCache.m; sourceTree = "<group>"; };
+		E16C5CFE1C2CEB7600DC15B4 /* ProtocolDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolDefine.h; sourceTree = "<group>"; };
 		E16E6D301C2198A000751E1D /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
 		E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
 		E19761E91C2673220093A935 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -704,6 +705,7 @@
 				E1B78A641C228CC700A2E384 /* AudioPlayControl.m */,
 				E1EB9A141C2C091A00200059 /* QuestionListVC.h */,
 				E1EB9A151C2C091A00200059 /* QuestionListVC.m */,
+				E16C5CFE1C2CEB7600DC15B4 /* ProtocolDefine.h */,
 			);
 			name = common;
 			sourceTree = "<group>";

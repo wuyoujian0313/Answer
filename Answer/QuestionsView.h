@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "QuestionsResult.h"
+#import "ProtocolDefine.h"
 
-@protocol QuestionTableViewCellDelegate;
 
 @interface QuestionsView : UIView
 

@@ -18,21 +18,20 @@
     return (AppDelegate*)[UIApplication sharedApplication].delegate;
 }
 
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    [self setupMainVC];
-    return YES;
-}
-
 - (void)setupMainVC {
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     MainController *mainController = [[MainController alloc] init];
     self.mainVC = mainController;
     self.window.rootViewController = mainController;
-
+    
     [_window makeKeyAndVisible];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Override point for customization after application launch.
+    [self setupMainVC];
+    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

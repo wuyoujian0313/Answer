@@ -238,6 +238,7 @@
             // 我的问题
             QuestionListVC *vc = [[QuestionListVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.type = PageType_MyQuestionList;
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }

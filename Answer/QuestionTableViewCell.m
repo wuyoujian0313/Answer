@@ -139,11 +139,15 @@
         
         left += 20 + 10;
         [nameLabel setFrame:CGRectMake(left, top, 180, 20)];
-        if (_userInfo.nickName) {
+        if (_userInfo.nickName && [_userInfo.nickName length]) {
             [nameLabel setText:_userInfo.nickName];
         } else {
-            if (_userInfo.userName) {
+            if (_userInfo.userName && [_userInfo.userName length]) {
                 [nameLabel setText:_userInfo.userName];
+            } else if (_userInfo.phoneNumber && [_userInfo.phoneNumber length]) {
+                [nameLabel setText:_userInfo.phoneNumber];
+            } else {
+                [nameLabel setText:@"匿名"];
             }
         }
         
@@ -418,10 +422,10 @@
             [line1 setFrame:CGRectMake(left, 5, kLineHeight1px, 10)];
         }
         
-        if (_questionInfo.type) {
-            [typeBtn setTitle:_questionInfo.type forState:UIControlStateNormal];
+        if (_questionInfo.fenlei) {
+            [typeBtn setTitle:_questionInfo.fenlei forState:UIControlStateNormal];
             UIImage *image = [UIImage imageNamed:@"category"];
-            CGSize sizeText = [_questionInfo.type sizeWithFontCompatible:typeBtn.titleLabel.font constrainedToSize:CGSizeMake(0, CGFLOAT_MAX) lineBreakMode:typeBtn.titleLabel.lineBreakMode];
+            CGSize sizeText = [_questionInfo.fenlei sizeWithFontCompatible:typeBtn.titleLabel.font constrainedToSize:CGSizeMake(0, CGFLOAT_MAX) lineBreakMode:typeBtn.titleLabel.lineBreakMode];
             
             left -= image.size.width/2.0 + sizeText.width + sizeText1.width + 6;
             [typeBtn setFrame:CGRectMake(left, top, image.size.width + sizeText.width + 6, 20)];

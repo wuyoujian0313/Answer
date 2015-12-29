@@ -75,7 +75,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
     
     NSMutableAttributedString *attrStr = [NSMutableAttributedString attributedStringWithString:tempString];
     [attrStr setFont:[UIFont systemFontOfSize:14]];
-    [attrStr setTextColor:[UIColor colorWithHex:0xff6600]];
+    [attrStr setTextColor:[UIColor colorWithHex:0x56b5f5]];
     [attrStr modifyParagraphStylesWithBlock:^(OHParagraphStyle *paragraphStyle) {
         paragraphStyle.textAlignment = kCTTextAlignmentCenter;
     }];
@@ -361,7 +361,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         if ([textString length] > 0) {
             _nextBtn.enabled = YES;
             
-            [_nextBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0xff8915]] forState:UIControlStateNormal];
+            [_nextBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0x56b5f5]] forState:UIControlStateNormal];
         } else {
             _nextBtn.enabled = NO;
             [_nextBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0xe8e8e8]] forState:UIControlStateNormal];
@@ -464,7 +464,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
             [_codeBtn setFrame:CGRectMake(tableView.frame.size.width - 105 + 10, 0, 105 - 20, 44)];
             [_codeBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
             
-            [_codeBtn setTitleColor:[UIColor colorWithHex:0xff6600] forState:UIControlStateNormal];
+            [_codeBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
             [_codeBtn addTarget:self action:@selector(phoneCodeStart:) forControlEvents:UIControlEventTouchUpInside];
             [_codeBtn setTitle:@"发送验证码" forState:UIControlStateNormal];
             [cell.contentView addSubview:_codeBtn];

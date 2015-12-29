@@ -71,7 +71,7 @@
     
     NSMutableAttributedString *attrStr = [NSMutableAttributedString attributedStringWithString:tempString];
     [attrStr setFont:[UIFont systemFontOfSize:14]];
-    [attrStr setTextColor:[UIColor colorWithHex:0xff6600]];
+    [attrStr setTextColor:[UIColor colorWithHex:0x56b5f5]];
     [attrStr modifyParagraphStylesWithBlock:^(OHParagraphStyle *paragraphStyle) {
         paragraphStyle.textAlignment = kCTTextAlignmentCenter;
     }];
@@ -150,7 +150,7 @@
     view.backgroundColor = [UIColor clearColor];
     
     UIButton *loginBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-    [loginBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0xff8915]] forState:UIControlStateNormal];
+    [loginBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0x56b5f5]] forState:UIControlStateNormal];
     [loginBtn.layer setCornerRadius:5.0];
     [loginBtn setTag:101];
     [loginBtn setClipsToBounds:YES];
@@ -216,7 +216,8 @@
         [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Login
                                                  forParam:param
                                                  delegate:self
-                                                resultObj:[[LoginResult alloc] init] customInfo:@"login"];
+                                                resultObj:[[LoginResult alloc] init]
+                                               customInfo:@"login"];
     }
 }
 

@@ -13,8 +13,11 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "QuestionsResult.h"
+#import "NetworkTask.h"
+#import "User.h"
 
-@interface AnswerCircleVC ()<QuestionTableViewCellDelegate,AVAudioPlayerDelegate>
+@interface AnswerCircleVC ()<QuestionTableViewCellDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate>
 @property (nonatomic, strong) QuestionsView             *questionView;
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
 @property(nonatomic,strong)NSURL                        *recordedFile;
@@ -30,7 +33,28 @@
     self.navigationItem.leftBarButtonItem = nil;
     [self setNavTitle:self.tabBarItem.title];
     [self layoutQuestionView];
+    [self requestQuestionList];
 }
+
+- (void)requestQuestionList {
+    
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          @"all",@"wtype",
+                          @"40",@"friendId",
+                          @"1",@"latitude",
+                          @"1",@"longitude",
+                          [User sharedUser].user.uId,@"userId",nil];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetTuWenList
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[QuestionsResult alloc] init]
+                                           customInfo:@"GetTuWenList"];
+}
+
+
+
 
 -(void)playVideo:(UIButton*)sender {
     
@@ -43,6 +67,7 @@
         [_moviePlayer.moviePlayer play];
         
         [self presentMoviePlayerViewControllerAnimated:_moviePlayer];
+        
     }
 }
 
@@ -94,10 +119,52 @@
 }
 
 
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    if ([customInfo isEqualToString:@"GetTuWenList"] && result) {
+        
+        QuestionsResult *qResult = (QuestionsResult*)result;
+        [_questionView setQuestionsResult:qResult];
+    }
+}
+
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
+}
+
+
 
 
 #pragma mark - QuestionTableViewCellDelegate
 - (void)questionTableViewCellAction:(QuestionTableViewCellAction)action questionInfo:(QuestionInfo*)question {
+    
+    switch (action) {
+            
+        case QuestionTableViewCellAction_Attention:
+            break;
+        case QuestionTableViewCellAction_PlayAudio:
+            break;
+        case QuestionTableViewCellAction_PlayVideo:
+            break;
+        case QuestionTableViewCellAction_ScanDetail:
+            break;
+        case QuestionTableViewCellAction_Answer:
+            break;
+        case QuestionTableViewCellAction_Sharing:
+            break;
+        case QuestionTableViewCellAction_RedPackage:
+            break;
+        case QuestionTableViewCellAction_Location:
+            break;
+            
+        default:
+            break;
+    }
     
 }
 

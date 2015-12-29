@@ -8,6 +8,12 @@
 
 #import "BaseVC.h"
 
-@interface QuestionListVC : BaseVC
+typedef NS_ENUM(NSInteger, PageType) {
+    PageType_MyQuestionList,
+    PageType_FriendQuestionList,
+    PageType_NearbyQuestionList,
+};
 
+@interface QuestionListVC : BaseVC
+@property (nonatomic, assign) PageType      type;
 @end

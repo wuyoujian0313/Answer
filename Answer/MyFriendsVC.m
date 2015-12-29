@@ -137,6 +137,7 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     QuestionListVC *vc = [[QuestionListVC alloc] init];
+    vc.type = PageType_FriendQuestionList;
     [self.navigationController pushViewController:vc animated:YES];
 }
 

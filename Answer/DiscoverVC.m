@@ -128,6 +128,7 @@
             
             // 附近问题
             QuestionListVC *vc = [[QuestionListVC alloc] init];
+            vc.type = PageType_NearbyQuestionList;
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             
@@ -136,6 +137,7 @@
         case 1: {
             // 好友问题
             QuestionListVC *vc = [[QuestionListVC alloc] init];
+            vc.type = PageType_FriendQuestionList;
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;

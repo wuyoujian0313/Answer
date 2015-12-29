@@ -9,5 +9,4 @@
 #import "BaseVC.h"
 
 @interface AnswerCircleVC : BaseVC
-
 @end
