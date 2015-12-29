@@ -36,7 +36,8 @@
 #define NeedAudio
 
 
-#define kNetworkAPIServer           @"http://122.226.44.97/tuwen_web/service"
+#define kNetworkServerIP            @"http://122.226.44.97"
+#define kNetworkAPIServer           kNetworkServerIP@"/tuwen_web/service"
 
 #if DEBUG
 #define NSLog(...) NSLog(__VA_ARGS__)

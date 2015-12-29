@@ -226,22 +226,23 @@
             [_wtContentView addSubview:contentLabel];
         }
         
-        //0 图片，1 视频 ，2音频
+        //2 图片，1 视频 ，0音频
         audioControl.hidden = YES;
         contentImage.hidden = YES;
         playBtn.hidden = YES;
         if ([contentImage.gestureRecognizers containsObject:_tapGesture]) {
             [contentImage removeGestureRecognizer:_tapGesture];
         }
-        if ([_questionInfo.mediaType integerValue] == 0 || [_questionInfo.mediaType integerValue] == 1) {
+        if (_questionInfo.mediaType && ([_questionInfo.mediaType integerValue] == 1 || [_questionInfo.mediaType integerValue] == 2)) {
             contentImage.hidden = NO;
-            playBtn.hidden = ![_questionInfo.mediaType integerValue] == 1;
+            playBtn.hidden = !([_questionInfo.mediaType integerValue] == 1);
             
-            if ([_questionInfo.mediaType integerValue] == 0) {
+            if ([_questionInfo.mediaType integerValue] == 2) {
                 [contentImage addGestureRecognizer:_tapGesture];
             }
             
-            NSString *imageUrlString = [_questionInfo.mediaType integerValue] == 0 ? _questionInfo.mediaURL : _questionInfo.thumbnail;
+            NSString *imageUrlString = [_questionInfo.mediaType integerValue] == 2 ? _questionInfo.mediaURL : _questionInfo.thumbnail;
+            imageUrlString = [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,imageUrlString];
             
             CGFloat left = 10;
             CGFloat top = 0;
@@ -256,7 +257,7 @@
             UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
             
             if (cacheimage == nil) {
-//                cacheimage = [UIImage imageNamed:nil];
+                cacheimage = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
                 
                 [contentImage  sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     if (image) {
@@ -273,7 +274,7 @@
             [contentLabel setText:_questionInfo.content];
             
             _wtContentViewHeight = 120 + 45;
-        } else if ([_questionInfo.mediaType integerValue] == 2) {
+        } else if (_questionInfo.mediaType && [_questionInfo.mediaType integerValue] == 0) {
             audioControl.hidden = NO;
             [audioControl.timeLabel setText:[NSString stringWithFormat:@"%d\"",[_questionInfo.duration intValue]]];
             CGFloat left = 10;

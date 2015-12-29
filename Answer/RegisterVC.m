@@ -280,7 +280,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
 -(void)keyboardWillHide:(NSNotification *)note{
     [super keyboardWillHide:note];
     
-    [_registerTableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+    [_registerTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
 }
 
 -(void)keyboardDidShow:(NSNotification *)note{
@@ -291,7 +291,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
     
     keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
     
-    [_registerTableView setFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height - keyboardBounds.size.height)];
+    [_registerTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - keyboardBounds.size.height - navigationBarHeight)];
     
     [_registerTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }

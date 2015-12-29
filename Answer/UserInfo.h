@@ -13,6 +13,7 @@
 @property (nonatomic, copy) NSString        *uuid;
 @property (nonatomic, copy) NSString        *userName;
 @property (nonatomic, copy) NSString        *uId;
+@property (nonatomic, copy) NSString        *userId;
 @property (nonatomic, copy) NSString        *nickName;
 @property (nonatomic, copy) NSString        *phoneNumber;
 @property (nonatomic, strong) NSNumber      *attentionNum;
