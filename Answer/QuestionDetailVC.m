@@ -11,12 +11,16 @@
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
+#import "ProtocolDefine.h"
 
-@interface QuestionDetailVC ()<AVAudioPlayerDelegate>
+
+
+@interface QuestionDetailVC ()<AVAudioPlayerDelegate,QuestionInfoViewDelegate>
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
 @property(nonatomic,strong)NSURL                        *recordedFile;
 @property(nonatomic,copy)NSString                       *videoPathString;
 @property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
+
 @end
 
 @implementation QuestionDetailVC
@@ -26,6 +30,9 @@
     // Do any additional setup after loading the view.
 }
 
+
+
+///////////////////////////////////////////
 -(void)playVideo:(UIButton*)sender {
     
     NSString  *src = _videoPathString;
@@ -73,6 +80,34 @@
 
 - (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
     [_audioPlayer stop];
+}
+
+#pragma mark - QuestionInfoViewCellDelegate
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question {
+    
+    switch (action) {
+            
+        case QuestionInfoViewAction_Attention:
+            break;
+        case QuestionInfoViewAction_PlayAudio:
+            break;
+        case QuestionInfoViewAction_PlayVideo:
+            break;
+        case QuestionInfoViewAction_ScanDetail:
+            break;
+        case QuestionInfoViewAction_Answer:
+            break;
+        case QuestionInfoViewAction_Sharing:
+            break;
+        case QuestionInfoViewAction_RedPackage:
+            break;
+        case QuestionInfoViewAction_Location:
+            break;
+            
+        default:
+            break;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {

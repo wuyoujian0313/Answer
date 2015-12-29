@@ -25,11 +25,11 @@
     return [self initWithFrame:frame haveUserView:YES delegate:nil];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<QuestionTableViewCellDelegate>)delegate {
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<QuestionInfoViewDelegate>)delegate {
     return [self initWithFrame:frame haveUserView:YES delegate:delegate];
 }
 
-- (instancetype)initWithFrame:(CGRect)frame haveUserView:(BOOL)isHave delegate:(id<QuestionTableViewCellDelegate>)delegate {
+- (instancetype)initWithFrame:(CGRect)frame haveUserView:(BOOL)isHave delegate:(id<QuestionInfoViewDelegate>)delegate {
     
     self = [super initWithFrame:frame];
     if (self) {

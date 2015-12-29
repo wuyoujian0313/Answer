@@ -1,8 +1,8 @@
 //
-//  QuestionTableViewCell.h
+//  QuestionInfoView.h
 //  Answer
 //
-//  Created by wuyj on 15/12/16.
+//  Created by wuyj on 15/12/29.
 //  Copyright © 2015年 wuyj. All rights reserved.
 //
 
@@ -11,10 +11,10 @@
 #import "UserInfo.h"
 #import "ProtocolDefine.h"
 
-@interface QuestionTableViewCell : UITableViewCell
+@interface QuestionInfoView : UIView
 
 @property (nonatomic, weak) id<QuestionInfoViewDelegate>  delegate;
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo;
-- (CGFloat)cellHeight;
 
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo;
+- (CGFloat)viewHeight;
 @end

@@ -14,7 +14,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 
-@interface QuestionListVC ()<QuestionTableViewCellDelegate,AVAudioPlayerDelegate>
+@interface QuestionListVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate>
 @property (nonatomic, strong) QuestionsView             *questionView;
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
 @property(nonatomic,strong)NSURL                        *recordedFile;
@@ -110,7 +110,7 @@
 
 
 #pragma mark - QuestionTableViewCellDelegate
-- (void)questionTableViewCellAction:(QuestionTableViewCellAction)action questionInfo:(QuestionInfo*)question {
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question {
 }
 
 

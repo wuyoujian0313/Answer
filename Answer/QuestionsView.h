@@ -13,14 +13,14 @@
 
 @interface QuestionsView : UIView
 
-@property (nonatomic, weak) id<QuestionTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id<QuestionInfoViewDelegate> delegate;
 
 // 默认创建用户信息
 - (instancetype)initWithFrame:(CGRect)frame;
-- (instancetype)initWithFrame:(CGRect)frame delegate:(id<QuestionTableViewCellDelegate>)delegate;
+- (instancetype)initWithFrame:(CGRect)frame delegate:(id<QuestionInfoViewDelegate>)delegate;
 
 // 是否需要布局用户信息
-- (instancetype)initWithFrame:(CGRect)frame haveUserView:(BOOL)isHave delegate:(id<QuestionTableViewCellDelegate>)delegate;
+- (instancetype)initWithFrame:(CGRect)frame haveUserView:(BOOL)isHave delegate:(id<QuestionInfoViewDelegate>)delegate;
 
 - (void)setQuestionsResult:(QuestionsResult *)result;
 

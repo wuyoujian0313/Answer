@@ -17,7 +17,7 @@
 #import "NetworkTask.h"
 #import "User.h"
 
-@interface AnswerCircleVC ()<QuestionTableViewCellDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate>
+@interface AnswerCircleVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate>
 @property (nonatomic, strong) QuestionsView             *questionView;
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
 @property(nonatomic,strong)NSURL                        *recordedFile;
@@ -140,26 +140,26 @@
 
 
 
-#pragma mark - QuestionTableViewCellDelegate
-- (void)questionTableViewCellAction:(QuestionTableViewCellAction)action questionInfo:(QuestionInfo*)question {
+#pragma mark - QuestionInfoViewCellDelegate
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question {
     
     switch (action) {
             
-        case QuestionTableViewCellAction_Attention:
+        case QuestionInfoViewAction_Attention:
             break;
-        case QuestionTableViewCellAction_PlayAudio:
+        case QuestionInfoViewAction_PlayAudio:
             break;
-        case QuestionTableViewCellAction_PlayVideo:
+        case QuestionInfoViewAction_PlayVideo:
             break;
-        case QuestionTableViewCellAction_ScanDetail:
+        case QuestionInfoViewAction_ScanDetail:
             break;
-        case QuestionTableViewCellAction_Answer:
+        case QuestionInfoViewAction_Answer:
             break;
-        case QuestionTableViewCellAction_Sharing:
+        case QuestionInfoViewAction_Sharing:
             break;
-        case QuestionTableViewCellAction_RedPackage:
+        case QuestionInfoViewAction_RedPackage:
             break;
-        case QuestionTableViewCellAction_Location:
+        case QuestionInfoViewAction_Location:
             break;
             
         default:
