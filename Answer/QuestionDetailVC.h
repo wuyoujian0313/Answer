@@ -14,6 +14,5 @@
 
 @property (nonatomic, strong) QuestionInfo          *questionInfo;
 @property (nonatomic, strong) UserInfo              *userInfo;
-@property (nonatomic, assign) BOOL                  haveUserInfo;
 
 @end

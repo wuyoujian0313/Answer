@@ -23,6 +23,7 @@
 @property (nonatomic, strong) QuestionInfo          *questionInfo;
 @property (nonatomic, strong) UserInfo              *userInfo;
 @property (nonatomic, assign) BOOL                  haveUserInfo;
+@property (nonatomic, assign) BOOL                  foldText;
 
 @property (nonatomic, assign) CGFloat               userInfoViewHeight;
 @property (nonatomic, assign) CGFloat               wtContentViewHeight;
@@ -31,6 +32,10 @@
 @end
 
 @implementation QuestionInfoView
+
+- (void)dealloc {
+    [_tapGesture.view removeGestureRecognizer:_tapGesture];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -143,12 +148,12 @@
         }
         
         left += 180;
-        [levelLabel setFrame:CGRectMake(left, top, (screenWidth - 2*left), 20)];
+        [levelLabel setFrame:CGRectMake(left, top, (self.frame.size.width - 2*left), 20)];
         if (_userInfo.level) {
             [levelLabel setText:[NSString stringWithFormat:@"%d级",[_userInfo.level intValue]]];
         }
         
-        [attentionBtn setFrame:CGRectMake(screenWidth - 10 - 33, (40 - 17)/2.0, 33, 17)];
+        [attentionBtn setFrame:CGRectMake(self.frame.size.width - 10 - 33, (40 - 17)/2.0, 33, 17)];
         
         //
         if (_haveUserInfo) {
@@ -210,8 +215,6 @@
             contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
             [contentLabel setBackgroundColor:[UIColor clearColor]];
             [contentLabel setTag:203];
-            [contentLabel setNumberOfLines:2];
-            [contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
             [contentLabel setTextColor:[UIColor grayColor]];
             [contentLabel setFont:[UIFont systemFontOfSize:14]];
             [_wtContentView addSubview:contentLabel];
@@ -261,22 +264,50 @@
             }
             
             top += 120;
-            [contentLabel setFrame:CGRectMake(left, top, screenWidth - 20, 45)];
-            [contentLabel setText:_questionInfo.content];
             
-            _wtContentViewHeight = 120 + 45;
+            [contentLabel setText:_questionInfo.content];
+            if (_foldText) {
+                [contentLabel setNumberOfLines:2];
+                [contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+                [contentLabel setFrame:CGRectMake(left, top, self.frame.size.width - 20, 45)];
+                
+                _wtContentViewHeight = 120 + 45;
+            } else {
+                
+                [contentLabel setNumberOfLines:0];
+                [contentLabel setLineBreakMode:NSLineBreakByWordWrapping];
+                
+                CGSize textSize = [contentLabel.text sizeWithFontCompatible:contentLabel.font constrainedToSize:CGSizeMake(self.frame.size.width - 20, CGFLOAT_MAX) lineBreakMode:contentLabel.lineBreakMode];
+                
+                [contentLabel setFrame:CGRectMake(left, top, textSize.width, textSize.height)];
+                _wtContentViewHeight = 120 + textSize.height;
+            }
+            
         } else if (_questionInfo.mediaType && [_questionInfo.mediaType integerValue] == 0) {
             audioControl.hidden = NO;
             [audioControl.timeLabel setText:[NSString stringWithFormat:@"%d\"",[_questionInfo.duration intValue]]];
             CGFloat left = 10;
             CGFloat top = 0;
-            [audioControl setFrame:CGRectMake(left, top, screenWidth - 20, 55)];
+            [audioControl setFrame:CGRectMake(left, top, self.frame.size.width - 20, 55)];
             
             top += 55;
-            [contentLabel setFrame:CGRectMake(left, top, screenWidth - 20, 45)];
             [contentLabel setText:_questionInfo.content];
-            
-            _wtContentViewHeight = 55 + 45;
+            if (_foldText) {
+                [contentLabel setNumberOfLines:2];
+                [contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
+                [contentLabel setFrame:CGRectMake(left, top, self.frame.size.width - 20, 45)];
+                
+                _wtContentViewHeight = 120 + 45;
+            } else {
+                
+                [contentLabel setNumberOfLines:0];
+                [contentLabel setLineBreakMode:NSLineBreakByWordWrapping];
+                
+                CGSize textSize = [contentLabel.text sizeWithFontCompatible:contentLabel.font constrainedToSize:CGSizeMake(self.frame.size.width - 20, CGFLOAT_MAX) lineBreakMode:contentLabel.lineBreakMode];
+                
+                [contentLabel setFrame:CGRectMake(left, top, textSize.width, textSize.height)];
+                _wtContentViewHeight = 120 + textSize.height;
+            }
         }
         
         [_wtContentView setFrame:CGRectMake(0, _userInfoViewHeight + _spaceViewHeight, self.frame.size.width, _wtContentViewHeight)];
@@ -407,7 +438,7 @@
             [rewardBtn setTitle:_questionInfo.reward forState:UIControlStateNormal];
             
             UIImage *image = [UIImage imageNamed:@"reward"];
-            left = screenWidth - 10 - image.size.width/2.0 - sizeText1.width - 6;
+            left = self.frame.size.width - 10 - image.size.width/2.0 - sizeText1.width - 6;
             [rewardBtn setFrame:CGRectMake(left, top, image.size.width + sizeText1.width + 6, 20)];
             
             left -= 10;
@@ -424,7 +455,7 @@
         }
         
         top += 20;
-        [line3 setFrame:CGRectMake(0, top, screenWidth, kLineHeight1px)];
+        [line3 setFrame:CGRectMake(0, top, self.frame.size.width, kLineHeight1px)];
         
         //
         if (_questionInfo.updateDate) {
@@ -433,7 +464,7 @@
             [timeLabel setFrame:CGRectMake(left, top, 120, 40)];
         }
         
-        left = screenWidth - 10 - 33;
+        left = self.frame.size.width - 10 - 33;
         [sharingBtn setFrame:CGRectMake(left, top + (40 - 17)/2.0, 33, 17)];
         
         left -= 20+ 33;
@@ -483,19 +514,19 @@
         
     }
     
-    if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:)]) {
-        [_delegate questionInfoViewAction:tag questionInfo:_questionInfo];
+    if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:userInfo:)]) {
+        [_delegate questionInfoViewAction:tag questionInfo:_questionInfo userInfo:_userInfo];
     }
 }
 
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo {
-    
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo foldText:(BOOL)isfold {
     if (userInfo) {
         _haveUserInfo = YES;
     } else {
         _haveUserInfo = NO;
     }
     
+    _foldText = isfold;
     _userInfoViewHeight = 0;
     _wtContentViewHeight = 0;
     _funcViewHeight = 0;
@@ -503,13 +534,12 @@
     
     self.questionInfo = questionInfo;
     self.userInfo = userInfo;
-
-    [self layoutSpaceView:self];
-    [self layoutUserView:self];
-    [self layoutWtContentView:self];
-    [self layoutFuncView:self];
     
     [self layoutIfNeeded];
+}
+
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo {
+    [self setQuestionInfo:questionInfo userInfo:userInfo foldText:YES];
 }
 
 - (CGFloat)viewHeight {
@@ -519,6 +549,11 @@
 - (void)layoutSubviews {
     
     [super layoutSubviews];
+    [self layoutSpaceView:self];
+    [self layoutUserView:self];
+    [self layoutWtContentView:self];
+    [self layoutFuncView:self];
+
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, [self viewHeight]);
 }
 

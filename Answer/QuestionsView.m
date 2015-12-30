@@ -72,6 +72,23 @@
     return 1;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+
+    if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:userInfo:)]) {
+        
+        QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
+        
+        // 理论上只有一个
+        NSArray *users = [[_questions userList] filteredArrayUsingPredicate:predicate];
+        if (users && [users count]) {
+            [_delegate questionInfoViewAction:QuestionInfoViewAction_ScanDetail questionInfo:questionInfo userInfo:[users objectAtIndex:0]];
+        } else {
+            [_delegate questionInfoViewAction:QuestionInfoViewAction_ScanDetail questionInfo:questionInfo userInfo:nil];
+        } 
+    }
+}
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     if (indexPath.row < [[_questions twList] count]) {

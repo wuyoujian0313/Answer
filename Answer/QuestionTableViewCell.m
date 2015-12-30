@@ -50,10 +50,7 @@
 }
 
 - (void)layoutSubviews {
-    
     [super layoutSubviews];
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, screenWidth, [self cellHeight]);
-    [self.contentView setFrame:self.bounds];
     [self.infoView setFrame:self.contentView.bounds];
 }
 

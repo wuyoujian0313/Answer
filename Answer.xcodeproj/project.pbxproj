@@ -28,6 +28,9 @@
 		E14C211B1C1EFB27003925B5 /* MyFriendsResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C211A1C1EFB27003925B5 /* MyFriendsResult.m */; };
 		E15E27AB1C102C2D0035A4ED /* FileCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E15E27AA1C102C2D0035A4ED /* FileCache.m */; };
 		E16E6D321C2198A000751E1D /* QuestionTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */; };
+		E172432F1C33B77100A00F8C /* AnswerTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E172432E1C33B77100A00F8C /* AnswerTableViewCell.m */; };
+		E17243351C33BAFB00A00F8C /* HPGrowingTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E17243321C33BAFB00A00F8C /* HPGrowingTextView.m */; };
+		E17243361C33BAFB00A00F8C /* HPTextViewInternal.m in Sources */ = {isa = PBXBuildFile; fileRef = E17243341C33BAFB00A00F8C /* HPTextViewInternal.m */; };
 		E18F60DA1C32CB2700BB53AF /* QuestionInfoView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18F60D91C32CB2700BB53AF /* QuestionInfoView.m */; };
 		E19761FF1C2673220093A935 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E19761E91C2673220093A935 /* LICENSE */; };
 		E19762001C2673220093A935 /* CoreTextUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = E19761EC1C2673220093A935 /* CoreTextUtils.m */; };
@@ -81,7 +84,6 @@
 		E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E561C0F16A40042E1F3 /* LoginVC.m */; };
 		E1C21E5A1C0F16F60042E1F3 /* RegisterVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E591C0F16F60042E1F3 /* RegisterVC.m */; };
 		E1C21E5D1C0F21BF0042E1F3 /* QuestionDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E5C1C0F21BF0042E1F3 /* QuestionDetailVC.m */; };
-		E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E5F1C0F21E00042E1F3 /* AnswerVC.m */; };
 		E1C21E631C0F22BB0042E1F3 /* PublishQuestionVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E621C0F22BB0042E1F3 /* PublishQuestionVC.m */; };
 		E1C21E661C0F23090042E1F3 /* SystemMessageVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E651C0F23090042E1F3 /* SystemMessageVC.m */; };
 		E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C21E681C0F233F0042E1F3 /* MyFriendsVC.m */; };
@@ -193,6 +195,12 @@
 		E16C5CFE1C2CEB7600DC15B4 /* ProtocolDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProtocolDefine.h; sourceTree = "<group>"; };
 		E16E6D301C2198A000751E1D /* QuestionTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionTableViewCell.h; sourceTree = "<group>"; };
 		E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionTableViewCell.m; sourceTree = "<group>"; };
+		E172432D1C33B77100A00F8C /* AnswerTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerTableViewCell.h; sourceTree = "<group>"; };
+		E172432E1C33B77100A00F8C /* AnswerTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerTableViewCell.m; sourceTree = "<group>"; };
+		E17243311C33BAFB00A00F8C /* HPGrowingTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPGrowingTextView.h; sourceTree = "<group>"; };
+		E17243321C33BAFB00A00F8C /* HPGrowingTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPGrowingTextView.m; sourceTree = "<group>"; };
+		E17243331C33BAFB00A00F8C /* HPTextViewInternal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HPTextViewInternal.h; sourceTree = "<group>"; };
+		E17243341C33BAFB00A00F8C /* HPTextViewInternal.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HPTextViewInternal.m; sourceTree = "<group>"; };
 		E18F60D81C32CB2700BB53AF /* QuestionInfoView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionInfoView.h; sourceTree = "<group>"; };
 		E18F60D91C32CB2700BB53AF /* QuestionInfoView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionInfoView.m; sourceTree = "<group>"; };
 		E19761E91C2673220093A935 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
@@ -293,8 +301,6 @@
 		E1C21E591C0F16F60042E1F3 /* RegisterVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterVC.m; sourceTree = "<group>"; };
 		E1C21E5B1C0F21BF0042E1F3 /* QuestionDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionDetailVC.h; sourceTree = "<group>"; };
 		E1C21E5C1C0F21BF0042E1F3 /* QuestionDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionDetailVC.m; sourceTree = "<group>"; };
-		E1C21E5E1C0F21E00042E1F3 /* AnswerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerVC.h; sourceTree = "<group>"; };
-		E1C21E5F1C0F21E00042E1F3 /* AnswerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerVC.m; sourceTree = "<group>"; };
 		E1C21E611C0F22BB0042E1F3 /* PublishQuestionVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublishQuestionVC.h; sourceTree = "<group>"; };
 		E1C21E621C0F22BB0042E1F3 /* PublishQuestionVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublishQuestionVC.m; sourceTree = "<group>"; };
 		E1C21E641C0F23090042E1F3 /* SystemMessageVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SystemMessageVC.h; sourceTree = "<group>"; };
@@ -442,6 +448,17 @@
 				E15E27AA1C102C2D0035A4ED /* FileCache.m */,
 			);
 			path = FileCache;
+			sourceTree = "<group>";
+		};
+		E17243301C33BAFB00A00F8C /* HPGrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				E17243311C33BAFB00A00F8C /* HPGrowingTextView.h */,
+				E17243321C33BAFB00A00F8C /* HPGrowingTextView.m */,
+				E17243331C33BAFB00A00F8C /* HPTextViewInternal.h */,
+				E17243341C33BAFB00A00F8C /* HPTextViewInternal.m */,
+			);
+			path = HPGrowingTextView;
 			sourceTree = "<group>";
 		};
 		E19761E81C2673220093A935 /* OHAttributedLabel */ = {
@@ -624,10 +641,10 @@
 		E1C21E701C0F242C0042E1F3 /* 首页 */ = {
 			isa = PBXGroup;
 			children = (
-				E1C21E5E1C0F21E00042E1F3 /* AnswerVC.h */,
-				E1C21E5F1C0F21E00042E1F3 /* AnswerVC.m */,
 				E1C21E5B1C0F21BF0042E1F3 /* QuestionDetailVC.h */,
 				E1C21E5C1C0F21BF0042E1F3 /* QuestionDetailVC.m */,
+				E172432D1C33B77100A00F8C /* AnswerTableViewCell.h */,
+				E172432E1C33B77100A00F8C /* AnswerTableViewCell.m */,
 				E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */,
 				E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */,
 			);
@@ -798,6 +815,7 @@
 		E1D188F51C0EE6F60043DE9C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				E17243301C33BAFB00A00F8C /* HPGrowingTextView */,
 				E19762091C26825F0093A935 /* SVProgressHUD */,
 				E19761E81C2673220093A935 /* OHAttributedLabel */,
 				E1B78A531C2263B600A2E384 /* MJRefresh */,
@@ -1103,6 +1121,7 @@
 				E14C210F1C1EF7C7003925B5 /* CommitPictureResult.m in Sources */,
 				E19762081C2673220093A935 /* OHASMarkupParserBase.m in Sources */,
 				E1B78A651C228CC700A2E384 /* AudioPlayControl.m in Sources */,
+				E17243361C33BAFB00A00F8C /* HPTextViewInternal.m in Sources */,
 				E14C20F71C1EEE63003925B5 /* LoginoutResult.m in Sources */,
 				E1B78A511C22623900A2E384 /* XHViewState.m in Sources */,
 				E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */,
@@ -1148,6 +1167,7 @@
 				E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */,
 				E1B78A501C22623900A2E384 /* XHImageViewer.m in Sources */,
 				E1B78A3B1C22608300A2E384 /* TTTURLRequestFormatter.m in Sources */,
+				E17243351C33BAFB00A00F8C /* HPGrowingTextView.m in Sources */,
 				E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */,
 				E1C21E6F1C0F23FF0042E1F3 /* QuestionsView.m in Sources */,
 				E1B78A5F1C2263B600A2E384 /* MJRefreshBaseView.m in Sources */,
@@ -1165,6 +1185,7 @@
 				E1D189601C0EE6F60043DE9C /* SDWebImageCompat.m in Sources */,
 				E14C20FD1C1EF144003925B5 /* QuestionInfo.m in Sources */,
 				E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */,
+				E172432F1C33B77100A00F8C /* AnswerTableViewCell.m in Sources */,
 				E14410631C27DAF1000EE19A /* MainController.m in Sources */,
 				E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */,
 				E19762051C2673220093A935 /* OHTouchesGestureRecognizer.m in Sources */,
@@ -1201,7 +1222,6 @@
 				E14C21121C1EF969003925B5 /* MessagesResult.m in Sources */,
 				E1EB9A161C2C091A00200059 /* QuestionListVC.m in Sources */,
 				E14C21091C1EF78E003925B5 /* CommitVoiceResult.m in Sources */,
-				E1C21E601C0F21E00042E1F3 /* AnswerVC.m in Sources */,
 				E19762021C2673220093A935 /* NSTextCheckingResult+ExtendedURL.m in Sources */,
 				E19762041C2673220093A935 /* OHParagraphStyle.m in Sources */,
 				E1B78A371C22608300A2E384 /* TTTNameFormatter.m in Sources */,

@@ -16,6 +16,7 @@
 #import "QuestionsResult.h"
 #import "NetworkTask.h"
 #import "User.h"
+#import "QuestionDetailVC.h"
 
 @interface AnswerCircleVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate>
 @property (nonatomic, strong) QuestionsView             *questionView;
@@ -40,7 +41,7 @@
     
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           @"all",@"wtype",
-                          @"40",@"friendId",
+                          @"4",@"friendId",
                           @"1",@"latitude",
                           @"1",@"longitude",
                           [User sharedUser].user.uId,@"userId",nil];
@@ -141,7 +142,7 @@
 
 
 #pragma mark - QuestionInfoViewCellDelegate
-- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question {
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {
     
     switch (action) {
             
@@ -151,10 +152,15 @@
             break;
         case QuestionInfoViewAction_PlayVideo:
             break;
-        case QuestionInfoViewAction_ScanDetail:
-            break;
         case QuestionInfoViewAction_Answer:
+        case QuestionInfoViewAction_ScanDetail: {
+            QuestionDetailVC *vc = [[QuestionDetailVC alloc] init];
+            vc.questionInfo = question;
+            vc.userInfo = userInfo;
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
+        }
         case QuestionInfoViewAction_Sharing:
             break;
         case QuestionInfoViewAction_RedPackage:

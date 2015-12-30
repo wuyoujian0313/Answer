@@ -110,7 +110,7 @@
 
 
 #pragma mark - QuestionTableViewCellDelegate
-- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question {
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {
 }
 
 

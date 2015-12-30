@@ -9,8 +9,6 @@
 #ifndef ProtocolDefine_h
 #define ProtocolDefine_h
 
-#import "QuestionInfo.h"
-
 typedef NS_ENUM(NSInteger,QuestionInfoViewAction) {
     QuestionInfoViewAction_Attention = 103,
     QuestionInfoViewAction_PlayAudio = 200,
@@ -22,9 +20,10 @@ typedef NS_ENUM(NSInteger,QuestionInfoViewAction) {
     QuestionInfoViewAction_Location,
 };
 
-
+@class QuestionInfo;
+@class UserInfo;
 @protocol QuestionInfoViewDelegate <NSObject>
-- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question;
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo;
 @end
 
 
