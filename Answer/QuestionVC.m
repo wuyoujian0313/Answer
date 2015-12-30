@@ -37,9 +37,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    UIBarButtonItem * leftItem = [self configBarButtonWithTitle:@"取消" target:self selector:@selector(cancelSend)];
-    self.navigationItem.leftBarButtonItem = leftItem;
+    self.navigationItem.leftBarButtonItem = nil;
+    UIBarButtonItem * rightItem = [self configBarButtonWithTitle:@"取消" target:self selector:@selector(cancelSend)];
+    self.navigationItem.rightBarButtonItem = rightItem;
     [self setNavTitle:self.tabBarItem.title];
     [self layoutFuncView];
 }
@@ -191,33 +191,33 @@
     [button addTarget:target action:selector forControlEvents:UIControlEventTouchUpInside];
     [button setImage:image forState:UIControlStateNormal];
     [button setFrame:frame];
-    [button setImageEdgeInsets:UIEdgeInsetsMake(5, 5, 5, 5)];
+    [button setImageEdgeInsets:UIEdgeInsetsMake((frame.size.height - 25)/2.0, (frame.size.width - 25)/2.0, (frame.size.height - 25)/2.0, (frame.size.width - 25)/2.0)];
 
     return button;
 }
 
 - (void)layoutFuncView {
     
-    UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(20, screenHeight - 60, screenWidth - 40, 60)];
-    [panelView.layer setCornerRadius:4.0];
-    [panelView setBackgroundColor:[UIColor colorWithHex:0xdddddd]];
+    UIImageView *panelView = [[UIImageView alloc] initWithFrame:CGRectMake(10, screenHeight - 60, screenWidth - 20, 40)];
+    [panelView setImage:[UIImage imageNamed:@"tool-bg"]];
+    [panelView setUserInteractionEnabled:YES];
     [self.view addSubview:panelView];
     
-    CGFloat buttonWidth = (screenWidth - 40 - 8)/4.0;
+    CGFloat buttonWidth = (screenWidth - 20)/4.0;
     
-    UIButton *audioButton = [self createButton:[UIImage imageNamed:@"tabbar_home"] target:self selector:@selector(questionAction:) frame:CGRectMake(0, 0, buttonWidth, 60)];
+    UIButton *audioButton = [self createButton:[UIImage imageNamed:@"audio"] target:self selector:@selector(questionAction:) frame:CGRectMake(0, 0, buttonWidth, 40)];
     audioButton.tag = 100;
     [panelView addSubview:audioButton];
     
-    UIButton *phontoButton = [self createButton:[UIImage imageNamed:@"tabbar_circle"] target:self selector:@selector(questionAction:) frame:CGRectMake(buttonWidth,0, buttonWidth, 60)];
-    phontoButton.tag = 101;
-    [panelView addSubview:phontoButton];
+    UIButton *photoButton = [self createButton:[UIImage imageNamed:@"photo"] target:self selector:@selector(questionAction:) frame:CGRectMake(buttonWidth,0, buttonWidth, 40)];
+    photoButton.tag = 101;
+    [panelView addSubview:photoButton];
     
-    UIButton *cameraButton = [self createButton:[UIImage imageNamed:@"tabbar_message"] target:self selector:@selector(questionAction:) frame:CGRectMake(2*buttonWidth,0, buttonWidth, 60)];
+    UIButton *cameraButton = [self createButton:[UIImage imageNamed:@"camer"] target:self selector:@selector(questionAction:) frame:CGRectMake(2*buttonWidth,0, buttonWidth, 40)];
     cameraButton.tag = 102;
     [panelView addSubview:cameraButton];
     
-    UIButton *videoButton = [self createButton:[UIImage imageNamed:@"tabbar_question"] target:self selector:@selector(questionAction:) frame:CGRectMake(3*buttonWidth,0, buttonWidth, 60)];
+    UIButton *videoButton = [self createButton:[UIImage imageNamed:@"videotape"] target:self selector:@selector(questionAction:) frame:CGRectMake(3*buttonWidth,0, buttonWidth, 40)];
     videoButton.tag = 103;
     [panelView addSubview:videoButton];
 }

@@ -109,7 +109,7 @@
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
     
     if (default_image == nil) {
-        default_image = [UIImage imageNamed:@"defaultHeadImage"];
+        default_image = [UIImage imageNamed:@"defaultMeHead"];
         
         [_headImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
                           placeholderImage:default_image

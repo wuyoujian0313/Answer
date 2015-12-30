@@ -10,10 +10,10 @@
 
 @interface AnswerInfo : NSObject
 
-@property (nonatomic, strong) NSNumber          *uuid;
+@property (nonatomic, copy) NSString          *uuid;
 @property (nonatomic, copy) NSString            *uId;
-@property (nonatomic, strong) NSNumber          *tuwenId;
-@property (nonatomic, strong) NSNumber          *isBestAnswer;
+@property (nonatomic, copy) NSString          *tuwenId;
+@property (nonatomic, copy) NSString          *isBestAnswer;
 @property (nonatomic, copy) NSString            *content;
 @property (nonatomic, copy) NSString      *updateDate;
 

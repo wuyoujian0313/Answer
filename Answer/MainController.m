@@ -105,21 +105,21 @@
     [_homeVC setDelegate:self];
     
     AnswerCircleVC *answerVC = [[AnswerCircleVC alloc] init];
-    UITabBarItem *itemObj1 = [[UITabBarItem alloc] initWithTitle:@"首页"
+    UITabBarItem *itemObj1 = [[UITabBarItem alloc] initWithTitle:@"图问"
                                                             image:[UIImage imageNamed:@"tabbar_home"]
                                                     selectedImage:nil];
     [itemObj1 setTag:0];
     [answerVC setTabBarItem:itemObj1];
     
     DiscoverVC *discoverVC = [[DiscoverVC alloc] init];
-    UITabBarItem *itemObj2 = [[UITabBarItem alloc] initWithTitle:@"图问圈"
+    UITabBarItem *itemObj2 = [[UITabBarItem alloc] initWithTitle:@"发现"
                                                             image:[UIImage imageNamed:@"tabbar_circle"]
                                                     selectedImage:nil];
     [itemObj2 setTag:1];
     [discoverVC setTabBarItem:itemObj2];
     
     QuestionVC *questionVC = [[QuestionVC alloc] init];
-    UITabBarItem *itemObj3 = [[UITabBarItem alloc] initWithTitle:@"发问题"
+    UITabBarItem *itemObj3 = [[UITabBarItem alloc] initWithTitle:@"提问"
                                                             image:[UIImage imageNamed:@"tabbar_question"]
                                                     selectedImage:nil];
     [itemObj3 setTag:2];

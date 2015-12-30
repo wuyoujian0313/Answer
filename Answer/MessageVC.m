@@ -35,7 +35,7 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    [self setTableViewHeaderView:40];
+    [self setTableViewHeaderView:12];
     [self setTableViewFooterView:0];
 }
 
@@ -44,6 +44,9 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _meassageTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor clearColor];
     [_meassageTableView setTableHeaderView:view];
+    
+    LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, height-kLineHeight1px, _meassageTableView.frame.size.width, kLineHeight1px)];
+    [view addSubview:line];
 }
 
 -(void)setTableViewFooterView:(NSInteger)height {
@@ -91,7 +94,7 @@
         cell.selectedBackgroundView = selBGView;
         
         UIImageView * accessoryView = [[UIImageView alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 50,(50-15)/2.0, 15, 15)];
-        [accessoryView setImage:[UIImage imageFromColor:[UIColor redColor]]];
+        [accessoryView setImage:[UIImage imageNamed:@"red"]];
         accessoryView.tag = 102;
         accessoryView.clipsToBounds = YES;
         [accessoryView.layer setCornerRadius:7.5];
@@ -106,15 +109,15 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0:
-            imageView.image = [UIImage imageNamed:@"myQuestion"];
+            imageView.image = [UIImage imageNamed:@"answerMyQ"];
             titleLabel.text = @"回答我的问题";
             break;
         case 1:
-            imageView.image = [UIImage imageNamed:@"myPacket"];
+            imageView.image = [UIImage imageNamed:@"atMe"];
             titleLabel.text = @"@我的问题";
             break;
         case 2:
-            imageView.image = [UIImage imageNamed:@"myFriend"];
+            imageView.image = [UIImage imageNamed:@"sysMessage"];
             titleLabel.text = @"系统消息";
             break;
             

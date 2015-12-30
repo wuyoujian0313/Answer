@@ -97,11 +97,11 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0:
-            imageView.image = [UIImage imageNamed:@"myQuestion"];
+            imageView.image = [UIImage imageNamed:@"locQuestion"];
             titleLabel.text = @"附近问题";
             break;
         case 1:
-            imageView.image = [UIImage imageNamed:@"myPacket"];
+            imageView.image = [UIImage imageNamed:@"friendQuestion"];
             titleLabel.text = @"好友问题";
             break;
         default:

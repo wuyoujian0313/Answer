@@ -11,7 +11,7 @@
 
 @interface UserAccountResult : NetResultBase<NSCopying>
 
-@property (nonatomic, strong) NSNumber     *balance;
-@property (nonatomic, strong) NSNumber     *receivePacket;
-@property (nonatomic, strong) NSNumber     *sendPacket;
+@property (nonatomic, copy) NSString     *balance;
+@property (nonatomic, copy) NSString     *receivePacket;
+@property (nonatomic, copy) NSString     *sendPacket;
 @end

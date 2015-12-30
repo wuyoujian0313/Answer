@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
-		E14410651C282EA8000EE19A /* redPacket.png in Resources */ = {isa = PBXBuildFile; fileRef = E14410641C282EA8000EE19A /* redPacket.png */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
 		E14C20EE1C1EE8DB003925B5 /* UserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20ED1C1EE8DB003925B5 /* UserInfo.m */; };
 		E14C20F11C1EEADC003925B5 /* UserAccountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20F01C1EEADC003925B5 /* UserAccountResult.m */; };
@@ -45,10 +44,6 @@
 		E197620D1C26825F0093A935 /* SVProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E197620A1C26825F0093A935 /* SVProgressHUD.bundle */; };
 		E197620E1C26825F0093A935 /* SVProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E197620C1C26825F0093A935 /* SVProgressHUD.m */; };
 		E19762151C2692090093A935 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E19762141C2692090093A935 /* User.m */; };
-		E197621A1C2695120093A935 /* myFriend@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E19762161C2695120093A935 /* myFriend@2x.png */; };
-		E197621B1C2695120093A935 /* myPacket@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E19762171C2695120093A935 /* myPacket@2x.png */; };
-		E197621C1C2695120093A935 /* myQuestion@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E19762181C2695120093A935 /* myQuestion@2x.png */; };
-		E197621D1C2695120093A935 /* setting@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = E19762191C2695120093A935 /* setting@2x.png */; };
 		E19762201C26B2FC0093A935 /* SetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E197621F1C26B2FC0093A935 /* SetVC.m */; };
 		E19762231C26B6B30093A935 /* MenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E19762221C26B6B30093A935 /* MenuCollectionViewCell.m */; };
 		E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */; };
@@ -155,7 +150,6 @@
 /* Begin PBXFileReference section */
 		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
 		E14410621C27DAF1000EE19A /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainController.m; path = Answer/MainController.m; sourceTree = SOURCE_ROOT; };
-		E14410641C282EA8000EE19A /* redPacket.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redPacket.png; sourceTree = "<group>"; };
 		E14C20E91C1EE8A6003925B5 /* LoginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginResult.h; sourceTree = "<group>"; };
 		E14C20EA1C1EE8A6003925B5 /* LoginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginResult.m; sourceTree = "<group>"; };
 		E14C20EC1C1EE8DB003925B5 /* UserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfo.h; sourceTree = "<group>"; };
@@ -227,10 +221,6 @@
 		E197620C1C26825F0093A935 /* SVProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVProgressHUD.m; sourceTree = "<group>"; };
 		E19762131C2692090093A935 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		E19762141C2692090093A935 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
-		E19762161C2695120093A935 /* myFriend@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myFriend@2x.png"; sourceTree = "<group>"; };
-		E19762171C2695120093A935 /* myPacket@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myPacket@2x.png"; sourceTree = "<group>"; };
-		E19762181C2695120093A935 /* myQuestion@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "myQuestion@2x.png"; sourceTree = "<group>"; };
-		E19762191C2695120093A935 /* setting@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "setting@2x.png"; sourceTree = "<group>"; };
 		E197621E1C26B2FC0093A935 /* SetVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetVC.h; sourceTree = "<group>"; };
 		E197621F1C26B2FC0093A935 /* SetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetVC.m; sourceTree = "<group>"; };
 		E19762211C26B6B30093A935 /* MenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCollectionViewCell.h; sourceTree = "<group>"; };
@@ -570,18 +560,6 @@
 			name = APIModels;
 			sourceTree = "<group>";
 		};
-		E1A4E7DD1C2A8F2E0067CF3F /* demo图片 */ = {
-			isa = PBXGroup;
-			children = (
-				E19762161C2695120093A935 /* myFriend@2x.png */,
-				E19762171C2695120093A935 /* myPacket@2x.png */,
-				E19762181C2695120093A935 /* myQuestion@2x.png */,
-				E19762191C2695120093A935 /* setting@2x.png */,
-				E14410641C282EA8000EE19A /* redPacket.png */,
-			);
-			name = "demo图片";
-			sourceTree = "<group>";
-		};
 		E1B78A1C1C22608300A2E384 /* FormatterKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,7 +616,7 @@
 			path = MJRefresh;
 			sourceTree = "<group>";
 		};
-		E1C21E701C0F242C0042E1F3 /* 首页 */ = {
+		E1C21E701C0F242C0042E1F3 /* 图问 */ = {
 			isa = PBXGroup;
 			children = (
 				E1C21E5B1C0F21BF0042E1F3 /* QuestionDetailVC.h */,
@@ -648,19 +626,19 @@
 				E1C21E461C0F09ED0042E1F3 /* AnswerCircleVC.h */,
 				E1C21E471C0F09ED0042E1F3 /* AnswerCircleVC.m */,
 			);
-			name = "首页";
+			name = "图问";
 			sourceTree = "<group>";
 		};
-		E1C21E711C0F24690042E1F3 /* 图问圈 */ = {
+		E1C21E711C0F24690042E1F3 /* 发现 */ = {
 			isa = PBXGroup;
 			children = (
 				E1C21E4F1C0F0A910042E1F3 /* DiscoverVC.h */,
 				E1C21E501C0F0A910042E1F3 /* DiscoverVC.m */,
 			);
-			name = "图问圈";
+			name = "发现";
 			sourceTree = "<group>";
 		};
-		E1C21E721C0F24850042E1F3 /* 发问题 */ = {
+		E1C21E721C0F24850042E1F3 /* 提问 */ = {
 			isa = PBXGroup;
 			children = (
 				E1C21E611C0F22BB0042E1F3 /* PublishQuestionVC.h */,
@@ -670,7 +648,7 @@
 				E1C21E771C0F26B10042E1F3 /* RedPacketVC.h */,
 				E1C21E781C0F26B10042E1F3 /* RedPacketVC.m */,
 			);
-			name = "发问题";
+			name = "提问";
 			sourceTree = "<group>";
 		};
 		E1C21E731C0F24A30042E1F3 /* 消息 */ = {
@@ -767,7 +745,6 @@
 			isa = PBXGroup;
 			children = (
 				E1D188C51C0ED4880043DE9C /* Images.xcassets */,
-				E1A4E7DD1C2A8F2E0067CF3F /* demo图片 */,
 				E1D188BC1C0ED4880043DE9C /* AppDelegate.h */,
 				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
 				E14410611C27DAF1000EE19A /* MainController.h */,
@@ -803,11 +780,11 @@
 			children = (
 				E1C21E761C0F25510042E1F3 /* common */,
 				E1C21E751C0F25390042E1F3 /* 登录&注册 */,
-				E1C21E741C0F24BA0042E1F3 /* 我 */,
+				E1C21E701C0F242C0042E1F3 /* 图问 */,
+				E1C21E711C0F24690042E1F3 /* 发现 */,
+				E1C21E721C0F24850042E1F3 /* 提问 */,
 				E1C21E731C0F24A30042E1F3 /* 消息 */,
-				E1C21E721C0F24850042E1F3 /* 发问题 */,
-				E1C21E711C0F24690042E1F3 /* 图问圈 */,
-				E1C21E701C0F242C0042E1F3 /* 首页 */,
+				E1C21E741C0F24BA0042E1F3 /* 我 */,
 			);
 			name = UI;
 			sourceTree = "<group>";
@@ -1080,14 +1057,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E197621B1C2695120093A935 /* myPacket@2x.png in Resources */,
 				E1B78A5E1C2263B600A2E384 /* MJRefresh.bundle in Resources */,
-				E197621A1C2695120093A935 /* myFriend@2x.png in Resources */,
 				E197620D1C26825F0093A935 /* SVProgressHUD.bundle in Resources */,
-				E197621C1C2695120093A935 /* myQuestion@2x.png in Resources */,
-				E14410651C282EA8000EE19A /* redPacket.png in Resources */,
 				E19761FF1C2673220093A935 /* LICENSE in Resources */,
-				E197621D1C2695120093A935 /* setting@2x.png in Resources */,
 				E1D188C61C0ED4880043DE9C /* Images.xcassets in Resources */,
 				E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */,
 				E1D188EE1C0ED6630043DE9C /* InfoPlist.strings in Resources */,

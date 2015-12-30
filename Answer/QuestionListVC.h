@@ -12,8 +12,10 @@ typedef NS_ENUM(NSInteger, PageType) {
     PageType_MyQuestionList,
     PageType_FriendQuestionList,
     PageType_NearbyQuestionList,
+    PageType_AtMeQuestionList,
 };
 
 @interface QuestionListVC : BaseVC
 @property (nonatomic, assign) PageType      type;
+@property (nonatomic, copy) NSString        *userId;
 @end

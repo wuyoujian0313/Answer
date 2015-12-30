@@ -98,15 +98,15 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0:
-            imageView.image = [UIImage imageNamed:@"myQuestion"];
+            imageView.image = [UIImage imageNamed:@"about"];
             titleLabel.text = @"关于图问";
             break;
         case 1:
-            imageView.image = [UIImage imageNamed:@"myPacket"];
+            imageView.image = [UIImage imageNamed:@"shareToFriend"];
             titleLabel.text = @"推荐给好友";
             break;
         case 2:
-            imageView.image = [UIImage imageNamed:@"myFriend"];
+            imageView.image = [UIImage imageNamed:@"logout"];
             titleLabel.text = @"退出";
             break;
             

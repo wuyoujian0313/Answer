@@ -18,7 +18,7 @@
         self.uId                = [coder decodeObjectForKey:@"uId"];
         self.nickName           = [coder decodeObjectForKey:@"nickName"];
         self.phoneNumber        = [coder decodeObjectForKey:@"phoneNumber"];
-        self.attentionNum       = [coder decodeObjectForKey:@"attentionNum"];
+        self.guanzhuCount       = [coder decodeObjectForKey:@"guanzhuCount"];
         self.fansNum            = [coder decodeObjectForKey:@"fansNum"];
         self.password           = [coder decodeObjectForKey:@"password"];
         self.level              = [coder decodeObjectForKey:@"level"];
@@ -38,7 +38,7 @@
     [coder encodeObject:_uId forKey:@"uId"];
     [coder encodeObject:_nickName forKey:@"nickName"];
     [coder encodeObject:_phoneNumber forKey:@"phoneNumber"];
-    [coder encodeObject:_attentionNum forKey:@"attentionNum"];
+    [coder encodeObject:_guanzhuCount forKey:@"guanzhuCount"];
     [coder encodeObject:_fansNum forKey:@"fansNum"];
     [coder encodeObject:_password forKey:@"password"];
     [coder encodeObject:_level forKey:@"level"];
@@ -56,7 +56,7 @@
     [temp setUId:_uId];
     [temp setNickName:_nickName];
     [temp setPhoneNumber:_phoneNumber];
-    [temp setAttentionNum:_attentionNum];
+    [temp setGuanzhuCount:_guanzhuCount];
     [temp setFansNum:_fansNum];
     [temp setPassword:_password];
     [temp setLevel:_level];

@@ -45,13 +45,12 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    [self setTableViewHeaderView:105];
+    [self setTableViewHeaderView:190];
     [self setTableViewFooterView:0];
 }
 
--(void)loadHeadImageAndNickName {
-    
-    _userNicknameLabel.text = [User sharedUser].user.nickName ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
+-(void)loadHeadImage {
+
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
@@ -60,7 +59,7 @@
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
     
     if (default_image == nil) {
-        default_image = [UIImage imageNamed:@"defaultHeadImage"];
+        default_image = [UIImage imageNamed:@"defaultMeHead"];
         
         [_headImageView sd_setImageWithURL:[NSURL URLWithString:imageUrl]
                           placeholderImage:default_image
@@ -76,68 +75,92 @@
     }
 }
 
--(void)setTableViewHeaderView:(NSInteger)height {
+- (UIView *)createLabelWithFrame:(CGRect)frame text:(NSString*)text value:(NSString*)value {
+    
+    UIView *v = [[UIView alloc] initWithFrame:frame];
+    [v setBackgroundColor:[UIColor clearColor]];
+    
+    UILabel *labelText = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, frame.size.width, 20)];
+    labelText.backgroundColor = [UIColor clearColor];
+    labelText.font = [UIFont systemFontOfSize:16];
+    labelText.textAlignment = NSTextAlignmentCenter;
+    labelText.textColor = [UIColor grayColor];
+    labelText.text = text;
+    [v addSubview:labelText];
+    
+    UILabel *labelValue = [[UILabel alloc] initWithFrame:CGRectMake(0, 20 + 5, frame.size.width, 20)];
+    labelValue.backgroundColor = [UIColor clearColor];
+    labelValue.font = [UIFont systemFontOfSize:16];
+    labelValue.textAlignment = NSTextAlignmentCenter;
+    labelValue.textColor = [UIColor grayColor];
+    if (value && [value length]) {
+        labelValue.text = value;
+    }
+    
+    [v addSubview:labelValue];
+    
+    return v;
+}
+
+- (void)setTableViewHeaderView:(NSInteger)height {
     
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _meTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor clearColor];
     
-    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(10, 15, 75, 75)];
+    UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((_meTableView.frame.size.width - 75)/2.0, 15, 75, 75)];
     self.headImageView = imageView;
     imageView.clipsToBounds = YES;
-//    [imageView.layer setCornerRadius:75/2.0];
+    [imageView.layer setCornerRadius:75/2.0];
     [view addSubview:imageView];
     
     CGFloat left = 10;
-    left += 75 + 10;
-    UILabel *nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 25, _meTableView.frame.size.width, 16)];
+    CGFloat top = 15 + 75 + 10;
+    UILabel *nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, top, _meTableView.frame.size.width - 20, 20)];
     [self setUserNicknameLabel:nickNameLabel];
     nickNameLabel.backgroundColor = [UIColor clearColor];
     nickNameLabel.font = [UIFont systemFontOfSize:16];
-    nickNameLabel.textColor = [UIColor colorWithHex:0x666666];
+    nickNameLabel.textAlignment = NSTextAlignmentCenter;
+    nickNameLabel.textColor = [UIColor grayColor];
+    nickNameLabel.text = [[User sharedUser].user.nickName length] > 0 ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
     [view addSubview:nickNameLabel];
     
-    nickNameLabel.text = [User sharedUser].user.nickName ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
-    CGSize sizeText = [nickNameLabel.text sizeWithFontCompatible:nickNameLabel.font];
-    left += 10 + sizeText.width;
-    [_meTableView setTableHeaderView:view];
     
-    UILabel *levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 25, _meTableView.frame.size.width, 16)];
-    levelLabel.backgroundColor = [UIColor clearColor];
-    levelLabel.font = [UIFont systemFontOfSize:16];
-    levelLabel.textColor = [UIColor redColor];
-    levelLabel.text = [NSString stringWithFormat:@"%d级",[[User sharedUser].user.level intValue]];
-    [view addSubview:levelLabel];
+    CGFloat w = screenWidth / 4.0;
+    top += 20 + 10;
+    left = 0;
+    UIView *idView = [self createLabelWithFrame:CGRectMake(left, top, w, 45) text:@"ID" value:[User sharedUser].user.uId];
+    [view addSubview:idView];
+    
+    left += w;
+    NSString *level = @"0";
+    if ([User sharedUser].user.level && [[User sharedUser].user.level length]) {
+        level = [User sharedUser].user.level;
+    }
+    UIView *levelView = [self createLabelWithFrame:CGRectMake(left, top, w, 45) text:@"等级" value:level];
+    [view addSubview:levelView];
+    
+    left += w;
+    NSString *attentionNum = @"0";
+    if ([User sharedUser].user.guanzhuCount && [[User sharedUser].user.guanzhuCount length]) {
+        attentionNum = [User sharedUser].user.guanzhuCount;
+    }
+    UIView *attentionView = [self createLabelWithFrame:CGRectMake(left, top, w, 45) text:@"关注" value:attentionNum];
+    [view addSubview:attentionView];
+    
+    left += w;
+    NSString *fansNum = @"0";
+    if ([User sharedUser].user.fansNum && [[User sharedUser].user.fansNum length]) {
+        fansNum = [User sharedUser].user.fansNum;
+    }
+    UIView *fansView = [self createLabelWithFrame:CGRectMake(left, top, w, 45) text:@"粉丝" value:fansNum];
+    [view addSubview:fansView];
     
 
-    left = 10 + 75 + 10;
-    UILabel *idLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 60, _meTableView.frame.size.width, 16)];
-    idLabel.backgroundColor = [UIColor clearColor];
-    idLabel.font = [UIFont systemFontOfSize:16];
-    idLabel.textColor = [UIColor grayColor];
-    idLabel.text = [NSString stringWithFormat:@"ID:%@",[User sharedUser].user.uId];
-    [view addSubview:idLabel];
+    LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, height-kLineHeight1px, _meTableView.frame.size.width, kLineHeight1px)];
+    [view addSubview:line];
     
-    sizeText = [idLabel.text sizeWithFontCompatible:idLabel.font];
-    left += sizeText.width + 10;
-    
-    UILabel *attentionLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 60, _meTableView.frame.size.width, 16)];
-    attentionLabel.backgroundColor = [UIColor clearColor];
-    attentionLabel.font = [UIFont systemFontOfSize:16];
-    attentionLabel.textColor = [UIColor grayColor];
-    attentionLabel.text = [NSString stringWithFormat:@"关注:%d",[[User sharedUser].user.attentionNum intValue]];
-    [view addSubview:attentionLabel];
-    
-    sizeText = [attentionLabel.text sizeWithFontCompatible:attentionLabel.font];
-    left += sizeText.width + 10;
-    
-    UILabel *fansLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, 60, _meTableView.frame.size.width, 16)];
-    fansLabel.backgroundColor = [UIColor clearColor];
-    fansLabel.font = [UIFont systemFontOfSize:16];
-    fansLabel.textColor = [UIColor grayColor];
-    fansLabel.text = [NSString stringWithFormat:@"粉丝:%d",[[User sharedUser].user.fansNum intValue]];
-    [view addSubview:fansLabel];
-    
-    [self loadHeadImageAndNickName];
+    [_meTableView setTableHeaderView:view];
+    [self loadHeadImage];
 }
 
 -(void)setTableViewFooterView:(NSInteger)height {

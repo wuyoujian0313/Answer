@@ -149,11 +149,12 @@
         
         left += 180;
         [levelLabel setFrame:CGRectMake(left, top, (self.frame.size.width - 2*left), 20)];
-        if (_userInfo.level) {
-            [levelLabel setText:[NSString stringWithFormat:@"%d级",[_userInfo.level intValue]]];
+        if (_userInfo.level && [_userInfo.level length]) {
+            [levelLabel setText:[NSString stringWithFormat:@"%@级",_userInfo.level]];
         }
         
-        [attentionBtn setFrame:CGRectMake(self.frame.size.width - 10 - 33, (40 - 17)/2.0, 33, 17)];
+        [attentionBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
+        [attentionBtn setFrame:CGRectMake(self.frame.size.width - 43, 0, 40, 40)];
         
         //
         if (_haveUserInfo) {
@@ -239,7 +240,7 @@
             imageUrlString = [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,imageUrlString];
             
             CGFloat left = 10;
-            CGFloat top = 0;
+            CGFloat top = 5;
             [contentImage setFrame:CGRectMake(left, top, 120, 120)];
             [playBtn setFrame:CGRectMake(left, top, 120, 120)];
             [playBtn setImageEdgeInsets:UIEdgeInsetsMake(30, 30, 30, 30)];
@@ -271,7 +272,7 @@
                 [contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
                 [contentLabel setFrame:CGRectMake(left, top, self.frame.size.width - 20, 45)];
                 
-                _wtContentViewHeight = 120 + 45;
+                _wtContentViewHeight = top + 45;
             } else {
                 
                 [contentLabel setNumberOfLines:0];
@@ -280,14 +281,14 @@
                 CGSize textSize = [contentLabel.text sizeWithFontCompatible:contentLabel.font constrainedToSize:CGSizeMake(self.frame.size.width - 20, CGFLOAT_MAX) lineBreakMode:contentLabel.lineBreakMode];
                 
                 [contentLabel setFrame:CGRectMake(left, top, textSize.width, textSize.height)];
-                _wtContentViewHeight = 120 + textSize.height;
+                _wtContentViewHeight = top + textSize.height;
             }
             
         } else if (_questionInfo.mediaType && [_questionInfo.mediaType integerValue] == 0) {
             audioControl.hidden = NO;
             [audioControl.timeLabel setText:[NSString stringWithFormat:@"%d\"",[_questionInfo.duration intValue]]];
             CGFloat left = 10;
-            CGFloat top = 0;
+            CGFloat top = 5;
             [audioControl setFrame:CGRectMake(left, top, self.frame.size.width - 20, 55)];
             
             top += 55;
@@ -297,7 +298,7 @@
                 [contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
                 [contentLabel setFrame:CGRectMake(left, top, self.frame.size.width - 20, 45)];
                 
-                _wtContentViewHeight = 120 + 45;
+                _wtContentViewHeight = top + 45;
             } else {
                 
                 [contentLabel setNumberOfLines:0];
@@ -306,7 +307,7 @@
                 CGSize textSize = [contentLabel.text sizeWithFontCompatible:contentLabel.font constrainedToSize:CGSizeMake(self.frame.size.width - 20, CGFLOAT_MAX) lineBreakMode:contentLabel.lineBreakMode];
                 
                 [contentLabel setFrame:CGRectMake(left, top, textSize.width, textSize.height)];
-                _wtContentViewHeight = 120 + textSize.height;
+                _wtContentViewHeight = top + textSize.height;
             }
         }
         
@@ -465,10 +466,16 @@
         }
         
         left = self.frame.size.width - 10 - 33;
-        [sharingBtn setFrame:CGRectMake(left, top + (40 - 17)/2.0, 33, 17)];
+        //[sharingBtn setFrame:CGRectMake(left, top + (40 - 17)/2.0, 33, 17)];
+        
+        [sharingBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
+        [sharingBtn setFrame:CGRectMake(left, top, 40, 40)];
         
         left -= 20+ 33;
-        [answerBtn setFrame:CGRectMake(left, top + (40 - 17)/2.0,  33, 17)];
+        //[answerBtn setFrame:CGRectMake(left, top + (40 - 17)/2.0,  33, 17)];
+        
+        [answerBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
+        [answerBtn setFrame:CGRectMake(left, top, 40, 40)];
         
         _funcViewHeight = 60;
         
@@ -535,7 +542,12 @@
     self.questionInfo = questionInfo;
     self.userInfo = userInfo;
     
-    [self layoutIfNeeded];
+    [self layoutSpaceView:self];
+    [self layoutUserView:self];
+    [self layoutWtContentView:self];
+    [self layoutFuncView:self];
+    
+    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, [self viewHeight]);
 }
 
 - (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo {
