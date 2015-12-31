@@ -104,7 +104,6 @@
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    [User sharedUser].user.headImage = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
     NSString *imageUrl  = [User sharedUser].user.headImage;
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
     

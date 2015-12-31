@@ -31,6 +31,10 @@
     return self;
 }
 
+- (NSString *)headImage {
+    return [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,_headImage];
+}
+
 - (void)encodeWithCoder:(NSCoder *)coder {
     
     [coder encodeObject:_uuid forKey:@"uuid"];

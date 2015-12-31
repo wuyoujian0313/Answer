@@ -7,12 +7,10 @@
 //
 
 #import "BaseVC.h"
-#import "QuestionInfo.h"
-#import "UserInfo.h"
 
+@class QuestionInfo;
+@class UserInfo;
 @interface QuestionDetailVC : BaseVC
-
-@property (nonatomic, strong) QuestionInfo          *questionInfo;
-@property (nonatomic, strong) UserInfo              *userInfo;
-
+@property (nonatomic, strong) QuestionInfo              *questionInfo;
+@property (nonatomic, strong) UserInfo                  *userInfo;
 @end

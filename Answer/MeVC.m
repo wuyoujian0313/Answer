@@ -26,6 +26,10 @@
 
 @implementation MeVC
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self loadHeadImage];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -54,7 +58,6 @@
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    [User sharedUser].user.headImage = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
     NSString *imageUrl  = [User sharedUser].user.headImage;
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
     
@@ -120,7 +123,7 @@
     nickNameLabel.backgroundColor = [UIColor clearColor];
     nickNameLabel.font = [UIFont systemFontOfSize:16];
     nickNameLabel.textAlignment = NSTextAlignmentCenter;
-    nickNameLabel.textColor = [UIColor grayColor];
+    nickNameLabel.textColor = [UIColor blackColor];
     nickNameLabel.text = [[User sharedUser].user.nickName length] > 0 ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
     [view addSubview:nickNameLabel];
     

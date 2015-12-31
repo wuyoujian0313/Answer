@@ -51,8 +51,9 @@
 #define API_Register                @"register"
 #define API_Loginout                @"loginout"
 #define API_GetTuWenList            @"getTuWenList"
-
-
+#define API_Guanzhu                 @"guanZhu"
+#define API_Unguanzhu               @"unguanZhu"
+#define API_GetFriends              @"getFriends"
 
 
 

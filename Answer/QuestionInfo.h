@@ -14,8 +14,8 @@
 @property (nonatomic, copy) NSString        *uId;
 @property (nonatomic, copy) NSString        *userId;
 @property (nonatomic, copy) NSString        *mediaType;//2 图片，1 视频 ，0音频
-@property (nonatomic, copy) NSString        *mediaURL;
-@property (nonatomic, copy) NSString        *thumbnail;
+@property (nonatomic, copy, getter=mediaURL) NSString        *mediaURL;
+@property (nonatomic, copy, getter=thumbnail) NSString       *thumbnail;
 @property (nonatomic, copy) NSString        *content;
 @property (nonatomic, copy) NSString        *longitude;
 @property (nonatomic, copy) NSString        *latitude;
@@ -26,5 +26,6 @@
 @property (nonatomic, copy) NSString        *updateDate;
 @property (nonatomic, copy) NSString        *fenlei;
 @property (nonatomic, copy) NSString        *duration;
+@property (nonatomic, copy) NSString        *mark;
 
 @end

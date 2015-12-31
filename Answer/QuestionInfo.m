@@ -10,4 +10,12 @@
 
 @implementation QuestionInfo
 
+- (NSString *)mediaURL {
+    return [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,_mediaURL];
+}
+
+- (NSString *)thumbnail {
+    return [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,_thumbnail];
+}
+
 @end

@@ -13,7 +13,6 @@
 @property (nonatomic, copy) NSString        *uuid;
 @property (nonatomic, copy) NSString        *userName;
 @property (nonatomic, copy) NSString        *uId;
-@property (nonatomic, copy) NSString        *userId;
 @property (nonatomic, copy) NSString        *nickName;
 @property (nonatomic, copy) NSString        *phoneNumber;
 @property (nonatomic, copy) NSString        *guanzhuCount;
@@ -22,7 +21,7 @@
 @property (nonatomic, copy) NSString        *level;
 @property (nonatomic, copy) NSString        *qq;
 @property (nonatomic, copy) NSString        *weixin;
-@property (nonatomic, copy) NSString        *headImage;
+@property (nonatomic, copy, getter=headImage) NSString        *headImage;
 @property (nonatomic, copy) NSString        *updateDate;
 
 @end

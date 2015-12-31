@@ -117,15 +117,16 @@
             SDImageCache * imageCache = [SDImageCache sharedImageCache];
             
             //从缓存取
-            UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:_userInfo.headImage];
+            NSString *imageUrl = _userInfo.headImage;
+            UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
             
             if (cacheimage == nil) {
                 cacheimage = [UIImage imageNamed:@"defaultHeadImage"];
                 
-                [photoImage  sd_setImageWithURL:[NSURL URLWithString:_userInfo.headImage] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                [photoImage  sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                     if (image) {
                         photoImage.image = image;
-                        [[SDImageCache sharedImageCache] storeImage:image forKey:_userInfo.headImage];
+                        [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
                     }
                 }];
             } else {
@@ -237,8 +238,6 @@
             }
             
             NSString *imageUrlString = [_questionInfo.mediaType integerValue] == 2 ? _questionInfo.mediaURL : _questionInfo.thumbnail;
-            imageUrlString = [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,imageUrlString];
-            
             CGFloat left = 10;
             CGFloat top = 5;
             [contentImage setFrame:CGRectMake(left, top, 120, 120)];

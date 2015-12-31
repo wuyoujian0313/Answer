@@ -17,9 +17,14 @@
 #import "SDImageCache.h"
 #import "UIImageView+WebCache.h"
 #import "HPGrowingTextView.h"
+#import "User.h"
+#import "QuestionDetailResult.h"
+#import "QuestionInfo.h"
+#import "UserInfo.h"
+#import "NetworkTask.h"
 
 
-@interface QuestionDetailVC ()<AVAudioPlayerDelegate,QuestionInfoViewDelegate,UITableViewDataSource,UITableViewDelegate,HPGrowingTextViewDelegate>
+@interface QuestionDetailVC ()<AVAudioPlayerDelegate,QuestionInfoViewDelegate,UITableViewDataSource,UITableViewDelegate,HPGrowingTextViewDelegate,NetworkTaskDelegate>
 
 @property(nonatomic,strong)UITableView                  *detailTableView;
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
@@ -32,7 +37,8 @@
 @property(nonatomic,strong)HPGrowingTextView            *commentTextView;
 @property(nonatomic,copy)NSString                       *commentString;
 @property(nonatomic,strong)UIButton                     *sendBtn;
-@property(nonatomic,strong)NSArray                      *answerList;
+@property(nonatomic,strong)NSMutableArray               *answerList;
+
 
 @end
 
@@ -44,6 +50,16 @@
     [self setNavTitle:@"问题详情"];
     [self layoutDetailView];
     [self layoutCommentView];
+}
+
+- (void)requestQuestionDetail {
+//    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+//                          [User sharedUser].user.uId,@"userId",nil];
+//    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetFriends
+//                                             forParam:param
+//                                             delegate:self
+//                                            resultObj:[[MyFriendsResult alloc] init]
+//                                           customInfo:@"GetFriends"];
 }
 
 - (void)layoutCommentView {
@@ -159,6 +175,23 @@
     
 }
 
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"GetQuestionDetail"]) {
+    }
+}
+
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
+}
+
+
 #pragma mark - HPGrowingTextViewDelegate
 - (void)growingTextViewDidBeginEditing:(HPGrowingTextView *)growingTextView {
 }
@@ -268,7 +301,7 @@
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    NSString *imageUrl = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
+    NSString *imageUrl  = _userInfo.headImage;
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
     
     if (default_image == nil) {

@@ -15,6 +15,7 @@
 @property (nonatomic, copy) NSString              *phoneNumber;
 @property (nonatomic, copy) UserInfo              *user;
 @property (nonatomic, copy) UserAccountResult     *account;
+@property (nonatomic, strong) NSMutableArray      *friends;
 
 
 + (User*)sharedUser;
@@ -22,5 +23,7 @@
 - (void)clearUser;
 - (void)saveToUserDefault;
 - (void)loadFromUserDefault;
+
+- (void)saveFriends:(NSArray*)friends;
 
 @end

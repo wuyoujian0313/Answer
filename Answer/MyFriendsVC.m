@@ -14,6 +14,8 @@
 #import "UIImageView+WebCache.h"
 #import "FriendTableViewCell.h"
 #import "QuestionListVC.h"
+#import "MyFriendsResult.h"
+#import "User.h"
 
 @interface MyFriendsVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 @property(nonatomic,strong)UITableView          *friendTableView;
@@ -32,6 +34,17 @@
     }
     
     [self layoutFriendTableView];
+    [self requestMyFriendsList];
+}
+
+- (void)requestMyFriendsList {
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"userId",nil];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetFriends
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[MyFriendsResult alloc] init]
+                                           customInfo:@"GetFriends"];
 }
 
 - (void)layoutFriendTableView {
@@ -62,7 +75,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;// [_friendList count];
+    return [_friendList count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -101,10 +114,11 @@
         cell.accessoryView = selectBtn;
     }
     
+    UserInfo * user = [_friendList objectAtIndex:indexPath.row];
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    NSString *imageUrl = @"http://img.idol001.com/middle/2015/06/03/9e9b4afaa9228f72890749fe77dcf48b1433311330.jpg";
+    NSString *imageUrl = user.headImage;
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
     
     if (default_image == nil) {
@@ -121,8 +135,14 @@
         cell.imageView.image = default_image;
     }
     
+    if (user.nickName && [user.nickName length]) {
+        cell.textLabel.text = user.nickName;
+    } else if (user.phoneNumber && [user.phoneNumber length]) {
+        cell.textLabel.text = user.phoneNumber;
+    } else {
+        cell.textLabel.text = @"匿名";
+    }
     
-    cell.textLabel.text = @"帅到掉渣的老武";
     
     return cell;
 }
@@ -143,7 +163,12 @@
 
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
-    
+    if ([customInfo isEqualToString:@"GetFriends"] && result) {
+        MyFriendsResult *friendResult = (MyFriendsResult *)result;
+        [[User sharedUser] saveFriends:[friendResult friendList]];
+        [self setFriendList:[friendResult friendList]];
+        [_friendTableView reloadData];
+    }
 }
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {

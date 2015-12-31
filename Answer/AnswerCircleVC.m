@@ -17,6 +17,7 @@
 #import "NetworkTask.h"
 #import "User.h"
 #import "QuestionDetailVC.h"
+#import "MyFriendsResult.h"
 
 @interface AnswerCircleVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate>
 @property (nonatomic, strong) QuestionsView             *questionView;
@@ -34,17 +35,28 @@
     self.navigationItem.leftBarButtonItem = nil;
     [self setNavTitle:self.tabBarItem.title];
     [self layoutQuestionView];
-    [self requestQuestionList];
+    [self requestMyFriendsList];
+}
+
+- (void)requestMyFriendsList {
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"userId",nil];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetFriends
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[MyFriendsResult alloc] init]
+                                           customInfo:@"GetFriends"];
 }
 
 - (void)requestQuestionList {
     
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           @"all",@"wtype",
-                          @"4",@"friendId",
-                          @"1",@"latitude",
-                          @"1",@"longitude",
-                          [User sharedUser].user.uId,@"userId",nil];
+                          [User sharedUser].user.uId,@"userId",
+                          @"4",@"friendId",// 无效
+                          @"1",@"latitude",// 无效
+                          @"1",@"longitude",// 无效
+                          nil];
     
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetTuWenList
@@ -52,6 +64,29 @@
                                              delegate:self
                                             resultObj:[[QuestionsResult alloc] init]
                                            customInfo:@"GetTuWenList"];
+}
+
+
+- (void)commitGuanzhu:(NSString*)friendId isCancel:(BOOL)isCancel {
+    
+    //
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          friendId,@"friendId",
+                          [User sharedUser].user.uId,@"userId",nil];
+    
+    NSString *api = nil;
+    if (isCancel) {
+        api = API_Unguanzhu;
+    } else {
+        api = API_Guanzhu;
+    }
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:api
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[NetResultBase alloc] init]
+                                           customInfo:@"Guanzhu"];
 }
 
 
@@ -127,6 +162,14 @@
         
         QuestionsResult *qResult = (QuestionsResult*)result;
         [_questionView setQuestionsResult:qResult];
+    } else if ([customInfo isEqualToString:@"Guanzhu"] && result) {
+        [FadePromptView showPromptStatus:result.message duration:1.0 finishBlock:^{
+            //
+        }];
+    } else if ([customInfo isEqualToString:@"GetFriends"] && result) {
+        MyFriendsResult *friendResult = (MyFriendsResult *)result;
+        [[User sharedUser] saveFriends:[friendResult friendList]];
+        [self requestQuestionList];
     }
 }
 
@@ -146,8 +189,10 @@
     
     switch (action) {
             
-        case QuestionInfoViewAction_Attention:
+        case QuestionInfoViewAction_Attention:{
+            [self commitGuanzhu:question.userId isCancel:NO];
             break;
+        }
         case QuestionInfoViewAction_PlayAudio:
             break;
         case QuestionInfoViewAction_PlayVideo:
