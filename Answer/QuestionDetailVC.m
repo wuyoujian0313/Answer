@@ -39,6 +39,9 @@
 @property(nonatomic,strong)UIButton                     *sendBtn;
 @property(nonatomic,strong)NSMutableArray               *answerList;
 
+@property (nonatomic, strong) QuestionInfo              *questionInfo;
+@property (nonatomic, strong) UserInfo                  *userInfo;
+
 
 @end
 
@@ -50,16 +53,18 @@
     [self setNavTitle:@"问题详情"];
     [self layoutDetailView];
     [self layoutCommentView];
+    [self requestQuestionDetail];
 }
 
 - (void)requestQuestionDetail {
-//    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
-//                          [User sharedUser].user.uId,@"userId",nil];
-//    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetFriends
-//                                             forParam:param
-//                                             delegate:self
-//                                            resultObj:[[MyFriendsResult alloc] init]
-//                                           customInfo:@"GetFriends"];
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"userId",
+                          _tuWenId,@"uId",nil];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetTuWenDetail
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[QuestionDetailResult alloc] init]
+                                           customInfo:@"getTuWenDetail"];
 }
 
 - (void)layoutCommentView {
@@ -107,8 +112,6 @@
     [_commentTextView resignFirstResponder];
 }
 
-
-
 - (void)layoutDetailView {
     
     UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight - 44) style:UITableViewStylePlain];
@@ -118,8 +121,6 @@
     [tableView setBackgroundColor:[UIColor clearColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
-    
-    [self setTableViewHeaderView];
 }
 
 - (void)setTableViewHeaderView {
@@ -127,7 +128,6 @@
     QuestionInfoView *infoView = [[QuestionInfoView alloc] initWithFrame:CGRectMake(0, 0, _detailTableView.frame.size.width, 0)];
     infoView.delegate = self;
     self.questionInfoView = infoView;
-    
     
     [_questionInfoView setQuestionInfo:_questionInfo userInfo:_userInfo foldText:NO];
     [_questionInfoView setFrame:CGRectMake(0, 0, _detailTableView.frame.size.width, [_questionInfoView viewHeight])];
@@ -179,7 +179,14 @@
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
     
-    if ([customInfo isEqualToString:@"GetQuestionDetail"]) {
+    if ([customInfo isEqualToString:@"getTuWenDetail"]) {
+        QuestionDetailResult * detail = (QuestionDetailResult*)result;
+        self.userInfo = detail.user;
+        self.questionInfo = detail.tw;
+        self.answerList = [[NSMutableArray alloc] initWithArray:detail.twAnswers];
+        
+        [self setTableViewHeaderView];
+        [_detailTableView reloadData];
     }
 }
 

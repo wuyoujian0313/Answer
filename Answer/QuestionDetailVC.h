@@ -8,9 +8,6 @@
 
 #import "BaseVC.h"
 
-@class QuestionInfo;
-@class UserInfo;
 @interface QuestionDetailVC : BaseVC
-@property (nonatomic, strong) QuestionInfo              *questionInfo;
-@property (nonatomic, strong) UserInfo                  *userInfo;
+@property(nonatomic,copy) NSString *tuWenId;
 @end

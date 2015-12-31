@@ -54,6 +54,7 @@
 #define API_Guanzhu                 @"guanZhu"
 #define API_Unguanzhu               @"unguanZhu"
 #define API_GetFriends              @"getFriends"
+#define API_GetTuWenDetail          @"getTuWenDetail"
 
 
 

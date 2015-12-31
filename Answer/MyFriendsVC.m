@@ -38,6 +38,8 @@
 }
 
 - (void)requestMyFriendsList {
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           [User sharedUser].user.uId,@"userId",nil];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetFriends
@@ -163,6 +165,7 @@
 
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
     if ([customInfo isEqualToString:@"GetFriends"] && result) {
         MyFriendsResult *friendResult = (MyFriendsResult *)result;
         [[User sharedUser] saveFriends:[friendResult friendList]];
@@ -172,7 +175,10 @@
 }
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
-    
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -200,8 +200,7 @@
         case QuestionInfoViewAction_Answer:
         case QuestionInfoViewAction_ScanDetail: {
             QuestionDetailVC *vc = [[QuestionDetailVC alloc] init];
-            vc.questionInfo = question;
-            vc.userInfo = userInfo;
+            vc.tuWenId = question.uId;
             vc.hidesBottomBarWhenPushed = YES;
             [self.navigationController pushViewController:vc animated:YES];
             break;
