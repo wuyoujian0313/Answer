@@ -52,6 +52,20 @@
     return userShared;
 }
 
+- (BOOL)isFriend:(NSString*)userId {
+    
+    BOOL isFriend = NO;
+    
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",userId];
+    NSArray *users = [_friends filteredArrayUsingPredicate:predicate];
+    
+    if (users && [users count]) {
+        isFriend = YES;
+    }
+    
+    return isFriend;
+}
+
 - (void)saveFriends:(NSArray*)friends {
     if (friends) {
         [self.friends addObjectsFromArray:friends];

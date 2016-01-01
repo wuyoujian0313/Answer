@@ -9,17 +9,26 @@
 #import "QuestionsView.h"
 #import "QuestionTableViewCell.h"
 
-@interface QuestionsView ()<UITableViewDataSource,UITableViewDelegate,NSCacheDelegate>
+
+@interface QuestionsView ()<UITableViewDataSource,UITableViewDelegate,NSCacheDelegate,MJRefreshBaseViewDelegate>
 
 @property (nonatomic, strong) UITableView           *questionTableView;
 @property (nonatomic, strong) QuestionsResult       *questions;
 @property (nonatomic, assign) BOOL                  haveUserView;
-@property(nonatomic,strong) NSCache                 *cellCache;
+@property (nonatomic, strong) NSCache               *cellCache;
+
+@property (nonatomic, strong) MJRefreshHeaderView   *refreshHeader;
+@property (nonatomic, strong) MJRefreshFooterView   *refreshFootder;
 
 @end
 
 
 @implementation QuestionsView
+
+-(void)dealloc {
+    [_refreshHeader free];
+    [_refreshFootder free];
+}
 
 - (instancetype)initWithFrame:(CGRect)frame {
     return [self initWithFrame:frame haveUserView:YES delegate:nil];
@@ -45,16 +54,58 @@
         [tableView setBackgroundColor:[UIColor clearColor]];
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self addSubview:tableView];
+        
+        [self addRefreshHeadder];
+        [self addRefreshFootder];
     }
     
     return self;
 }
 
+-(void)addRefreshHeadder {
+    self.refreshHeader = [MJRefreshHeaderView header];
+    _refreshHeader.scrollView = _questionTableView;
+    _refreshHeader.delegate = self;
+}
+
+-(void)addRefreshFootder {
+    self.refreshFootder = [MJRefreshFooterView footer];
+    _refreshFootder.scrollView = _questionTableView;
+    _refreshFootder.delegate = self;
+}
+
+- (void)beginRefreshing {
+    [_refreshHeader beginRefreshing];
+}
+
+-(void)endRefresh {
+    if ([_refreshHeader isRefreshing]) {
+        [_refreshHeader endRefreshing];
+    }
+    
+    if ([_refreshFootder isRefreshing]) {
+        [_refreshFootder endRefreshing];
+    }
+}
+
 
 - (void)setQuestionsResult:(QuestionsResult *)result {
     self.questions = result;
-    
+    [self endRefresh];
     [_questionTableView reloadData];
+}
+
+#pragma mark - MJRefreshBaseViewDelegate
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView  {
+    if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshViewBeginRefreshing:)]) {
+        [_refreshDelegate refreshViewBeginRefreshing:refreshView];
+    }
+}
+
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView {
+    if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshViewEndRefreshing:)]) {
+        [_refreshDelegate refreshViewEndRefreshing:refreshView];
+    }
 }
 
 #pragma mark - NSCacheDelegate

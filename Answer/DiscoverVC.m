@@ -44,6 +44,9 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _discoverTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor clearColor];
     [_discoverTableView setTableHeaderView:view];
+    
+    LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, height-kLineHeight1px, _discoverTableView.frame.size.width, kLineHeight1px)];
+    [view addSubview:line];
 }
 
 -(void)setTableViewFooterView:(NSInteger)height {

@@ -16,18 +16,26 @@
 #import "SetVC.h"
 #import "MyWalletVC.h"
 #import "QuestionListVC.h"
+#import "ModifyNicknameVC.h"
+#import <MobileCoreServices/MobileCoreServices.h>
+#import <AssetsLibrary/AssetsLibrary.h>
+#import <AVFoundation/AVFoundation.h>
+#import "ChangeHeadImgResult.h"
+#import "NetworkTask.h"
+#import "ChangeHeadImgResult.h"
 
-@interface MeVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface MeVC ()<UITableViewDataSource,UITableViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,NetworkTaskDelegate>
 
 @property(nonatomic,strong)UITableView          *meTableView;
 @property(nonatomic,strong)UIImageView          *headImageView;
 @property(nonatomic,strong)UILabel              *userNicknameLabel;
+@property(nonatomic,copy)NSString               *headImageKey;
 @end
 
 @implementation MeVC
 
 - (void)viewWillAppear:(BOOL)animated {
-    [self loadHeadImage];
+    [self loadHeadImageAndNickname];
 }
 
 - (void)viewDidLoad {
@@ -53,7 +61,9 @@
     [self setTableViewFooterView:0];
 }
 
--(void)loadHeadImage {
+-(void)loadHeadImageAndNickname {
+    
+    _userNicknameLabel.text = [[User sharedUser].user.nickName length] > 0 ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
 
     //从缓存取
     //取图片缓存
@@ -113,19 +123,28 @@
     UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake((_meTableView.frame.size.width - 75)/2.0, 15, 75, 75)];
     self.headImageView = imageView;
     imageView.clipsToBounds = YES;
+    imageView.userInteractionEnabled = YES;
     [imageView.layer setCornerRadius:75/2.0];
     [view addSubview:imageView];
     
+    UITapGestureRecognizer *tapChangeHeadImage = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeHeadImage:)];
+    [imageView addGestureRecognizer:tapChangeHeadImage];
+    
     CGFloat left = 10;
     CGFloat top = 15 + 75 + 10;
+
     UILabel *nickNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(left, top, _meTableView.frame.size.width - 20, 20)];
     [self setUserNicknameLabel:nickNameLabel];
     nickNameLabel.backgroundColor = [UIColor clearColor];
+    nickNameLabel.userInteractionEnabled = YES;
     nickNameLabel.font = [UIFont systemFontOfSize:16];
     nickNameLabel.textAlignment = NSTextAlignmentCenter;
     nickNameLabel.textColor = [UIColor blackColor];
     nickNameLabel.text = [[User sharedUser].user.nickName length] > 0 ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
     [view addSubview:nickNameLabel];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(changeNickName:)];
+    [nickNameLabel addGestureRecognizer:tap];
     
     
     CGFloat w = screenWidth / 4.0;
@@ -163,7 +182,6 @@
     [view addSubview:line];
     
     [_meTableView setTableHeaderView:view];
-    [self loadHeadImage];
 }
 
 -(void)setTableViewFooterView:(NSInteger)height {
@@ -177,6 +195,152 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+-(void)takePicture {
+    UIActionSheet *sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"拍照",@"从相册选择", nil];
+    [sheet showInView:self.view];
+}
+
+- (void)changeHeadImage:(UITapGestureRecognizer*)sender {
+    [self takePicture];
+}
+
+- (void)changeNickName:(UITapGestureRecognizer*)sender {
+    NSString *nickname = [[User sharedUser].user.nickName length] > 0 ? [User sharedUser].user.nickName : [User sharedUser].user.phoneNumber;
+    
+    ModifyNicknameVC *vc = [[ModifyNicknameVC alloc] init];
+    vc.nickName = nickname;
+    vc.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    switch (buttonIndex) {
+        case 0: {
+            
+            AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+            if (authStatus == ALAuthorizationStatusRestricted || authStatus == ALAuthorizationStatusDenied ) {
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"无法使用相机" message:@"请在iPhone的“设置-隐私-相机”中允许访问相机" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles: nil];
+                [alertView show];
+                return;
+            }
+            
+            //打开照相机拍照
+            if ([UIImagePickerController isSourceTypeAvailable:
+                 UIImagePickerControllerSourceTypeCamera]) {
+                
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+                picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+                picker.allowsEditing = YES;
+                [self presentViewController:picker animated:YES completion:^{
+                }];
+            }
+            
+            break;
+            
+        }
+            
+            
+        case 1: {
+            
+            //打开本地相册
+            if ([UIImagePickerController isSourceTypeAvailable:
+                 UIImagePickerControllerSourceTypePhotoLibrary]) {
+                
+                UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+                picker.delegate = self;
+                picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+                picker.allowsEditing = YES;
+                [self presentViewController:picker animated:YES completion:^{
+                }];
+            }
+            
+            break;
+        }
+    }
+}
+
+- (void)changeHeadImage {
+    
+    SDImageCache *imageCache = [SDImageCache sharedImageCache];
+    UIImage *image = [imageCache imageFromDiskCacheForKey:_headImageKey];
+    NSData *imageData = UIImagePNGRepresentation(image);
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"userId",
+                          nil];
+    
+    [[NetworkTask sharedNetworkTask] startUploadTaskApi:API_UpdateHead
+                                               forParam:param
+                                               fileData:imageData
+                                                fileKey:@"headImage"
+                                               fileName:@"headImage.png"
+                                               mimeType:@"image/png"
+                                               delegate:self
+                                              resultObj:[[ChangeHeadImgResult alloc] init]
+                                             customInfo:@"modifyHeadImage"];
+}
+
+#pragma mark - imagepicker delegate
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
+    
+    self.headImageKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
+    __block UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
+    __block UIImagePickerController *weakPicker = picker;
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
+        UIImage *imageScale = [image resizedImageByMagick:@"200x200"];
+        
+        SDImageCache *imageCache = [SDImageCache sharedImageCache];
+        [imageCache storeImage:imageScale forKey:_headImageKey];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //
+            [weakPicker dismissViewControllerAnimated:YES completion:^{
+                [self changeHeadImage];
+            }];
+        });
+    });
+}
+
+-(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    [picker dismissViewControllerAnimated:YES completion:^{
+    }];
+}
+
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    if ([customInfo isEqualToString:@"modifyHeadImage"]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationChangeUserHeadImage object:nil];
+        
+        [FadePromptView showPromptStatus:@"修改成功" duration:1.0 finishBlock:^{
+            //
+            SDImageCache *imageCache = [SDImageCache sharedImageCache];
+            _headImageView.image = [imageCache imageFromDiskCacheForKey:_headImageKey];
+            [imageCache defaultCachePathForKey:_headImageKey];
+            
+            ChangeHeadImgResult *changeHeadRec = (ChangeHeadImgResult*)result;
+            [User sharedUser].user.headImage = changeHeadRec.headImage;
+            [[User sharedUser] saveToUserDefault];
+            
+            
+        }];
+    }
+}
+
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
+}
+
 
 
 #pragma mark - UITableViewDataSource

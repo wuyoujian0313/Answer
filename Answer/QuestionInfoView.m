@@ -13,6 +13,7 @@
 #import "AudioPlayControl.h"
 #import "LineView.h"
 #import "XHImageViewer.h"
+#import "User.h"
 
 @interface QuestionInfoView ()
 @property (nonatomic, strong) UIView                *userInfoView;
@@ -154,8 +155,15 @@
             [levelLabel setText:[NSString stringWithFormat:@"%@级",_userInfo.level]];
         }
         
-        [attentionBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
-        [attentionBtn setFrame:CGRectMake(self.frame.size.width - 43, 0, 40, 40)];
+        if (![[User sharedUser] isFriend:_userInfo.uId]) {
+            [attentionBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
+            [attentionBtn setFrame:CGRectMake(self.frame.size.width - 43, 0, 40, 40)];
+            attentionBtn.hidden = NO;
+        } else {
+            attentionBtn.hidden = YES;
+        }
+        
+        
         
         //
         if (_haveUserInfo) {
@@ -342,8 +350,10 @@
         if (typeBtn == nil) {
             typeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [typeBtn setTag:301];
+            [typeBtn setEnabled:NO];
             UIImage *image = [UIImage imageNamed:@"category"];
             [typeBtn setImage:image forState:UIControlStateNormal];
+            [typeBtn setImage:image forState:UIControlStateDisabled];
             [typeBtn.titleLabel setFont:[UIFont systemFontOfSize:10]];
             [typeBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
             [typeBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -image.size.width/2.0 + 6, 0, 0)];
@@ -380,8 +390,10 @@
         if (rewardBtn == nil) {
             rewardBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [rewardBtn setTag:305];
+            [rewardBtn setEnabled:NO];
             UIImage *image = [UIImage imageNamed:@"reward"];
             [rewardBtn setImage:image forState:UIControlStateNormal];
+            [rewardBtn setImage:image forState:UIControlStateDisabled];
             [rewardBtn.titleLabel setFont:[UIFont systemFontOfSize:10]];
             [rewardBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
             [rewardBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -image.size.width/2.0 + 6, 0, 0)];
@@ -460,7 +472,16 @@
         //
         if (_questionInfo.updateDate) {
             left = 10;
-            [timeLabel setText:_questionInfo.updateDate];
+            NSString *timeString = _questionInfo.updateDate;
+            NSDate *last = [NSDate dateWithTimeIntervalSince1970:[timeString longLongValue]/1000];
+            NSTimeInterval timeInterval = [last timeIntervalSinceNow];
+            
+            TTTTimeIntervalFormatter *formatter = [[TTTTimeIntervalFormatter alloc] init];
+            [formatter setLocale:[NSLocale currentLocale]];
+            [formatter setUsesIdiomaticDeicticExpressions:NO];
+            [formatter setUsesAbbreviatedCalendarUnits:YES];
+            
+            [timeLabel setText:[formatter stringForTimeInterval:timeInterval]];
             [timeLabel setFrame:CGRectMake(left, top, 120, 40)];
         }
         

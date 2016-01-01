@@ -22,6 +22,7 @@
 #import "QuestionInfo.h"
 #import "UserInfo.h"
 #import "NetworkTask.h"
+#import "AnswerResult.h"
 
 
 @interface QuestionDetailVC ()<AVAudioPlayerDelegate,QuestionInfoViewDelegate,UITableViewDataSource,UITableViewDelegate,HPGrowingTextViewDelegate,NetworkTaskDelegate>
@@ -38,6 +39,7 @@
 @property(nonatomic,copy)NSString                       *commentString;
 @property(nonatomic,strong)UIButton                     *sendBtn;
 @property(nonatomic,strong)NSMutableArray               *answerList;
+@property(nonatomic,strong)NSArray                      *userList;
 
 @property (nonatomic, strong) QuestionInfo              *questionInfo;
 @property (nonatomic, strong) UserInfo                  *userInfo;
@@ -60,6 +62,7 @@
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           [User sharedUser].user.uId,@"userId",
                           _tuWenId,@"uId",nil];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetTuWenDetail
                                              forParam:param
                                              delegate:self
@@ -110,6 +113,15 @@
 
 - (void)sendAnswer:(UIButton*)sender {
     [_commentTextView resignFirstResponder];
+    
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"userId",
+                          _tuWenId,@"uId",_commentString,@"content",nil];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Answer
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[AnswerResult alloc] init]
+                                           customInfo:@"Answer"];
 }
 
 - (void)layoutDetailView {
@@ -182,11 +194,21 @@
     if ([customInfo isEqualToString:@"getTuWenDetail"]) {
         QuestionDetailResult * detail = (QuestionDetailResult*)result;
         self.userInfo = detail.user;
-        self.questionInfo = detail.tw;
-        self.answerList = [[NSMutableArray alloc] initWithArray:detail.twAnswers];
+        self.questionInfo = detail.tuwen;
+        self.answerList = [[NSMutableArray alloc] initWithArray:detail.answers];
+        self.userList = detail.userList;
         
         [self setTableViewHeaderView];
         [_detailTableView reloadData];
+    } else if ([customInfo isEqualToString:@"Answer"]) {
+        //AnswerResult * anResult = (AnswerResult*)result;
+        [self requestQuestionDetail];
+        _commentTextView.text = nil;
+        _commentString = nil;
+        
+        [FadePromptView showPromptStatus:@"发表成功！" duration:1.0 finishBlock:^{
+            //
+        }];
     }
 }
 
@@ -281,7 +303,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;//[_answerList count];
+    return [_answerList count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -305,37 +327,49 @@
         [cell.contentView addSubview:line];
     }
     
-    //从缓存取
-    //取图片缓存
-    SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    NSString *imageUrl  = _userInfo.headImage;
-    UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
+    AnswerInfo *answerInfo = [_answerList objectAtIndex:indexPath.row];
+    NSString *userId = answerInfo.userId;
     
-    if (default_image == nil) {
-        default_image = [UIImage imageNamed:@"defaultHeadImage"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",userId];
+    // 理论上只有一个
+    
+    UserInfo *answer = nil;
+    NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
+    if (users && [users count]) {
+        answer = [users objectAtIndex:0];
         
-        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:default_image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        //从缓存取
+        //取图片缓存
+        SDImageCache * imageCache = [SDImageCache sharedImageCache];
+        NSString *imageUrl  = answer.headImage;
+        UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
+        
+        if (default_image == nil) {
+            default_image = [UIImage imageNamed:@"defaultHeadImage"];
             
-            if (image) {
-                cell.imageView.image = image;
-                [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
-            }
-        }];
-    } else {
-        cell.imageView.image = default_image;
+            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:default_image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                
+                if (image) {
+                    cell.imageView.image = image;
+                    [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+                }
+            }];
+        } else {
+            cell.imageView.image = default_image;
+        }
+        
+        NSString *content = answerInfo.content;
+        cell.textLabel.text = content;
+        
+        CGSize size = [content sizeWithFontCompatible:cell.textLabel.font constrainedToSize:CGSizeMake(tableView.frame.size.width - 60, CGFLOAT_MAX) lineBreakMode:cell.textLabel.lineBreakMode];
+        LineView *line = (LineView*)[cell.contentView viewWithTag:100];
+        CGFloat height = size.height + 20;
+        if (height - 50 < 0.0) {
+            height = 50;
+        }
+        
+        [line setFrame:CGRectMake(0, height - kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
     }
-    
-    NSString *str = @"测试回答内容";
-    CGSize size = [str sizeWithFontCompatible:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(tableView.frame.size.width - 60, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
-    LineView *line = (LineView*)[cell.contentView viewWithTag:100];
-    CGFloat height = size.height + 20;
-    if (height - 50 < 0.0) {
-        height = 50;
-    }
-    
-    [line setFrame:CGRectMake(0, height - kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
-    
-    cell.textLabel.text = str;
     
     return cell;
 }
@@ -359,13 +393,15 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *str = @"测试回答内容";
-    CGSize size = [str sizeWithFontCompatible:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(tableView.frame.size.width - 60, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     
+    AnswerInfo *answerInfo = [_answerList objectAtIndex:indexPath.row];
+    NSString *content = answerInfo.content;
+    CGSize size = [content sizeWithFontCompatible:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(tableView.frame.size.width - 60, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
     CGFloat height = size.height + 20;
     if (height - 50 < 0.0) {
         height = 50;
     }
+
     return height;
 }
 

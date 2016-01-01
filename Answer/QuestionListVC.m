@@ -19,7 +19,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import <CoreLocation/CLLocationManagerDelegate.h>
 
-@interface QuestionListVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate,CLLocationManagerDelegate>
+@interface QuestionListVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate,CLLocationManagerDelegate,MJRefreshBaseViewDelegate>
 @property (nonatomic, strong) QuestionsView                 *questionView;
 @property (nonatomic, strong) AVAudioPlayer                 *audioPlayer;
 @property (nonatomic, strong) NSURL                         *recordedFile;
@@ -34,26 +34,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self layoutQuestionView];
+    
     // Do any additional setup after loading the view.
     if (_type == PageType_FriendQuestionList) {
         [self setNavTitle:@"好友问题"];
-        [self requestQuestionList];
+        [_questionView beginRefreshing];
     } else if ( _type == PageType_MyQuestionList) {
         [self setNavTitle:@"我的问题"];
-        [self requestQuestionList];
+        [_questionView beginRefreshing];
     } else if (_type == PageType_NearbyQuestionList) {
         [self setNavTitle:@"附近问题"];
         //
         [self beginGPS];
     } else if (_type == PageType_AtMeQuestionList) {
         [self setNavTitle:@"@我的问题"];
-        [self requestQuestionList];
+        [_questionView beginRefreshing];
     } else  {
         [self setNavTitle:@"问题列表"];
-        [self requestQuestionList];
+        [_questionView beginRefreshing];
     }
-    
-    [self layoutQuestionView];
 }
 
 
@@ -89,7 +90,7 @@
     self.latitude = [NSNumber numberWithDouble:userLatitude];
     self.longitude = [NSNumber numberWithDouble:userLatitude];
     
-    [self requestQuestionList];
+    [_questionView beginRefreshing];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -147,8 +148,6 @@
     }
     
     [param setValue:wtype forKey:@"wtype"];
-    
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetTuWenList
                                              forParam:param
                                              delegate:self
@@ -204,6 +203,7 @@
     }
 
     self.questionView = [[QuestionsView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, screenWidth, screenHeight - navigationBarHeight) haveUserView:haveUserView delegate:self];
+    _questionView.refreshDelegate = self;
     
     [self.view addSubview:_questionView];
 }
@@ -224,6 +224,15 @@
     [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
         //
     }];
+}
+
+#pragma mark - MJRefreshBaseViewDelegate
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView  {
+    [self requestQuestionList];
+}
+
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView {
+    
 }
 
 #pragma mark - AVAudioPlayerDelegate

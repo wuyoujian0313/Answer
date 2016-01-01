@@ -14,7 +14,8 @@
 
 @interface QuestionDetailResult : NetResultBase
 @property (nonatomic, strong) UserInfo                              *user;
-@property (nonatomic, strong) QuestionInfo                          *tw;
-@property (nonatomic, strong,getter=twAnswers) NSArray              *BaiduParserArray(twAnswers,AnswerInfo);
+@property (nonatomic, strong) QuestionInfo                          *tuwen;
+@property (nonatomic, strong,getter=answers) NSArray              *BaiduParserArray(answers,AnswerInfo);
+@property (nonatomic, strong,getter=userList) NSArray              *BaiduParserArray(userList,UserInfo);
 
 @end

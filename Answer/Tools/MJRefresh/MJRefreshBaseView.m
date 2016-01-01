@@ -300,14 +300,14 @@
 #pragma mark 开始刷新
 - (void)beginRefreshing
 {
-//    if (self.window) {
-//        [self setState:MJRefreshStateRefreshing];
-//    } else {
-//        _state = MJRefreshStateWillRefreshing;
-//        [self setNeedsLayout];
-//    }
+    if (self.window) {
+        [self setState:MJRefreshStateRefreshing];
+    } else {
+        _state = MJRefreshStateWillRefreshing;
+        [self setNeedsLayout];
+    }
     
-    [self setState:MJRefreshStateRefreshing];
+   // [self setState:MJRefreshStateRefreshing];
 }
 #pragma mark 结束刷新
 - (void)endRefreshing

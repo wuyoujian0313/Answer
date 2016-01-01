@@ -38,6 +38,9 @@ typedef NS_ENUM(NSInteger, NetStatusCode) {
 - (void)startUploadTaskApi:(NSString*)api
                   forParam:(NSDictionary *)param
                   fileData:(NSData*)fileData
+                   fileKey:(NSString*)fileKey
+                  fileName:(NSString*)fileName
+                  mimeType:(NSString*)mimeType
                   delegate:(id <NetworkTaskDelegate>)delegate
                  resultObj:(NetResultBase*)resultObj
                 customInfo:(id)customInfo;
@@ -45,6 +48,9 @@ typedef NS_ENUM(NSInteger, NetStatusCode) {
 - (void)startUploadTaskApi:(NSString*)api
                   forParam:(NSDictionary *)param
                   filePath:(NSString*)filePath
+                   fileKey:(NSString*)fileKey
+                  fileName:(NSString*)fileName
+                  mimeType:(NSString*)mimeType
                   delegate:(id <NetworkTaskDelegate>)delegate
                  resultObj:(NetResultBase*)resultObj
                 customInfo:(id)customInfo;

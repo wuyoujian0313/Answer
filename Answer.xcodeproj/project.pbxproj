@@ -127,6 +127,7 @@
 		E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189441C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m */; };
 		E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189461C0EE6F60043DE9C /* UIImageView+WebCache.m */; };
 		E1D1896C1C0EE6F60043DE9C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189481C0EE6F60043DE9C /* UIView+WebCacheOperation.m */; };
+		E1E304671C36739D00B5D537 /* ModifyNicknameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E304661C36739D00B5D537 /* ModifyNicknameVC.m */; };
 		E1EB9A161C2C091A00200059 /* QuestionListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EB9A151C2C091A00200059 /* QuestionListVC.m */; };
 /* End PBXBuildFile section */
 
@@ -392,6 +393,9 @@
 		E1D189471C0EE6F60043DE9C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		E1D189481C0EE6F60043DE9C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer-Prefix.pch"; sourceTree = "<group>"; };
+		E1E304651C36739D00B5D537 /* ModifyNicknameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyNicknameVC.h; sourceTree = "<group>"; };
+		E1E304661C36739D00B5D537 /* ModifyNicknameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyNicknameVC.m; sourceTree = "<group>"; };
+		E1E304681C369BDF00B5D537 /* NotificationDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationDefine.h; sourceTree = "<group>"; };
 		E1EB9A141C2C091A00200059 /* QuestionListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionListVC.h; sourceTree = "<group>"; };
 		E1EB9A151C2C091A00200059 /* QuestionListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionListVC.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -677,6 +681,8 @@
 				E19762221C26B6B30093A935 /* MenuCollectionViewCell.m */,
 				E197621E1C26B2FC0093A935 /* SetVC.h */,
 				E197621F1C26B2FC0093A935 /* SetVC.m */,
+				E1E304651C36739D00B5D537 /* ModifyNicknameVC.h */,
+				E1E304661C36739D00B5D537 /* ModifyNicknameVC.m */,
 			);
 			name = "我";
 			sourceTree = "<group>";
@@ -706,6 +712,7 @@
 				E1EB9A141C2C091A00200059 /* QuestionListVC.h */,
 				E1EB9A151C2C091A00200059 /* QuestionListVC.m */,
 				E16C5CFE1C2CEB7600DC15B4 /* ProtocolDefine.h */,
+				E1E304681C369BDF00B5D537 /* NotificationDefine.h */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -1173,6 +1180,7 @@
 				E1C21E481C0F09ED0042E1F3 /* AnswerCircleVC.m in Sources */,
 				E19762231C26B6B30093A935 /* MenuCollectionViewCell.m in Sources */,
 				E1B78A381C22608300A2E384 /* TTTOrdinalNumberFormatter.m in Sources */,
+				E1E304671C36739D00B5D537 /* ModifyNicknameVC.m in Sources */,
 				E1AE75301C290CAE0035AAEE /* FriendTableViewCell.m in Sources */,
 				E19762001C2673220093A935 /* CoreTextUtils.m in Sources */,
 				E1B78A391C22608300A2E384 /* TTTTimeIntervalFormatter.m in Sources */,

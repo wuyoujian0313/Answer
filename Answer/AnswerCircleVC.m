@@ -19,15 +19,21 @@
 #import "QuestionDetailVC.h"
 #import "MyFriendsResult.h"
 
-@interface AnswerCircleVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate>
-@property (nonatomic, strong) QuestionsView             *questionView;
+
+@interface AnswerCircleVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate,MJRefreshBaseViewDelegate>
+@property(nonatomic,strong)QuestionsView                *questionView;
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
 @property(nonatomic,strong)NSURL                        *recordedFile;
 @property(nonatomic,copy)NSString                       *videoPathString;
 @property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
+@property(nonatomic,assign)BOOL                         isFristRefreshing;
 @end
 
 @implementation AnswerCircleVC
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -35,10 +41,17 @@
     self.navigationItem.leftBarButtonItem = nil;
     [self setNavTitle:self.tabBarItem.title];
     [self layoutQuestionView];
-    [self requestMyFriendsList];
+    _isFristRefreshing = YES;
+    [_questionView beginRefreshing];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(requestQuestionList)
+                                                 name:NotificationChangeUserHeadImage
+                                               object:nil];
 }
 
 - (void)requestMyFriendsList {
+    
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           [User sharedUser].user.uId,@"userId",nil];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetFriends
@@ -57,8 +70,6 @@
                           @"1",@"latitude",// 无效
                           @"1",@"longitude",// 无效
                           nil];
-    
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetTuWenList
                                              forParam:param
                                              delegate:self
@@ -135,6 +146,7 @@
 
 - (void)layoutQuestionView {
     self.questionView = [[QuestionsView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, screenWidth, screenHeight - navigationBarHeight - 49) delegate:self];
+    _questionView.refreshDelegate = self;
     
     [self.view addSubview:_questionView];
 }
@@ -159,7 +171,6 @@
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
     if ([customInfo isEqualToString:@"GetTuWenList"] && result) {
-        
         QuestionsResult *qResult = (QuestionsResult*)result;
         [_questionView setQuestionsResult:qResult];
     } else if ([customInfo isEqualToString:@"Guanzhu"] && result) {
@@ -182,6 +193,19 @@
 }
 
 
+#pragma mark - MJRefreshBaseViewDelegate
+- (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView  {
+    if (_isFristRefreshing) {
+        [self requestMyFriendsList];
+        _isFristRefreshing = NO;
+    } else {
+        [self requestQuestionList];
+    }
+}
+
+- (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView {
+    
+}
 
 
 #pragma mark - QuestionInfoViewCellDelegate

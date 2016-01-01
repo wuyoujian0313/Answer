@@ -9,11 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "QuestionsResult.h"
 #import "ProtocolDefine.h"
+#import "MJRefresh.h"
 
 
 @interface QuestionsView : UIView
 
 @property (nonatomic, weak) id<QuestionInfoViewDelegate> delegate;
+@property (nonatomic, weak) id<MJRefreshBaseViewDelegate> refreshDelegate;
 
 // 默认创建用户信息
 - (instancetype)initWithFrame:(CGRect)frame;
@@ -22,6 +24,7 @@
 // 是否需要布局用户信息
 - (instancetype)initWithFrame:(CGRect)frame haveUserView:(BOOL)isHave delegate:(id<QuestionInfoViewDelegate>)delegate;
 
+- (void)beginRefreshing;
 - (void)setQuestionsResult:(QuestionsResult *)result;
 
 @end

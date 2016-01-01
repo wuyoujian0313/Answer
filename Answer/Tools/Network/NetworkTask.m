@@ -214,24 +214,31 @@
     }
 }
 
-
+// @"video/quicktime"
+//
 #pragma mark - 公开API
 - (void)startUploadTaskApi:(NSString*)api
                   forParam:(NSDictionary *)param
                   fileData:(NSData*)fileData
+                   fileKey:(NSString*)fileKey
+                  fileName:(NSString*)fileName
+                  mimeType:(NSString*)mimeType
                   delegate:(id <NetworkTaskDelegate>)delegate
                  resultObj:(NetResultBase*)resultObj
                 customInfo:(id)customInfo {
     
     
+    
     [_afManager.requestSerializer setTimeoutInterval:_taskTimeout];
     [_afManager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-    
-    __weak NetworkTask *weakSelf = self;
     NSString * urlString = [NSString stringWithFormat:@"%@/%@",kNetworkAPIServer,api];
+
+    __weak NetworkTask *weakSelf = self;
+
     [_afManager POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
-        [formData appendPartWithFormData:fileData name:@"content"];
+        [formData appendPartWithFileData:fileData name:fileKey fileName:fileName mimeType:mimeType];
+        
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"response:%@",operation.responseString);
@@ -248,6 +255,9 @@
 - (void)startUploadTaskApi:(NSString*)api
                   forParam:(NSDictionary *)param
                   filePath:(NSString*)filePath
+                   fileKey:(NSString*)fileKey
+                  fileName:(NSString*)fileName
+                  mimeType:(NSString*)mimeType
                   delegate:(id <NetworkTaskDelegate>)delegate
                  resultObj:(NetResultBase*)resultObj
                 customInfo:(id)customInfo {
@@ -261,7 +271,7 @@
     [_afManager POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-        [formData appendPartWithFileURL:fileURL name:@"content" error:nil];
+        [formData appendPartWithFileURL:fileURL name:fileKey fileName:fileName mimeType:mimeType error:nil];
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSLog(@"response:%@",operation.responseString);

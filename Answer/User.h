@@ -12,10 +12,10 @@
 
 @interface User : NSObject
 
-@property (nonatomic, copy) NSString              *phoneNumber;
-@property (nonatomic, copy) UserInfo              *user;
-@property (nonatomic, copy) UserAccountResult     *account;
-@property (nonatomic, strong) NSMutableArray      *friends;
+@property (nonatomic, copy) NSString                        *phoneNumber;
+@property (nonatomic, copy) UserInfo                        *user;
+@property (nonatomic, copy) UserAccountResult               *account;
+@property (nonatomic, strong) NSMutableArray<UserInfo*>     *friends;
 
 
 + (User*)sharedUser;
@@ -25,5 +25,6 @@
 - (void)loadFromUserDefault;
 
 - (void)saveFriends:(NSArray*)friends;
+- (BOOL)isFriend:(NSString*)userId;
 
 @end

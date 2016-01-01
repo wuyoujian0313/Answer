@@ -10,4 +10,6 @@
 
 @interface ChangeHeadImgResult : NetResultBase
 
+@property(nonatomic, copy) NSString        *headImage;
+
 @end

@@ -23,6 +23,7 @@
 #import "WYJNavigationController.h"
 #import "FadePromptView.h"
 #import "SVProgressHUD.h"
+#import "NotificationDefine.h"
 #endif
 
 #define screenStartY self.navigationController.navigationBarHidden ? 20:0
@@ -55,6 +56,8 @@
 #define API_Unguanzhu               @"unguanZhu"
 #define API_GetFriends              @"getFriends"
 #define API_GetTuWenDetail          @"getTuWenDetail"
-
+#define API_Answer                  @"answer"
+#define API_UpdateNickname          @"updateNickname"
+#define API_UpdateHead              @"updateHead"
 
 

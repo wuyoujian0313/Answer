@@ -58,7 +58,7 @@
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
-    //[self setTableViewHeaderView:0];
+    [self setTableViewHeaderView:12];
     [self setTableViewFooterView:0];
 }
 
@@ -67,6 +67,9 @@
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _friendTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor clearColor];
     [_friendTableView setTableHeaderView:view];
+    
+    LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, height-kLineHeight1px, _friendTableView.frame.size.width, kLineHeight1px)];
+    [view addSubview:line];
 }
 
 -(void)setTableViewFooterView:(NSInteger)height {
