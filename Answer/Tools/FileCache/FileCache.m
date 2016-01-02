@@ -69,6 +69,10 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
         _diskCachePath = [self createDiskCachePathWithNamespace:DISK_CACHE_NAMESPACE];
         dispatch_sync(_rwQueue, ^{
             _fileManager = [[NSFileManager alloc]init];
+            
+            if (![_fileManager fileExistsAtPath:_diskCachePath]) {
+                [_fileManager createDirectoryAtPath:_diskCachePath withIntermediateDirectories:YES attributes:nil error:NULL];
+            }
         });
         
 #if TARGET_OS_IPHONE
@@ -153,6 +157,19 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
         return data;
     }
     return nil;
+}
+
+- (void)removeFileForKey:(NSString *)key {
+    
+    if (key == nil) {
+        return;
+    }
+    
+    [self.memoryCache removeObjectForKey:key];
+    
+    dispatch_async(self.rwQueue, ^{
+        [_fileManager removeItemAtPath:[self diskCachePathForKey:key] error:nil];
+    });
 }
 
 #pragma mark - notification func

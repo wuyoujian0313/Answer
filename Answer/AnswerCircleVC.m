@@ -23,8 +23,8 @@
 @interface AnswerCircleVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate,MJRefreshBaseViewDelegate>
 @property(nonatomic,strong)QuestionsView                *questionView;
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
-@property(nonatomic,strong)NSURL                        *recordedFile;
-@property(nonatomic,copy)NSString                       *videoPathString;
+@property(nonatomic,strong)NSURL                        *audioURL;
+@property(nonatomic,strong)NSURL                        *videoURL;
 @property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
 @property(nonatomic,assign)BOOL                         isFristRefreshing;
 @end
@@ -66,7 +66,7 @@
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           @"all",@"wtype",
                           [User sharedUser].user.uId,@"userId",
-                          @"4",@"friendId",// 无效
+                          @"1",@"friendId",// 无效
                           @"1",@"latitude",// 无效
                           @"1",@"longitude",// 无效
                           nil];
@@ -103,11 +103,10 @@
 
 
 
--(void)playVideo:(UIButton*)sender {
+-(void)playVideo {
     
-    NSString  *src = _videoPathString;
-    if (src != nil && [src length] > 0) {
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:src]];
+    if (_videoURL != nil) {
+        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:_videoURL];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer.moviePlayer];
         [_moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
@@ -128,11 +127,11 @@
 
 -(void)playReordFile {
     
-    //#if TARGET_IPHONE_SIMULATOR
-    //#elif TARGET_OS_IPHONE
+#if TARGET_IPHONE_SIMULATOR
+#elif TARGET_OS_IPHONE
     // 播放
     NSError *playerError;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:_recordedFile error:&playerError];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfURL:_audioURL] error:&playerError];
     if (_audioPlayer) {
         _audioPlayer.delegate = self;
         [_audioPlayer prepareToPlay];
@@ -140,7 +139,7 @@
     } else {
         NSLog(@"ERror creating player: %@", [playerError description]);
     }
-    //#endif
+#endif
     
 }
 
@@ -218,8 +217,14 @@
             break;
         }
         case QuestionInfoViewAction_PlayAudio:
+            self.audioURL = [NSURL URLWithString:question.mediaURL];
+            [self playReordFile];
+            
             break;
         case QuestionInfoViewAction_PlayVideo:
+            self.videoURL = [NSURL URLWithString:question.mediaURL];
+            [self playVideo];
+            
             break;
         case QuestionInfoViewAction_Answer:
         case QuestionInfoViewAction_ScanDetail: {

@@ -52,6 +52,7 @@
 		E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */; };
 		E1AE75301C290CAE0035AAEE /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */; };
 		E1AE759F1C2977570035AAEE /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */; };
+		E1B297981C37DD0700872FF0 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B297971C37DD0700872FF0 /* SZTextView.m */; };
 		E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = E1B78A1D1C22608300A2E384 /* FormatterKit.strings */; };
 		E1B78A331C22608300A2E384 /* TTTAddressFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */; };
 		E1B78A341C22608300A2E384 /* TTTArrayFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B78A221C22608300A2E384 /* TTTArrayFormatter.m */; };
@@ -238,6 +239,8 @@
 		E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		E1AE759D1C2977570035AAEE /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
 		E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ResizeMagick.m"; sourceTree = "<group>"; };
+		E1B297961C37DD0700872FF0 /* SZTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SZTextView.h; sourceTree = "<group>"; };
+		E1B297971C37DD0700872FF0 /* SZTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SZTextView.m; sourceTree = "<group>"; };
 		E1B78A1E1C22608300A2E384 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/FormatterKit.strings; sourceTree = "<group>"; };
 		E1B78A1F1C22608300A2E384 /* TTTAddressFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TTTAddressFormatter.h; sourceTree = "<group>"; };
 		E1B78A201C22608300A2E384 /* TTTAddressFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TTTAddressFormatter.m; sourceTree = "<group>"; };
@@ -564,6 +567,15 @@
 			name = APIModels;
 			sourceTree = "<group>";
 		};
+		E1B297951C37DD0700872FF0 /* SZTextView */ = {
+			isa = PBXGroup;
+			children = (
+				E1B297961C37DD0700872FF0 /* SZTextView.h */,
+				E1B297971C37DD0700872FF0 /* SZTextView.m */,
+			);
+			path = SZTextView;
+			sourceTree = "<group>";
+		};
 		E1B78A1C1C22608300A2E384 /* FormatterKit */ = {
 			isa = PBXGroup;
 			children = (
@@ -799,6 +811,7 @@
 		E1D188F51C0EE6F60043DE9C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				E1B297951C37DD0700872FF0 /* SZTextView */,
 				E17243301C33BAFB00A00F8C /* HPGrowingTextView */,
 				E19762091C26825F0093A935 /* SVProgressHUD */,
 				E19761E81C2673220093A935 /* OHAttributedLabel */,
@@ -1095,6 +1108,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1B78A611C2263B600A2E384 /* MJRefreshFooterView.m in Sources */,
+				E1B297981C37DD0700872FF0 /* SZTextView.m in Sources */,
 				E1D189671C0EE6F60043DE9C /* UIImage+GIF.m in Sources */,
 				E1D189541C0EE6F60043DE9C /* NSString+Utility.m in Sources */,
 				E14C210F1C1EF7C7003925B5 /* CommitPictureResult.m in Sources */,

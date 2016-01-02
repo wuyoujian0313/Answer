@@ -10,6 +10,9 @@
 #import "NetResultBase.h"
 #import "AFNetworking.h"
 
+@implementation UploadFileInfo
+@end
+
 
 
 @interface AFHTTPRequestOperationManager (PUTForm)
@@ -214,9 +217,41 @@
     }
 }
 
-// @"video/quicktime"
-//
 #pragma mark - 公开API
+- (void)startUploadTaskApi:(NSString*)api
+                  forParam:(NSDictionary *)param
+                     files:(NSArray<UploadFileInfo*>*)files
+                  delegate:(id <NetworkTaskDelegate>)delegate
+                 resultObj:(NetResultBase*)resultObj
+                customInfo:(id)customInfo {
+    
+    
+    
+    [_afManager.requestSerializer setTimeoutInterval:_taskTimeout];
+    [_afManager.requestSerializer setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    NSString * urlString = [NSString stringWithFormat:@"%@/%@",kNetworkAPIServer,api];
+    
+    __weak NetworkTask *weakSelf = self;
+    
+    [_afManager POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        
+        for (UploadFileInfo *info in files) {
+            [formData appendPartWithFileData:info.fileData name:info.key fileName:info.fileName mimeType:info.mimeType];
+        }
+
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSLog(@"response:%@",operation.responseString);
+        [weakSelf analyzeData:responseObject delegate:delegate resultObj:resultObj customInfo:customInfo];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        NSLog(@"response:%@",operation.responseString);
+        
+        [weakSelf handleError:operation error:error delegate:delegate receiveResultObj:resultObj customInfo:customInfo];
+    }];
+}
+
+
 - (void)startUploadTaskApi:(NSString*)api
                   forParam:(NSDictionary *)param
                   fileData:(NSData*)fileData

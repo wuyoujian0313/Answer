@@ -14,6 +14,13 @@ typedef NS_ENUM(NSInteger, NetStatusCode) {
     NetStatusCodeUnknown,
 };
 
+@interface UploadFileInfo : NSObject
+@property(nonatomic,copy) NSString      *fileName;
+@property(nonatomic,strong) NSString    *mimeType;
+@property(nonatomic,strong) NSData      *fileData;
+@property(nonatomic,strong) NSString    *key;
+@end
+
 
 @class NetResultBase;
 @protocol NetworkTaskDelegate <NSObject>
@@ -51,6 +58,13 @@ typedef NS_ENUM(NSInteger, NetStatusCode) {
                    fileKey:(NSString*)fileKey
                   fileName:(NSString*)fileName
                   mimeType:(NSString*)mimeType
+                  delegate:(id <NetworkTaskDelegate>)delegate
+                 resultObj:(NetResultBase*)resultObj
+                customInfo:(id)customInfo;
+
+- (void)startUploadTaskApi:(NSString*)api
+                  forParam:(NSDictionary *)param
+                     files:(NSArray<UploadFileInfo*>*)files
                   delegate:(id <NetworkTaskDelegate>)delegate
                  resultObj:(NetResultBase*)resultObj
                 customInfo:(id)customInfo;

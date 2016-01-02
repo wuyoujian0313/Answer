@@ -43,8 +43,15 @@
 - (NSData *)dataFromCacheForKey:(NSString *)key;
 
 /**
+ * 文件路径
+ */
+- (NSString *)diskCachePathForKey:(NSString *)key;
+
+/**
  * 清除内存缓存数据
  */
 - (void)cleanCacheMemory;
+
+- (void)removeFileForKey:(NSString *)key;
 
 @end
