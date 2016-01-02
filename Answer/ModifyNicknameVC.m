@@ -103,7 +103,7 @@
         self.navigationItem.rightBarButtonItem = nil;
     }
     
-    _remainNumLabel.text = [NSString stringWithFormat:@"可输%lu个字",MaxNickLength - [textField.text length]];
+    _remainNumLabel.text = [NSString stringWithFormat:@"可输%lu个字",(long)(MaxNickLength - [textField.text length])];
 }
 
 #pragma mark - UITextFieldDelegate

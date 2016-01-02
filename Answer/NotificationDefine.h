@@ -10,6 +10,7 @@
 #define NotificationDefine_h
 
 #define NotificationChangeUserHeadImage     @"NotificationChangeUserHeadImage"
+#define NotificationsStopPlayAudio          @"NotificationsStopPlayAudio"
 
 
 #endif /* NotificationDefine_h */

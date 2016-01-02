@@ -29,7 +29,6 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
 
 @interface QuestionVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>
 
-@property(nonatomic,strong)UIImagePickerController      *picker;
 @property(nonatomic,copy)NSString                       *videoScanImageKey;
 @property(nonatomic,copy)NSString                       *photoKey;
 @property(nonatomic,copy)NSString                       *mp4KeyString;
@@ -43,7 +42,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
 @property(nonatomic,strong)UIButton                     *cancelBtn;
 @property(nonatomic,strong)UIButton                     *okBtn;
 @property(nonatomic,assign)RecordStatus                 status;
-@property(nonatomic,assign)NSInteger                        audioDurationSeconds;
+@property(nonatomic,assign)NSInteger                    audioDurationSeconds;
 @end
 
 @implementation QuestionVC
@@ -298,18 +297,18 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     } else if (tag == 101) {
         // 选择照片
         
-        self.picker = [[UIImagePickerController alloc] init];
-        _picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        _picker.allowsEditing = YES;
-        _picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-        _picker.delegate = self;
-        _picker.navigationBar.barTintColor = [UIColor whiteColor];
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        picker.allowsEditing = YES;
+        picker.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
+        picker.delegate = self;
+        picker.navigationBar.barTintColor = [UIColor whiteColor];
         
         NSDictionary *dict = [NSDictionary dictionaryWithObjectsAndKeys:
                               [UIColor blackColor],NSForegroundColorAttributeName,
                               [UIFont systemFontOfSize:18],NSFontAttributeName,nil];
-        _picker.navigationBar.titleTextAttributes = dict;
-        [self presentViewController:_picker animated:YES completion:^{
+        picker.navigationBar.titleTextAttributes = dict;
+        [self presentViewController:picker animated:YES completion:^{
         }];
         
     } else if (tag == 102 || tag == 103) {
@@ -347,9 +346,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
                                   [UIColor blackColor],NSForegroundColorAttributeName,
                                   [UIFont systemFontOfSize:18],NSFontAttributeName,nil];
             picker.navigationBar.titleTextAttributes = dict;
-            picker.navigationBar.barTintColor = [UIColor whiteColor];;
-            
-            self.picker = picker;
+            picker.navigationBar.barTintColor = [UIColor whiteColor];
             [self presentViewController:picker animated:YES completion:^{
             }];
         }

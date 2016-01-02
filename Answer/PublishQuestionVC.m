@@ -46,6 +46,9 @@
 
 - (void)dealloc {
     [_tapGesture.view removeGestureRecognizer:_tapGesture];
+    
+    [_audioPlayer stop];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
 }
 
 - (void)viewDidLoad {
@@ -75,7 +78,7 @@
         
         [_locmanager startUpdatingLocation];
     } else {
-        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"注意" message:@"您的定位服务并未打开，请到设置面板中打开百度移动办公定位服务功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"注意" message:@"您的定位服务并未打开，请到设置面板中打开图问圈的定位服务功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         [alert show];
     }
 }
@@ -86,12 +89,15 @@
     [self setPublishTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
-    [tableView setBackgroundColor:[UIColor clearColor]];
+    [tableView setBackgroundColor:[UIColor whiteColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
 }
 
--(void)playReordFile {
+-(void)playReordFile:(AudioPlayControl*)sender {
+    [_audioPlayer stop];
+    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
+    [sender startPlayAnimation];
     
 #if TARGET_IPHONE_SIMULATOR
 #elif TARGET_OS_IPHONE
@@ -105,6 +111,7 @@
         _audioPlayer.delegate = self;
         [_audioPlayer prepareToPlay];
         [_audioPlayer play];
+        
     } else {
         NSLog(@"ERror creating player: %@", [playerError description]);
     }
@@ -153,11 +160,13 @@
     [param setObject:@"6" forKey:@"reward"];
     [param setObject:@"0" forKey:@"isAnonymous"];
     
-    [param setObject:_contentTextView.text forKey:@"content"];
+    if (_commentString && [_commentString length]) {
+        [param setObject:_commentString forKey:@"content"];
+    } else {
+        [param setObject:@"" forKey:@"content"];
+    }
     
-    
-    
-    NetResultBase *result = [[CommitPictureResult alloc] init];
+    NetResultBase *result = nil;
     NSMutableArray *uploadFiles = [[NSMutableArray alloc] init];
     
     if (_publishType == PublishType_audio) {
@@ -359,7 +368,7 @@
             [audioControl setTag:100];
             self.audioControl = audioControl;
             [audioControl setHidden:YES];
-            [audioControl addTarget:self action:@selector(playReordFile) forControlEvents:UIControlEventTouchUpInside];
+            [audioControl addTarget:self action:@selector(playReordFile:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:audioControl];
             
             UIImageView *contentImage = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -394,7 +403,7 @@
         if (_publishType == PublishType_audio) {
             audioControl.hidden = NO;
         
-            [audioControl.timeLabel setText:[NSString stringWithFormat:@"%d\"",_recordDur]];
+            [audioControl.timeLabel setText:[NSString stringWithFormat:@"%ld\"",(long)_recordDur]];
             [audioControl setFrame:CGRectMake(10, 10, tableView.frame.size.width - 20, 55)];
         } else if (_publishType == PublishType_image || _publishType == PublishType_video) {
             [contentImage addGestureRecognizer:_tapGesture];
@@ -537,7 +546,7 @@
     }
     
     self.commentString = temp;
-    _remainNumLabel.text = [NSString stringWithFormat:@"剩余%d",MaxWordNumber - [textView.text length]];
+    _remainNumLabel.text = [NSString stringWithFormat:@"剩余%lu",(long)(MaxWordNumber - [textView.text length])];
 }
 
 #pragma mark - UIScrollViewDelegate

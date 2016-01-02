@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-#define stopPlayAudioNotification   @"stopPlayAudioNotification"
+
 
 @interface AudioPlayControl : UIControl
 @property (nonatomic, strong) UILabel       *timeLabel;

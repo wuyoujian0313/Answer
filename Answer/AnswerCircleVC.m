@@ -31,6 +31,7 @@
 
 @implementation AnswerCircleVC
 
+
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
@@ -48,6 +49,17 @@
                                              selector:@selector(requestQuestionList)
                                                  name:NotificationChangeUserHeadImage
                                                object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(stopPlay)
+                                                 name:NotificationsStopPlayAudio
+                                               object:nil];
+    
+    
+}
+
+- (void)stopPlay {
+    [_audioPlayer stop];
 }
 
 - (void)requestMyFriendsList {

@@ -24,8 +24,11 @@
     
     if (self) {
         self.bgView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        [_bgView setImage:[UIImage imageNamed:@"audio_bg"]];
+        //[_bgView setImage:[UIImage imageNamed:@"audio_bg"]];
         [_bgView setAutoresizesSubviews:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
+        [_bgView.layer setCornerRadius:4.0];
+        [_bgView.layer setBorderColor:[UIColor colorWithHex:0x666666].CGColor];
+        [_bgView.layer setBorderWidth:kLineHeight1px];
         [self addSubview:_bgView];
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -49,7 +52,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(stopPlayAnimation)
-                                                     name:stopPlayAudioNotification
+                                                     name:NotificationsStopPlayAudio
                                                    object:nil];
     }
     
@@ -78,7 +81,7 @@
 
 - (BOOL)beginTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super beginTrackingWithTouch:touch withEvent:event];
-    [self setBackgroundColor:[UIColor colorWithHex:0xcccccc]];
+    [self setBackgroundColor:[UIColor whiteColor]];
     return YES;
 }
 
@@ -86,7 +89,7 @@
 
 - (BOOL)continueTrackingWithTouch:(UITouch *)touch withEvent:(UIEvent *)event{
     [super continueTrackingWithTouch:touch withEvent:event];
-    [self setBackgroundColor:[UIColor colorWithHex:0xcccccc]];
+    [self setBackgroundColor:[UIColor whiteColor]];
     return YES;
 }
 

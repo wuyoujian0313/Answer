@@ -486,14 +486,10 @@
         }
         
         left = self.frame.size.width - 10 - 33;
-        //[sharingBtn setFrame:CGRectMake(left, top + (40 - 17)/2.0, 33, 17)];
-        
         [sharingBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
         [sharingBtn setFrame:CGRectMake(left, top, 40, 40)];
         
         left -= 20+ 33;
-        //[answerBtn setFrame:CGRectMake(left, top + (40 - 17)/2.0,  33, 17)];
-        
         [answerBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
         [answerBtn setFrame:CGRectMake(left, top, 40, 40)];
         
@@ -532,6 +528,7 @@
         //关注
     } else if (tag == QuestionInfoViewAction_PlayAudio) {
         //语音播放
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
         [(AudioPlayControl*)sender startPlayAnimation];
     } else if (tag == QuestionInfoViewAction_PlayVideo) {
         //视频播放

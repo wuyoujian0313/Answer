@@ -20,6 +20,7 @@
 @property (nonatomic, strong) UIViewController              *rootVC;
 @property (nonatomic, strong) UITabBarController            *homeVC;
 @property (nonatomic, strong) UIViewController              *currentVC;
+@property (nonatomic, strong) UIViewController              *currentTabVC;
 
 @property (nonatomic, strong) WYJNavigationController       *loginNav;
 @end
@@ -149,6 +150,8 @@
     
     [_homeVC setViewControllers:[[NSArray alloc] initWithObjects:nav1,nav2,nav3,nav4,nav5,nil]];
     [_homeVC setSelectedIndex:0];
+    _currentTabVC = nav1;
+    
     
     [self addChildViewController:_homeVC];
     [self.view addSubview:_homeVC.view];
@@ -160,7 +163,12 @@
 
 #pragma UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    
+    if (_currentTabVC != viewController) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
+    }
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
