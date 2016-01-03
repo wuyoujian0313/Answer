@@ -8,6 +8,15 @@
 
 #import "BaseVC.h"
 
+typedef NS_ENUM(NSInteger, MessageType) {
+    MessageType_system,
+    MessageType_answerMyQuestion,
+    MessageType_atMe,
+    
+};
+
 @interface SystemMessageVC : BaseVC
+
+@property(nonatomic, assign) MessageType messageType;
 
 @end

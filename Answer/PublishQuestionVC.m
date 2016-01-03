@@ -190,6 +190,10 @@
         [param setObject:@"" forKey:@"content"];
     }
     
+    if (_friendIdsString) {
+        [param setObject:_friendIdsString forKey:@"atFriends"];
+    }
+    
     NetResultBase *result = nil;
     NSMutableArray *uploadFiles = [[NSMutableArray alloc] init];
     
@@ -585,6 +589,9 @@
             left -= 5 + 50;
             UIButton *pubilcBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [pubilcBtn setTag:301];
+            [pubilcBtn.layer setBorderColor:[UIColor colorWithHex:0xcccccc].CGColor];
+            [pubilcBtn.layer setCornerRadius:4.0];
+            [pubilcBtn.layer setBorderWidth:kLineHeight1px];
             [pubilcBtn setFrame:CGRectMake(left, 7, 50, 30)];
             [pubilcBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
             [pubilcBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
@@ -594,8 +601,8 @@
             
             UIImage *image1 = [UIImage imageNamed:@"unSelected"];
             [pubilcBtn setImage:image1 forState:UIControlStateNormal];
-            [pubilcBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -36 - image.size.width, 0, 0)];
-            [pubilcBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 24, 0, 0)];
+            [pubilcBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30 - image.size.width, 0, 0)];
+            [pubilcBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 26, 0, 0)];
             [cell.contentView addSubview:pubilcBtn];
             
             LineView *line2 = [[LineView alloc] initWithFrame:CGRectMake(0, 44 - kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];

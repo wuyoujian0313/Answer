@@ -13,7 +13,7 @@
 #import "NetworkTask.h"
 #import "User.h"
 
-@interface SetVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
+@interface SetVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,UIActionSheetDelegate>
 @property(nonatomic,strong)UITableView          *setTableView;
 @end
 
@@ -142,18 +142,9 @@
         }
         case 2: {
             // 退出
-            NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
-                                 [User sharedUser].user.uuid,@"uuid",
-                                 [User sharedUser].user.uId,@"uId",nil];
             
-            [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-            [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Loginout
-                                                     forParam:param
-                                                     delegate:self
-                                                    resultObj:[[LoginoutResult alloc] init] customInfo:@"loginout"];
-            
-            
-            
+            UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"确认退出登录？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登录" otherButtonTitles:nil];
+            [sheet showInView:self.view];
             break;
         }
             
@@ -166,12 +157,15 @@
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
-    [FadePromptView showPromptStatus:@"退出成功" duration:1.0 positionY:screenHeight- 300 finishBlock:^{
-        //
-        [[User sharedUser] clearUser];
-        AppDelegate *app = [AppDelegate shareMyApplication];
-        [app.mainVC switchToLoginVC];
-    }];
+    if ([customInfo isEqualToString:@"loginout"]) {
+        [FadePromptView showPromptStatus:@"退出成功" duration:1.0 positionY:screenHeight- 300 finishBlock:^{
+            //
+            [[User sharedUser] clearUser];
+            AppDelegate *app = [AppDelegate shareMyApplication];
+            [app.mainVC switchToLoginVC];
+        }];
+    }
+    
 }
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
@@ -180,6 +174,21 @@
         //
     }];
     
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        
+        NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                              [User sharedUser].user.uuid,@"uuid",
+                              [User sharedUser].user.uId,@"uId",nil];
+        
+        [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Loginout
+                                                 forParam:param
+                                                 delegate:self
+                                                resultObj:[[LoginoutResult alloc] init] customInfo:@"loginout"];
+    }
 }
 
 @end

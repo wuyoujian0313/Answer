@@ -11,7 +11,7 @@
 #import "MessagesResult.h"
 #import "NetworkTask.h"
 
-@interface SystemMessageVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
+@interface SystemMessageVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,UIActionSheetDelegate>
 @property(nonatomic,strong)UITableView          *messageTableView;
 @property(nonatomic,strong)NSArray              *messageList;
 @end
@@ -21,8 +21,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setNavTitle:@"系统消息"];
+    if (_messageType == MessageType_atMe) {
+        [self setNavTitle:@"@我的消息"];
+    } else if(_messageType == MessageType_system) {
+        [self setNavTitle:@"系统消息"];
+    } else {
+        [self setNavTitle:@"回答我的问题的消息"];
+    }
+    
+    UIBarButtonItem *rightButton = [self configBarButtonWithTitle:@"清除" target:self selector:@selector(navBarCleanAction:)];
+    self.navigationItem.rightBarButtonItem = rightButton;
+    
     [self layoutMessageTableView];
+}
+
+- (void)navBarCleanAction:(UIBarButtonItem*)sender {
+    
+    UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"确认清除所有消息？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
+    [sheet showInView:self.view];
 }
 
 - (void)layoutMessageTableView {
@@ -136,6 +152,13 @@
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
     
+}
+
+#pragma mark - UIActionSheetDelegate
+-(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == actionSheet.destructiveButtonIndex) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 

@@ -143,17 +143,26 @@
     switch (row) {
         case 0: {
             // 回答我的问题
+            SystemMessageVC *vc = [[SystemMessageVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.messageType = MessageType_answerMyQuestion;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 1: {
             
             // @我的问题
+            SystemMessageVC *vc = [[SystemMessageVC alloc] init];
+            vc.hidesBottomBarWhenPushed = YES;
+            vc.messageType = MessageType_atMe;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 2: {
             // 系统消息
             SystemMessageVC *vc = [[SystemMessageVC alloc] init];
             vc.hidesBottomBarWhenPushed = YES;
+            vc.messageType = MessageType_system;
             [self.navigationController pushViewController:vc animated:YES];
             
             break;
