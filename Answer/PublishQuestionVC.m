@@ -8,6 +8,7 @@
 
 #import "PublishQuestionVC.h"
 #import "RedPacketVC.h"
+#import "MyFriendsVC.h"
 #import <MediaPlayer/MediaPlayer.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreMedia/CoreMedia.h>
@@ -26,7 +27,7 @@
 
 #define MaxWordNumber           300
 
-@interface PublishQuestionVC ()<AVAudioPlayerDelegate,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,NetworkTaskDelegate,CLLocationManagerDelegate>
+@interface PublishQuestionVC ()<AVAudioPlayerDelegate,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,NetworkTaskDelegate,CLLocationManagerDelegate,RedSetDelegate,SelectedFriendIdsDelegate>
 
 @property (nonatomic, strong) UITableView                  *publishTableView;
 @property (nonatomic, strong) AudioPlayControl             *audioControl;
@@ -40,6 +41,14 @@
 @property (nonatomic, strong) CLLocationManager            *locmanager;
 @property (nonatomic, strong) NSNumber                     *latitude;
 @property (nonatomic, strong) NSNumber                     *longitude;
+@property (nonatomic, strong) UIButton                     *locBtn;
+@property (nonatomic, copy) NSString                       *locString;
+@property (nonatomic, copy) NSString                       *friendIdsString;
+@property (nonatomic, strong) UIButton                     *redBtn;
+
+@property (nonatomic, assign) BOOL                         isAnonymous;
+@property (nonatomic, assign) NSInteger                    reward;
+
 @end
 
 @implementation PublishQuestionVC
@@ -57,9 +66,19 @@
     [self setNavTitle:@"发布问题"];
     [self layoutPublishTableView];
     [self beginGPS];
+    _isAnonymous = YES;
     
+    _locString = @"北京 奎科科技大厦";
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPhotoAction:)];
     self.tapGesture = tap;
+    
+    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)];
+    [self.view addGestureRecognizer:tap1];
+    
+}
+
+- (void)tapView:(UITapGestureRecognizer*)sender {
+    [_contentTextView resignFirstResponder];
 }
 
 - (void)beginGPS {
@@ -157,8 +176,13 @@
     [param setObject:@"1" forKey:@"longitude"];
     [param setObject:@"1" forKey:@"latitude"];
     [param setObject:@"生活" forKey:@"fenlei"];
-    [param setObject:@"6" forKey:@"reward"];
-    [param setObject:@"0" forKey:@"isAnonymous"];
+    
+    [param setObject:[NSString stringWithFormat:@"%ld",(long)_reward] forKey:@"reward"];
+    if (_isAnonymous) {
+        [param setObject:@"1" forKey:@"isAnonymous"];
+    } else {
+        [param setObject:@"0" forKey:@"isAnonymous"];
+    }
     
     if (_commentString && [_commentString length]) {
         [param setObject:_commentString forKey:@"content"];
@@ -276,6 +300,46 @@
 
 - (void)sendAction:(UIButton*)sender {
     [self publishQuestion];
+}
+
+- (void)toolAction:(UIButton*)sender {
+    if (sender.tag == 300) {
+        // 定位
+    } else if (sender.tag == 301) {
+        
+        // 匿名设置
+        UIImage *image = [UIImage imageNamed:@"unSelected"];
+        if (_isAnonymous) {
+            image = [UIImage imageNamed:@"selected"];
+        }
+        
+        [sender setImage:image forState:UIControlStateNormal];
+        _isAnonymous = !_isAnonymous;
+        
+    } else if (sender.tag == 302) {
+        // 好友设置
+        MyFriendsVC *vc = [[MyFriendsVC alloc] init];
+        vc.enterType = EnterType_FromPublishQuestion;
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (sender.tag == 303) {
+        // 红包设置
+        RedPacketVC *vc = [[RedPacketVC alloc] init];
+        vc.delegate = self;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+}
+
+#pragma mark - RedSetDelegate
+-(void)setRedNumber:(NSInteger)number {
+    _reward = number;
+    [_redBtn setTitle:[NSString stringWithFormat:@"%ld",(long)_reward] forState:UIControlStateNormal];
+}
+
+#pragma mark - SelectedFriendIdsDelegate
+// 用,拼接
+-(void)setSelectedFriendIds:(NSString*)idsString {
+    self.friendIdsString = idsString;
 }
 
 
@@ -446,7 +510,7 @@
             _contentTextView.placeholderTextColor = [UIColor colorWithHex:0xcccccc];
             [cell.contentView addSubview:_contentTextView];
             
-            self.remainNumLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 100, tableView.frame.size.width - 11, 15)];
+            self.remainNumLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, tableView.frame.size.width - 20, 15)];
             _remainNumLabel.backgroundColor = [UIColor clearColor];
             _remainNumLabel.textAlignment = NSTextAlignmentRight;
             _remainNumLabel.text = [NSString stringWithFormat:@"剩余%d",MaxWordNumber];
@@ -468,11 +532,77 @@
             
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.contentView.backgroundColor = [UIColor whiteColor];
+        
             
-            UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 44)];
-            [v setBackgroundColor:[UIColor colorWithHex:0xcccccc]];
-            [cell.contentView addSubview:v];
+            LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, kLineHeight1px)];
+            [cell.contentView addSubview:line1];
+            
+            //
+            CGFloat left = 10;
+            CGFloat top = 0;
+            UIButton *locBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.locBtn = locBtn;
+            [locBtn setTag:300];
+            [locBtn setFrame:CGRectMake(left, top, 100, 44)];
+            [locBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+            [locBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+            [locBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            [locBtn setTitle:_locString forState:UIControlStateNormal];
+            [locBtn addTarget:self action:@selector(toolAction:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.contentView addSubview:locBtn];
+            
+            left = tableView.frame.size.width - 10 - 50;
+            UIButton *redBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.redBtn = redBtn;
+            [redBtn.layer setBorderColor:[UIColor colorWithHex:0xcccccc].CGColor];
+            [redBtn.layer setCornerRadius:4.0];
+            [redBtn.layer setBorderWidth:kLineHeight1px];
+            [redBtn setTag:303];
+            [redBtn setFrame:CGRectMake(left, 7, 50, 30)];
+            [redBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
+            [redBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+            [redBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            [redBtn addTarget:self action:@selector(toolAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+            UIImage *image = [UIImage imageNamed:@"reward"];
+            [redBtn setImage:image forState:UIControlStateNormal];
+            [redBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -image.size.width/2.0 + 10, 0, 0)];
+            [redBtn setTitle:@"0" forState:UIControlStateNormal];
+            [cell.contentView addSubview:redBtn];
+            
+            
+            left -= 10 + 50;
+            UIButton *atBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [atBtn setTag:302];
+            [atBtn.layer setBorderColor:[UIColor colorWithHex:0xcccccc].CGColor];
+            [atBtn.layer setCornerRadius:4.0];
+            [atBtn.layer setBorderWidth:kLineHeight1px];
+            [atBtn setFrame:CGRectMake(left, 7, 50, 30)];
+            [atBtn setImage:[UIImage imageNamed:@"atMe"] forState:UIControlStateNormal];
+            [atBtn addTarget:self action:@selector(toolAction:) forControlEvents:UIControlEventTouchUpInside];
+            [cell.contentView addSubview:atBtn];
+            
+            left -= 5 + 50;
+            UIButton *pubilcBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            [pubilcBtn setTag:301];
+            [pubilcBtn setFrame:CGRectMake(left, 7, 50, 30)];
+            [pubilcBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+            [pubilcBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+            [pubilcBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+            [pubilcBtn setTitle:@"匿名" forState:UIControlStateNormal];
+            [pubilcBtn addTarget:self action:@selector(toolAction:) forControlEvents:UIControlEventTouchUpInside];
+            
+            UIImage *image1 = [UIImage imageNamed:@"unSelected"];
+            [pubilcBtn setImage:image1 forState:UIControlStateNormal];
+            [pubilcBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -36 - image.size.width, 0, 0)];
+            [pubilcBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 24, 0, 0)];
+            [cell.contentView addSubview:pubilcBtn];
+            
+            LineView *line2 = [[LineView alloc] initWithFrame:CGRectMake(0, 44 - kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
+            [cell.contentView addSubview:line2];
         }
+        
+        //
         
         return cell;
     }
@@ -514,7 +644,7 @@
             return 140;
         }
     } else if (indexPath.row == 1) {
-        return 115;
+        return 120;
     } else if (indexPath.row == 2) {
         return 44;
     } else if (indexPath.row == 3) {

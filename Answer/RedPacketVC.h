@@ -8,6 +8,12 @@
 
 #import "BaseVC.h"
 
+@protocol RedSetDelegate <NSObject>
+-(void)setRedNumber:(NSInteger)number;
+@end
+
 @interface RedPacketVC : BaseVC
+
+@property (nonatomic, weak) id<RedSetDelegate> delegate;
 
 @end

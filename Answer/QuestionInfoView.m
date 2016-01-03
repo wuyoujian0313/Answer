@@ -71,7 +71,7 @@
         if (photoImage == nil) {
             photoImage = [[UIImageView alloc] initWithFrame:CGRectZero];
             [photoImage setTag:100];
-            [photoImage.layer setCornerRadius:20/2.0];
+            [photoImage.layer setCornerRadius:30/2.0];
             [photoImage setClipsToBounds:YES];
             [_userInfoView addSubview:photoImage];
         }
@@ -109,8 +109,8 @@
         
         
         CGFloat left = 10;
-        CGFloat top = 10;
-        [photoImage setFrame:CGRectMake(left, top, 20, 20)];
+        CGFloat top = 5;
+        [photoImage setFrame:CGRectMake(left, top, 30, 30)];
         
         if (_userInfo) {
             
@@ -135,8 +135,8 @@
             }
         }
         
-        left += 20 + 10;
-        [nameLabel setFrame:CGRectMake(left, top, 180, 20)];
+        left += 30 + 10;
+        [nameLabel setFrame:CGRectMake(left, top, 180, 30)];
         if (_userInfo.nickName && [_userInfo.nickName length]) {
             [nameLabel setText:_userInfo.nickName];
         } else {

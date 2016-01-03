@@ -20,6 +20,7 @@
 @interface MyFriendsVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 @property(nonatomic,strong)UITableView          *friendTableView;
 @property(nonatomic,strong)NSArray              *friendList;
+@property(nonatomic,strong)NSMutableArray       *selectFriendIds;
 @end
 
 @implementation MyFriendsVC
@@ -30,11 +31,25 @@
     if (_enterType == EnterType_FromMe) {
         [self setNavTitle:@"我的好友"];
     } else {
-        [self setNavTitle:@"指定好友"];
+        [self setNavTitle:@"@我的好友"];
+        self.selectFriendIds = [[NSMutableArray alloc] initWithCapacity:0];
     }
     
     [self layoutFriendTableView];
     [self requestMyFriendsList];
+}
+
+- (void)navBarOKAction:(UIBarButtonItem*)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    
+    if (_delegate && [_delegate respondsToSelector:@selector(setSelectedFriendIds:)]) {
+        
+        NSString *idsString = [_selectFriendIds componentsJoinedByString:@","];
+        
+        [_delegate setSelectedFriendIds:idsString];
+    }
+    
 }
 
 - (void)requestMyFriendsList {
@@ -78,6 +93,40 @@
     [_friendTableView setTableFooterView:view];
 }
 
+- (void)selectButtonAction:(UIButton*)sender event:(UIEvent*)event {
+    
+    if (_enterType == EnterType_FromPublishQuestion) {
+        NSSet *touches = [event allTouches];
+        UITouch *touch = [touches anyObject];
+        
+        CGPoint currentTouchPosition = [touch locationInView:_friendTableView];
+        NSIndexPath *indexPath = [_friendTableView indexPathForRowAtPoint:currentTouchPosition];
+        
+        UserInfo *user = [_friendList objectAtIndex:indexPath.row];
+        NSString *friendId = user.uId;
+        if ([_selectFriendIds count] > 0) {
+            if ([_selectFriendIds containsObject:friendId]) {
+                [_selectFriendIds removeObject:friendId];
+                [sender setImage:[UIImage imageNamed:@"unSelected"] forState:UIControlStateNormal];
+            } else {
+                [_selectFriendIds addObject:friendId];
+                [sender setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
+            }
+        } else {
+            //
+            [_selectFriendIds addObject:friendId];
+            [sender setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
+        }
+        
+        if ([_selectFriendIds count] > 0) {
+            UIBarButtonItem *rightButton = [self configBarButtonWithTitle:@"确定" target:self selector:@selector(navBarOKAction:)];
+            self.navigationItem.rightBarButtonItem = rightButton;
+        } else {
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+    }
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_friendList count];
@@ -101,8 +150,6 @@
         UIView *selBGView = [[UIView alloc] initWithFrame:cell.bounds];
         [selBGView setBackgroundColor:[UIColor colorWithHex:0xeeeeee]];
         cell.selectedBackgroundView = selBGView;
-        
-        
     }
     
     if (_enterType == EnterType_FromMe) {
@@ -113,7 +160,8 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         UIButton *selectBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [selectBtn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
+        [selectBtn setImage:[UIImage imageNamed:@"unSelected"] forState:UIControlStateNormal];
+        [selectBtn addTarget:self action:@selector(selectButtonAction:event:) forControlEvents:UIControlEventTouchUpInside];
         [selectBtn setFrame:CGRectMake(0, 0, 50, 50)];
         [selectBtn setImageEdgeInsets:UIEdgeInsetsMake(10, 10, 10, 10)];
         cell.accessoryView = selectBtn;
@@ -159,11 +207,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    QuestionListVC *vc = [[QuestionListVC alloc] init];
-    vc.type = PageType_FriendQuestionList;
-    [self.navigationController pushViewController:vc animated:YES];
+    if (_enterType == EnterType_FromMe) {
+        [tableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        QuestionListVC *vc = [[QuestionListVC alloc] init];
+        vc.type = PageType_FriendQuestionList;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
+    
 }
 
 #pragma mark - NetworkTaskDelegate
@@ -173,6 +225,7 @@
         MyFriendsResult *friendResult = (MyFriendsResult *)result;
         [[User sharedUser] saveFriends:[friendResult friendList]];
         [self setFriendList:[friendResult friendList]];
+
         [_friendTableView reloadData];
     }
 }

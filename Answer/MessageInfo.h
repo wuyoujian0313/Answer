@@ -10,10 +10,10 @@
 
 @interface MessageInfo : NSObject
 
-@property (nonatomic, copy) NSString          *uuid;
+@property (nonatomic, copy) NSString            *uuid;
 @property (nonatomic, copy) NSString            *uId;
-@property (nonatomic, copy) NSString      *updateDate;
-@property (nonatomic, copy) NSString          *isRead;
+@property (nonatomic, copy) NSString            *updateDate;
+@property (nonatomic, copy) NSString            *isRead;
 @property (nonatomic, copy) NSString            *content;
 @property (nonatomic, copy) NSString            *reward;
 
