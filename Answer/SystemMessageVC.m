@@ -10,6 +10,7 @@
 #import "LineView.h"
 #import "MessagesResult.h"
 #import "NetworkTask.h"
+#import "User.h"
 
 @interface SystemMessageVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,UIActionSheetDelegate>
 @property(nonatomic,strong)UITableView          *messageTableView;
@@ -29,10 +30,29 @@
         [self setNavTitle:@"回答我的问题的消息"];
     }
     
-    UIBarButtonItem *rightButton = [self configBarButtonWithTitle:@"清除" target:self selector:@selector(navBarCleanAction:)];
-    self.navigationItem.rightBarButtonItem = rightButton;
-    
     [self layoutMessageTableView];
+    [self requestMessageList];
+}
+
+- (void)requestMessageList {
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    [param setObject:[User sharedUser].user.uId forKey:@"userId"];
+    if (_messageType == MessageType_atMe) {
+        [param setObject:@"atme" forKey:@"wtype"];
+    } else if(_messageType == MessageType_system) {
+        [param setObject:@"sys" forKey:@"wtype"];
+    } else {
+        [param setObject:@"mylist" forKey:@"wtype"];
+    }
+    
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetSystemMessage
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[MessagesResult alloc] init]
+                                           customInfo:@"GetSystemMessage"];
 }
 
 - (void)navBarCleanAction:(UIBarButtonItem*)sender {
@@ -69,7 +89,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return [_messageList count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -92,49 +112,43 @@
     }
     
     MessageInfo *msgInfo = [_messageList objectAtIndex:indexPath.row];
-    UILabel *titleLabel = cell.textLabel;
-    UILabel *subTitleLabel = cell.detailTextLabel;
+    NSString *timeString = msgInfo.updateDate;
+    NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[timeString longLongValue]/1000];
     
-    NSDictionary *attributes1 = @{
-                                 NSFontAttributeName:[UIFont systemFontOfSize:28],
-                                 NSForegroundColorAttributeName:[UIColor blackColor]
-                                 };
-    NSDictionary *attributes2 = @{
-                                  NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                  NSForegroundColorAttributeName:[UIColor blackColor]
-                                  };
-    NSString *str1 = @"22";
-    NSString *str2 = @"8月";
+    //获取日期
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:updateDate];
+
+    NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont systemFontOfSize:28], NSForegroundColorAttributeName:[UIColor blackColor] };
+    
+    NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor] };
+    
+    NSString *str1 = [NSString stringWithFormat:@"%2ld",(long)comps.day];
+    NSString *str2 = [NSString stringWithFormat:@"%2ld月",(long)comps.month];;
     NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
     NSRange range1 = [str rangeOfString:str1];
     NSRange range2 = [str rangeOfString:str2];
     
     NSMutableAttributedString *att1 = [[NSMutableAttributedString alloc] initWithString:str];
-    
     [att1 addAttributes:attributes1 range:range1];
     [att1 addAttributes:attributes2 range:range2];
     
-    titleLabel.attributedText = att1;
+    cell.textLabel.attributedText = att1;
     
-    //////////////
-    NSString *subString = @"你在回复****的问题，获得8元";
-    NSRange rang3 = [subString rangeOfString:@"8"];
+
+    NSString *subString = msgInfo.content;
+    NSRange rang3 = [subString rangeOfString:msgInfo.reward];
     
-    NSDictionary *sub_attributes1 = @{
-                                  NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                  NSForegroundColorAttributeName:[UIColor colorWithHex:0xa0a2a5]
-                                  };
+    NSDictionary *sub_attributes1 = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor colorWithHex:0xa0a2a5] };
     
-    NSDictionary *sub_attributes2 = @{
-                                  NSFontAttributeName:[UIFont systemFontOfSize:14],
-                                  NSForegroundColorAttributeName:[UIColor redColor]
-                                  };
+    NSDictionary *sub_attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor redColor] };
     
     NSMutableAttributedString *att2 = [[NSMutableAttributedString alloc] initWithString:subString];
     [att2 addAttributes:sub_attributes1 range:NSMakeRange(0, [subString length])];
     [att2 addAttributes:sub_attributes2 range:rang3];
     
-    subTitleLabel.attributedText = att2;
+    cell.detailTextLabel.attributedText = att2;
 
     return cell;
 }
@@ -147,11 +161,27 @@
 
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
-    
+    [SVProgressHUD dismiss];
+    if ([customInfo isEqualToString:@"GetSystemMessage"] && result) {
+        MessagesResult *messageRec = (MessagesResult*)result;
+        [self setMessageList:messageRec.sysMessageList];
+        
+        if (messageRec.sysMessageList && [messageRec.sysMessageList count]) {
+            UIBarButtonItem *rightButton = [self configBarButtonWithTitle:@"清除" target:self selector:@selector(navBarCleanAction:)];
+            self.navigationItem.rightBarButtonItem = rightButton;
+        } else {
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+        
+        [_messageTableView reloadData];
+    }
 }
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
-    
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
 }
 
 #pragma mark - UIActionSheetDelegate

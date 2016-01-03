@@ -60,5 +60,6 @@
 #define API_UpdateNickname          @"updateNickname"
 #define API_UpdateHead              @"updateHead"
 #define API_AddTuWen                @"addTuWen"
+#define API_GetSystemMessage        @"getSystemMessage"
 
 
