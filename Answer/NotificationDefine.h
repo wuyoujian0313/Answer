@@ -9,7 +9,7 @@
 #ifndef NotificationDefine_h
 #define NotificationDefine_h
 
-#define NotificationChangeUserHeadImage     @"NotificationChangeUserHeadImage"
+#define NotificationChangeUserInfo     @"NotificationChangeUserInfo"
 #define NotificationsStopPlayAudio          @"NotificationsStopPlayAudio"
 
 

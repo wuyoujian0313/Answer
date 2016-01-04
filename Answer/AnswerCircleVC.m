@@ -47,7 +47,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(requestQuestionList)
-                                                 name:NotificationChangeUserHeadImage
+                                                 name:NotificationChangeUserInfo
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self

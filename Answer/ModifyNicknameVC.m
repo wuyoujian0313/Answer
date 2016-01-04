@@ -64,19 +64,16 @@
     
     NSString *nickName = [NSString stringWithFormat:@"%@",_nickNameFieldText.text];
     NSString *temp = [nickName stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    temp = [temp stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     if (temp == nil || (temp!= nil && [temp length] == 0)) {
         [FadePromptView showPromptStatus:@"昵称不能为空" duration:1.0 finishBlock:^{
             //
             [_nickNameFieldText becomeFirstResponder];
         }];
         
-        
-        
         return;
     }
     
-    NSDictionary *param = [[NSDictionary alloc] initWithObjectsAndKeys:temp,@"nickname", [User sharedUser].user.uId,@"userId",nil];
+    NSDictionary *param = [[NSDictionary alloc] initWithObjectsAndKeys:temp,@"nickName", [User sharedUser].user.uId,@"userId",nil];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_UpdateNickname
                                              forParam:param
@@ -147,6 +144,7 @@
             user.user.nickName = _nickNameText;
             [user saveToUserDefault];
             
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationChangeUserInfo object:nil];
             [self.navigationController popViewControllerAnimated:YES];
         }];
     }

@@ -95,7 +95,6 @@
     [tableView setDataSource:self];
     [tableView setBackgroundColor:[UIColor clearColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
-    [tableView setBounces:NO];
     [self.view addSubview:tableView];
     
     [self setTableViewHeaderView:200];
@@ -155,7 +154,7 @@
     [loginBtn setClipsToBounds:YES];
     [loginBtn setTitle:@"登录" forState:UIControlStateNormal];
     [loginBtn.titleLabel setFont:[UIFont systemFontOfSize:18]];
-    [loginBtn setFrame:CGRectMake(11, 15, _loginTableView.frame.size.width - 22, 45)];
+    [loginBtn setFrame:CGRectMake(11, 40, _loginTableView.frame.size.width - 22, 45)];
     [loginBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
     [view addSubview:loginBtn];
     
@@ -339,10 +338,9 @@
             [textField setClearsOnBeginEditing:YES];
             [textField setPlaceholder:@"手机号码"];
             
-            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-            NSString *phoneNumber = [userDefaults objectForKey:UserDefault_PhoneNumber];
+            NSString *phoneNumber = [User sharedUser].phoneNumber;
             if (phoneNumber) {
-                [textField setText:[User sharedUser].phoneNumber];
+                [textField setText:phoneNumber];
             }
             
             

@@ -351,7 +351,7 @@
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
     if ([customInfo isEqualToString:@"publishQuestion"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationChangeUserHeadImage object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationChangeUserInfo object:nil];
         
         [FadePromptView showPromptStatus:@"发布成功" duration:1.0 finishBlock:^{
             //
