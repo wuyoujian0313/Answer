@@ -115,7 +115,7 @@
     NSString *timeString = msgInfo.updateDate;
     NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[timeString longLongValue]/1000];
     
-    //获取日期
+    //
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSInteger unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit;
     NSDateComponents *comps = [calendar components:unitFlags fromDate:updateDate];

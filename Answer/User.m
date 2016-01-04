@@ -8,10 +8,9 @@
 
 #import "User.h"
 
-#define  UserDefault_User               @"UserDefault_User"
-#define  UserDefault_Account            @"UserDefault_Account"
-#define  UserDefault_Friends            @"UserDefault_Friends"
-#define  UserDefault_PhoneNumber        @"UserDefault_PhoneNumber"
+@interface User ()
+@property (nonatomic,strong) NSMutableDictionary *userHeads;
+@end
 
 @implementation User
 
@@ -27,6 +26,7 @@
         self.user = [[UserInfo alloc] init];
         self.account = [[UserAccountResult alloc] init];
         self.friends = [[NSMutableArray alloc] init];
+        self.userHeads = [[NSMutableDictionary alloc] init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(saveToUserDefault)
@@ -50,6 +50,10 @@
         userShared = [[self alloc] init];
     });
     return userShared;
+}
+
+- (NSString *)getUserHeadImageURLWithPhoneNumber:(NSString *)phoneNumber {
+    return [_userHeads objectForKey:phoneNumber];
 }
 
 - (BOOL)isFriend:(NSString*)userId {
@@ -85,6 +89,7 @@
     self.user = [[UserInfo alloc] init];;
     self.account = [[UserAccountResult alloc] init];
     self.friends = [[NSMutableArray alloc] init];
+    self.userHeads = [[NSMutableDictionary alloc] init];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:nil forKey:UserDefault_User];
@@ -100,8 +105,14 @@
     if (_user) {
         NSData *userData = [NSKeyedArchiver archivedDataWithRootObject:_user];
         [userDefaults setObject:userData forKey:UserDefault_User];
+
+        [self.userHeads setObject:_user.headImage forKey:_user.phoneNumber];
+        [userDefaults setObject:_userHeads forKey:UserDefault_UsersHeadImage];
         
-        [userDefaults setObject:_user.phoneNumber forKey:UserDefault_PhoneNumber];
+        NSString *phoneNumber = [userDefaults objectForKey:UserDefault_PhoneNumber];
+        if (![_user.phoneNumber isEqualToString:phoneNumber]) {
+            [userDefaults setObject:_user.phoneNumber forKey:UserDefault_PhoneNumber];
+        }
     }
     
     if (_account) {
@@ -122,6 +133,12 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     self.phoneNumber = [userDefaults objectForKey:UserDefault_PhoneNumber];
+    
+    NSMutableDictionary *hh = [userDefaults objectForKey:UserDefault_UsersHeadImage];
+    if (hh) {
+        [self.userHeads addEntriesFromDictionary:hh];
+    }
+    
 
     NSData *userData = [userDefaults objectForKey:UserDefault_User];
     if (userData && [userData isKindOfClass:[NSData class]]) {

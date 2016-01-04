@@ -10,6 +10,13 @@
 #import "UserInfo.h"
 #import "UserAccountResult.h"
 
+#define  UserDefault_User               @"UserDefault_User"
+#define  UserDefault_Account            @"UserDefault_Account"
+#define  UserDefault_Friends            @"UserDefault_Friends"
+#define  UserDefault_PhoneNumber        @"UserDefault_PhoneNumber"
+#define  UserDefault_UsersHeadImage     @"UserDefault_UsersHeadImage"
+
+
 @interface User : NSObject
 
 @property (nonatomic, copy) NSString                        *phoneNumber;
@@ -26,5 +33,7 @@
 
 - (void)saveFriends:(NSArray*)friends;
 - (BOOL)isFriend:(NSString*)userId;
+
+- (NSString *)getUserHeadImageURLWithPhoneNumber:(NSString *)phoneNumber;
 
 @end

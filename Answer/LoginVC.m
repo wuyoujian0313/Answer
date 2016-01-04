@@ -37,6 +37,8 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES];
+    [[User sharedUser] loadFromUserDefault];
+    [self loadHeadImage:[User sharedUser].phoneNumber];
 }
 
 -(void)viewWillDisappear:(BOOL)animated {
@@ -49,7 +51,7 @@
     self.navigationItem.leftBarButtonItem = nil;
     [self setNavTitle:@"登录"];
     [self layoutLoginTableView];
-    [self layoutToRegisterView];
+    [self layoutToRegisterView]; 
 }
 
 - (void)layoutToRegisterView {
@@ -100,11 +102,11 @@
     [self setTableViewFooterView:180];
 }
 
-- (void)loadHeadImage {
+- (void)loadHeadImage:(NSString*)phoneNumber {
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
-    NSString *imageUrl  = [User sharedUser].user.headImage;
+    NSString *imageUrl  = [[User sharedUser] getUserHeadImageURLWithPhoneNumber:phoneNumber];
     UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
     
     if (default_image == nil) {
@@ -139,8 +141,6 @@
     LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, height - kLineHeight1px, view.frame.size.width, kLineHeight1px)];
     [view addSubview:line1];
     [_loginTableView setTableHeaderView:view];
-    
-    [self loadHeadImage];
 }
 
 
@@ -272,7 +272,20 @@
 - (BOOL)textFieldShouldClear:(UITextField *)textField  {
     return YES;
 }
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField == _nameTextField) {
+        [_pwdTextField becomeFirstResponder];
+        [self loadHeadImage:_nameTextField.text];
+    }
+}
+
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField == _nameTextField) {
+        [_pwdTextField becomeFirstResponder];
+        [self loadHeadImage:_nameTextField.text];
+    }
+    
     return YES;
 }
 
@@ -280,6 +293,7 @@
     
     if (textField == _nameTextField) {
         [_pwdTextField becomeFirstResponder];
+        [self loadHeadImage:_nameTextField.text];
     } else if (textField == _pwdTextField){
         [textField resignFirstResponder];
     }
@@ -324,7 +338,13 @@
             [textField setKeyboardType:UIKeyboardTypePhonePad];
             [textField setClearsOnBeginEditing:YES];
             [textField setPlaceholder:@"手机号码"];
-            [textField setText:[User sharedUser].phoneNumber];
+            
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            NSString *phoneNumber = [userDefaults objectForKey:UserDefault_PhoneNumber];
+            if (phoneNumber) {
+                [textField setText:[User sharedUser].phoneNumber];
+            }
+            
             
             [cell.contentView addSubview:textField];
             
