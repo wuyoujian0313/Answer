@@ -353,6 +353,18 @@
     if ([customInfo isEqualToString:@"publishQuestion"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationChangeUserInfo object:nil];
         
+        if (_publishType == PublishType_audio) {
+            NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
+            filePath = [filePath stringByAppendingPathExtension:@"m4a"];
+            [[FileCache sharedFileCache] removeFileForPath:filePath];
+        } else if (_publishType == PublishType_video) {
+            NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_videoKeyString];
+            filePath = [filePath stringByAppendingPathExtension:@"mp4"];
+            [[FileCache sharedFileCache] removeFileForPath:filePath];
+        } else {
+            [[SDImageCache sharedImageCache] removeImageForKey:_imageKey];
+        }
+        
         [FadePromptView showPromptStatus:@"发布成功" duration:1.0 finishBlock:^{
             //
             [self.navigationController popViewControllerAnimated:YES];

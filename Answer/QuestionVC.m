@@ -127,7 +127,9 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     [session setActive:YES error:nil];
     
     //
-    [[FileCache sharedFileCache] removeFileForKey:_recordFileKey];
+    NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
+    filePath = [filePath stringByAppendingPathExtension:@"m4a"];
+    [[FileCache sharedFileCache] removeFileForPath:filePath];
     
 #if TARGET_IPHONE_SIMULATOR
 #elif TARGET_OS_IPHONE
@@ -140,8 +142,6 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     NSError *error;
     [self.audioRecoder stop];
     
-    NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
-    filePath = [filePath stringByAppendingPathExtension:@"m4a"];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];
     self.audioRecoder = [[AVAudioRecorder alloc] initWithURL:fileURL settings:recordSetting error:&error];
     if (_audioRecoder) {
@@ -182,25 +182,49 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     NSLog(@"%lf",lowPassResults);
     //最大50  0
     //图片 小-》大
-    if (0 <lowPassResults<=0.15) {
+    
+    
+    if (0<lowPassResults<=0.06) {
+        
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder0"]];
-    } else if (0.15<lowPassResults<=0.25) {
-        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder1"]];
-    } else if (0.25<lowPassResults<=0.35) {
+    } else if (0.06<lowPassResults<=0.13) {
+        
+        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder0"]];
+    } else if (0.13<lowPassResults<=0.20) {
+        
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder2"]];
-    } else if (0.35<lowPassResults<=0.40) {
+    } else if (0.20<lowPassResults<=0.27) {
+        
+        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder3"]];
+    } else if (0.27<lowPassResults<=0.34) {
+        
+        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder3"]];
+    } else if (0.34<lowPassResults<=0.41) {
+        
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder4"]];
-    } else if (0.40<lowPassResults<=0.55) {
+        
+    } else if (0.55<lowPassResults<=0.62) {
+        
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder5"]];
-    } else if (0.55<lowPassResults<=0.65) {
+    }else if (0.48<lowPassResults<=0.55) {
+        
+        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder5"]];
+        
+    } else if (0.69<lowPassResults<=0.76) {
+        
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder6"]];
-    } else if (0.65<lowPassResults<=0.80) {
+    }else if (0.76<lowPassResults<=0.83) {
+        
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder7"]];
-    } else if (0.80<lowPassResults<=1.0) {
+        
+    } else if (0.83<lowPassResults<=0.9)  {
+        
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder8"]];
     } else {
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder0"]];
     }
+    
+    
 }
 
 - (void)recordAction:(UIButton*)sender {
@@ -276,6 +300,10 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
 - (void)sendRecordAction:(UIButton *)sender {
     if (sender.tag == 200) {
         // 取消
+        NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
+        filePath = [filePath stringByAppendingPathExtension:@"m4a"];
+        [[FileCache sharedFileCache] removeFileForPath:filePath];
+        
     } else if (sender.tag == 201) {
         // 确定
         PublishQuestionVC *vc = [[PublishQuestionVC alloc] init];

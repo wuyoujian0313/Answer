@@ -53,5 +53,6 @@
 - (void)cleanCacheMemory;
 
 - (void)removeFileForKey:(NSString *)key;
+- (void)removeFileForPath:(NSString *)path;
 
 @end

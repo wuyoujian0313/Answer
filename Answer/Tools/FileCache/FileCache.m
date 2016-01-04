@@ -172,6 +172,12 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
     });
 }
 
+- (void)removeFileForPath:(NSString *)path {
+    dispatch_async(self.rwQueue, ^{
+        [_fileManager removeItemAtPath:path error:nil];
+    });
+}
+
 #pragma mark - notification func
 /**
  * 虽然NSCache会在内存吃紧的时候进行清空，但是不确定时机，在这里额外加上内存清空处理
