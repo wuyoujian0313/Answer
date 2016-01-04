@@ -24,6 +24,9 @@
 #import "CommitPictureResult.h"
 #import "CommitVideoResult.h"
 #import "CommitVoiceResult.h"
+#import "BaiduMapLocationResult.h"
+
+
 
 #define MaxWordNumber           300
 
@@ -48,6 +51,9 @@
 
 @property (nonatomic, assign) BOOL                         isAnonymous;
 @property (nonatomic, assign) NSInteger                    reward;
+@property (nonatomic, strong) NSTimer                      *timer;
+@property (nonatomic, assign) BOOL                         firstLocation;
+@property (nonatomic, strong) BaiduMapLocationResult       *locationResult;
 
 @end
 
@@ -55,6 +61,7 @@
 
 - (void)dealloc {
     [_tapGesture.view removeGestureRecognizer:_tapGesture];
+    [_timer invalidate];
     
     [_audioPlayer stop];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
@@ -65,20 +72,18 @@
     // Do any additional setup after loading the view.
     [self setNavTitle:@"发布问题"];
     [self layoutPublishTableView];
-    [self beginGPS];
-    _isAnonymous = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self beginGPS];
+    });
     
-    _locString = @"北京 奎科科技大厦";
+    _isAnonymous = YES;
+    _firstLocation = YES;
+    
+    //设置定时检测，5分钟调用一次接口
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:300 target:self selector:@selector(refreshLocation) userInfo:nil repeats:YES];
+
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPhotoAction:)];
     self.tapGesture = tap;
-    
-    UITapGestureRecognizer *tap1 = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapView:)];
-    [self.view addGestureRecognizer:tap1];
-    
-}
-
-- (void)tapView:(UITapGestureRecognizer*)sender {
-    [_contentTextView resignFirstResponder];
 }
 
 - (void)beginGPS {
@@ -146,6 +151,7 @@
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer.moviePlayer];
         [_moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
+        [_moviePlayer.moviePlayer setMovieSourceType:MPMovieSourceTypeFile];
         [_moviePlayer.moviePlayer play];
         
         [self presentMoviePlayerViewControllerAnimated:_moviePlayer];
@@ -172,9 +178,9 @@
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
     
     [param setObject:[User sharedUser].user.uId forKey:@"userId"];
-    [param setObject:@"北京 海淀" forKey:@"address"];
-    [param setObject:@"1" forKey:@"longitude"];
-    [param setObject:@"1" forKey:@"latitude"];
+    [param setObject:[_locBtn titleForState:UIControlStateNormal] forKey:@"address"];
+    [param setObject:[_longitude stringValue] forKey:@"longitude"];
+    [param setObject:[_latitude stringValue] forKey:@"latitude"];
     [param setObject:@"生活" forKey:@"fenlei"];
     
     [param setObject:[NSString stringWithFormat:@"%ld",(long)_reward] forKey:@"reward"];
@@ -302,13 +308,33 @@
     
 }
 
+
 - (void)sendAction:(UIButton*)sender {
     [self publishQuestion];
+}
+
+- (void)refreshLocation {
+    
+    NSLog(@"latitude %@, longitude %@", [_latitude stringValue], [_longitude stringValue]);
+    NSMutableString *locURLString = [[NSMutableString alloc] init];
+    [locURLString appendString:BaiduGeocoderURL];
+    [locURLString appendFormat:@"ak=%@",BaiduMapLocationAK];
+    [locURLString appendFormat:@"&location=%@,%@",[_latitude stringValue],[_longitude stringValue]];
+    
+    NSString *bundleId = [[NSBundle mainBundle] bundleIdentifier];
+    [locURLString appendFormat:@"&mcode=%@",bundleId];
+    [locURLString appendString:@"&output=json&pois=0&coordtype=wgs84ll"];
+
+    [[NetworkTask sharedNetworkTask] startGETTaskURL:locURLString
+                                            delegate:self
+                                           resultObj:[[BaiduMapLocationResult alloc] init]
+                                          customInfo:@"location"];
 }
 
 - (void)toolAction:(UIButton*)sender {
     if (sender.tag == 300) {
         // 定位
+        [self refreshLocation];
     } else if (sender.tag == 301) {
         
         // 匿名设置
@@ -354,13 +380,17 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationChangeUserInfo object:nil];
         
         if (_publishType == PublishType_audio) {
+            
             NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
             filePath = [filePath stringByAppendingPathExtension:@"m4a"];
             [[FileCache sharedFileCache] removeFileForPath:filePath];
         } else if (_publishType == PublishType_video) {
+            
             NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_videoKeyString];
             filePath = [filePath stringByAppendingPathExtension:@"mp4"];
             [[FileCache sharedFileCache] removeFileForPath:filePath];
+            
+            [[SDImageCache sharedImageCache] removeImageForKey:_imageKey];
         } else {
             [[SDImageCache sharedImageCache] removeImageForKey:_imageKey];
         }
@@ -369,6 +399,17 @@
             //
             [self.navigationController popViewControllerAnimated:YES];
         }];
+    } else if ([customInfo isEqualToString:@"location"]) {
+        BaiduMapLocationResult *locRec = (BaiduMapLocationResult*)result;
+        if ([locRec poiRegions] && [[locRec poiRegions] count]) {
+            BaiduMapPOIRegions *poi = [[locRec poiRegions] objectAtIndex:0];
+            
+            NSString *poiName = poi.name;
+           // NSString *city = locRec.addressComponent.city;
+            
+            [_locBtn setTitle:poiName forState:UIControlStateNormal];
+        }
+        
     }
 }
 
@@ -386,11 +427,14 @@
     
     double userLatitude = newLocation.coordinate.latitude;
     double userLongitude = newLocation.coordinate.longitude;
-    NSLog(@"latitude %f, longitude %f", userLatitude, userLongitude);
-    
-    self.latitude = [NSNumber numberWithDouble:userLatitude];
-    self.longitude = [NSNumber numberWithDouble:userLatitude];
 
+    self.latitude = [NSNumber numberWithDouble:userLatitude];
+    self.longitude = [NSNumber numberWithDouble:userLongitude];
+    
+    if (_firstLocation) {
+        [self refreshLocation];
+        _firstLocation = NO;
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -485,6 +529,7 @@
         
             [audioControl.timeLabel setText:[NSString stringWithFormat:@"%ld\"",(long)_recordDur]];
             [audioControl setFrame:CGRectMake(10, 10, tableView.frame.size.width - 20, 55)];
+            
         } else if (_publishType == PublishType_image || _publishType == PublishType_video) {
             [contentImage addGestureRecognizer:_tapGesture];
             [contentImage setFrame:CGRectMake((tableView.frame.size.width - 200)/2.0, 10, 200, 120)];

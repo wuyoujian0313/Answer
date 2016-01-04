@@ -111,12 +111,12 @@
     
     [resultObj autoParseJsonData:responseObject];
     
-    if(resultObj.code != nil && [resultObj.code integerValue] == NetStatusCodeSuccess) {
+    if(resultObj.code != nil && NetStatusCodeSuc([resultObj.code integerValue])) {
         
         if (delegate != nil && [delegate respondsToSelector:@selector(netResultSuccessBack:forInfo:)]) {
             [delegate netResultSuccessBack:resultObj forInfo:customInfo];
         }
-    } else if(resultObj.code != nil && [resultObj.code integerValue] != NetStatusCodeSuccess ) {
+    } else if(resultObj.code != nil && NetStatusCodeFail([resultObj.code integerValue])) {
         
         if (delegate != nil && [delegate respondsToSelector:@selector(netResultFailBack:errorCode:forInfo:)]) {
             NSString *errorDesc = [NetworkTask errerDescription:[resultObj.code integerValue]];
@@ -406,6 +406,7 @@
     NSMutableString *desc = [[NSMutableString alloc] initWithCapacity:0];
     
     switch (statusCode) {
+        case NetStatusCodeMAPSuccess:
         case NetStatusCodeSuccess: {
             [desc appendString:@"成功"];
             break;

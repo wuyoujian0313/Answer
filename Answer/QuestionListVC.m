@@ -47,7 +47,9 @@
     } else if (_type == PageType_NearbyQuestionList) {
         [self setNavTitle:@"附近问题"];
         //
-        [self beginGPS];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self beginGPS];
+        });
     } else if (_type == PageType_AtMeQuestionList) {
         [self setNavTitle:@"@我的问题"];
         [_questionView beginRefreshing];

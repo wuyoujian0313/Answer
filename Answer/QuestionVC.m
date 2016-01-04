@@ -54,16 +54,6 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     _status = RecordStatus_none;
     [self setNavTitle:self.tabBarItem.title];
     [self layoutFuncView];
-
-    AVAudioSession *session = [AVAudioSession sharedInstance];
-    NSError *sessionError;
-    [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
-    [session setActive:YES error:nil];
-    
-    self.recordFileKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
-    self.photoKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
-    self.mp4KeyString = [NSString stringWithFormat:@"%@",[NSString UUID]];
-    self.videoScanImageKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
 }
 
 - (BOOL)canRecord {
@@ -127,6 +117,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     [session setActive:YES error:nil];
     
     //
+    self.recordFileKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
     NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
     filePath = [filePath stringByAppendingPathExtension:@"m4a"];
     [[FileCache sharedFileCache] removeFileForPath:filePath];
@@ -189,13 +180,13 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder0"]];
     } else if (0.06<lowPassResults<=0.13) {
         
-        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder0"]];
+        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder1"]];
     } else if (0.13<lowPassResults<=0.20) {
         
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder2"]];
     } else if (0.20<lowPassResults<=0.27) {
         
-        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder3"]];
+        [_recordAnimateView setImage:[UIImage imageNamed:@"recorder2"]];
     } else if (0.27<lowPassResults<=0.34) {
         
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder3"]];
@@ -217,7 +208,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
         
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder7"]];
         
-    } else if (0.83<lowPassResults<=0.9)  {
+    } else if (0.83<lowPassResults<=1.0)  {
         
         [_recordAnimateView setImage:[UIImage imageNamed:@"recorder8"]];
     } else {
@@ -395,7 +386,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     if ([presets containsObject:AVAssetExportPresetMediumQuality]) {
         AVAssetExportSession *exportSession = [[AVAssetExportSession alloc] initWithAsset:avAsset presetName:AVAssetExportPresetMediumQuality];
 
-        
+        self.mp4KeyString = [NSString stringWithFormat:@"%@",[NSString UUID]];
         NSString *mp4PathString = [[FileCache sharedFileCache] diskCachePathForKey:_mp4KeyString];
         mp4PathString = [mp4PathString stringByAppendingPathExtension:@"mp4"];
         exportSession.outputURL = [NSURL fileURLWithPath:mp4PathString];
@@ -428,7 +419,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
 }
 
 
--(void)getPreViewImg:(NSURL *)url {
+-(void)getVideoScanImage:(NSURL *)url {
     
     AVURLAsset *asset = [[AVURLAsset alloc] initWithURL:url options:nil];
     AVAssetImageGenerator *gen = [[AVAssetImageGenerator alloc] initWithAsset:asset];
@@ -440,6 +431,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     UIImage *img = [[UIImage alloc] initWithCGImage:image];
     CGImageRelease(image);
     
+    self.videoScanImageKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
     SDImageCache *imageCache = [SDImageCache sharedImageCache];
     [imageCache storeImage:img forKey:_videoScanImageKey];
     
@@ -567,6 +559,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
             CGSize scaleSize = [[UIScreen mainScreen] bounds].size;
             UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%ldx%ld",(long)scaleSize.width,(long)scaleSize.height]];
             
+            self.photoKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
             SDImageCache *imageCache = [SDImageCache sharedImageCache];
             [imageCache storeImage:imageScale forKey:_photoKey];
             
@@ -597,8 +590,9 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
                 CGSize scaleSize = [[UIScreen mainScreen] bounds].size;
                 UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%ldx%ld",(long)scaleSize.width,(long)scaleSize.height]];
             
+                self.photoKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
                 SDImageCache *imageCache = [SDImageCache sharedImageCache];
-                [imageCache storeImage:imageScale forKey:_videoScanImageKey];
+                [imageCache storeImage:imageScale forKey:_photoKey];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                 
@@ -620,7 +614,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
             ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
             [library writeVideoAtPathToSavedPhotosAlbum:url completionBlock:nil];
             
-            [self getPreViewImg:url];
+            [self getVideoScanImage:url];
             
             [picker dismissViewControllerAnimated:YES completion:^{
                 //

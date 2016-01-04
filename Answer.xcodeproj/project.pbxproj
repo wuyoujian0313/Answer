@@ -128,6 +128,7 @@
 		E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189441C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m */; };
 		E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189461C0EE6F60043DE9C /* UIImageView+WebCache.m */; };
 		E1D1896C1C0EE6F60043DE9C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189481C0EE6F60043DE9C /* UIView+WebCacheOperation.m */; };
+		E1D670D61C3A778F0055EAFD /* BaiduMapLocationResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D670D51C3A778F0055EAFD /* BaiduMapLocationResult.m */; };
 		E1E304671C36739D00B5D537 /* ModifyNicknameVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E304661C36739D00B5D537 /* ModifyNicknameVC.m */; };
 		E1EB9A161C2C091A00200059 /* QuestionListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1EB9A151C2C091A00200059 /* QuestionListVC.m */; };
 /* End PBXBuildFile section */
@@ -396,6 +397,8 @@
 		E1D189471C0EE6F60043DE9C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		E1D189481C0EE6F60043DE9C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Answer-Prefix.pch"; sourceTree = "<group>"; };
+		E1D670D41C3A778F0055EAFD /* BaiduMapLocationResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaiduMapLocationResult.h; sourceTree = "<group>"; };
+		E1D670D51C3A778F0055EAFD /* BaiduMapLocationResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaiduMapLocationResult.m; sourceTree = "<group>"; };
 		E1E304651C36739D00B5D537 /* ModifyNicknameVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModifyNicknameVC.h; sourceTree = "<group>"; };
 		E1E304661C36739D00B5D537 /* ModifyNicknameVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModifyNicknameVC.m; sourceTree = "<group>"; };
 		E1E304681C369BDF00B5D537 /* NotificationDefine.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationDefine.h; sourceTree = "<group>"; };
@@ -563,6 +566,8 @@
 				E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */,
 				E1A054B21C1F0EEB00A6DD56 /* ChangeNicknameResult.h */,
 				E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */,
+				E1D670D41C3A778F0055EAFD /* BaiduMapLocationResult.h */,
+				E1D670D51C3A778F0055EAFD /* BaiduMapLocationResult.m */,
 			);
 			name = APIModels;
 			sourceTree = "<group>";
@@ -1145,6 +1150,7 @@
 				E1C21E661C0F23090042E1F3 /* SystemMessageVC.m in Sources */,
 				E1D189521C0EE6F60043DE9C /* BaseVC.m in Sources */,
 				E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */,
+				E1D670D61C3A778F0055EAFD /* BaiduMapLocationResult.m in Sources */,
 				E14C21181C1EFB02003925B5 /* DeleteMessageResult.m in Sources */,
 				E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */,
 				E1C21E5A1C0F16F60042E1F3 /* RegisterVC.m in Sources */,

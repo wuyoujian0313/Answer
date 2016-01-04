@@ -14,6 +14,7 @@
 #import "MeVC.h"
 #import "LoginVC.h"
 #import "User.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface MainController ()<UITabBarControllerDelegate>
 
@@ -38,6 +39,13 @@
     } else {
         [self switchToLoginVCFrom:_rootVC];
     }
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
+        AVAudioSession *session = [AVAudioSession sharedInstance];
+        NSError *sessionError;
+        [session setCategory:AVAudioSessionCategoryPlayAndRecord error:&sessionError];
+        [session setActive:YES error:nil];
+    });
 }
 
 - (nullable UIViewController *)childViewControllerForStatusBarHidden {

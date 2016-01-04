@@ -27,6 +27,12 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>请点击“好”以允许访问</string>
+	<key>NSLocationUsageDescription</key>
+	<string>您的信息将被严格保密</string>
+	<key>NSLocationWhenInUseDescription</key>
+	<string>请点击“好”以允许访问</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
