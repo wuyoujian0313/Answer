@@ -47,8 +47,10 @@
 }
 
 -(void)setImageName:(NSString *)imageName withName:(NSString*)name {
-    _nameLabel.text = name;
-    _menuImageView.image = [UIImage imageNamed:imageName];
+    if (imageName && name) {
+        _nameLabel.text = name;
+        _menuImageView.image = [UIImage imageNamed:imageName];
+    }
 }
 
 @end

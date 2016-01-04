@@ -112,9 +112,6 @@
                                            customInfo:@"Guanzhu"];
 }
 
-
-
-
 -(void)playVideo {
     
     if (_videoURL != nil) {

@@ -59,6 +59,8 @@
     _mainMenuView.showsHorizontalScrollIndicator = NO;
     _mainMenuView.delegate = self;
     _mainMenuView.dataSource = self;
+    _mainMenuView.bounces = YES;
+    _mainMenuView.scrollEnabled = NO;
     
     [self.view addSubview:_mainMenuView];
 }
@@ -72,7 +74,7 @@
 
 //每个分区上的元素个数
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
+    return 33;
 }
 
 
@@ -98,7 +100,12 @@
     
     [cell sizeToFit];
     cell.indexPath = indexPath;
-    [cell setImageName:[[_menuData objectAtIndex:indexPath.row] objectForKey:@"image"] withName:[[_menuData objectAtIndex:indexPath.row] objectForKey:@"name"]];
+    if (indexPath.row < 4) {
+        [cell setImageName:[[_menuData objectAtIndex:indexPath.row] objectForKey:@"image"] withName:[[_menuData objectAtIndex:indexPath.row] objectForKey:@"name"]];
+    } else {
+        [cell setImageName:nil withName:nil];
+    }
+    
     
     return cell;
 }
