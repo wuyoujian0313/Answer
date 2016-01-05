@@ -11,10 +11,12 @@
 #import "MessagesResult.h"
 #import "NetworkTask.h"
 #import "User.h"
+#import "DeleteMessageResult.h"
 
 @interface SystemMessageVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,UIActionSheetDelegate>
 @property(nonatomic,strong)UITableView          *messageTableView;
-@property(nonatomic,strong)NSArray              *messageList;
+@property(nonatomic,strong)NSMutableArray       *messageList;
+@property(nonatomic,strong)NSIndexPath          *delIndexPath;
 @end
 
 @implementation SystemMessageVC
@@ -55,6 +57,102 @@
                                            customInfo:@"GetSystemMessage"];
 }
 
+
+- (void)deleteAllMessage {
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    [param setObject:[User sharedUser].user.uId forKey:@"userId"];
+    
+    [param setObject:@"delAll" forKey:@"wtype"];
+    [param setObject:@"0" forKey:@"uId"];//无效
+    
+    if (_messageType == MessageType_atMe) {
+        [param setObject:@"1" forKey:@"fenlei"];
+    } else if(_messageType == MessageType_system) {
+        [param setObject:@"2" forKey:@"fenlei"];
+    } else {
+        [param setObject:@"0" forKey:@"fenlei"];
+    }
+    
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_DelSystemMessage
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[DeleteMessageResult alloc] init]
+                                           customInfo:@"deleteAllMessage"];
+}
+
+
+- (void)deleteOneMessage:(MessageInfo*)message {
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    [param setObject:[User sharedUser].user.uId forKey:@"userId"];
+    
+    [param setObject:@"part" forKey:@"wtype"];
+    [param setObject:message.uId forKey:@"uId"];
+    
+    if (_messageType == MessageType_atMe) {
+        [param setObject:@"1" forKey:@"fenlei"];
+    } else if(_messageType == MessageType_system) {
+        [param setObject:@"2" forKey:@"fenlei"];
+    } else {
+        [param setObject:@"0" forKey:@"fenlei"];
+    }
+    
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_DelSystemMessage
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[DeleteMessageResult alloc] init]
+                                           customInfo:@"deleteOneMessage"];
+}
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"GetSystemMessage"] && result) {
+        MessagesResult *messageRec = (MessagesResult*)result;
+        [self setMessageList:[NSMutableArray arrayWithArray:messageRec.sysMessageList]];
+        
+        if (messageRec.sysMessageList && [messageRec.sysMessageList count]) {
+            UIBarButtonItem *rightButton = [self configBarButtonWithTitle:@"清除" target:self selector:@selector(navBarCleanAction:)];
+            self.navigationItem.rightBarButtonItem = rightButton;
+        } else {
+            self.navigationItem.rightBarButtonItem = nil;
+        }
+        
+        [_messageTableView reloadData];
+    } else if([customInfo isEqualToString:@"deleteAllMessage"] && result) {
+        // 删除所有消息
+        [FadePromptView showPromptStatus:@"删除成功" duration:1.0 finishBlock:^{
+            //
+            [_messageTableView setHidden:YES];
+            [self.navigationController popViewControllerAnimated:YES];
+            
+        }];
+    } else if ([customInfo isEqualToString:@"deleteOneMessage"]) {
+        
+        // 删除单个消息
+        if (_delIndexPath && _delIndexPath.row < [_messageList count]) {
+            [_messageList removeObjectAtIndex:_delIndexPath.row];
+            [FadePromptView showPromptStatus:@"删除成功" duration:1.0 finishBlock:^{
+                //
+                [_messageTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_delIndexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+            }];
+        }
+    }
+}
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
+}
+
 - (void)navBarCleanAction:(UIBarButtonItem*)sender {
     
     UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"确认清除所有消息？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"确定" otherButtonTitles:nil];
@@ -88,14 +186,6 @@
 }
 
 #pragma mark - UITableViewDataSource
-//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
-//
-//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
-
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
     return UITableViewCellEditingStyleDelete;
 }
@@ -104,7 +194,9 @@
     
     if (editingStyle == UITableViewCellEditingStyleDelete) {
         //
-        
+        MessageInfo *info = [_messageList objectAtIndex:indexPath.row];
+        self.delIndexPath = indexPath;
+        [self deleteOneMessage:info];
     }
 }
 
@@ -180,35 +272,13 @@
     return 50;
 }
 
-#pragma mark - NetworkTaskDelegate
--(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
-    [SVProgressHUD dismiss];
-    if ([customInfo isEqualToString:@"GetSystemMessage"] && result) {
-        MessagesResult *messageRec = (MessagesResult*)result;
-        [self setMessageList:messageRec.sysMessageList];
-        
-        if (messageRec.sysMessageList && [messageRec.sysMessageList count]) {
-            UIBarButtonItem *rightButton = [self configBarButtonWithTitle:@"清除" target:self selector:@selector(navBarCleanAction:)];
-            self.navigationItem.rightBarButtonItem = rightButton;
-        } else {
-            self.navigationItem.rightBarButtonItem = nil;
-        }
-        
-        [_messageTableView reloadData];
-    }
-}
 
--(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
-    [SVProgressHUD dismiss];
-    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
-        //
-    }];
-}
 
 #pragma mark - UIActionSheetDelegate
 -(void)actionSheet:(UIActionSheet *)actionSheet didDismissWithButtonIndex:(NSInteger)buttonIndex {
     if (buttonIndex == actionSheet.destructiveButtonIndex) {
-        [self.navigationController popViewControllerAnimated:YES];
+        
+        [self deleteAllMessage];
     }
 }
 

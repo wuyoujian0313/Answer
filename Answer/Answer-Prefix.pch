@@ -64,5 +64,5 @@
 #define API_UpdateHead              @"updateHead"
 #define API_AddTuWen                @"addTuWen"
 #define API_GetSystemMessage        @"getSystemMessage"
-
+#define API_DelSystemMessage        @"delSystemMessage"
 
