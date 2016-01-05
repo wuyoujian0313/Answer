@@ -51,11 +51,20 @@
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadQuestionView)
+                                                 name:NotificationCancelGuanzhu
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(stopPlay)
                                                  name:NotificationsStopPlayAudio
                                                object:nil];
     
     
+}
+
+- (void)reloadQuestionView {
+    [_questionView reloadQuestionView];
 }
 
 - (void)stopPlay {
@@ -90,7 +99,7 @@
 }
 
 
-- (void)commitGuanzhu:(NSString*)friendId isCancel:(BOOL)isCancel {
+- (void)commitGuanzhu:(NSString*)friendId isCancel:(BOOL)isCancel friend:(UserInfo*)friend {
     
     //
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
@@ -109,7 +118,7 @@
                                              forParam:param
                                              delegate:self
                                             resultObj:[[NetResultBase alloc] init]
-                                           customInfo:@"Guanzhu"];
+                                           customInfo:friend];
 }
 
 -(void)playVideo {
@@ -179,18 +188,32 @@
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
-    if ([customInfo isEqualToString:@"GetTuWenList"] && result) {
-        QuestionsResult *qResult = (QuestionsResult*)result;
-        [_questionView setQuestionsResult:qResult];
-    } else if ([customInfo isEqualToString:@"Guanzhu"] && result) {
-        [FadePromptView showPromptStatus:result.message duration:1.0 finishBlock:^{
+    
+    if ([customInfo isKindOfClass:[NSString class]] || [customInfo isKindOfClass:[NSMutableString class]]) {
+        
+        if ([customInfo isEqualToString:@"GetTuWenList"] && result) {
+            QuestionsResult *qResult = (QuestionsResult*)result;
+            [_questionView setQuestionsResult:qResult];
+            
+        } else if ([customInfo isEqualToString:@"GetFriends"] && result) {
+            MyFriendsResult *friendResult = (MyFriendsResult *)result;
+            
+            NSArray *friendIds = [[friendResult friendList] valueForKey:@"uId"];
+            
+            [[User sharedUser] saveFriends:friendIds];
+            [self requestQuestionList];
+        }
+    } else if ([customInfo isKindOfClass:[UserInfo class]]) {
+        
+        UserInfo *user = customInfo;
+        [[User sharedUser] addFriend:user.uId];
+        [FadePromptView showPromptStatus:@"关注成功" duration:1.0 finishBlock:^{
             //
+            [self reloadQuestionView];
         }];
-    } else if ([customInfo isEqualToString:@"GetFriends"] && result) {
-        MyFriendsResult *friendResult = (MyFriendsResult *)result;
-        [[User sharedUser] saveFriends:[friendResult friendList]];
-        [self requestQuestionList];
     }
+    
+   
 }
 
 
@@ -223,7 +246,7 @@
     switch (action) {
             
         case QuestionInfoViewAction_Attention:{
-            [self commitGuanzhu:question.userId isCancel:NO];
+            [self commitGuanzhu:question.userId isCancel:NO friend:userInfo];
             break;
         }
         case QuestionInfoViewAction_PlayAudio:

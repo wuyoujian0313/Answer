@@ -479,7 +479,7 @@
             TTTTimeIntervalFormatter *formatter = [[TTTTimeIntervalFormatter alloc] init];
             [formatter setLocale:[NSLocale currentLocale]];
             [formatter setUsesIdiomaticDeicticExpressions:NO];
-            [formatter setUsesAbbreviatedCalendarUnits:YES];
+            [formatter setUsesAbbreviatedCalendarUnits:NO];
             
             [timeLabel setText:[formatter stringForTimeInterval:timeInterval]];
             [timeLabel setFrame:CGRectMake(left, top, 120, 40)];

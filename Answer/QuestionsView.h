@@ -27,4 +27,6 @@
 - (void)beginRefreshing;
 - (void)setQuestionsResult:(QuestionsResult *)result;
 
+- (void)reloadQuestionView;
+
 @end

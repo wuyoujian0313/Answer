@@ -88,6 +88,10 @@
     }
 }
 
+- (void)reloadQuestionView {
+    [_questionTableView reloadData];
+}
+
 
 - (void)setQuestionsResult:(QuestionsResult *)result {
     self.questions = result;

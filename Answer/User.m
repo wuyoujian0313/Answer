@@ -25,7 +25,7 @@
     if (self = [super init]) {
         self.user = [[UserInfo alloc] init];
         self.account = [[UserAccountResult alloc] init];
-        self.friends = [[NSMutableArray alloc] init];
+        self.friendIds = [[NSMutableSet alloc] init];
         self.userHeads = [[NSMutableDictionary alloc] init];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -57,29 +57,19 @@
 }
 
 - (BOOL)isFriend:(NSString*)userId {
-    
-    BOOL isFriend = NO;
-    
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",userId];
-    NSArray *users = [_friends filteredArrayUsingPredicate:predicate];
-    
-    if (users && [users count]) {
-        isFriend = YES;
-    }
-    
-    return isFriend;
+    return [_friendIds containsObject:userId];
 }
 
-- (void)saveFriends:(NSArray*)friends {
+- (void)saveFriends:(NSArray<NSString*>*)friends {
     if (friends) {
-        [self.friends addObjectsFromArray:friends];
+        [self.friendIds addObjectsFromArray:friends];
     }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    if (_friends) {
+    if (_friendIds) {
         
-        NSData *friendsData = [NSKeyedArchiver archivedDataWithRootObject:_friends];
-        [userDefaults setObject:friendsData forKey:UserDefault_Friends];
+        NSData *friendIdsData = [NSKeyedArchiver archivedDataWithRootObject:_friendIds];
+        [userDefaults setObject:friendIdsData forKey:UserDefault_Friends];
     }
     [userDefaults synchronize];
 }
@@ -88,7 +78,7 @@
     
     self.user = [[UserInfo alloc] init];;
     self.account = [[UserAccountResult alloc] init];
-    self.friends = [[NSMutableArray alloc] init];
+    self.friendIds = [[NSMutableSet alloc] init];
     self.userHeads = [[NSMutableDictionary alloc] init];
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
@@ -96,6 +86,36 @@
     [userDefaults setObject:nil forKey:UserDefault_Account];
     [userDefaults setObject:nil forKey:UserDefault_Friends];
     [userDefaults synchronize];
+}
+
+- (void)deleteFriend:(NSString*)userId {
+    
+    if (userId) {
+        [_friendIds removeObject:userId];
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        if (_friendIds) {
+            NSData *friendIdsData = [NSKeyedArchiver archivedDataWithRootObject:_friendIds];
+            [userDefaults setObject:friendIdsData forKey:UserDefault_Friends];
+        }
+        
+        [userDefaults synchronize];
+    }
+}
+
+- (void)addFriend:(NSString*)userId {
+    
+    if (userId) {
+        [_friendIds addObject:userId];
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        if (_friendIds) {
+            NSData *friendIdsData = [NSKeyedArchiver archivedDataWithRootObject:_friendIds];
+            [userDefaults setObject:friendIdsData forKey:UserDefault_Friends];
+        }
+        
+        [userDefaults synchronize];
+    }
 }
 
 
@@ -120,10 +140,9 @@
         [userDefaults setObject:accountData forKey:UserDefault_Account];
     }
     
-    if (_friends) {
-        
-        NSData *friendsData = [NSKeyedArchiver archivedDataWithRootObject:_friends];
-        [userDefaults setObject:friendsData forKey:UserDefault_Friends];
+    if (_friendIds) {
+        NSData *friendIdsData = [NSKeyedArchiver archivedDataWithRootObject:_friendIds];
+        [userDefaults setObject:friendIdsData forKey:UserDefault_Friends];
     }
     
     [userDefaults synchronize];
@@ -160,9 +179,7 @@
     NSData *friendsData = [userDefaults objectForKey:UserDefault_Friends];
     if (friendsData && [friendsData isKindOfClass:[NSData class]]) {
         NSArray *friends = [NSKeyedUnarchiver unarchiveObjectWithData:friendsData];
-        if (friends) {
-            [self.friends addObjectsFromArray:friends];
-        }
+        [self.friendIds addObjectsFromArray:friends];
     }
 }
 

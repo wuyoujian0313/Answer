@@ -19,7 +19,7 @@
 
 @interface MyFriendsVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 @property(nonatomic,strong)UITableView          *friendTableView;
-@property(nonatomic,strong)NSArray              *friendList;
+@property(nonatomic,strong)NSMutableArray       *friendList;
 @property(nonatomic,strong)NSMutableArray       *selectFriendIds;
 @end
 
@@ -127,6 +127,21 @@
     }
 }
 
+- (void)commitGuanzhu:(NSString*)friendId index:(NSIndexPath*)indexPath {
+    
+    //
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          friendId,@"friendId",
+                          [User sharedUser].user.uId,@"userId",nil];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Unguanzhu
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[NetResultBase alloc] init]
+                                           customInfo:indexPath];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [_friendList count];
@@ -200,7 +215,36 @@
     return cell;
 }
 
+
+
 #pragma mark - UITableViewDelegate
+
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return YES;
+//}
+//
+//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return YES;
+//}
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //
+        UserInfo * user = [_friendList objectAtIndex:indexPath.row];
+        [self commitGuanzhu:user.uId index:indexPath];
+        
+    }
+}
+
+- (nullable NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return @"取消关注";
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
@@ -215,18 +259,48 @@
         vc.type = PageType_FriendQuestionList;
         [self.navigationController pushViewController:vc animated:YES];
     }
-    
 }
 
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
-    if ([customInfo isEqualToString:@"GetFriends"] && result) {
-        MyFriendsResult *friendResult = (MyFriendsResult *)result;
-        [[User sharedUser] saveFriends:[friendResult friendList]];
-        [self setFriendList:[friendResult friendList]];
-
-        [_friendTableView reloadData];
+    
+    if ([customInfo isKindOfClass:[NSString class]] || [customInfo isKindOfClass:[NSMutableString class]]) {
+        if ([customInfo isEqualToString:@"GetFriends"] && result) {
+            MyFriendsResult *friendResult = (MyFriendsResult *)result;
+            
+            NSArray *friendIds = [[friendResult friendList] valueForKey:@"uId"];
+            
+            [[User sharedUser] saveFriends:friendIds];
+            [self setFriendList:[NSMutableArray arrayWithArray:[friendResult friendList]]];
+            
+            if ([_friendList count] == 0) {
+                [_friendTableView setHidden:YES];
+            } else {
+                [_friendTableView reloadData];
+            }
+        }
+    } else {
+        // 取消关注
+        if ([customInfo isKindOfClass:[NSIndexPath class]]) {
+            NSIndexPath *indexPath = customInfo;
+            if (indexPath.row < [_friendList count]) {
+                
+                UserInfo *user = [_friendList objectAtIndex:[indexPath row]];
+                [[User sharedUser] deleteFriend:user.uId];
+                
+                [_friendList removeObjectAtIndex:[indexPath row]];
+                if ([_friendList count] == 0) {
+                    [_friendTableView setHidden:YES];
+                } else {
+                    [_friendTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationMiddle];
+                }
+                
+                [[NSNotificationCenter defaultCenter] postNotificationName:NotificationCancelGuanzhu object:nil];
+                
+            }
+        }
+        
     }
 }
 

@@ -10,7 +10,8 @@
 #define NotificationDefine_h
 
 #define NotificationChangeUserInfo     @"NotificationChangeUserInfo"
-#define NotificationsStopPlayAudio          @"NotificationsStopPlayAudio"
+#define NotificationCancelGuanzhu      @"NotificationCancelGuanzhu"
+#define NotificationsStopPlayAudio     @"NotificationsStopPlayAudio"
 
 
 #endif /* NotificationDefine_h */
