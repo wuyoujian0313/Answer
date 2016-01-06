@@ -416,6 +416,8 @@
            // NSString *city = locRec.addressComponent.city;
             
             [_locBtn setTitle:poiName forState:UIControlStateNormal];
+        } else if(locRec.formatted_address && [locRec.formatted_address length]) {
+            [_locBtn setTitle:locRec.formatted_address forState:UIControlStateNormal];
         }
         
     }
