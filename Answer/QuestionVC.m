@@ -151,6 +151,11 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
 #endif
 }
 
+-(void)popBack {
+    [_timer invalidate];
+    [super popBack];
+}
+
 - (void)detectionVoice {
     [_audioRecoder updateMeters];//刷新音量数据
     

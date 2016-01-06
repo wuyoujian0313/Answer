@@ -126,14 +126,14 @@
 
 #pragma mark - Config Top Bar Button
 - (UIBarButtonItem*)configBackButton {
-    UIBarButtonItem *itemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(back)];
+    UIBarButtonItem *itemBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back"] style:UIBarButtonItemStylePlain target:self action:@selector(popBack)];
     
     self.navigationItem.leftBarButtonItem = itemBtn;
 
     return itemBtn;
 }
 
-- (void)back {
+- (void)popBack {
     [self.navigationController popViewControllerAnimated:YES];
 }
 

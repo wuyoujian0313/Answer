@@ -28,6 +28,8 @@
 - (void)configLeftBarButtonWithCustomView:(UIView*)aView;
 - (void)configTitleWithImage:(NSString*)imagename;
 
+- (void)popBack;
+
 
 #pragma mark - 子类是实现
 - (void)regieditKeyboardNotification;

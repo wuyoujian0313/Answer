@@ -52,7 +52,6 @@
     [self setMeTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
-    [tableView setBounces:NO];
     [tableView setBackgroundColor:[UIColor clearColor]];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];

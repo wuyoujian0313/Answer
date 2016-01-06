@@ -37,6 +37,9 @@
 
 -(void)dealloc {
     [_timer invalidate];
+    if (_type == PageType_NearbyQuestionList) {
+        [_locmanager stopUpdatingLocation];
+    }
 }
 
 - (void)viewDidLoad {
@@ -55,8 +58,9 @@
     } else if (_type == PageType_NearbyQuestionList) {
         [self setNavTitle:@"附近问题"];
         //
+        __weak QuestionListVC *weakSelf = self;
         dispatch_async(dispatch_get_main_queue(), ^{
-            [self beginGPS];
+            [weakSelf beginGPS];
         });
         
         //设置定时检测，5分钟调用一次接口
@@ -73,6 +77,11 @@
 
 - (void)refreshLocation {
     [_questionView beginRefreshing];
+}
+
+-(void)popBack {
+    [_timer invalidate];
+    [super popBack];
 }
 
 - (void)beginGPS {
@@ -219,6 +228,7 @@
                 [_locmanager stopUpdatingLocation];
                 break;
             case kCLErrorLocationUnknown:
+                [_locmanager stopUpdatingLocation];
                 break;
             default:
                 break;

@@ -63,6 +63,8 @@
     [_tapGesture.view removeGestureRecognizer:_tapGesture];
     [_timer invalidate];
     
+    [_locmanager stopUpdatingLocation];
+    
     [_audioPlayer stop];
     [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
 }
@@ -72,8 +74,9 @@
     // Do any additional setup after loading the view.
     [self setNavTitle:@"发布问题"];
     [self layoutPublishTableView];
+    __weak PublishQuestionVC *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self beginGPS];
+        [weakSelf beginGPS];
     });
     
     _isAnonymous = YES;
@@ -84,6 +87,11 @@
 
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPhotoAction:)];
     self.tapGesture = tap;
+}
+
+-(void)popBack {
+    [_timer invalidate];
+    [super popBack];
 }
 
 - (void)beginGPS {
@@ -444,6 +452,7 @@
                 [_locmanager stopUpdatingLocation];
                 break;
             case kCLErrorLocationUnknown:
+                [_locmanager stopUpdatingLocation];
                 break;
             default:
                 break;
