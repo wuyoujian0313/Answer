@@ -9,6 +9,11 @@
 #import "MyWalletVC.h"
 #import "MenuCollectionViewCell.h"
 #import "LineView.h"
+#import "RechangeVC.h"
+#import "MyRecordVC.h"
+#import "ToCashVC.h"
+#import "MyBalanceVC.h"
+
 
 @interface MyWalletVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
 @property (nonatomic, strong) UICollectionView          *mainMenuView;
@@ -124,6 +129,24 @@
 
 //点击元素触发事件
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == 0) {
+        //充值
+        RechangeVC *vc = [[RechangeVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 1) {
+        //余额
+        MyBalanceVC *vc = [[MyBalanceVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 2) {
+        //提现
+        ToCashVC *vc = [[ToCashVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    } else if (indexPath.row == 3) {
+        //提现
+        MyRecordVC *vc = [[MyRecordVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

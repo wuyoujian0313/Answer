@@ -50,6 +50,11 @@
 		E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */; };
 		E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */; };
 		E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */; };
+		E1A441201C3CB64000C3ECD3 /* RechangeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A4411F1C3CB64000C3ECD3 /* RechangeVC.m */; };
+		E1A441231C3CB67A00C3ECD3 /* MyRecordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A441221C3CB67A00C3ECD3 /* MyRecordVC.m */; };
+		E1A441261C3CB6CA00C3ECD3 /* ToCashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A441251C3CB6CA00C3ECD3 /* ToCashVC.m */; };
+		E1A441291C3CB71800C3ECD3 /* MyBalanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A441281C3CB71800C3ECD3 /* MyBalanceVC.m */; };
+		E1A4412C1C3CB9B000C3ECD3 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A4412B1C3CB9B000C3ECD3 /* AboutVC.m */; };
 		E1AE75301C290CAE0035AAEE /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */; };
 		E1AE759F1C2977570035AAEE /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */; };
 		E1B297981C37DD0700872FF0 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B297971C37DD0700872FF0 /* SZTextView.m */; };
@@ -236,6 +241,16 @@
 		E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeHeadImgResult.m; sourceTree = "<group>"; };
 		E1A054B21C1F0EEB00A6DD56 /* ChangeNicknameResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeNicknameResult.h; sourceTree = "<group>"; };
 		E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeNicknameResult.m; sourceTree = "<group>"; };
+		E1A4411E1C3CB64000C3ECD3 /* RechangeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechangeVC.h; sourceTree = "<group>"; };
+		E1A4411F1C3CB64000C3ECD3 /* RechangeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechangeVC.m; sourceTree = "<group>"; };
+		E1A441211C3CB67A00C3ECD3 /* MyRecordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyRecordVC.h; sourceTree = "<group>"; };
+		E1A441221C3CB67A00C3ECD3 /* MyRecordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyRecordVC.m; sourceTree = "<group>"; };
+		E1A441241C3CB6CA00C3ECD3 /* ToCashVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ToCashVC.h; sourceTree = "<group>"; };
+		E1A441251C3CB6CA00C3ECD3 /* ToCashVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ToCashVC.m; sourceTree = "<group>"; };
+		E1A441271C3CB71800C3ECD3 /* MyBalanceVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBalanceVC.h; sourceTree = "<group>"; };
+		E1A441281C3CB71800C3ECD3 /* MyBalanceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBalanceVC.m; sourceTree = "<group>"; };
+		E1A4412A1C3CB9B000C3ECD3 /* AboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
+		E1A4412B1C3CB9B000C3ECD3 /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
 		E1AE752E1C290CAE0035AAEE /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		E1AE759D1C2977570035AAEE /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
@@ -700,6 +715,16 @@
 				E197621F1C26B2FC0093A935 /* SetVC.m */,
 				E1E304651C36739D00B5D537 /* ModifyNicknameVC.h */,
 				E1E304661C36739D00B5D537 /* ModifyNicknameVC.m */,
+				E1A4411E1C3CB64000C3ECD3 /* RechangeVC.h */,
+				E1A4411F1C3CB64000C3ECD3 /* RechangeVC.m */,
+				E1A441211C3CB67A00C3ECD3 /* MyRecordVC.h */,
+				E1A441221C3CB67A00C3ECD3 /* MyRecordVC.m */,
+				E1A441241C3CB6CA00C3ECD3 /* ToCashVC.h */,
+				E1A441251C3CB6CA00C3ECD3 /* ToCashVC.m */,
+				E1A441271C3CB71800C3ECD3 /* MyBalanceVC.h */,
+				E1A441281C3CB71800C3ECD3 /* MyBalanceVC.m */,
+				E1A4412A1C3CB9B000C3ECD3 /* AboutVC.h */,
+				E1A4412B1C3CB9B000C3ECD3 /* AboutVC.m */,
 			);
 			name = "我";
 			sourceTree = "<group>";
@@ -1132,6 +1157,7 @@
 				E1C21E571C0F16A40042E1F3 /* LoginVC.m in Sources */,
 				E19762011C2673220093A935 /* NSAttributedString+Attributes.m in Sources */,
 				E197620E1C26825F0093A935 /* SVProgressHUD.m in Sources */,
+				E1A441201C3CB64000C3ECD3 /* RechangeVC.m in Sources */,
 				E14C20FA1C1EF074003925B5 /* QuestionsResult.m in Sources */,
 				E1D1894D1C0EE6F60043DE9C /* AFSecurityPolicy.m in Sources */,
 				E16E6D321C2198A000751E1D /* QuestionTableViewCell.m in Sources */,
@@ -1164,12 +1190,15 @@
 				E1D189511C0EE6F60043DE9C /* AFURLSessionManager.m in Sources */,
 				E1B78A3A1C22608300A2E384 /* TTTUnitOfInformationFormatter.m in Sources */,
 				E1A054B41C1F0EEB00A6DD56 /* ChangeNicknameResult.m in Sources */,
+				E1A4412C1C3CB9B000C3ECD3 /* AboutVC.m in Sources */,
+				E1A441231C3CB67A00C3ECD3 /* MyRecordVC.m in Sources */,
 				E1B78A501C22623900A2E384 /* XHImageViewer.m in Sources */,
 				E1B78A3B1C22608300A2E384 /* TTTURLRequestFormatter.m in Sources */,
 				E17243351C33BAFB00A00F8C /* HPGrowingTextView.m in Sources */,
 				E1D1896A1C0EE6F60043DE9C /* UIImageView+HighlightedWebCache.m in Sources */,
 				E1C21E6F1C0F23FF0042E1F3 /* QuestionsView.m in Sources */,
 				E1B78A5F1C2263B600A2E384 /* MJRefreshBaseView.m in Sources */,
+				E1A441261C3CB6CA00C3ECD3 /* ToCashVC.m in Sources */,
 				E14C21061C1EF61B003925B5 /* AnswerInfo.m in Sources */,
 				E1B78A621C2263B600A2E384 /* MJRefreshHeaderView.m in Sources */,
 				E1B78A341C22608300A2E384 /* TTTArrayFormatter.m in Sources */,
@@ -1226,6 +1255,7 @@
 				E19762041C2673220093A935 /* OHParagraphStyle.m in Sources */,
 				E1B78A371C22608300A2E384 /* TTTNameFormatter.m in Sources */,
 				E1D189691C0EE6F60043DE9C /* UIImage+WebP.m in Sources */,
+				E1A441291C3CB71800C3ECD3 /* MyBalanceVC.m in Sources */,
 				E1D188BB1C0ED4880043DE9C /* main.m in Sources */,
 				E1D1895F1C0EE6F60043DE9C /* SDImageCache.m in Sources */,
 			);

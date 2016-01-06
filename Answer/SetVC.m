@@ -12,6 +12,7 @@
 #import "LoginoutResult.h"
 #import "NetworkTask.h"
 #import "User.h"
+#import "AboutVC.h"
 
 @interface SetVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,UIActionSheetDelegate>
 @property(nonatomic,strong)UITableView          *setTableView;
@@ -131,12 +132,12 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0: {
-            
             // 关于图问
+            AboutVC *vc = [[AboutVC alloc] init];
+            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case 1: {
-            
             // 推荐给好友
             break;
         }
