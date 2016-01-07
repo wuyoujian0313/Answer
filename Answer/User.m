@@ -178,8 +178,8 @@
     
     NSData *friendsData = [userDefaults objectForKey:UserDefault_Friends];
     if (friendsData && [friendsData isKindOfClass:[NSData class]]) {
-        NSArray *friends = [NSKeyedUnarchiver unarchiveObjectWithData:friendsData];
-        [self.friendIds addObjectsFromArray:friends];
+        NSSet *friends = [NSKeyedUnarchiver unarchiveObjectWithData:friendsData];
+        [self.friendIds setSet:friends];
     }
 }
 

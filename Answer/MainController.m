@@ -7,6 +7,7 @@
 //
 
 #import "MainController.h"
+#import <AVFoundation/AVFoundation.h>
 #import "AnswerCircleVC.h"
 #import "DiscoverVC.h"
 #import "QuestionVC.h"
@@ -14,16 +15,16 @@
 #import "MeVC.h"
 #import "LoginVC.h"
 #import "User.h"
-#import <AVFoundation/AVFoundation.h>
+
 
 @interface MainController ()<UITabBarControllerDelegate>
 
 @property (nonatomic, strong) UIViewController              *rootVC;
+@property (nonatomic, strong) WYJNavigationController       *loginNav;
 @property (nonatomic, strong) UITabBarController            *homeVC;
 @property (nonatomic, strong) UIViewController              *currentVC;
 @property (nonatomic, strong) UIViewController              *currentTabVC;
 
-@property (nonatomic, strong) WYJNavigationController       *loginNav;
 @end
 
 @implementation MainController
