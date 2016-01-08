@@ -7,6 +7,7 @@
 //
 
 #import "QuestionBaseVC.h"
+#import "FileCache.h"
 
 @interface QuestionBaseVC ()<AVAudioPlayerDelegate>
 @end
@@ -31,17 +32,44 @@
 }
 
 - (void)playVideo {
-    
-    if (_videoURL != nil) {
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:_videoURL];
+
+    __weak QuestionBaseVC *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        QuestionBaseVC *sself = weakSelf;
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer.moviePlayer];
-        [_moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
-        [_moviePlayer.moviePlayer play];
-        
-        [self presentMoviePlayerViewControllerAnimated:_moviePlayer];
-        
-    }
+        if (sself.videoURL != nil) {
+            
+            FileCache *sharedCache = [FileCache sharedFileCache];
+            NSString *cachePath = [sharedCache diskCachePathForKey:[sself.videoURL absoluteString]];
+            cachePath = [cachePath stringByAppendingPathExtension:@"mp4"];
+            
+            NSData *data = [sharedCache dataFromCacheForPath:cachePath];
+            if (data == nil) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSData *ndata = [NSData dataWithContentsOfURL:sself.videoURL];
+                    [sharedCache writeData:ndata path:cachePath];
+                });
+                
+                
+                sself.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:self.videoURL];
+                
+                [[NSNotificationCenter defaultCenter] addObserver:sself selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:sself.moviePlayer.moviePlayer];
+                [sself.moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
+                [sself.moviePlayer.moviePlayer play];
+                
+                [sself presentMoviePlayerViewControllerAnimated:sself.moviePlayer];
+            } else {
+                sself.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:cachePath]];
+                
+                [[NSNotificationCenter defaultCenter] addObserver:sself selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:sself.moviePlayer.moviePlayer];
+                [sself.moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
+                [sself.moviePlayer.moviePlayer play];
+                
+                [sself presentMoviePlayerViewControllerAnimated:sself.moviePlayer];
+            }
+        }
+    });
 }
 
 - (void)movieFinishedCallback:(NSNotification *)notify {
@@ -55,20 +83,38 @@
 - (void)playReordFile {
     
     [_audioPlayer stop];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
 #if TARGET_IPHONE_SIMULATOR
 #elif TARGET_OS_IPHONE
     // 播放
     
-    NSError *playerError;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfURL:_audioURL] error:&playerError];
-    if (_audioPlayer) {
-        _audioPlayer.delegate = self;
-        [_audioPlayer prepareToPlay];
-        [_audioPlayer play];
-    } else {
-        NSLog(@"ERror creating player: %@", [playerError description]);
-    }
+    __weak QuestionBaseVC *weakSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSError *playerError;
+        
+        QuestionBaseVC *sself = weakSelf;
+        
+        FileCache *sharedCache = [FileCache sharedFileCache];
+        NSData *data = [sharedCache dataFromCacheForKey:[sself.audioURL absoluteString]];
+        if (data == nil) {
+            
+            data = [NSData dataWithContentsOfURL:sself.audioURL];
+            [sharedCache writeData:data forKey:[sself.audioURL absoluteString]];
+        }
+        
+        sself.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&playerError];
+        if (sself.audioPlayer) {
+            sself.audioPlayer.delegate = self;
+            [sself.audioPlayer prepareToPlay];
+            [sself.audioPlayer play];
+            
+        } else {
+            NSLog(@"ERror creating player: %@", [playerError description]);
+        }
+        
+        
+    });
+    
+    
 #endif
     
 }

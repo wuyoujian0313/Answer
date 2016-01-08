@@ -40,7 +40,7 @@
     [_otherTextField resignFirstResponder];
     if (sender.tag == 201) {
         if (_otherTextField.text == nil || [_otherTextField.text length] == 0) {
-            [FadePromptView showPromptStatus:@"请入金额" duration:1.0 finishBlock:^{
+            [FadePromptView showPromptStatus:@"请入金额(最大999)" duration:1.0 finishBlock:^{
                 //
                 [_otherTextField becomeFirstResponder];
             }];
@@ -147,7 +147,7 @@
     [panelView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:panelView];
     
-    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake((panelView.frame.size.width - 120)/2.0, 0, 120, 40)];
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake((panelView.frame.size.width - 120)/2.0, 0, 140, 40)];
     self.otherTextField = textField;
     [textField setHidden:YES];
     [textField setDelegate:self];
@@ -157,7 +157,7 @@
     [textField setTextAlignment:NSTextAlignmentCenter];
     [textField setKeyboardType:UIKeyboardTypeNumberPad];
     [textField setClearsOnBeginEditing:YES];
-    [textField setPlaceholder:@"请入其他金额"];
+    [textField setPlaceholder:@"请入金额(最大999元)"];
     [panelView addSubview:textField];
     
     
@@ -199,7 +199,20 @@
 
 
 #pragma mark - UITextFieldDelegate
-- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    NSMutableString *textString = [NSMutableString stringWithString:textField.text];
+    [textString replaceCharactersInRange:range withString:string];
+    
+    if ([textString length] > 3) {
+        
+        [FadePromptView showPromptStatus:@"最大金额999元)" duration:1.0 finishBlock:^{
+            //
+            [_otherTextField becomeFirstResponder];
+        }];
+        
+        return NO;
+    }
     
     return YES;
 }

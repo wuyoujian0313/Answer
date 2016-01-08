@@ -37,6 +37,8 @@
  */
 - (void)writeData:(NSData *)data forKey:(NSString *)key;
 
+- (void)writeData:(NSData *)data path:(NSString *)path;
+
 /**
  * 从缓存中获取数据
  */

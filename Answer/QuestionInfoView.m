@@ -548,6 +548,7 @@
         
     }
     
+    
     if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:userInfo:)]) {
         [_delegate questionInfoViewAction:tag questionInfo:_questionInfo userInfo:_userInfo];
     }
