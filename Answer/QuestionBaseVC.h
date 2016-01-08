@@ -19,4 +19,8 @@
 @property(nonatomic,strong)NSURL                        *videoURL;
 @property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
 
+
+- (void)playVideo;
+- (void)playReordFile;
+
 @end

@@ -9,10 +9,6 @@
 #import "QuestionListVC.h"
 #import "QuestionsView.h"
 #import "QuestionTableViewCell.h"
-#import <CoreMedia/CoreMedia.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AVFoundation/AVFoundation.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import "QuestionsResult.h"
 #import "NetworkTask.h"
 #import "User.h"
@@ -22,16 +18,12 @@
 
 @interface QuestionListVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate,CLLocationManagerDelegate,MJRefreshBaseViewDelegate>
 @property (nonatomic, strong) QuestionsView                 *questionView;
-@property (nonatomic, strong) AVAudioPlayer                 *audioPlayer;
-@property (nonatomic, strong) MPMoviePlayerViewController   *moviePlayer;
 @property (nonatomic, strong) CLLocationManager             *locmanager;
 @property (nonatomic, strong) NSNumber                      *latitude;
 @property (nonatomic, strong) NSNumber                      *longitude;
 @property (nonatomic, assign) BOOL                          firstLocation;
 @property (nonatomic, strong) NSTimer                       *timer;
-@property (nonatomic, strong) NSURL                         *audioURL;
-@property (nonatomic, strong) NSURL                         *videoURL;
-@property(nonatomic,copy)NSString                           *guanzhuFriendId;
+@property (nonatomic, copy) NSString                        *guanzhuFriendId;
 @end
 
 @implementation QuestionListVC
@@ -157,46 +149,6 @@
                                            customInfo:@"GetTuWenList"];
 }
 
--(void)playVideo {
-    
-    if (_videoURL != nil) {
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:_videoURL];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer.moviePlayer];
-        [_moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
-        [_moviePlayer.moviePlayer play];
-        
-        [self presentMoviePlayerViewControllerAnimated:_moviePlayer];
-        
-    }
-}
-
--(void)movieFinishedCallback:(NSNotification *)notify {
-    
-    MPMoviePlayerController *vc = [notify object];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:vc];
-    
-    _moviePlayer = nil;
-}
-
--(void)playReordFile {
-    
-#if TARGET_IPHONE_SIMULATOR
-#elif TARGET_OS_IPHONE
-    // 播放
-    NSError *playerError;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfURL:_audioURL] error:&playerError];
-    if (_audioPlayer) {
-        _audioPlayer.delegate = self;
-        [_audioPlayer prepareToPlay];
-        [_audioPlayer play];
-    } else {
-        NSLog(@"ERror creating player: %@", [playerError description]);
-    }
-#endif
-    
-}
-
 - (void)commitGuanzhu:(NSString*)friendId {
     
     //
@@ -223,6 +175,11 @@
     _questionView.refreshDelegate = self;
     
     [self.view addSubview:_questionView];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - CLLocationManagerDelegate
@@ -255,6 +212,8 @@
         }
     }
 }
+
+
 
 
 #pragma mark - NetworkTaskDelegate
@@ -290,22 +249,6 @@
 - (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView {
     
 }
-
-#pragma mark - AVAudioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    [_audioPlayer stop];
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    [_audioPlayer stop];
-}
-
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
 
 #pragma mark - QuestionTableViewCellDelegate
 - (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {

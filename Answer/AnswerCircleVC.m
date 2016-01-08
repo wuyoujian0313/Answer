@@ -9,10 +9,6 @@
 #import "AnswerCircleVC.h"
 #import "QuestionsView.h"
 #import "QuestionTableViewCell.h"
-#import <CoreMedia/CoreMedia.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AVFoundation/AVFoundation.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import "QuestionsResult.h"
 #import "NetworkTask.h"
 #import "User.h"
@@ -20,12 +16,8 @@
 #import "MyFriendsResult.h"
 
 
-@interface AnswerCircleVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate,MJRefreshBaseViewDelegate>
+@interface AnswerCircleVC ()<QuestionInfoViewDelegate,NetworkTaskDelegate,MJRefreshBaseViewDelegate>
 @property(nonatomic,strong)QuestionsView                *questionView;
-@property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
-@property(nonatomic,strong)NSURL                        *audioURL;
-@property(nonatomic,strong)NSURL                        *videoURL;
-@property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
 @property(nonatomic,assign)BOOL                         isFristRefreshing;
 @property(nonatomic,copy)NSString                       *guanzhuFriendId;
 @end
@@ -56,21 +48,12 @@
                                                  name:NotificationGuanzhu
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(stopPlay)
-                                                 name:NotificationsStopPlayAudio
-                                               object:nil];
-    
-    
 }
 
 - (void)reloadQuestionView {
     [_questionView reloadQuestionView];
 }
 
-- (void)stopPlay {
-    [_audioPlayer stop];
-}
 
 - (void)requestMyFriendsList {
     
@@ -115,63 +98,12 @@
                                            customInfo:@"Guanzhu"];
 }
 
--(void)playVideo {
-    
-    if (_videoURL != nil) {
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:_videoURL];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer.moviePlayer];
-        [_moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
-        [_moviePlayer.moviePlayer play];
-        
-        [self presentMoviePlayerViewControllerAnimated:_moviePlayer];
-        
-    }
-}
-
--(void)movieFinishedCallback:(NSNotification *)notify {
-    
-    MPMoviePlayerController *vc = [notify object];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:vc];
-    
-    _moviePlayer = nil;
-}
-
--(void)playReordFile {
-    
-#if TARGET_IPHONE_SIMULATOR
-#elif TARGET_OS_IPHONE
-    // 播放
-    NSError *playerError;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfURL:_audioURL] error:&playerError];
-    if (_audioPlayer) {
-        _audioPlayer.delegate = self;
-        [_audioPlayer prepareToPlay];
-        [_audioPlayer play];
-    } else {
-        NSLog(@"ERror creating player: %@", [playerError description]);
-    }
-#endif
-    
-}
-
 - (void)layoutQuestionView {
     self.questionView = [[QuestionsView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, screenWidth, screenHeight - navigationBarHeight - 49) delegate:self];
     _questionView.refreshDelegate = self;
     
     [self.view addSubview:_questionView];
 }
-
-#pragma mark - AVAudioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
-
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

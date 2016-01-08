@@ -9,9 +9,6 @@
 #import "PublishQuestionVC.h"
 #import "RedPacketVC.h"
 #import "MyFriendsVC.h"
-#import <MediaPlayer/MediaPlayer.h>
-#import <AVFoundation/AVFoundation.h>
-#import <CoreMedia/CoreMedia.h>
 #import "FileCache.h"
 #import "AudioPlayControl.h"
 #import "NetworkTask.h"
@@ -34,8 +31,6 @@
 
 @property (nonatomic, strong) UITableView                  *publishTableView;
 @property (nonatomic, strong) AudioPlayControl             *audioControl;
-@property (nonatomic, strong) MPMoviePlayerViewController  *moviePlayer;
-@property (nonatomic, strong) AVAudioPlayer                *audioPlayer;
 @property (nonatomic, strong) UITapGestureRecognizer       *tapGesture;
 @property (nonatomic, strong) SZTextView                   *contentTextView;
 @property (nonatomic, strong) UILabel                      *remainNumLabel;
@@ -62,11 +57,7 @@
 - (void)dealloc {
     [_tapGesture.view removeGestureRecognizer:_tapGesture];
     [_timer invalidate];
-    
     [_locmanager stopUpdatingLocation];
-    
-    [_audioPlayer stop];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
 }
 
 - (void)viewDidLoad {
@@ -127,50 +118,21 @@
 }
 
 -(void)playReordFile:(AudioPlayControl*)sender {
-    [_audioPlayer stop];
-    [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
-    [sender startPlayAnimation];
     
-#if TARGET_IPHONE_SIMULATOR
-#elif TARGET_OS_IPHONE
-    // 播放
-    NSError *playerError;
     NSString* filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
     filePath = [filePath stringByAppendingPathExtension:@"m4a"];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:&playerError];
-    if (_audioPlayer) {
-        _audioPlayer.delegate = self;
-        [_audioPlayer prepareToPlay];
-        [_audioPlayer play];
-        
-    } else {
-        NSLog(@"ERror creating player: %@", [playerError description]);
-    }
-#endif
+    self.audioURL = fileURL;
+    [self playReordFile];
 }
 
-- (void)playVideo {
+- (void)playVideo:(UIButton*)sender {
 
     NSString *videoPath = [[FileCache sharedFileCache] diskCachePathForKey:_videoKeyString];
     videoPath = [videoPath stringByAppendingPathExtension:@"mp4"];
-    if (videoPath != nil && [videoPath length] > 0) {
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:videoPath]];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer.moviePlayer];
-        [_moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
-        [_moviePlayer.moviePlayer setMovieSourceType:MPMovieSourceTypeFile];
-        [_moviePlayer.moviePlayer play];
-        
-        [self presentMoviePlayerViewControllerAnimated:_moviePlayer];
-    }
-}
-
--(void)movieFinishedCallback:(NSNotification *)notify {
-    
-    MPMoviePlayerController *vc = [notify object];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:vc];
-    _moviePlayer = nil;
+    NSURL *fileURL = [NSURL fileURLWithPath:videoPath];
+    self.videoURL = fileURL;
+    [self playVideo];
 }
 
 - (void)tapPhotoAction:(UITapGestureRecognizer *)sender {
@@ -462,19 +424,6 @@
     }
 }
 
-
-
-#pragma mark - AVAudioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    [_audioControl stopPlayAnimation];
-    [_audioPlayer stop];
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    [_audioControl stopPlayAnimation];
-    [_audioPlayer stop];
-}
-
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 4;
@@ -519,7 +468,7 @@
             [playBtn setHidden:YES];
             [playBtn setImageEdgeInsets:UIEdgeInsetsMake(30, 30, 30, 30)];
             [playBtn setImage:[UIImage imageNamed:@"video"] forState:UIControlStateNormal];
-            [playBtn addTarget:self action:@selector(playVideo) forControlEvents:UIControlEventTouchUpInside];
+            [playBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:playBtn];
         }
         

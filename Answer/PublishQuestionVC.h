@@ -7,6 +7,7 @@
 //
 
 #import "BaseVC.h"
+#import "QuestionBaseVC.h"
 
 typedef NS_ENUM(NSInteger,PublishType) {
     PublishType_audio,
@@ -14,7 +15,7 @@ typedef NS_ENUM(NSInteger,PublishType) {
     PublishType_image,
 };
 
-@interface PublishQuestionVC : BaseVC
+@interface PublishQuestionVC : QuestionBaseVC
 
 @property(nonatomic, assign)PublishType  publishType;
 @property(nonatomic, assign)NSInteger    recordDur;

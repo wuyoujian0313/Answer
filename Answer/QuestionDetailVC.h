@@ -7,7 +7,8 @@
 //
 
 #import "BaseVC.h"
+#import "QuestionBaseVC.h"
 
-@interface QuestionDetailVC : BaseVC
+@interface QuestionDetailVC : QuestionBaseVC
 @property(nonatomic,copy) NSString *tuWenId;
 @end

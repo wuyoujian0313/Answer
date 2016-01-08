@@ -7,10 +7,6 @@
 //
 
 #import "QuestionDetailVC.h"
-#import <CoreMedia/CoreMedia.h>
-#import <MobileCoreServices/MobileCoreServices.h>
-#import <AVFoundation/AVFoundation.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import "ProtocolDefine.h"
 #import "QuestionInfoView.h"
 #import "AnswerTableViewCell.h"
@@ -25,13 +21,9 @@
 #import "AnswerResult.h"
 
 
-@interface QuestionDetailVC ()<AVAudioPlayerDelegate,QuestionInfoViewDelegate,UITableViewDataSource,UITableViewDelegate,HPGrowingTextViewDelegate,NetworkTaskDelegate>
+@interface QuestionDetailVC ()<QuestionInfoViewDelegate,UITableViewDataSource,UITableViewDelegate,HPGrowingTextViewDelegate,NetworkTaskDelegate>
 
 @property(nonatomic,strong)UITableView                  *detailTableView;
-@property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
-@property(nonatomic,strong)NSURL                        *audioURL;
-@property(nonatomic,strong)NSURL                        *videoURL;
-@property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
 @property(nonatomic,copy)NSString                       *guanzhuFriendId;
 
 @property(nonatomic,strong)QuestionInfoView             *questionInfoView;
@@ -145,46 +137,6 @@
     [_questionInfoView setFrame:CGRectMake(0, 0, _detailTableView.frame.size.width, [_questionInfoView viewHeight])];
     
     [_detailTableView setTableHeaderView:_questionInfoView];
-}
-
--(void)playVideo {
-    
-    if (_videoURL != nil) {
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:_videoURL];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer.moviePlayer];
-        [_moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
-        [_moviePlayer.moviePlayer play];
-        
-        [self presentMoviePlayerViewControllerAnimated:_moviePlayer];
-        
-    }
-}
-
--(void)movieFinishedCallback:(NSNotification *)notify {
-    
-    MPMoviePlayerController *vc = [notify object];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:vc];
-    
-    _moviePlayer = nil;
-}
-
--(void)playReordFile {
-    
-#if TARGET_IPHONE_SIMULATOR
-#elif TARGET_OS_IPHONE
-    // 播放
-    NSError *playerError;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfURL:_audioURL] error:&playerError];
-    if (_audioPlayer) {
-        _audioPlayer.delegate = self;
-        [_audioPlayer prepareToPlay];
-        [_audioPlayer play];
-    } else {
-        NSLog(@"ERror creating player: %@", [playerError description]);
-    }
-#endif
-    
 }
 
 - (void)commitGuanzhu:(NSString*)friendId {
@@ -432,16 +384,6 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
-
-#pragma mark - AVAudioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    [_audioPlayer stop];
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    [_audioPlayer stop];
-}
-
 #pragma mark - QuestionInfoViewCellDelegate
 - (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {
     
@@ -463,10 +405,6 @@
             break;
         case QuestionInfoViewAction_Answer:
         case QuestionInfoViewAction_ScanDetail: {
-            QuestionDetailVC *vc = [[QuestionDetailVC alloc] init];
-            vc.tuWenId = question.uId;
-            vc.hidesBottomBarWhenPushed = YES;
-            [self.navigationController pushViewController:vc animated:YES];
             break;
         }
         case QuestionInfoViewAction_Sharing:
