@@ -55,6 +55,7 @@
 		E1A441261C3CB6CA00C3ECD3 /* ToCashVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A441251C3CB6CA00C3ECD3 /* ToCashVC.m */; };
 		E1A441291C3CB71800C3ECD3 /* MyBalanceVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A441281C3CB71800C3ECD3 /* MyBalanceVC.m */; };
 		E1A4412C1C3CB9B000C3ECD3 /* AboutVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A4412B1C3CB9B000C3ECD3 /* AboutVC.m */; };
+		E1A6F0551C3F675000852EFA /* QuestionBaseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A6F0541C3F675000852EFA /* QuestionBaseVC.m */; };
 		E1AE75301C290CAE0035AAEE /* FriendTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */; };
 		E1AE759F1C2977570035AAEE /* UIImage+ResizeMagick.m in Sources */ = {isa = PBXBuildFile; fileRef = E1AE759E1C2977570035AAEE /* UIImage+ResizeMagick.m */; };
 		E1B297981C37DD0700872FF0 /* SZTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B297971C37DD0700872FF0 /* SZTextView.m */; };
@@ -251,6 +252,8 @@
 		E1A441281C3CB71800C3ECD3 /* MyBalanceVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBalanceVC.m; sourceTree = "<group>"; };
 		E1A4412A1C3CB9B000C3ECD3 /* AboutVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutVC.h; sourceTree = "<group>"; };
 		E1A4412B1C3CB9B000C3ECD3 /* AboutVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutVC.m; sourceTree = "<group>"; };
+		E1A6F0531C3F675000852EFA /* QuestionBaseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionBaseVC.h; sourceTree = "<group>"; };
+		E1A6F0541C3F675000852EFA /* QuestionBaseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionBaseVC.m; sourceTree = "<group>"; };
 		E1AE752E1C290CAE0035AAEE /* FriendTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FriendTableViewCell.h; sourceTree = "<group>"; };
 		E1AE752F1C290CAE0035AAEE /* FriendTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FriendTableViewCell.m; sourceTree = "<group>"; };
 		E1AE759D1C2977570035AAEE /* UIImage+ResizeMagick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ResizeMagick.h"; sourceTree = "<group>"; };
@@ -755,6 +758,8 @@
 				E1EB9A151C2C091A00200059 /* QuestionListVC.m */,
 				E16C5CFE1C2CEB7600DC15B4 /* ProtocolDefine.h */,
 				E1E304681C369BDF00B5D537 /* NotificationDefine.h */,
+				E1A6F0531C3F675000852EFA /* QuestionBaseVC.h */,
+				E1A6F0541C3F675000852EFA /* QuestionBaseVC.m */,
 			);
 			name = common;
 			sourceTree = "<group>";
@@ -1200,6 +1205,7 @@
 				E1B78A5F1C2263B600A2E384 /* MJRefreshBaseView.m in Sources */,
 				E1A441261C3CB6CA00C3ECD3 /* ToCashVC.m in Sources */,
 				E14C21061C1EF61B003925B5 /* AnswerInfo.m in Sources */,
+				E1A6F0551C3F675000852EFA /* QuestionBaseVC.m in Sources */,
 				E1B78A621C2263B600A2E384 /* MJRefreshHeaderView.m in Sources */,
 				E1B78A341C22608300A2E384 /* TTTArrayFormatter.m in Sources */,
 				E1B78A361C22608300A2E384 /* TTTLocationFormatter.m in Sources */,

@@ -8,6 +8,7 @@
 
 #import "QuestionsView.h"
 #import "QuestionTableViewCell.h"
+#import "User.h"
 
 
 @interface QuestionsView ()<UITableViewDataSource,UITableViewDelegate,NSCacheDelegate,MJRefreshBaseViewDelegate>
@@ -178,24 +179,33 @@
         
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
         }
+        
+        [_cellCache setObject:cell forKey:key];
     }
     
     // 设置数据
     cell.delegate = _delegate;
-    [_cellCache setObject:cell forKey:key];
     QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
     
     if (_haveUserView) {
-        //
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
         
-        // 理论上只有一个
-        NSArray *users = [[_questions userList] filteredArrayUsingPredicate:predicate];
-        if (users && [users count]) {
-            [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
+        if ([questionInfo.userId isEqualToString:[User sharedUser].user.uId]) {
+            // 是自己的问题
+            [cell setQuestionInfo:questionInfo userInfo:[User sharedUser].user];
         } else {
-            [cell setQuestionInfo:questionInfo userInfo:nil];
+            //
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
+            
+            // 理论上只有一个
+            NSArray *users = [[_questions userList] filteredArrayUsingPredicate:predicate];
+            if (users && [users count]) {
+                [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
+            } else {
+                [cell setQuestionInfo:questionInfo userInfo:nil];
+            }
         }
+        
+        
     } else {
         [cell setQuestionInfo:questionInfo userInfo:nil];
     }

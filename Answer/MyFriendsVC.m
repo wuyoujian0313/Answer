@@ -175,7 +175,7 @@
                 [_friendTableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:_selIndexPath] withRowAnimation:UITableViewRowAnimationMiddle];
             }
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationCancelGuanzhu object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:NotificationGuanzhu object:nil];
             
         }
         

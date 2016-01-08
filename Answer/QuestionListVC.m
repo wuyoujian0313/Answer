@@ -31,6 +31,7 @@
 @property (nonatomic, strong) NSTimer                       *timer;
 @property (nonatomic, strong) NSURL                         *audioURL;
 @property (nonatomic, strong) NSURL                         *videoURL;
+@property(nonatomic,copy)NSString                           *guanzhuFriendId;
 @end
 
 @implementation QuestionListVC
@@ -73,6 +74,10 @@
         [self setNavTitle:@"问题列表"];
         [_questionView beginRefreshing];
     }
+}
+
+- (void)reloadQuestionView {
+    [_questionView reloadQuestionView];
 }
 
 - (void)refreshLocation {
@@ -192,6 +197,21 @@
     
 }
 
+- (void)commitGuanzhu:(NSString*)friendId {
+    
+    //
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          friendId,@"friendId",
+                          [User sharedUser].user.uId,@"userId",nil];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Guanzhu
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[NetResultBase alloc] init]
+                                           customInfo:@"Guanzhu"];
+}
+
 - (void)layoutQuestionView {
     
     BOOL haveUserView = YES;
@@ -244,6 +264,13 @@
         
         QuestionsResult *qResult = (QuestionsResult*)result;
         [_questionView setQuestionsResult:qResult];
+    } else if ([customInfo isEqualToString:@"Guanzhu"]) {
+        [[User sharedUser] addFriend:_guanzhuFriendId];
+        //
+        [self reloadQuestionView];
+        [FadePromptView showPromptStatus:@"关注成功" duration:1.0 finishBlock:^{
+            
+        }];
     }
 }
 
@@ -279,28 +306,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)commitGuanzhu:(NSString*)friendId isCancel:(BOOL)isCancel {
-    
-    //
-    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
-                          friendId,@"friendId",
-                          [User sharedUser].user.uId,@"userId",nil];
-    
-    NSString *api = nil;
-    if (isCancel) {
-        api = API_Unguanzhu;
-    } else {
-        api = API_Guanzhu;
-    }
-    
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:api
-                                             forParam:param
-                                             delegate:self
-                                            resultObj:[[NetResultBase alloc] init]
-                                           customInfo:@"Guanzhu"];
-}
-
 
 #pragma mark - QuestionTableViewCellDelegate
 - (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {
@@ -308,7 +313,7 @@
     switch (action) {
             
         case QuestionInfoViewAction_Attention:{
-            [self commitGuanzhu:question.userId isCancel:NO];
+            [self commitGuanzhu:question.userId];
             break;
         }
         case QuestionInfoViewAction_PlayAudio:

@@ -56,6 +56,10 @@
     return [_userHeads objectForKey:phoneNumber];
 }
 
+- (BOOL)isMe:(NSString*)userId {
+    return [_user.uId isEqualToString:userId];
+}
+
 - (BOOL)isFriend:(NSString*)userId {
     return [_friendIds containsObject:userId];
 }

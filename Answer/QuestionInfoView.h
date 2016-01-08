@@ -18,6 +18,6 @@
 // 默认折叠文字
 - (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo;
 
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo foldText:(BOOL)isfold;
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo isFoldText:(BOOL)isfold;
 - (CGFloat)viewHeight;
 @end

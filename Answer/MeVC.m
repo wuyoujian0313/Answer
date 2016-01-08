@@ -318,17 +318,16 @@
     if ([customInfo isEqualToString:@"modifyHeadImage"]) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationChangeUserInfo object:nil];
         
+        SDImageCache *imageCache = [SDImageCache sharedImageCache];
+        _headImageView.image = [imageCache imageFromDiskCacheForKey:_headImageKey];
+        [imageCache defaultCachePathForKey:_headImageKey];
+        
+        ChangeHeadImgResult *changeHeadRec = (ChangeHeadImgResult*)result;
+        [User sharedUser].user.headImage = changeHeadRec.headImage;
+        [[User sharedUser] saveToUserDefault];
+        
         [FadePromptView showPromptStatus:@"修改成功" duration:1.0 finishBlock:^{
             //
-            SDImageCache *imageCache = [SDImageCache sharedImageCache];
-            _headImageView.image = [imageCache imageFromDiskCacheForKey:_headImageKey];
-            [imageCache defaultCachePathForKey:_headImageKey];
-            
-            ChangeHeadImgResult *changeHeadRec = (ChangeHeadImgResult*)result;
-            [User sharedUser].user.headImage = changeHeadRec.headImage;
-            [[User sharedUser] saveToUserDefault];
-            
-            
         }];
     }
 }

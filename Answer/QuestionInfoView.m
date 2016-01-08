@@ -24,7 +24,7 @@
 @property (nonatomic, strong) QuestionInfo          *questionInfo;
 @property (nonatomic, strong) UserInfo              *userInfo;
 @property (nonatomic, assign) BOOL                  haveUserInfo;
-@property (nonatomic, assign) BOOL                  foldText;
+@property (nonatomic, assign) BOOL                  isFoldText;
 
 @property (nonatomic, assign) CGFloat               userInfoViewHeight;
 @property (nonatomic, assign) CGFloat               wtContentViewHeight;
@@ -155,16 +155,20 @@
             [levelLabel setText:[NSString stringWithFormat:@"%@级",_userInfo.level]];
         }
         
-        if (![[User sharedUser] isFriend:_userInfo.uId]) {
-            [attentionBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
-            [attentionBtn setFrame:CGRectMake(self.frame.size.width - 43, 0, 40, 40)];
-            attentionBtn.hidden = NO;
-        } else {
+    
+        if ([[User sharedUser] isMe:_userInfo.uId]) {
             attentionBtn.hidden = YES;
+        } else {
+            if (![[User sharedUser] isFriend:_userInfo.uId]) {
+                [attentionBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
+                [attentionBtn setFrame:CGRectMake(self.frame.size.width - 43, 0, 40, 40)];
+                attentionBtn.hidden = NO;
+            } else {
+                attentionBtn.hidden = YES;
+            }
         }
         
-        
-        
+
         //
         if (_haveUserInfo) {
             [_userInfoView setFrame:CGRectMake(0, _spaceViewHeight, self.frame.size.width, 40)];
@@ -274,7 +278,7 @@
             top += 120;
             
             [contentLabel setText:_questionInfo.content];
-            if (_foldText) {
+            if (_isFoldText) {
                 [contentLabel setNumberOfLines:2];
                 [contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
                 [contentLabel setFrame:CGRectMake(left, top, self.frame.size.width - 20, 45)];
@@ -300,7 +304,7 @@
             
             top += 55;
             [contentLabel setText:_questionInfo.content];
-            if (_foldText) {
+            if (_isFoldText) {
                 [contentLabel setNumberOfLines:2];
                 [contentLabel setLineBreakMode:NSLineBreakByTruncatingTail];
                 [contentLabel setFrame:CGRectMake(left, top, self.frame.size.width - 20, 45)];
@@ -490,8 +494,14 @@
         [sharingBtn setFrame:CGRectMake(left, top, 40, 40)];
         
         left -= 20+ 33;
-        [answerBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
-        [answerBtn setFrame:CGRectMake(left, top, 40, 40)];
+        if (!_isFoldText) {
+            answerBtn.hidden = YES;
+        } else {
+            answerBtn.hidden = NO;
+            [answerBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
+            [answerBtn setFrame:CGRectMake(left, top, 40, 40)];
+        }
+        
         
         _funcViewHeight = 60;
         
@@ -543,14 +553,14 @@
     }
 }
 
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo foldText:(BOOL)isfold {
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo isFoldText:(BOOL)isfold {
     if (userInfo) {
         _haveUserInfo = YES;
     } else {
         _haveUserInfo = NO;
     }
     
-    _foldText = isfold;
+    _isFoldText = isfold;
     _userInfoViewHeight = 0;
     _wtContentViewHeight = 0;
     _funcViewHeight = 0;
@@ -568,7 +578,7 @@
 }
 
 - (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo {
-    [self setQuestionInfo:questionInfo userInfo:userInfo foldText:YES];
+    [self setQuestionInfo:questionInfo userInfo:userInfo isFoldText:YES];
 }
 
 - (CGFloat)viewHeight {

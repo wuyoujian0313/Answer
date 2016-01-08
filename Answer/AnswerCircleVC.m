@@ -27,6 +27,7 @@
 @property(nonatomic,strong)NSURL                        *videoURL;
 @property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
 @property(nonatomic,assign)BOOL                         isFristRefreshing;
+@property(nonatomic,copy)NSString                       *guanzhuFriendId;
 @end
 
 @implementation AnswerCircleVC
@@ -46,13 +47,13 @@
     [_questionView beginRefreshing];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(requestQuestionList)
+                                             selector:@selector(reloadQuestionView)
                                                  name:NotificationChangeUserInfo
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadQuestionView)
-                                                 name:NotificationCancelGuanzhu
+                                                 name:NotificationGuanzhu
                                                object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -98,27 +99,20 @@
                                            customInfo:@"GetTuWenList"];
 }
 
-
-- (void)commitGuanzhu:(NSString*)friendId isCancel:(BOOL)isCancel friend:(UserInfo*)friend {
+- (void)commitGuanzhu:(NSString*)friendId {
     
     //
+    self.guanzhuFriendId = friendId;
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           friendId,@"friendId",
                           [User sharedUser].user.uId,@"userId",nil];
     
-    NSString *api = nil;
-    if (isCancel) {
-        api = API_Unguanzhu;
-    } else {
-        api = API_Guanzhu;
-    }
-    
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:api
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Guanzhu
                                              forParam:param
                                              delegate:self
                                             resultObj:[[NetResultBase alloc] init]
-                                           customInfo:friend];
+                                           customInfo:@"Guanzhu"];
 }
 
 -(void)playVideo {
@@ -189,31 +183,25 @@
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
     
-    if ([customInfo isKindOfClass:[NSString class]] || [customInfo isKindOfClass:[NSMutableString class]]) {
+    if ([customInfo isEqualToString:@"GetTuWenList"] && result) {
+        QuestionsResult *qResult = (QuestionsResult*)result;
+        [_questionView setQuestionsResult:qResult];
         
-        if ([customInfo isEqualToString:@"GetTuWenList"] && result) {
-            QuestionsResult *qResult = (QuestionsResult*)result;
-            [_questionView setQuestionsResult:qResult];
-            
-        } else if ([customInfo isEqualToString:@"GetFriends"] && result) {
-            MyFriendsResult *friendResult = (MyFriendsResult *)result;
-            
-            NSArray *friendIds = [[friendResult friendList] valueForKey:@"uId"];
-            
-            [[User sharedUser] saveFriends:friendIds];
-            [self requestQuestionList];
-        }
-    } else if ([customInfo isKindOfClass:[UserInfo class]]) {
+    } else if ([customInfo isEqualToString:@"GetFriends"] && result) {
+        MyFriendsResult *friendResult = (MyFriendsResult *)result;
         
-        UserInfo *user = customInfo;
-        [[User sharedUser] addFriend:user.uId];
+        NSArray *friendIds = [[friendResult friendList] valueForKey:@"uId"];
+        
+        [[User sharedUser] saveFriends:friendIds];
+        [self requestQuestionList];
+    } else if ([customInfo isEqualToString:@"Guanzhu"]) {
+        [[User sharedUser] addFriend:_guanzhuFriendId];
+        //
+        [self reloadQuestionView];
         [FadePromptView showPromptStatus:@"关注成功" duration:1.0 finishBlock:^{
-            //
-            [self reloadQuestionView];
+            
         }];
     }
-    
-   
 }
 
 
@@ -246,7 +234,7 @@
     switch (action) {
             
         case QuestionInfoViewAction_Attention:{
-            [self commitGuanzhu:question.userId isCancel:NO friend:userInfo];
+            [self commitGuanzhu:question.userId];
             break;
         }
         case QuestionInfoViewAction_PlayAudio:

@@ -33,6 +33,7 @@
 
 - (void)saveFriends:(NSArray<NSString*>*)friends;
 - (BOOL)isFriend:(NSString*)userId;
+- (BOOL)isMe:(NSString*)userId;
 - (void)deleteFriend:(NSString*)userId;
 - (void)addFriend:(NSString*)userId;
 

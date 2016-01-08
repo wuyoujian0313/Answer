@@ -42,7 +42,9 @@
 - (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo {
     
     [self.infoView setQuestionInfo:questionInfo userInfo:userInfo];
-    [self layoutIfNeeded];
+    [self.infoView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    [self.contentView setFrame:self.bounds];
+    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
 }
 
 - (CGFloat)cellHeight {
@@ -51,7 +53,9 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    [self.infoView setFrame:self.contentView.bounds];
+    [self.infoView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    [self.contentView setFrame:self.bounds];
+    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
 }
 
 @end

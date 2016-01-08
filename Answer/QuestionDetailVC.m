@@ -29,9 +29,10 @@
 
 @property(nonatomic,strong)UITableView                  *detailTableView;
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
-@property(nonatomic,strong)NSURL                        *recordedFile;
-@property(nonatomic,copy)NSString                       *videoPathString;
+@property(nonatomic,strong)NSURL                        *audioURL;
+@property(nonatomic,strong)NSURL                        *videoURL;
 @property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
+@property(nonatomic,copy)NSString                       *guanzhuFriendId;
 
 @property(nonatomic,strong)QuestionInfoView             *questionInfoView;
 @property(nonatomic,strong)UIView                       *containerView;
@@ -43,7 +44,6 @@
 
 @property (nonatomic, strong) QuestionInfo              *questionInfo;
 @property (nonatomic, strong) UserInfo                  *userInfo;
-
 
 @end
 
@@ -141,23 +141,23 @@
     infoView.delegate = self;
     self.questionInfoView = infoView;
     
-    [_questionInfoView setQuestionInfo:_questionInfo userInfo:_userInfo foldText:NO];
+    [_questionInfoView setQuestionInfo:_questionInfo userInfo:_userInfo isFoldText:NO];
     [_questionInfoView setFrame:CGRectMake(0, 0, _detailTableView.frame.size.width, [_questionInfoView viewHeight])];
     
     [_detailTableView setTableHeaderView:_questionInfoView];
 }
 
--(void)playVideo:(UIButton*)sender {
+-(void)playVideo {
     
-    NSString  *src = _videoPathString;
-    if (src != nil && [src length] > 0) {
-        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:[NSURL fileURLWithPath:src]];
+    if (_videoURL != nil) {
+        self.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:_videoURL];
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:_moviePlayer.moviePlayer];
         [_moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
         [_moviePlayer.moviePlayer play];
         
         [self presentMoviePlayerViewControllerAnimated:_moviePlayer];
+        
     }
 }
 
@@ -171,11 +171,11 @@
 
 -(void)playReordFile {
     
-    //#if TARGET_IPHONE_SIMULATOR
-    //#elif TARGET_OS_IPHONE
+#if TARGET_IPHONE_SIMULATOR
+#elif TARGET_OS_IPHONE
     // 播放
     NSError *playerError;
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:_recordedFile error:&playerError];
+    self.audioPlayer = [[AVAudioPlayer alloc] initWithData:[NSData dataWithContentsOfURL:_audioURL] error:&playerError];
     if (_audioPlayer) {
         _audioPlayer.delegate = self;
         [_audioPlayer prepareToPlay];
@@ -183,8 +183,24 @@
     } else {
         NSLog(@"ERror creating player: %@", [playerError description]);
     }
-    //#endif
+#endif
     
+}
+
+- (void)commitGuanzhu:(NSString*)friendId {
+    
+    //
+    self.guanzhuFriendId = friendId;
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          friendId,@"friendId",
+                          [User sharedUser].user.uId,@"userId",nil];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Guanzhu
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[NetResultBase alloc] init]
+                                           customInfo:@"Guanzhu"];
 }
 
 #pragma mark - NetworkTaskDelegate
@@ -208,6 +224,13 @@
         
         [FadePromptView showPromptStatus:@"发表成功！" duration:1.0 finishBlock:^{
             //
+        }];
+    } else if ([customInfo isEqualToString:@"Guanzhu"]) {
+        [[User sharedUser] addFriend:_guanzhuFriendId];
+        //
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationGuanzhu object:nil];
+        [FadePromptView showPromptStatus:@"关注成功" duration:1.0 finishBlock:^{
+            
         }];
     }
 }
@@ -424,16 +447,28 @@
     
     switch (action) {
             
-        case QuestionInfoViewAction_Attention:
+        case QuestionInfoViewAction_Attention:{
+            [self commitGuanzhu:question.userId];
             break;
+        }
         case QuestionInfoViewAction_PlayAudio:
+            self.audioURL = [NSURL URLWithString:question.mediaURL];
+            [self playReordFile];
+            
             break;
         case QuestionInfoViewAction_PlayVideo:
-            break;
-        case QuestionInfoViewAction_ScanDetail:
+            self.videoURL = [NSURL URLWithString:question.mediaURL];
+            [self playVideo];
+            
             break;
         case QuestionInfoViewAction_Answer:
+        case QuestionInfoViewAction_ScanDetail: {
+            QuestionDetailVC *vc = [[QuestionDetailVC alloc] init];
+            vc.tuWenId = question.uId;
+            vc.hidesBottomBarWhenPushed = YES;
+            [self.navigationController pushViewController:vc animated:YES];
             break;
+        }
         case QuestionInfoViewAction_Sharing:
             break;
         case QuestionInfoViewAction_RedPackage:
