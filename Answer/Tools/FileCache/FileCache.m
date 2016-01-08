@@ -129,6 +129,14 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
     return nil;
 }
 
+- (NSData *)dataFromCacheForPath:(NSString *)path {
+    NSData *data = [NSData dataWithContentsOfFile:path];
+    if (data) {
+        return data;
+    }
+    return nil;
+}
+
 
 #pragma mark - private func
 - (NSString *)md5FileNameForKey:(NSString *)key {

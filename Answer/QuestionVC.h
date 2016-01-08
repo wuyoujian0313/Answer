@@ -7,7 +7,8 @@
 //
 
 #import "BaseVC.h"
+#import "QuestionBaseVC.h"
 
-@interface QuestionVC : BaseVC
+@interface QuestionVC : QuestionBaseVC
 
 @end

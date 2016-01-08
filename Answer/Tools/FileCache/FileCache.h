@@ -43,6 +43,11 @@
 - (NSData *)dataFromCacheForKey:(NSString *)key;
 
 /**
+ * 从缓存中获取数据
+ */
+- (NSData *)dataFromCacheForPath:(NSString *)path;
+
+/**
  * 文件路径
  */
 - (NSString *)diskCachePathForKey:(NSString *)key;

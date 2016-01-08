@@ -8,17 +8,14 @@
 
 #import "QuestionBaseVC.h"
 
-
-
 @interface QuestionBaseVC ()<AVAudioPlayerDelegate>
 @end
 
 @implementation QuestionBaseVC
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewDidLoad {

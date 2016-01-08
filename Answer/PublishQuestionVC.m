@@ -27,7 +27,7 @@
 
 #define MaxWordNumber           300
 
-@interface PublishQuestionVC ()<AVAudioPlayerDelegate,UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,NetworkTaskDelegate,CLLocationManagerDelegate,RedSetDelegate,SelectedFriendIdsDelegate>
+@interface PublishQuestionVC ()<UITableViewDataSource,UITableViewDelegate,UITextViewDelegate,NetworkTaskDelegate,CLLocationManagerDelegate,RedSetDelegate,SelectedFriendIdsDelegate>
 
 @property (nonatomic, strong) UITableView                  *publishTableView;
 @property (nonatomic, strong) AudioPlayControl             *audioControl;

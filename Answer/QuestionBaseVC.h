@@ -23,4 +23,6 @@
 - (void)playVideo;
 - (void)playReordFile;
 
+- (void)stopPlay;
+
 @end

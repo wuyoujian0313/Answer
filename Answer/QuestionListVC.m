@@ -16,7 +16,7 @@
 #import <CoreLocation/CLLocationManagerDelegate.h>
 #import "QuestionDetailVC.h"
 
-@interface QuestionListVC ()<QuestionInfoViewDelegate,AVAudioPlayerDelegate,NetworkTaskDelegate,CLLocationManagerDelegate,MJRefreshBaseViewDelegate>
+@interface QuestionListVC ()<QuestionInfoViewDelegate,NetworkTaskDelegate,CLLocationManagerDelegate,MJRefreshBaseViewDelegate>
 @property (nonatomic, strong) QuestionsView                 *questionView;
 @property (nonatomic, strong) CLLocationManager             *locmanager;
 @property (nonatomic, strong) NSNumber                      *latitude;

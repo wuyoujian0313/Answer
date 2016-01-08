@@ -27,14 +27,13 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
 };
 
 
-@interface QuestionVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate,AVAudioPlayerDelegate>
+@interface QuestionVC ()<UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate>
 
 @property(nonatomic,copy)NSString                       *videoScanImageKey;
 @property(nonatomic,copy)NSString                       *photoKey;
 @property(nonatomic,copy)NSString                       *mp4KeyString;
 @property(nonatomic,copy)NSString                       *recordFileKey;
 @property(nonatomic,strong)AVAudioRecorder              *audioRecoder;
-@property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
 @property(nonatomic,strong)NSTimer                      *timer;
 @property(nonatomic,strong)UIImageView                  *recordAnimateView;
 @property(nonatomic,strong)UILabel                      *recordText;
@@ -76,24 +75,15 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     return bCanRecord;
 }
 
--(void)playReordFile {
-    
-#if TARGET_IPHONE_SIMULATOR
-#elif TARGET_OS_IPHONE
-    // 播放
-    NSError *playerError;
-    NSString* filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
-    filePath = [filePath stringByAppendingPathExtension:@"m4a"];
-    NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    self.audioPlayer = [[AVAudioPlayer alloc] initWithContentsOfURL:fileURL error:&playerError];
-    if (_audioPlayer) {
-        _audioPlayer.delegate = self;
-        [_audioPlayer prepareToPlay];
-        [_audioPlayer play];
-    } else {
-        NSLog(@"ERror creating player: %@", [playerError description]);
+- (void)stopPlay {
+
+    [super stopPlay];
+    if (_status == RecordStatus_recording) {
+        [_recordBtn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
+        _status = RecordStatus_stop;
+        [_recordText setHidden:NO];
+        [_recordText setText:@"点击播放"];
     }
-#endif
 }
 
 - (void)recordAudioFile {
@@ -262,6 +252,10 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
         [_recordText setText:@"播放中…"];
         
         //
+        NSString* filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
+        filePath = [filePath stringByAppendingPathExtension:@"m4a"];
+        NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+        self.audioURL = fileURL;
         [self playReordFile];
         
     } else if (_status == RecordStatus_playing) {
@@ -269,7 +263,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
         _status = RecordStatus_stop;
         [_recordText setHidden:NO];
         [_recordText setText:@"点击播放"];
-        [_audioPlayer stop];
+        [self.audioPlayer stop];
     }
 }
 
@@ -281,7 +275,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     [_recordText setHidden:NO];
     [_recordBtn setImage:[UIImage imageNamed:@"recorder"] forState:UIControlStateNormal];
     [_recordText setText:@"点击录音"];
-    [_audioPlayer stop];
+    [self.audioPlayer stop];
     [_audioRecoder stop];
     [_timer invalidate];
     
@@ -376,6 +370,9 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
         }
     }
     
+    NSString *filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
+    filePath = [filePath stringByAppendingPathExtension:@"m4a"];
+    [[FileCache sharedFileCache] removeFileForPath:filePath];
     [self recoverRecorderViewStatus];
 }
 
@@ -551,67 +548,47 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     [recordSendView addSubview:okBtn];
 }
 
+- (void)pickerPublicVCWithPicker:(UIImagePickerController *)picker media:(NSDictionary *)info {
+    __weak QuestionVC *weakSelf = self;
+    
+    dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
+        UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
+        CGSize scaleSize = [[UIScreen mainScreen] bounds].size;
+        UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%ldx%ld",(long)scaleSize.width,(long)scaleSize.height]];
+        
+        self.photoKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
+        SDImageCache *imageCache = [SDImageCache sharedImageCache];
+        [imageCache storeImage:imageScale forKey:_photoKey];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //
+            [picker dismissViewControllerAnimated:YES completion:^{
+                //
+                PublishQuestionVC *vc = [[PublishQuestionVC alloc] init];
+                vc.publishType = PublishType_image;
+                vc.imageKey = _photoKey;
+                vc.hidesBottomBarWhenPushed = YES;
+                [weakSelf.navigationController pushViewController:vc animated:YES];
+            }];
+        });
+    });
+}
+
 #pragma mark - imagepicker delegate
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     
     if (picker.sourceType == UIImagePickerControllerSourceTypePhotoLibrary) {
         //
-        __weak QuestionVC *weakSelf = self;
-        
-        dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
-            UIImage *image = [info objectForKey:UIImagePickerControllerEditedImage];
-            CGSize scaleSize = [[UIScreen mainScreen] bounds].size;
-            UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%ldx%ld",(long)scaleSize.width,(long)scaleSize.height]];
-            
-            self.photoKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
-            SDImageCache *imageCache = [SDImageCache sharedImageCache];
-            [imageCache storeImage:imageScale forKey:_photoKey];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                //
-                [picker dismissViewControllerAnimated:YES completion:^{
-                    //
-                    PublishQuestionVC *vc = [[PublishQuestionVC alloc] init];
-                    vc.publishType = PublishType_image;
-                    vc.imageKey = _photoKey;
-                    vc.hidesBottomBarWhenPushed = YES;
-                    [weakSelf.navigationController pushViewController:vc animated:YES];
-                }];
-            });
-        });
+        [self pickerPublicVCWithPicker:picker media:info];
 
     } else if (picker.sourceType == UIImagePickerControllerSourceTypeCamera) {
-        
-        __weak QuestionVC *weakSelf = self;
-        
+
         NSString *mediaType = [info objectForKey:UIImagePickerControllerMediaType];
         if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
+            //
+            [self pickerPublicVCWithPicker:picker media:info];
             
-            dispatch_async(dispatch_get_global_queue(0, 0), ^(void) {
-                UIImage *image = [info objectForKey:UIImagePickerControllerOriginalImage];
-                UIImageWriteToSavedPhotosAlbum(image, self, @selector(image:didFinishSavingWithError:contextInfo:),nil);
-                
-                CGSize scaleSize = [[UIScreen mainScreen] bounds].size;
-                UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%ldx%ld",(long)scaleSize.width,(long)scaleSize.height]];
-            
-                self.photoKey = [NSString stringWithFormat:@"%@",[NSString UUID]];
-                SDImageCache *imageCache = [SDImageCache sharedImageCache];
-                [imageCache storeImage:imageScale forKey:_photoKey];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                
-                    [picker dismissViewControllerAnimated:YES completion:^{
-                        //
-                        PublishQuestionVC *vc = [[PublishQuestionVC alloc] init];
-                        vc.publishType = PublishType_image;
-                        vc.imageKey = _photoKey;
-                        vc.hidesBottomBarWhenPushed = YES;
-                        [weakSelf.navigationController pushViewController:vc animated:YES];
-                        
-                    }];
-                });
-            });
         } else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie]) {
             
             NSURL *url = [info objectForKey:UIImagePickerControllerMediaURL];
@@ -632,29 +609,10 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     [picker dismissViewControllerAnimated:YES completion:^{}];
 }
 
-#pragma mark - AVAudioPlayerDelegate
-- (void)audioPlayerDidFinishPlaying:(AVAudioPlayer *)player successfully:(BOOL)flag {
-    
-    [_recordBtn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    _status = RecordStatus_stop;
-    [_recordText setHidden:NO];
-    [_recordText setText:@"点击播放"];
-    
-    [_audioPlayer stop];
-    
-}
-
-- (void)audioPlayerDecodeErrorDidOccur:(AVAudioPlayer *)player error:(NSError *)error {
-    [_recordBtn setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];
-    _status = RecordStatus_stop;
-    [_recordText setHidden:NO];
-    [_recordText setText:@"点击播放"];
-    [_audioPlayer stop];
-}
 
 #pragma mark - AVAudioRecorderDelegate
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag {
-    //    [recorder stop];
+    [recorder stop];
 }
 
 - (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError *)error {
