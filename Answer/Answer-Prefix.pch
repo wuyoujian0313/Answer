@@ -50,6 +50,8 @@
 #define BaiduMapLocationAK          @"xvluEhl0pPdKpmxlEPTQZsnn"
 #define BaiduGeocoderURL            @"http://api.map.baidu.com/geocoder/v2/?"
 
+#define ShareSDKAppKey              @"e7d543e9f216"
+
 #define API_Login                   @"login"
 #define API_GetVerifyCode           @"getVerifyCode"
 #define API_Register                @"register"

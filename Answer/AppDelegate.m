@@ -7,6 +7,10 @@
 //
 
 #import "AppDelegate.h"
+#import <ShareSDK/ShareSDK.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import <TencentOpenAPI/TencentOAuth.h>
+#import "WXApi.h"
 
 @interface AppDelegate ()
 @end
@@ -28,13 +32,16 @@
     [_window makeKeyAndVisible];
 }
 
-- (void)registerGPS {
+- (void)registerShareSDK {
+    [ShareSDK registerApp:ShareSDKAppKey];//字符串api20为您的ShareSDK的AppKey
+    
     
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self setupMainVC];
+    [self registerShareSDK];
     return YES;
 }
 
