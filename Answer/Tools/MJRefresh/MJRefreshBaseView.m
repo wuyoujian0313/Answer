@@ -317,7 +317,7 @@
 
 #pragma mark - 随便实现
 - (CGFloat)validY { return 0;}
-- (MJRefreshViewType)viewType {return MJRefreshViewTypeHeader;}
+- (MJRefreshViewType)viewType {return MJRefreshViewTypeNone;}
 - (void)free
 {
     [_scrollView removeObserver:self forKeyPath:MJRefreshContentOffset];

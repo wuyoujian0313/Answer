@@ -25,8 +25,9 @@
 - (instancetype)initWithFrame:(CGRect)frame haveUserView:(BOOL)isHave delegate:(id<QuestionInfoViewDelegate>)delegate;
 
 - (void)beginRefreshing;
-- (void)setQuestionsResult:(QuestionsResult *)result;
+- (void)addQuestionsResult:(QuestionsResult *)result;
 
 - (void)reloadQuestionView;
+- (void)clearTableViewData;
 
 @end

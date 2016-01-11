@@ -25,7 +25,7 @@
 @property (nonatomic, copy) NSString        *reward;
 @property (nonatomic, copy) NSString        *updateDate;
 @property (nonatomic, copy) NSString        *fenlei;
-@property (nonatomic, copy) NSString        *duration;
+@property (nonatomic, copy) NSString        *mediaLen;
 @property (nonatomic, copy) NSString        *mark;
 
 @end

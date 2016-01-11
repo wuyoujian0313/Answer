@@ -156,7 +156,7 @@
 }
 
 // view的类型
-- (int)viewType
+- (MJRefreshViewType)viewType
 {
     return MJRefreshViewTypeHeader;
 }

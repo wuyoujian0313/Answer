@@ -297,10 +297,10 @@
             
         } else if (_questionInfo.mediaType && [_questionInfo.mediaType integerValue] == 0) {
             audioControl.hidden = NO;
-            [audioControl.timeLabel setText:[NSString stringWithFormat:@"%d\"",[_questionInfo.duration intValue]]];
+            [audioControl.timeLabel setText:[NSString stringWithFormat:@"%d\"",[_questionInfo.mediaLen intValue]]];
             CGFloat left = 10;
             CGFloat top = 5;
-            [audioControl setFrame:CGRectMake(left, top, self.frame.size.width - 20, 55)];
+            [audioControl setFrame:CGRectMake(left, top, 80, 55)];
             
             top += 55;
             [contentLabel setText:_questionInfo.content];

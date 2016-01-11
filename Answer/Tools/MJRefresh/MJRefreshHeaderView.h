@@ -10,4 +10,5 @@
 
 @interface MJRefreshHeaderView : MJRefreshBaseView
 + (instancetype)header;
+- (MJRefreshViewType)viewType;
 @end

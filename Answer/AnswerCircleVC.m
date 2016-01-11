@@ -20,6 +20,7 @@
 @property(nonatomic,strong)QuestionsView                *questionView;
 @property(nonatomic,assign)BOOL                         isFristRefreshing;
 @property(nonatomic,copy)NSString                       *guanzhuFriendId;
+@property(nonatomic,assign)NSInteger                    more;
 @end
 
 @implementation AnswerCircleVC
@@ -36,6 +37,8 @@
     [self setNavTitle:self.tabBarItem.title];
     [self layoutQuestionView];
     _isFristRefreshing = YES;
+    _more = 1;
+    
     [_questionView beginRefreshing];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -46,6 +49,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadQuestionView)
                                                  name:NotificationGuanzhu
+                                               object:nil];
+    
+    //
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(requestQuestionList)
+                                                 name:NotificationAddNewQuestion
                                                object:nil];
     
 }
@@ -70,7 +79,9 @@
     
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           @"all",@"wtype",
+                          [NSString stringWithFormat:@"%d",_more],@"more",
                           [User sharedUser].user.uId,@"userId",
+                          @"1",@"longitude",// 无效
                           @"1",@"friendId",// 无效
                           @"1",@"latitude",// 无效
                           @"1",@"longitude",// 无效
@@ -117,7 +128,7 @@
     
     if ([customInfo isEqualToString:@"GetTuWenList"] && result) {
         QuestionsResult *qResult = (QuestionsResult*)result;
-        [_questionView setQuestionsResult:qResult];
+        [_questionView addQuestionsResult:qResult];
         
     } else if ([customInfo isEqualToString:@"GetFriends"] && result) {
         MyFriendsResult *friendResult = (MyFriendsResult *)result;
@@ -151,6 +162,11 @@
         [self requestMyFriendsList];
         _isFristRefreshing = NO;
     } else {
+        if ([refreshView viewType] == MJRefreshViewTypeHeader) {
+            _more = 1;
+        } else if ([refreshView viewType] == MJRefreshViewTypeFooter){
+            _more ++;
+        }
         [self requestQuestionList];
     }
 }

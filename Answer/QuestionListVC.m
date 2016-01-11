@@ -24,6 +24,7 @@
 @property (nonatomic, assign) BOOL                          firstLocation;
 @property (nonatomic, strong) NSTimer                       *timer;
 @property (nonatomic, copy) NSString                        *guanzhuFriendId;
+@property(nonatomic,assign)NSInteger                        more;
 @end
 
 @implementation QuestionListVC
@@ -40,6 +41,7 @@
     
     [self layoutQuestionView];
     _firstLocation = YES;
+    _more = 1;
     
     // Do any additional setup after loading the view.
     if (_type == PageType_FriendQuestionList) {
@@ -222,7 +224,7 @@
     if ([customInfo isEqualToString:@"GetTuWenList"] && result) {
         
         QuestionsResult *qResult = (QuestionsResult*)result;
-        [_questionView setQuestionsResult:qResult];
+        [_questionView addQuestionsResult:qResult];
     } else if ([customInfo isEqualToString:@"Guanzhu"]) {
         [[User sharedUser] addFriend:_guanzhuFriendId];
         //
@@ -243,6 +245,11 @@
 
 #pragma mark - MJRefreshBaseViewDelegate
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView  {
+    if ([refreshView viewType] == MJRefreshViewTypeHeader) {
+        _more = 1;
+    } else if ([refreshView viewType] == MJRefreshViewTypeFooter){
+        _more ++;
+    }
     [self requestQuestionList];
 }
 

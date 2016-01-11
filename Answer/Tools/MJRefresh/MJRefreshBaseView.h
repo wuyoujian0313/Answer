@@ -21,6 +21,7 @@ typedef enum {
 
 // 控件的类型
 typedef enum {
+    MJRefreshViewTypeNone,
     MJRefreshViewTypeHeader = -1, // 头部控件
     MJRefreshViewTypeFooter = 1 // 尾部控件
 } MJRefreshViewType;
@@ -109,5 +110,6 @@ typedef void (^RefreshStateChangeBlock)(MJRefreshBaseView *refreshView, MJRefres
 /**
  交给子类去实现 和 调用
  */
+- (MJRefreshViewType)viewType;
 - (void)setState:(MJRefreshState)state;
 @end

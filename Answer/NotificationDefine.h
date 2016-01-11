@@ -9,8 +9,9 @@
 #ifndef NotificationDefine_h
 #define NotificationDefine_h
 
+#define NotificationAddNewQuestion     @"NotificationAddNewQuestion"
 #define NotificationChangeUserInfo     @"NotificationChangeUserInfo"
-#define NotificationGuanzhu      @"NotificationGuanzhu"
+#define NotificationGuanzhu            @"NotificationGuanzhu"
 #define NotificationsStopPlayAudio     @"NotificationsStopPlayAudio"
 
 

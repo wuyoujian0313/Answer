@@ -34,7 +34,6 @@
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         [_timeLabel setBackgroundColor:[UIColor clearColor]];
         [_timeLabel setUserInteractionEnabled:NO];
-        [_timeLabel setHidden:YES];
         [_timeLabel setTextColor:[UIColor colorWithHex:0x666666]];
         [_timeLabel setFont:[UIFont systemFontOfSize:14]];
         [self addSubview:_timeLabel];

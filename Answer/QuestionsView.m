@@ -14,12 +14,14 @@
 @interface QuestionsView ()<UITableViewDataSource,UITableViewDelegate,NSCacheDelegate,MJRefreshBaseViewDelegate>
 
 @property (nonatomic, strong) UITableView           *questionTableView;
-@property (nonatomic, strong) QuestionsResult       *questions;
 @property (nonatomic, assign) BOOL                  haveUserView;
 @property (nonatomic, strong) NSCache               *cellCache;
 
 @property (nonatomic, strong) MJRefreshHeaderView   *refreshHeader;
 @property (nonatomic, strong) MJRefreshFooterView   *refreshFootder;
+
+@property (nonatomic, strong) NSMutableArray        *questionList;
+@property (nonatomic, strong) NSMutableArray        *userList;
 
 @end
 
@@ -47,6 +49,8 @@
         self.haveUserView = isHave;
         self.delegate = delegate;
         self.clipsToBounds = YES;
+        self.questionList = [[NSMutableArray alloc] init];
+        self.userList = [[NSMutableArray alloc] init];
         
         UITableView * tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
         [self setQuestionTableView:tableView];
@@ -93,9 +97,33 @@
     [_questionTableView reloadData];
 }
 
+- (void)clearTableViewData {
+    [_questionList removeAllObjects];
+    [_userList removeAllObjects];
+}
 
-- (void)setQuestionsResult:(QuestionsResult *)result {
-    self.questions = result;
+- (void)addQuestionsResult:(QuestionsResult *)result {
+    
+    if (result.twList && [result.twList count]) {
+        if ([result.twList count] < 30) {
+            [_refreshFootder setHidden:YES];
+        }
+        [_questionList addObjectsFromArray:result.twList];
+    }
+    
+    if (result.userList && [result.userList count]) {
+        
+        for (UserInfo * user in result.userList) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",user.uId];
+            
+            // 理论上只有一个
+            NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
+            if (users == nil || [users count] == 0) {
+                [_userList addObject:user];
+            }
+        }
+    }
+
     [self endRefresh];
     [_questionTableView reloadData];
 }
@@ -103,6 +131,10 @@
 #pragma mark - MJRefreshBaseViewDelegate
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView  {
     if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshViewBeginRefreshing:)]) {
+        
+        if ([refreshView isEqual:_refreshHeader]) {
+            [self clearTableViewData];
+        }
         [_refreshDelegate refreshViewBeginRefreshing:refreshView];
     }
 }
@@ -121,7 +153,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [[_questions twList] count];
+    return [_questionList count];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -132,11 +164,11 @@
 
     if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:userInfo:)]) {
         
-        QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
+        QuestionInfo *questionInfo = [_questionList objectAtIndex:indexPath.row];
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
         
         // 理论上只有一个
-        NSArray *users = [[_questions userList] filteredArrayUsingPredicate:predicate];
+        NSArray *users = [_questionList filteredArrayUsingPredicate:predicate];
         if (users && [users count]) {
             [_delegate questionInfoViewAction:QuestionInfoViewAction_ScanDetail questionInfo:questionInfo userInfo:[users objectAtIndex:0]];
         } else {
@@ -147,7 +179,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row < [[_questions twList] count]) {
+    if (indexPath.row < [_questionList count]) {
         return [self tableView:tableView preparedCellForIndexPath:indexPath];
     }
     
@@ -185,7 +217,7 @@
     
     // 设置数据
     cell.delegate = _delegate;
-    QuestionInfo *questionInfo = [[_questions twList] objectAtIndex:indexPath.row];
+    QuestionInfo *questionInfo = [_questionList objectAtIndex:indexPath.row];
     
     if (_haveUserView) {
         
@@ -197,7 +229,7 @@
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
             
             // 理论上只有一个
-            NSArray *users = [[_questions userList] filteredArrayUsingPredicate:predicate];
+            NSArray *users = [_questionList filteredArrayUsingPredicate:predicate];
             if (users && [users count]) {
                 [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
             } else {
@@ -217,7 +249,7 @@
 #pragma mark - UITableViewDelegate
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < [[_questions twList] count]) {
+    if (indexPath.row < [_questionList count]) {
         QuestionTableViewCell *cell = [self tableView:tableView preparedCellForIndexPath:indexPath];
         return [cell cellHeight];
     }
@@ -226,7 +258,7 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row < [[_questions twList] count]) {
+    if (indexPath.row < [_questionList count]) {
         QuestionTableViewCell *cell = [self tableView:tableView preparedCellForIndexPath:indexPath];
         return [cell cellHeight];
     }

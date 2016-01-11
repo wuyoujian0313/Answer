@@ -166,6 +166,8 @@
         [param setObject:@"" forKey:@"content"];
     }
     
+    [param setObject:[NSString stringWithFormat:@"%ld",(long)_recordDur] forKey:@"mediaLen"];
+    
     if (_friendIdsString) {
         [param setObject:_friendIdsString forKey:@"atFriends"];
     }
@@ -347,7 +349,7 @@
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
     if ([customInfo isEqualToString:@"publishQuestion"]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationChangeUserInfo object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationAddNewQuestion object:nil];
         
         if (_publishType == PublishType_audio) {
             
