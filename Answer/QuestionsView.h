@@ -28,6 +28,5 @@
 - (void)addQuestionsResult:(QuestionsResult *)result;
 
 - (void)reloadQuestionView;
-- (void)clearTableViewData;
 
 @end

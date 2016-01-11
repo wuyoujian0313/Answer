@@ -18,7 +18,6 @@
 
 @interface AnswerCircleVC ()<QuestionInfoViewDelegate,NetworkTaskDelegate,MJRefreshBaseViewDelegate>
 @property(nonatomic,strong)QuestionsView                *questionView;
-@property(nonatomic,assign)BOOL                         isFristRefreshing;
 @property(nonatomic,copy)NSString                       *guanzhuFriendId;
 @property(nonatomic,assign)NSInteger                    more;
 @end
@@ -36,10 +35,9 @@
     self.navigationItem.leftBarButtonItem = nil;
     [self setNavTitle:self.tabBarItem.title];
     [self layoutQuestionView];
-    _isFristRefreshing = YES;
     _more = 1;
     
-    [_questionView beginRefreshing];
+    [self requestMyFriendsList];
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reloadQuestionView)
@@ -136,7 +134,7 @@
         NSArray *friendIds = [[friendResult friendList] valueForKey:@"uId"];
         
         [[User sharedUser] saveFriends:friendIds];
-        [self requestQuestionList];
+        [_questionView beginRefreshing];
     } else if ([customInfo isEqualToString:@"Guanzhu"]) {
         [[User sharedUser] addFriend:_guanzhuFriendId];
         //
@@ -152,23 +150,21 @@
     [SVProgressHUD dismiss];
     [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
         //
+        if ([customInfo isEqualToString:@"GetFriends"]) {
+            [_questionView beginRefreshing];
+        }
     }];
 }
 
 
 #pragma mark - MJRefreshBaseViewDelegate
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView  {
-    if (_isFristRefreshing) {
-        [self requestMyFriendsList];
-        _isFristRefreshing = NO;
-    } else {
-        if ([refreshView viewType] == MJRefreshViewTypeHeader) {
-            _more = 1;
-        } else if ([refreshView viewType] == MJRefreshViewTypeFooter){
-            _more ++;
-        }
-        [self requestQuestionList];
+    if ([refreshView viewType] == MJRefreshViewTypeHeader) {
+        _more = 1;
+    } else if ([refreshView viewType] == MJRefreshViewTypeFooter){
+        _more ++;
     }
+    [self requestQuestionList];
 }
 
 - (void)refreshViewEndRefreshing:(MJRefreshBaseView *)refreshView {

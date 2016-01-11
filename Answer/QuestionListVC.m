@@ -216,8 +216,6 @@
 }
 
 
-
-
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
