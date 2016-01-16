@@ -44,11 +44,11 @@
     [self.navigationController popViewControllerAnimated:YES];
     
     
-    if (_delegate && [_delegate respondsToSelector:@selector(setSelectedFriendIds:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(setSelectedFriendIds:number:)]) {
         
         NSString *idsString = [_selectFriendIds componentsJoinedByString:@","];
         
-        [_delegate setSelectedFriendIds:idsString];
+        [_delegate setSelectedFriendIds:idsString number:[_selectFriendIds count]];
     }
     
 }

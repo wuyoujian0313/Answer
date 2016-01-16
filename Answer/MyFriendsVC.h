@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger,EnterType) {
 
 @optional
 // 用,拼接
--(void)setSelectedFriendIds:(NSString*)idsString;
+-(void)setSelectedFriendIds:(NSString*)idsString number:(NSInteger)number;
 
 @end
 

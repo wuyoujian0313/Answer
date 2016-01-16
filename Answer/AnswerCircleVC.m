@@ -77,7 +77,7 @@
     
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           @"all",@"wtype",
-                          [NSString stringWithFormat:@"%d",_more],@"more",
+                          [NSString stringWithFormat:@"%ld",(long)_more],@"more",
                           [User sharedUser].user.uId,@"userId",
                           @"1",@"longitude",// 无效
                           @"1",@"friendId",// 无效

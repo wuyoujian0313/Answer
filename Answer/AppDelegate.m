@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <ShareSDK/ShareSDK.h>
+#import <ShareSDKConnector/ShareSDKConnector.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
@@ -33,8 +34,36 @@
 }
 
 - (void)registerShareSDK {
-    [ShareSDK registerApp:ShareSDKAppKey];//字符串api20为您的ShareSDK的AppKey
     
+    [ShareSDK registerApp:@"iosv1101" activePlatforms:@[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ)] onImport:^(SSDKPlatformType platformType) {
+        
+        switch (platformType) {
+            case SSDKPlatformTypeWechat:
+                [ShareSDKConnector connectWeChat:[WXApi class]];
+                break;
+            case SSDKPlatformTypeQQ:
+                [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
+                break;
+                
+            default:
+                break;
+        }
+     } onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+         
+         switch (platformType) {
+             case SSDKPlatformTypeWechat:
+                 [appInfo SSDKSetupWeChatByAppId:@"wx4868b35061f87885"
+                                       appSecret:@"64020361b8ec4c99936c0e3999a9f249"];
+                 break;
+             case SSDKPlatformTypeQQ:
+                 [appInfo SSDKSetupQQByAppId:@"100371282"
+                                      appKey:@"aed9b0303e3ed1e27bae87c33761161d"
+                                    authType:SSDKAuthTypeBoth];
+                 break;
+             default:
+                 break;
+         }
+     }];
     
 }
 

@@ -100,6 +100,7 @@
 - (void)clearTableViewData {
     [_questionList removeAllObjects];
     [_userList removeAllObjects];
+    [_cellCache removeAllObjects];
 }
 
 - (void)addQuestionsResult:(QuestionsResult *)result {

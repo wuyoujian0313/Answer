@@ -43,6 +43,7 @@
 @property (nonatomic, copy) NSString                       *locString;
 @property (nonatomic, copy) NSString                       *friendIdsString;
 @property (nonatomic, strong) UIButton                     *redBtn;
+@property (nonatomic, strong) UIButton                     *atBtn;
 
 @property (nonatomic, assign) BOOL                         isAnonymous;
 @property (nonatomic, assign) NSInteger                    reward;
@@ -310,13 +311,14 @@
     } else if (sender.tag == 301) {
         
         // 匿名设置
-        UIImage *image = [UIImage imageNamed:@"unSelected"];
+        _isAnonymous = !_isAnonymous;
+        UIImage *image = [UIImage imageNamed:@"unanonymous"];
         if (_isAnonymous) {
-            image = [UIImage imageNamed:@"selected"];
+            image = [UIImage imageNamed:@"anonymous"];
         }
         
         [sender setImage:image forState:UIControlStateNormal];
-        _isAnonymous = !_isAnonymous;
+        
         
     } else if (sender.tag == 302) {
         // 好友设置
@@ -340,8 +342,10 @@
 
 #pragma mark - SelectedFriendIdsDelegate
 // 用,拼接
--(void)setSelectedFriendIds:(NSString*)idsString {
+-(void)setSelectedFriendIds:(NSString*)idsString number:(NSInteger)number {
     self.friendIdsString = idsString;
+
+    [_atBtn setTitle:[NSString stringWithFormat:@"%ld",(long)number] forState:UIControlStateNormal];
 }
 
 
@@ -563,10 +567,11 @@
             //
             CGFloat left = 10;
             CGFloat top = 0;
+            CGFloat btnWidth = 50;
             UIButton *locBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             self.locBtn = locBtn;
             [locBtn setTag:300];
-            [locBtn setFrame:CGRectMake(left, top, 100, 44)];
+            [locBtn setFrame:CGRectMake(left, top, tableView.frame.size.width -  3*btnWidth - 10, 44)];
             [locBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
             [locBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
             [locBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
@@ -574,54 +579,48 @@
             [locBtn addTarget:self action:@selector(toolAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:locBtn];
             
-            left = tableView.frame.size.width - 10 - 50;
+            left = tableView.frame.size.width -  btnWidth;
             UIButton *redBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             self.redBtn = redBtn;
-            [redBtn.layer setBorderColor:[UIColor colorWithHex:0xcccccc].CGColor];
-            [redBtn.layer setCornerRadius:4.0];
-            [redBtn.layer setBorderWidth:kLineHeight1px];
             [redBtn setTag:303];
-            [redBtn setFrame:CGRectMake(left, 7, 50, 30)];
-            [redBtn.titleLabel setFont:[UIFont systemFontOfSize:16]];
+            [redBtn setFrame:CGRectMake(left, 2, btnWidth, 40)];
+            [redBtn.titleLabel setFont:[UIFont systemFontOfSize:11]];
             [redBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
             [redBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
             [redBtn addTarget:self action:@selector(toolAction:) forControlEvents:UIControlEventTouchUpInside];
             
-            UIImage *image = [UIImage imageNamed:@"reward"];
+            UIImage *image = [UIImage imageNamed:@"redPacketNum"];
             [redBtn setImage:image forState:UIControlStateNormal];
-            [redBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -image.size.width/2.0 + 10, 0, 0)];
+            [redBtn.titleLabel setTextAlignment:NSTextAlignmentLeft];
+            [redBtn setTitleEdgeInsets:UIEdgeInsetsMake(2, -image.size.width/2.0 - 16, 0, 0)];
             [redBtn setTitle:@"0" forState:UIControlStateNormal];
             [cell.contentView addSubview:redBtn];
             
             
-            left -= 10 + 50;
+            left -= btnWidth;
             UIButton *atBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            self.atBtn = atBtn;
             [atBtn setTag:302];
-            [atBtn.layer setBorderColor:[UIColor colorWithHex:0xcccccc].CGColor];
-            [atBtn.layer setCornerRadius:4.0];
-            [atBtn.layer setBorderWidth:kLineHeight1px];
-            [atBtn setFrame:CGRectMake(left, 7, 50, 30)];
-            [atBtn setImage:[UIImage imageNamed:@"atMe"] forState:UIControlStateNormal];
+            [atBtn setFrame:CGRectMake(left, 4, btnWidth, 40)];
+            [atBtn setImage:[UIImage imageNamed:@"atFriend"] forState:UIControlStateNormal];
+            [atBtn.titleLabel setFont:[UIFont systemFontOfSize:11]];
+            [atBtn setTitle:@"0" forState:UIControlStateNormal];
+            [atBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+            [atBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -image.size.width/2.0 - 16, 0, 0)];
             [atBtn addTarget:self action:@selector(toolAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:atBtn];
             
-            left -= 5 + 50;
+            left -= btnWidth;
             UIButton *pubilcBtn = [UIButton buttonWithType:UIButtonTypeCustom];
             [pubilcBtn setTag:301];
-            [pubilcBtn.layer setBorderColor:[UIColor colorWithHex:0xcccccc].CGColor];
-            [pubilcBtn.layer setCornerRadius:4.0];
-            [pubilcBtn.layer setBorderWidth:kLineHeight1px];
-            [pubilcBtn setFrame:CGRectMake(left, 7, 50, 30)];
-            [pubilcBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
-            [pubilcBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
-            [pubilcBtn setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
-            [pubilcBtn setTitle:@"匿名" forState:UIControlStateNormal];
+            [pubilcBtn setFrame:CGRectMake(left, 2, btnWidth, 40)];
             [pubilcBtn addTarget:self action:@selector(toolAction:) forControlEvents:UIControlEventTouchUpInside];
+            if (_isAnonymous) {
+                [pubilcBtn setImage:[UIImage imageNamed:@"anonymous"] forState:UIControlStateNormal];
+            } else {
+                [pubilcBtn setImage:[UIImage imageNamed:@"unanonymous"] forState:UIControlStateNormal];
+            }
             
-            UIImage *image1 = [UIImage imageNamed:@"unSelected"];
-            [pubilcBtn setImage:image1 forState:UIControlStateNormal];
-            [pubilcBtn setTitleEdgeInsets:UIEdgeInsetsMake(0, -30 - image.size.width, 0, 0)];
-            [pubilcBtn setImageEdgeInsets:UIEdgeInsetsMake(0, 26, 0, 0)];
             [cell.contentView addSubview:pubilcBtn];
             
             LineView *line2 = [[LineView alloc] initWithFrame:CGRectMake(0, 44 - kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];

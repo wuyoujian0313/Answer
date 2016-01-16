@@ -33,11 +33,11 @@
 - (void)createMenuData {
     NSDictionary *item1 = [NSDictionary dictionaryWithObjectsAndKeys:@"rechange",@"image",@"充值",@"name", nil];
     
-    NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:@"balance",@"image",@"余额",@"name", nil];
+    NSDictionary *item2 = [NSDictionary dictionaryWithObjectsAndKeys:@"balance",@"image",@"我的余额",@"name", nil];
     
     NSDictionary *item3 = [NSDictionary dictionaryWithObjectsAndKeys:@"cash",@"image",@"提现",@"name", nil];
     
-    NSDictionary *item4 = [NSDictionary dictionaryWithObjectsAndKeys:@"record",@"image",@"记录",@"name", nil];
+    NSDictionary *item4 = [NSDictionary dictionaryWithObjectsAndKeys:@"record",@"image",@"交易记录",@"name", nil];
     
     self.menuData = [[NSArray alloc] initWithObjects:item1,item2,item3,item4,nil];
 }

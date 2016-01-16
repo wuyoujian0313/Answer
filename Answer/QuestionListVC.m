@@ -192,7 +192,7 @@
     NSLog(@"latitude %f, longitude %f", userLatitude, userLongitude);
     
     self.latitude = [NSNumber numberWithDouble:userLatitude];
-    self.longitude = [NSNumber numberWithDouble:userLatitude];
+    self.longitude = [NSNumber numberWithDouble:userLongitude];
     
     if (_firstLocation) {
         [_questionView beginRefreshing];

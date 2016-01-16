@@ -40,7 +40,7 @@
     [_otherTextField resignFirstResponder];
     if (sender.tag == 201) {
         if (_otherTextField.text == nil || [_otherTextField.text length] == 0) {
-            [FadePromptView showPromptStatus:@"请入金额(最大999)" duration:1.0 finishBlock:^{
+            [FadePromptView showPromptStatus:@"请输入金额(最大100)" duration:1.0 finishBlock:^{
                 //
                 [_otherTextField becomeFirstResponder];
             }];
@@ -121,7 +121,7 @@
 }
 
 - (void)layoutNavBarView {
-    self.navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height, self.view.frame.size.width, 44)];
+    self.navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, screenHeight, self.view.frame.size.width, 44)];
     [_navBar setBackgroundColor:[UIColor whiteColor]];
     [_navBar setHidden:YES];
     
@@ -157,7 +157,7 @@
     [textField setTextAlignment:NSTextAlignmentCenter];
     [textField setKeyboardType:UIKeyboardTypeNumberPad];
     [textField setClearsOnBeginEditing:YES];
-    [textField setPlaceholder:@"请入金额(最大999元)"];
+    [textField setPlaceholder:@"请输入金额(最大100元)"];
     [panelView addSubview:textField];
     
     
@@ -206,7 +206,7 @@
     
     if ([textString length] > 3) {
         
-        [FadePromptView showPromptStatus:@"最大金额999元)" duration:1.0 finishBlock:^{
+        [FadePromptView showPromptStatus:@"最大金额100元" duration:1.0 finishBlock:^{
             //
             [_otherTextField becomeFirstResponder];
         }];
