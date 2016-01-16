@@ -1,4 +1,9 @@
 build
+
+MyDerivedData
+
 *.xcuserstate
 
 *.xcuserstate
+
+MyDerivedData/Answer/FindHistory.xcfind

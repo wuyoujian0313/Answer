@@ -56,7 +56,7 @@
         [self setQuestionTableView:tableView];
         [tableView setDelegate:self];
         [tableView setDataSource:self];
-        [tableView setBackgroundColor:[UIColor clearColor]];
+        [tableView setBackgroundColor:[UIColor colorWithHex:0xebeef0]];
         [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
         [self addSubview:tableView];
         
@@ -101,13 +101,16 @@
     [_questionList removeAllObjects];
     [_userList removeAllObjects];
     [_cellCache removeAllObjects];
+    _cellCache = nil;
 }
 
 - (void)addQuestionsResult:(QuestionsResult *)result {
     
     if (result.twList && [result.twList count]) {
-        if ([result.twList count] < 30) {
+        if ([result.twList count] <= 30) {
             [_refreshFootder setHidden:YES];
+        } else {
+            [_refreshFootder setHidden:NO];
         }
         [_questionList addObjectsFromArray:result.twList];
     }
@@ -133,7 +136,7 @@
 - (void)refreshViewBeginRefreshing:(MJRefreshBaseView *)refreshView  {
     if (_refreshDelegate && [_refreshDelegate respondsToSelector:@selector(refreshViewBeginRefreshing:)]) {
         
-        if ([refreshView isEqual:_refreshHeader]) {
+        if ([refreshView viewType] == MJRefreshViewTypeHeader) {
             [self clearTableViewData];
         }
         [_refreshDelegate refreshViewBeginRefreshing:refreshView];
@@ -211,9 +214,11 @@
             cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            [_cellCache setObject:cell forKey:key];
         }
         
-        [_cellCache setObject:cell forKey:key];
+        
     }
     
     // 设置数据
