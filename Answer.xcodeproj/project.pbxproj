@@ -1545,12 +1545,6 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wu YouJian (EK2QWBZ82K)";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Answer/ShareSDK/Connection",
-					"$(PROJECT_DIR)/Answer/ShareSDK/Core",
-					"$(PROJECT_DIR)/Answer/ShareSDK/Extend/QQConnectSDK",
-					"$(PROJECT_DIR)/Answer/ShareSDK",
-					"$(PROJECT_DIR)/Answer/ShareSDK/UI",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/QQSDK",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5",
 				);
@@ -1561,7 +1555,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Answer/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/WeChatSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.answer;
@@ -1580,12 +1573,6 @@
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing WeiMeiTianCheng Technology Co., Ltd.";
 				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/Answer/ShareSDK/Connection",
-					"$(PROJECT_DIR)/Answer/ShareSDK/Core",
-					"$(PROJECT_DIR)/Answer/ShareSDK/Extend/QQConnectSDK",
-					"$(PROJECT_DIR)/Answer/ShareSDK",
-					"$(PROJECT_DIR)/Answer/ShareSDK/UI",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/QQSDK",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5",
 				);
@@ -1597,7 +1584,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Answer/ShareSDK/Extend/WeChatSDK",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/WeChatSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.answer;

@@ -2,6 +2,10 @@ build
 
 MyDerivedData
 
+xcuserdata
+
+*.xcuserstate
+
 *.xcuserstate
 
 *.xcuserstate
