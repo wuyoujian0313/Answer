@@ -2,7 +2,9 @@ build
 
 MyDerivedData
 
-Answer.xcodeproj/project.xcworkspace/xcuserdata
+Answer.xcodeproj/project.xcworkspace/xcuserdata/*
+
+*.xcuserstate
 
 *.xcuserstate
 
