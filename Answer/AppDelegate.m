@@ -70,7 +70,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self setupMainVC];
+#if TARGET_IPHONE_SIMULATOR
+#elif TARGET_OS_IPHONE
     [self registerShareSDK];
+#endif
     return YES;
 }
 

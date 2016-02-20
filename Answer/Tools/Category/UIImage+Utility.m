@@ -79,4 +79,19 @@
     return scaledImage;
 }
 
+
+
++ (UIImage *)screenShotImage:(UIView*)view {
+    
+    //创建图片
+    UIGraphicsBeginImageContext(view.bounds.size);
+    [view.layer renderInContext:UIGraphicsGetCurrentContext()];
+    //截取当前的图片
+    UIImage* image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
+
 @end

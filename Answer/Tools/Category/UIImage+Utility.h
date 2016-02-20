@@ -14,4 +14,6 @@
 + (UIImage *)imageFromColor:(UIColor *)color size:(CGSize)size;
 + (UIImage *)scaleImage:(UIImage *)image toSize:(CGSize)targetSize;
 
++ (UIImage *)screenShotImage:(UIView*)view;
+
 @end
