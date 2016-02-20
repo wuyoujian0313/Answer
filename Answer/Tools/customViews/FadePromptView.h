@@ -17,3 +17,5 @@ static  const CGFloat kFadePromptViewMaxWidth = 260;
 +(void)showPromptStatus:(NSString*)status duration:(NSTimeInterval)seconds positionY:(CGFloat)y finishBlock:(finishPrompt)finish;
 
 @end
+
+

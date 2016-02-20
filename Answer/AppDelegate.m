@@ -35,7 +35,7 @@
 
 - (void)registerShareSDK {
     
-    [ShareSDK registerApp:@"iosv1101" activePlatforms:@[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ)] onImport:^(SSDKPlatformType platformType) {
+    [ShareSDK registerApp:ShareSDKAppKey activePlatforms:@[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ)] onImport:^(SSDKPlatformType platformType) {
         
         switch (platformType) {
             case SSDKPlatformTypeWechat:

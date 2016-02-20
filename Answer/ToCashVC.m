@@ -33,9 +33,9 @@
 }
 
 - (void)createRechangeMethods {
-    NSMutableDictionary *item1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"rechange",@"image",@"微信提现",@"title",@YES,@"seleted", nil];
+    NSMutableDictionary *item1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"weixin",@"image",@"微信提现",@"title",@YES,@"seleted", nil];
     
-    NSMutableDictionary *item2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"balance",@"image",@"支付宝提现",@"title",@YES,@"seleted", nil];
+    NSMutableDictionary *item2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"zhifubao",@"image",@"支付宝提现",@"title",@YES,@"seleted", nil];
     
     self.rechangeMethods = [[NSArray alloc] initWithObjects:item1,item2,nil];
 }
