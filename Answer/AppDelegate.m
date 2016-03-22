@@ -14,7 +14,7 @@
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
 
-@interface AppDelegate ()
+@interface AppDelegate ()<WXApiDelegate>
 @end
 
 @implementation AppDelegate
@@ -49,47 +49,51 @@
     [_window makeKeyAndVisible];
 }
 
+
 - (void)registerShareSDK {
     
-    [ShareSDK registerApp:ShareSDKAppKey activePlatforms:@[@(SSDKPlatformTypeWechat),@(SSDKPlatformTypeQQ)] onImport:^(SSDKPlatformType platformType) {
-        
-        switch (platformType) {
-            case SSDKPlatformTypeWechat:
-                [ShareSDKConnector connectWeChat:[WXApi class]];
-                break;
-            case SSDKPlatformTypeQQ:
-                [ShareSDKConnector connectQQ:[QQApiInterface class] tencentOAuthClass:[TencentOAuth class]];
-                break;
-                
-            default:
-                break;
-        }
-     } onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
-         
-         switch (platformType) {
-             case SSDKPlatformTypeWechat:
-                 [appInfo SSDKSetupWeChatByAppId:@"wx4868b35061f87885"
-                                       appSecret:@"64020361b8ec4c99936c0e3999a9f249"];
-                 break;
-             case SSDKPlatformTypeQQ:
-                 [appInfo SSDKSetupQQByAppId:@"100371282"
-                                      appKey:@"aed9b0303e3ed1e27bae87c33761161d"
-                                    authType:SSDKAuthTypeBoth];
-                 break;
-             default:
-                 break;
-         }
-     }];
-    
+    [ShareSDK registerApp:ShareSDKAppKey
+          activePlatforms:@[@(SSDKPlatformTypeQQ),@(SSDKPlatformTypeWechat)]
+                 onImport:^(SSDKPlatformType platformType) {
+                     
+                     switch (platformType) {
+                         case SSDKPlatformTypeWechat:
+                             [ShareSDKConnector connectWeChat:[WXApi class] delegate:self];
+                             break;
+                         case SSDKPlatformTypeQQ:
+                             [ShareSDKConnector connectQQ:[QQApiInterface class]
+                                        tencentOAuthClass:[TencentOAuth class]];
+                             break;
+                             
+                         default:
+                             break;
+                     }
+                 }
+          onConfiguration:^(SSDKPlatformType platformType, NSMutableDictionary *appInfo) {
+              
+              switch (platformType) {
+                  case SSDKPlatformTypeWechat:
+                      [appInfo SSDKSetupWeChatByAppId:WeiXinSDKAppId
+                                            appSecret:WeiXinSDKAppSecret];
+                      break;
+                  case SSDKPlatformTypeQQ:
+                      [appInfo SSDKSetupQQByAppId:QQSDKAppId
+                                           appKey:QQSDKAppKey
+                                         authType:SSDKAuthTypeBoth];
+                      break;
+                  default:
+                      break;
+              }
+          }];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [self setupMainVC];
-#if TARGET_IPHONE_SIMULATOR
-#elif TARGET_OS_IPHONE
+//#if TARGET_IPHONE_SIMULATOR
+//#elif TARGET_OS_IPHONE
     [self registerShareSDK];
-#endif
+//#endif
     return YES;
 }
 
@@ -124,13 +128,15 @@
             //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
             NSLog(@"result = %@",resultDic);
         }];
-    }
-    if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
+    } else if ([url.host isEqualToString:@"platformapi"]){//支付宝钱包快登授权返回authCode
         
         [[AlipaySDK defaultService] processAuthResult:url standbyCallback:^(NSDictionary *resultDic) {
             //【由于在跳转支付宝客户端支付的过程中，商户app在后台很可能被系统kill了，所以pay接口的callback就会失效，请商户对standbyCallback返回的回调结果进行处理,就是在这个方法里面处理跟callback一样的逻辑】
             NSLog(@"result = %@",resultDic);
         }];
+    } else {
+
+        
     }
     return YES;
 }

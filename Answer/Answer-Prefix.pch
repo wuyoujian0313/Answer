@@ -51,7 +51,16 @@
 #define BaiduGeocoderURL            @"http://api.map.baidu.com/geocoder/v2/?"
 
 // 分享相关
-#define ShareSDKAppKey              @"e7d543e9f216"
+#define ShareSDKAppKey              @"e7d5f19efdb0"
+
+#define QQSDKAppKey                 @"alkvsxWc7Eh7GwGk"
+#define QQSDKAppId                  @"1105106734"
+
+#define WeiXinSDKAppSecret          @""
+#define WeiXinSDKAppId              @""
+
+#define AlipaySDKAppKey             @""
+#define AlipaySDKAppId              @""
 
 // 后台接口API
 #define API_Login                   @"login"

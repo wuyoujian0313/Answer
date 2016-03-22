@@ -1457,7 +1457,7 @@
 				TargetAttributes = {
 					E1D188B51C0ED4870043DE9C = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 7DUX67X748;
+						DevelopmentTeam = PQKYEKPNF9;
 					};
 					E1D188CE1C0ED4880043DE9C = {
 						CreatedOnToolsVersion = 7.1;
@@ -1735,7 +1735,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1778,7 +1778,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1803,9 +1803,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wu YouJian (EK2QWBZ82K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wu YouJian (4PHANCCNV9)";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/QQSDK",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5",
@@ -1815,17 +1818,18 @@
 				GCC_PREFIX_HEADER = "Answer/Answer-Prefix.pch";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Answer/AlipaySDK";
 				INFOPLIST_FILE = Answer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/WeChatSDK",
 					"$(PROJECT_DIR)/Answer/AlipaySDK",
 				);
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.answer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9fdfb247-0d29-4634-a7ff-c9b25316bd00";
+				PROVISIONING_PROFILE = "b7860293-8755-4ac1-96eb-1e6116c883bb";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1835,9 +1839,12 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing WeiMeiTianCheng Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/QQSDK",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5",
@@ -1848,17 +1855,18 @@
 				GCC_PREPROCESSOR_DEFINITIONS = "DEBUG=0";
 				HEADER_SEARCH_PATHS = "$(SRCROOT)/Answer/AlipaySDK";
 				INFOPLIST_FILE = Answer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/WeChatSDK",
 					"$(PROJECT_DIR)/Answer/AlipaySDK",
 				);
+				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.answer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "da891e86-274e-487c-bd50-9e6c997518a6";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
