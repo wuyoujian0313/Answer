@@ -56,8 +56,8 @@
 #define QQSDKAppKey                 @"alkvsxWc7Eh7GwGk"
 #define QQSDKAppId                  @"1105106734"
 
-#define WeiXinSDKAppSecret          @""
-#define WeiXinSDKAppId              @""
+#define WeiXinSDKAppSecret          @"dce5699086e990df3104052ce298f573"
+#define WeiXinSDKAppId              @"wx7a296d05150143e5"
 
 #define AlipaySDKAppKey             @""
 #define AlipaySDKAppId              @""

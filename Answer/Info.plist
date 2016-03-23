@@ -26,14 +26,8 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>QQ41DE972E</string>
-			</array>
-		</dict>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
 				<string>TuWenCircle</string>
+				<string>wx7a296d05150143e5</string>
 			</array>
 		</dict>
 	</array>
