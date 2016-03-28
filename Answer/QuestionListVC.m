@@ -99,7 +99,7 @@
         
         [_locmanager startUpdatingLocation];
     } else {
-        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"注意" message:@"您的定位服务并未打开，请到设置面板中打开图问圈的定位服务功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
+        UIAlertView* alert = [[UIAlertView alloc]initWithTitle:@"注意" message:@"您的定位服务并未打开，请到设置面板中打开图问的定位服务功能" delegate:self cancelButtonTitle:@"确定" otherButtonTitles:nil];
         alert.tag = 101;
         [alert show];
     }

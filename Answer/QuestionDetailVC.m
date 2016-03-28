@@ -20,6 +20,12 @@
 #import "NetworkTask.h"
 #import "AnswerResult.h"
 
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
+#import <ShareSDKUI/SSUIShareActionSheetStyle.h>
+#import <ShareSDKUI/SSUIShareActionSheetCustomItem.h>
+#import <ShareSDK/ShareSDK+Base.h>
+
 
 @interface QuestionDetailVC ()<QuestionInfoViewDelegate,UITableViewDataSource,UITableViewDelegate,HPGrowingTextViewDelegate,NetworkTaskDelegate>
 
@@ -384,6 +390,68 @@
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 
+
+- (void)shareMenu {
+    
+    //1、创建分享参数
+    NSString *url =  @"http://mp.weixin.qq.com/s?__biz=MzI0MDIxODQwNA==&mid=402448879&idx=1&sn=68af9498ea6dd3c5d58ff50135a41fce&scene=0&previewkey=N8Sopmdh7ICqBwQYX9JqVMNS9bJajjJKzz%2F0By7ITJA%3D#wechat_redirect";
+    
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    [shareParams SSDKSetupShareParamsByText:@"我正在使用“图问”，快来围观吧！"
+                                     images:[UIImage imageNamed:@"180"]
+                                        url:[NSURL URLWithString:url]
+                                      title:@"图问分享"
+                                       type:SSDKContentTypeAuto];
+    
+    //2、分享（可以弹出我们的分享菜单和编辑界面）
+    [ShareSDK showShareActionSheet:self.view
+                             items:nil
+                       shareParams:shareParams
+               onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+                   
+                   switch (state) {
+                       case SSDKResponseStateBegin: {
+                           
+                           break;
+                       }
+                           
+                           
+                       case SSDKResponseStateSuccess: {
+                           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                               message:nil
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"确定"
+                                                                     otherButtonTitles:nil];
+                           [alertView show];
+                           break;
+                       }
+                           
+                       case SSDKResponseStateFail: {
+                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                           message:[NSString stringWithFormat:@"%@",error]
+                                                                          delegate:nil
+                                                                 cancelButtonTitle:@"OK"
+                                                                 otherButtonTitles:nil, nil];
+                           [alert show];
+                           break;
+                       }
+                           
+                       case SSDKResponseStateCancel: {
+                           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享已取消"
+                                                                               message:nil
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"确定"
+                                                                     otherButtonTitles:nil];
+                           [alertView show];
+                           break;
+                       }
+                       default:
+                           break;
+                   }
+               }
+     ];
+}
+
 #pragma mark - QuestionInfoViewCellDelegate
 - (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {
     
@@ -407,8 +475,10 @@
         case QuestionInfoViewAction_ScanDetail: {
             break;
         }
-        case QuestionInfoViewAction_Sharing:
+        case QuestionInfoViewAction_Sharing: {
+            [self shareMenu];
             break;
+        }
         case QuestionInfoViewAction_RedPackage:
             break;
         case QuestionInfoViewAction_Location:

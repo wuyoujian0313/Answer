@@ -68,7 +68,7 @@
     [rootview addGestureRecognizer:tap];
     
     NSString *noteString = @"没有账号？";
-    NSString *tempString = [NSString stringWithFormat:@"%@注册图问圈账号",noteString];
+    NSString *tempString = [NSString stringWithFormat:@"%@注册图问账号",noteString];
     NSRange range = [tempString rangeOfString:noteString];
     
     NSMutableAttributedString *attrStr = [NSMutableAttributedString attributedStringWithString:tempString];

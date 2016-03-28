@@ -64,6 +64,7 @@
 		E19762151C2692090093A935 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = E19762141C2692090093A935 /* User.m */; };
 		E19762201C26B2FC0093A935 /* SetVC.m in Sources */ = {isa = PBXBuildFile; fileRef = E197621F1C26B2FC0093A935 /* SetVC.m */; };
 		E19762231C26B6B30093A935 /* MenuCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E19762221C26B6B30093A935 /* MenuCollectionViewCell.m */; };
+		E19E87881CA97CD600731308 /* 180.png in Resources */ = {isa = PBXBuildFile; fileRef = E19E87871CA97CD600731308 /* 180.png */; };
 		E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */; };
 		E1A054AE1C1F0D5500A6DD56 /* RewardInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054AD1C1F0D5500A6DD56 /* RewardInfo.m */; };
 		E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E1A054B01C1F0EC400A6DD56 /* ChangeHeadImgResult.m */; };
@@ -377,6 +378,7 @@
 		E197621F1C26B2FC0093A935 /* SetVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SetVC.m; sourceTree = "<group>"; };
 		E19762211C26B6B30093A935 /* MenuCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuCollectionViewCell.h; sourceTree = "<group>"; };
 		E19762221C26B6B30093A935 /* MenuCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuCollectionViewCell.m; sourceTree = "<group>"; };
+		E19E87871CA97CD600731308 /* 180.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 180.png; sourceTree = "<group>"; };
 		E1A054A91C1F0D2500A6DD56 /* RewardListResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardListResult.h; sourceTree = "<group>"; };
 		E1A054AA1C1F0D2500A6DD56 /* RewardListResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RewardListResult.m; sourceTree = "<group>"; };
 		E1A054AC1C1F0D5500A6DD56 /* RewardInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RewardInfo.h; sourceTree = "<group>"; };
@@ -1114,6 +1116,7 @@
 		E1D188B91C0ED4880043DE9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E19E87871CA97CD600731308 /* 180.png */,
 				E1F880971C426BC0000BC291 /* frameworks */,
 				E1D188C51C0ED4880043DE9C /* Images.xcassets */,
 				E1D188CA1C0ED4880043DE9C /* Info.plist */,
@@ -1498,6 +1501,7 @@
 				E1B78A5E1C2263B600A2E384 /* MJRefresh.bundle in Resources */,
 				E17E49B71C79B957003D20AE /* AlipaySDK.bundle in Resources */,
 				E197620D1C26825F0093A935 /* SVProgressHUD.bundle in Resources */,
+				E19E87881CA97CD600731308 /* 180.png in Resources */,
 				E1E9DAEB1C453007009C618C /* ShareSDKUI.bundle in Resources */,
 				E19761FF1C2673220093A935 /* LICENSE in Resources */,
 				E1D188C61C0ED4880043DE9C /* Images.xcassets in Resources */,
