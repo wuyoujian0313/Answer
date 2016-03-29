@@ -120,7 +120,7 @@
         for (UserInfo * user in result.userList) {
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",user.uId];
             
-            // 理论上只有一个
+            // 数组里不存在用户
             NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
             if (users == nil || [users count] == 0) {
                 [_userList addObject:user];
@@ -172,7 +172,7 @@
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
         
         // 理论上只有一个
-        NSArray *users = [_questionList filteredArrayUsingPredicate:predicate];
+        NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
         if (users && [users count]) {
             [_delegate questionInfoViewAction:QuestionInfoViewAction_ScanDetail questionInfo:questionInfo userInfo:[users objectAtIndex:0]];
         } else {
@@ -235,7 +235,7 @@
             NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
             
             // 理论上只有一个
-            NSArray *users = [_questionList filteredArrayUsingPredicate:predicate];
+            NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
             if (users && [users count]) {
                 [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
             } else {

@@ -78,4 +78,6 @@
 #define API_AddTuWen                @"addTuWen"
 #define API_GetSystemMessage        @"getSystemMessage"
 #define API_DelSystemMessage        @"delSystemMessage"
+#define API_ToCash                  @"fundFlow/withdrawCash"
+
 

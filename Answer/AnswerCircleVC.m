@@ -61,10 +61,17 @@
                                                  name:NotificationAddNewQuestion
                                                object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reloadQuestionView)
+                                                 name:UIApplicationWillEnterForegroundNotification
+                                               object:nil];
+    
 }
 
-- (void)reloadQuestionView {
-    [_questionView reloadQuestionView];
+-(void)reloadQuestionView {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_questionView reloadQuestionView];
+    });
 }
 
 
