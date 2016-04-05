@@ -35,9 +35,10 @@
 - (void)createRechangeMethods {
     NSMutableDictionary *item1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"weixin",@"image",@"微信提现",@"title",@YES,@"seleted", nil];
     
-    NSMutableDictionary *item2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"zhifubao",@"image",@"支付宝提现",@"title",@YES,@"seleted", nil];
+//    NSMutableDictionary *item2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"zhifubao",@"image",@"支付宝提现",@"title",@NO,@"seleted", nil];
     
-    self.rechangeMethods = [[NSArray alloc] initWithObjects:item1,item2,nil];
+    self.rechangeMethods = [[NSArray alloc] initWithObjects:item1,nil];
+    _selIndex = 0;
 }
 
 - (void)layoutNavBarView {
@@ -299,7 +300,7 @@
                 [textField setReturnKeyType:UIReturnKeyNext];
                 [textField setClearButtonMode:UITextFieldViewModeAlways];
                 [textField setClearsOnBeginEditing:YES];
-                textField.placeholder = @"请输入提现账号";
+                textField.placeholder = @"请输入提现到账的微信号";
                 [textField setKeyboardType:UIKeyboardTypeDefault];
                 [cell.contentView addSubview:textField];
                 

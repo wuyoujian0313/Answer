@@ -9,6 +9,12 @@
 #import "QuestionBaseVC.h"
 #import "FileCache.h"
 
+#import <ShareSDK/ShareSDK.h>
+#import <ShareSDKUI/ShareSDK+SSUI.h>
+#import <ShareSDKUI/SSUIShareActionSheetStyle.h>
+#import <ShareSDKUI/SSUIShareActionSheetCustomItem.h>
+#import <ShareSDK/ShareSDK+Base.h>
+
 @interface QuestionBaseVC ()<AVAudioPlayerDelegate>
 @end
 
@@ -25,6 +31,76 @@
                                              selector:@selector(stopPlay)
                                                  name:NotificationsStopPlayAudio
                                                object:nil];
+}
+
+- (void)shareMenu {
+    
+    
+    //    // 授权
+    //    [ShareSDK authorize:SSDKPlatformTypeWechat settings:@{SSDKAuthSettingKeyScopes : @[@"snsapi_userinfo"]} onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+    //        //
+    //    }];
+    //
+    //
+    //    return;
+    
+    //1、创建分享参数
+    NSString *url = kSharedURL;
+    
+    NSMutableDictionary *shareParams = [NSMutableDictionary dictionary];
+    [shareParams SSDKSetupShareParamsByText:@"我正在使用“图问”，快来围观吧！"
+                                     images:[UIImage imageNamed:@"180"]
+                                        url:[NSURL URLWithString:url]
+                                      title:@"图问分享"
+                                       type:SSDKContentTypeAuto];
+    
+    //2、分享（可以弹出我们的分享菜单和编辑界面）
+    [ShareSDK showShareActionSheet:self.view
+                             items:nil
+                       shareParams:shareParams
+               onShareStateChanged:^(SSDKResponseState state, SSDKPlatformType platformType, NSDictionary *userData, SSDKContentEntity *contentEntity, NSError *error, BOOL end) {
+                   
+                   switch (state) {
+                       case SSDKResponseStateBegin: {
+                           
+                           break;
+                       }
+                           
+                           
+                       case SSDKResponseStateSuccess: {
+                           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享成功"
+                                                                               message:nil
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"确定"
+                                                                     otherButtonTitles:nil];
+                           [alertView show];
+                           break;
+                       }
+                           
+                       case SSDKResponseStateFail: {
+                           UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"分享失败"
+                                                                           message:[NSString stringWithFormat:@"%@",error]
+                                                                          delegate:nil
+                                                                 cancelButtonTitle:@"OK"
+                                                                 otherButtonTitles:nil, nil];
+                           [alert show];
+                           break;
+                       }
+                           
+                       case SSDKResponseStateCancel: {
+                           UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"分享已取消"
+                                                                               message:nil
+                                                                              delegate:nil
+                                                                     cancelButtonTitle:@"确定"
+                                                                     otherButtonTitles:nil];
+                           [alertView show];
+                           break;
+                       }
+                       default:
+                           break;
+                   }
+               }
+     ];
 }
 
 - (void)stopPlay {
