@@ -217,8 +217,12 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellIdentifier];
         
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+        
+        UIView *selBGView = [[UIView alloc] initWithFrame:cell.bounds];
+        [selBGView setBackgroundColor:[UIColor colorWithHex:0xeeeeee]];
+        cell.selectedBackgroundView = selBGView;
     
         LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, 50-kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
         [cell.contentView addSubview:line];
@@ -233,12 +237,12 @@
     NSInteger unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit;
     NSDateComponents *comps = [calendar components:unitFlags fromDate:updateDate];
 
-    NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont systemFontOfSize:28], NSForegroundColorAttributeName:[UIColor blackColor] };
+    NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont systemFontOfSize:28], NSForegroundColorAttributeName:[UIColor redColor] };
     
     NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor] };
     
-    NSString *str1 = [NSString stringWithFormat:@"%2ld",(long)comps.day];
-    NSString *str2 = [NSString stringWithFormat:@"日%2ld月",(long)comps.month];
+    NSString *str1 = [NSString stringWithFormat:@"%2ld日",(long)comps.day];
+    NSString *str2 = [NSString stringWithFormat:@"%2ld月",(long)comps.month];
     NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
     NSRange range1 = [str rangeOfString:str1];
     NSRange range2 = [str rangeOfString:str2];
@@ -270,6 +274,13 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 50;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSInteger row = indexPath.row;
 }
 
 

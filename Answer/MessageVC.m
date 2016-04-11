@@ -11,7 +11,8 @@
 #import "SystemMessageVC.h"
 
 @interface MessageVC ()<UITableViewDataSource,UITableViewDelegate>
-@property(nonatomic,strong)UITableView          *meassageTableView;
+@property(nonatomic,strong) UITableView          *meassageTableView;
+@property(nonatomic,strong) GetNewMsgCountResult  *msgCountRec;
 @end
 
 @implementation MessageVC
@@ -55,6 +56,12 @@
     [_meassageTableView setTableFooterView:view];
 }
 
+- (void)reloadData:(GetNewMsgCountResult *)msgCountRec {
+    
+    self.msgCountRec = msgCountRec;
+    [_meassageTableView reloadData];
+}
+
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 3;
@@ -71,9 +78,6 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-        
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.selectionStyle = UITableViewCellSelectionStyleGray;
         
         UIImageView * imageView = [[UIImageView alloc] initWithFrame:CGRectMake(11, (50-30)/2.0, 30, 30)];
         imageView.tag = 100;
@@ -104,21 +108,48 @@
     
     UIImageView *imageView =  (UIImageView *)[cell.contentView viewWithTag:100];
     UILabel *titleLabel = (UILabel *)[cell.contentView viewWithTag:101];
-   // UIImageView * accessoryView = (UIImageView*)[cell.contentView viewWithTag:102];
-    
+    UIImageView * accessoryView = (UIImageView*)[cell.contentView viewWithTag:102];
     NSInteger row = indexPath.row;
     switch (row) {
         case 0:
             imageView.image = [UIImage imageNamed:@"answerMyQ"];
             titleLabel.text = @"回答我的问题";
+            if (_msgCountRec.answerCount != nil && [_msgCountRec.answerCount length]) {
+                accessoryView.hidden = NO;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            } else {
+                accessoryView.hidden = YES;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
             break;
         case 1:
             imageView.image = [UIImage imageNamed:@"atMe"];
             titleLabel.text = @"@我的问题";
+            if (_msgCountRec.atmecount != nil && [_msgCountRec.atmecount length]) {
+                accessoryView.hidden = NO;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+            } else {
+                accessoryView.hidden = YES;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
             break;
         case 2:
             imageView.image = [UIImage imageNamed:@"sysMessage"];
             titleLabel.text = @"系统消息";
+            if (_msgCountRec.sysMsgCount != nil && [_msgCountRec.sysMsgCount length]) {
+                accessoryView.hidden = NO;
+                cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+                cell.selectionStyle = UITableViewCellSelectionStyleGray;
+                
+            } else {
+                accessoryView.hidden = YES;
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
             break;
             
         default:
@@ -142,28 +173,37 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0: {
-            // 回答我的问题
-            SystemMessageVC *vc = [[SystemMessageVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            vc.messageType = MessageType_answerMyQuestion;
-            [self.navigationController pushViewController:vc animated:YES];
+            if (_msgCountRec.answerCount && [_msgCountRec.answerCount length]) {
+                // 回答我的问题
+                SystemMessageVC *vc = [[SystemMessageVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.messageType = MessageType_answerMyQuestion;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
             break;
         }
         case 1: {
             
             // @我的问题
-            SystemMessageVC *vc = [[SystemMessageVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            vc.messageType = MessageType_atMe;
-            [self.navigationController pushViewController:vc animated:YES];
+            if (_msgCountRec.atmecount && [_msgCountRec.atmecount length]) {
+                SystemMessageVC *vc = [[SystemMessageVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.messageType = MessageType_atMe;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
             break;
         }
         case 2: {
             // 系统消息
-            SystemMessageVC *vc = [[SystemMessageVC alloc] init];
-            vc.hidesBottomBarWhenPushed = YES;
-            vc.messageType = MessageType_system;
-            [self.navigationController pushViewController:vc animated:YES];
+            if (_msgCountRec.sysMsgCount && [_msgCountRec.sysMsgCount length]) {
+                SystemMessageVC *vc = [[SystemMessageVC alloc] init];
+                vc.hidesBottomBarWhenPushed = YES;
+                vc.messageType = MessageType_system;
+                [self.navigationController pushViewController:vc animated:YES];
+            }
+            
             
             break;
         }

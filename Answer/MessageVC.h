@@ -7,7 +7,12 @@
 //
 
 #import "BaseVC.h"
+#import "GetNewMsgCountResult.h"
 
 @interface MessageVC : BaseVC
+
+- (void)reloadData:(GetNewMsgCountResult *)msgCountRec;
+
+
 
 @end

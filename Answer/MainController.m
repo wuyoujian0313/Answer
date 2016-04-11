@@ -16,14 +16,18 @@
 #import "LoginVC.h"
 #import "User.h"
 
+#import "NetworkTask.h"
+#import "GetNewMsgCountResult.h"
 
-@interface MainController ()<UITabBarControllerDelegate>
+
+@interface MainController ()<UITabBarControllerDelegate,NetworkTaskDelegate>
 
 @property (nonatomic, strong) UIViewController              *rootVC;
 @property (nonatomic, strong) WYJNavigationController       *loginNav;
 @property (nonatomic, strong) UITabBarController            *homeVC;
 @property (nonatomic, strong) UIViewController              *currentVC;
 @property (nonatomic, strong) UIViewController              *currentTabVC;
+@property (nonatomic, strong) MessageVC                     *messageVC;
 
 @end
 
@@ -111,7 +115,7 @@
     
     self.homeVC = [[UITabBarController alloc] init];
     [_homeVC.tabBar setBarTintColor:[UIColor lightTextColor]];
-    UIColor *color = [UIColor colorWithHex:0x12b8f6];
+    //UIColor *color = [UIColor colorWithHex:0x12b8f6];
     [_homeVC.tabBar setTintColor:[UIColor colorWithHex:0x12b8f6]];
     [_homeVC setDelegate:self];
     
@@ -137,12 +141,12 @@
     [questionVC setNavTitle:itemObj3.title];
     [questionVC setTabBarItem:itemObj3];
     
-    MessageVC *messageVC = [[MessageVC alloc] init];
+    self.messageVC = [[MessageVC alloc] init];
     UITabBarItem *itemObj4 = [[UITabBarItem alloc] initWithTitle:@"消息"
                                                             image:[UIImage imageNamed:@"tabbar_message"]
                                                     selectedImage:nil];
     [itemObj4 setTag:3];
-    [messageVC setTabBarItem:itemObj4];
+    [_messageVC setTabBarItem:itemObj4];
     
     
     MeVC *meVC = [[MeVC alloc] init];
@@ -155,7 +159,7 @@
     WYJNavigationController *nav1 = [[WYJNavigationController alloc] initWithRootViewController:answerVC];
     WYJNavigationController *nav2 = [[WYJNavigationController alloc] initWithRootViewController:discoverVC];
     WYJNavigationController *nav3 = [[WYJNavigationController alloc] initWithRootViewController:questionVC];
-    WYJNavigationController *nav4 = [[WYJNavigationController alloc] initWithRootViewController:messageVC];
+    WYJNavigationController *nav4 = [[WYJNavigationController alloc] initWithRootViewController:_messageVC];
     WYJNavigationController *nav5 = [[WYJNavigationController alloc] initWithRootViewController:meVC];
     
     [_homeVC setViewControllers:[[NSArray alloc] initWithObjects:nav1,nav2,nav3,nav4,nav5,nil]];
@@ -171,13 +175,45 @@
     [_homeVC setSelectedIndex:0];
 }
 
+- (void)getNewMsgCount {
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    [param setObject:[User sharedUser].user.uId forKey:@"userId"];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetNewMsgCount
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[GetNewMsgCountResult alloc] init]
+                                           customInfo:@"GetNewMsgCount"];
+}
+
 #pragma UITabBarControllerDelegate
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
     
     if (_currentTabVC != viewController) {
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationsStopPlayAudio object:nil];
+        
+        if ([[(WYJNavigationController*)viewController topViewController] isKindOfClass:[MessageVC class]]) {
+            //
+            [self getNewMsgCount];
+        }
+        
+        _currentTabVC = viewController;
     }
 }
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    if ([customInfo isEqualToString:@"GetNewMsgCount"] && result) {
+        
+        [_messageVC reloadData:(GetNewMsgCountResult*)result];
+    }
+}
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
+}
+
 
 
 - (void)didReceiveMemoryWarning {

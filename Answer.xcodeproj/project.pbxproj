@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		70BC27091CBBE88200C16B04 /* GetNewMsgCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BC27081CBBE88200C16B04 /* GetNewMsgCountResult.m */; };
 		E120F8E61C4A25270024FC87 /* RechangeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */; };
 		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
@@ -197,6 +198,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		70BC27071CBBE88200C16B04 /* GetNewMsgCountResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNewMsgCountResult.h; sourceTree = "<group>"; };
+		70BC27081CBBE88200C16B04 /* GetNewMsgCountResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNewMsgCountResult.m; sourceTree = "<group>"; };
 		E120F8E41C4A25270024FC87 /* RechangeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechangeTableViewCell.h; sourceTree = "<group>"; };
 		E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechangeTableViewCell.m; sourceTree = "<group>"; };
 		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
@@ -900,6 +903,8 @@
 				E1A054B31C1F0EEB00A6DD56 /* ChangeNicknameResult.m */,
 				E1D670D41C3A778F0055EAFD /* BaiduMapLocationResult.h */,
 				E1D670D51C3A778F0055EAFD /* BaiduMapLocationResult.m */,
+				70BC27071CBBE88200C16B04 /* GetNewMsgCountResult.h */,
+				70BC27081CBBE88200C16B04 /* GetNewMsgCountResult.m */,
 			);
 			name = APIModels;
 			sourceTree = "<group>";
@@ -1653,6 +1658,7 @@
 				E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */,
 				E1D1894C1C0EE6F60043DE9C /* AFNetworkReachabilityManager.m in Sources */,
 				E14C210C1C1EF7A3003925B5 /* CommitVideoResult.m in Sources */,
+				70BC27091CBBE88200C16B04 /* GetNewMsgCountResult.m in Sources */,
 				E17E4A211C79BD33003D20AE /* base64.m in Sources */,
 				E1D189641C0EE6F60043DE9C /* SDWebImageManager.m in Sources */,
 				E14C21121C1EF969003925B5 /* MessagesResult.m in Sources */,
