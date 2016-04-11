@@ -20,9 +20,11 @@
 @property(nonatomic,strong)UITextField          *codeTextField;
 @property(nonatomic,strong)UITextField          *phoneTextField;
 @property(nonatomic,strong)UITextField          *pwdTextField;
+@property(nonatomic,strong)UITextField          *pwd2TextField;
 @property(nonatomic,strong)UIButton             *codeBtn;
 @property(nonatomic,strong)UIButton             *nextBtn;
 @property(nonatomic,copy)NSString               *pwdNewString;
+@property(nonatomic,copy)NSString               *pwdNew2String;
 
 @property (nonatomic, assign) NSInteger             lessTime;			// 剩余时间的总秒数
 @property (nonatomic, assign) CFRunLoopRef          runLoop;			// 消息循环
@@ -338,6 +340,8 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
     } else if(textField == _codeTextField) {
         [_pwdTextField becomeFirstResponder];
     } else if (textField == _pwdTextField){
+        [_pwd2TextField becomeFirstResponder];
+    } else if (textField == _pwd2TextField){
         [textField resignFirstResponder];
     }
     return YES;
@@ -373,6 +377,13 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         if ([textString length] > 18) {
             return NO;
         }
+    } else if(textField == _pwd2TextField) {
+        NSMutableString *textString = [NSMutableString stringWithString:textField.text];
+        [textString replaceCharactersInRange:range withString:string];
+        
+        if ([textString length] > 18) {
+            return NO;
+        }
     }
     
     
@@ -385,17 +396,26 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
     UITextField *textField = (UITextField *)sender;
     NSString *temp = [NSString stringWithFormat:@"%@",textField.text];
     if ([temp length] > 18) {
-        textField.text = _pwdNewString;
+        if (textField == _pwdTextField) {
+            textField.text = _pwdNewString;
+        } else if (textField == _pwd2TextField) {
+            textField.text = _pwdNew2String;
+        }
+        
         return;
     }
     
-    self.pwdNewString = [NSString stringWithFormat:@"%@",textField.text];
+    if (textField == _pwdTextField) {
+        self.pwdNewString = [NSString stringWithFormat:@"%@",textField.text];
+    } else if (textField == _pwd2TextField) {
+        self.pwdNew2String = [NSString stringWithFormat:@"%@",textField.text];
+    }
 }
 
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -497,7 +517,38 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField addTarget:self action:@selector(inputChange:) forControlEvents:UIControlEventEditingChanged];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
-            [textField setPlaceholder:@"请输入新密码(6-18位)"];
+            [textField setPlaceholder:@"请输入密码(6-18位)"];
+            [textField setClearsOnBeginEditing:YES];
+            [cell.contentView addSubview:textField];
+            
+            LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, 45-kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
+            [cell.contentView addSubview:line1];
+        }
+        
+        return cell;
+    }
+    
+    curRow ++;
+    if (row == curRow) {
+        static NSString *reusedCellID = @"registerCellf4";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reusedCellID];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reusedCellID];
+            
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(11, 0, tableView.frame.size.width - 22, 45)];
+            self.pwd2TextField = textField;
+            [textField setDelegate:self];
+            [textField setFont:[UIFont systemFontOfSize:14]];
+            [textField setSecureTextEntry:YES];
+            [textField setReturnKeyType:UIReturnKeyNext];
+            [textField setKeyboardType:UIKeyboardTypeDefault];
+            //[textField setTextAlignment:NSTextAlignmentCenter];
+            [textField setTextColor:[UIColor colorWithHex:0x666666]];
+            [textField addTarget:self action:@selector(inputChange:) forControlEvents:UIControlEventEditingChanged];
+            [textField setClearButtonMode:UITextFieldViewModeAlways];
+            [textField setPlaceholder:@"请再次输入密码(6-18位)"];
             [textField setClearsOnBeginEditing:YES];
             [cell.contentView addSubview:textField];
             
