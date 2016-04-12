@@ -16,5 +16,7 @@
 @property (nonatomic, copy) NSString            *isRead;
 @property (nonatomic, copy) NSString            *content;
 @property (nonatomic, copy) NSString            *reward;
+@property (nonatomic, copy) NSString            *tuwenId;
+@property (nonatomic, copy) NSString            *feilei;
 
 @end

@@ -12,6 +12,7 @@
 #import "NetworkTask.h"
 #import "User.h"
 #import "DeleteMessageResult.h"
+#import "QuestionDetailVC.h"
 
 @interface SystemMessageVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate,UIActionSheetDelegate>
 @property(nonatomic,strong)UITableView          *messageTableView;
@@ -228,6 +229,14 @@
         [cell.contentView addSubview:line];
     }
     
+    if (_messageType == MessageType_system) {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    } else {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }
+    
     MessageInfo *msgInfo = [_messageList objectAtIndex:indexPath.row];
     NSString *timeString = msgInfo.updateDate;
     NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[timeString longLongValue]/1000];
@@ -280,7 +289,14 @@
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSInteger row = indexPath.row;
+    if (_messageType == MessageType_system) {
+        
+    } else {
+        MessageInfo *msgInfo = [_messageList objectAtIndex:indexPath.row];
+        QuestionDetailVC *vc = [[QuestionDetailVC alloc] init];
+        vc.tuWenId = msgInfo.tuwenId;
+        [self.navigationController pushViewController:vc animated:YES];
+    }
 }
 
 

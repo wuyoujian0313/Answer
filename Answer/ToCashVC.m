@@ -9,8 +9,9 @@
 #import "ToCashVC.h"
 #import "User.h"
 #import "RechangeTableViewCell.h"
+#import "NetworkTask.h"
 
-@interface ToCashVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface ToCashVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate,UIAlertViewDelegate>
 @property (nonatomic, strong) UITableView                   *balanceTableView;
 @property (nonatomic, strong) UITextField                   *rechangeTextField;
 @property (nonatomic, strong) UITextField                   *acountTextField;
@@ -193,6 +194,68 @@
 
 - (void)buttonAction:(UIButton*)sender {
     
+    
+    NSString *msg = [NSString stringWithFormat:@"您确定提现到这个微信账号：%@",_acountTextField.text];
+    UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"提现"
+                                                         message:msg
+                                                        delegate:self
+                                               cancelButtonTitle:@"取消"
+                                               otherButtonTitles:@"确定", nil];
+    [alertView show];
+    
+}
+
+- (void)requestToCash {
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    
+    //// http://localhost:8080/tuwen_web/fundFlow/withdrawCash?userId=32&targetAccount=23334@12.com&amount=100.31
+    
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    [param setObject:[User sharedUser].user.uId forKey:@"userId"];
+    
+    if (_acountTextField.text) {
+        [param setObject:_acountTextField.text forKey:@"targetAccount"];
+    }
+    
+    if (_rechangeTextField.text) {
+        [param setObject:_rechangeTextField.text forKey:@"amount"];
+    }
+    
+
+    
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_ToCash
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[NetResultBase alloc] init]
+                                           customInfo:@"ToCash"];
+}
+
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        [self requestToCash];
+    }
+}
+
+#pragma mark - NetworkTaskDelegate
+
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"ToCash"] && result) {
+        [FadePromptView showPromptStatus:result.message duration:2.0 finishBlock:^{
+            //
+        }];
+    }
+}
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
 }
 
 
@@ -433,16 +496,18 @@
     NSMutableString *textString = [NSMutableString stringWithString:textField.text];
     [textString replaceCharactersInRange:range withString:string];
     
-    if ([textString length] > 3) {
-        
-        if (textField == _rechangeTextField) {
-            [FadePromptView showPromptStatus:@"最大金额100元" duration:1.0 finishBlock:^{
+    if (textField == _rechangeTextField) {
+        if ([textString length] > 3) {
+            [FadePromptView showPromptStatus:@"最大金额999元" duration:1.0 finishBlock:^{
                 //
                 [textField becomeFirstResponder];
             }];
+            
+            return NO;
         }
-        return NO;
+        
     }
+    
     
     return YES;
 }

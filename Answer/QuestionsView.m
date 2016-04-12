@@ -94,7 +94,9 @@
 }
 
 - (void)reloadQuestionView {
-    [_questionTableView reloadData];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [_questionTableView reloadData];
+    });
 }
 
 - (void)clearTableViewData {
@@ -188,12 +190,7 @@
     }
     
     //
-    static NSString *cellIdentifier = @"QuestionTableCellEx";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-    }
-    return cell;
+    return nil;
 }
 
 

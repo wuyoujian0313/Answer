@@ -149,9 +149,20 @@
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
     
     [param setObject:[User sharedUser].user.uId forKey:@"userId"];
-    [param setObject:[_locBtn titleForState:UIControlStateNormal] forKey:@"address"];
-    [param setObject:[_longitude stringValue] forKey:@"longitude"];
-    [param setObject:[_latitude stringValue] forKey:@"latitude"];
+    if ([_locBtn titleForState:UIControlStateNormal]) {
+        [param setObject:[_locBtn titleForState:UIControlStateNormal] forKey:@"address"];
+    }
+    
+    if ([_longitude stringValue]) {
+        [param setObject:[_longitude stringValue] forKey:@"longitude"];
+    }
+    
+    if ([_latitude stringValue]) {
+        [param setObject:[_latitude stringValue] forKey:@"latitude"];
+    }
+    
+    
+    
     [param setObject:@"生活" forKey:@"fenlei"];
     
     [param setObject:[NSString stringWithFormat:@"%ld",(long)_reward] forKey:@"reward"];

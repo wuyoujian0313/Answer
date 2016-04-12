@@ -291,8 +291,8 @@
                 
                 CGSize textSize = [contentLabel.text sizeWithFontCompatible:contentLabel.font constrainedToSize:CGSizeMake(self.frame.size.width - 20, CGFLOAT_MAX) lineBreakMode:contentLabel.lineBreakMode];
                 
-                [contentLabel setFrame:CGRectMake(left, top, textSize.width, textSize.height)];
-                _wtContentViewHeight = top + textSize.height;
+                [contentLabel setFrame:CGRectMake(left, top + 10, textSize.width, textSize.height)];
+                _wtContentViewHeight = top + textSize.height + 20;
             }
             
         } else if (_questionInfo.mediaType && [_questionInfo.mediaType integerValue] == 0) {
@@ -317,8 +317,8 @@
                 
                 CGSize textSize = [contentLabel.text sizeWithFontCompatible:contentLabel.font constrainedToSize:CGSizeMake(self.frame.size.width - 20, CGFLOAT_MAX) lineBreakMode:contentLabel.lineBreakMode];
                 
-                [contentLabel setFrame:CGRectMake(left, top, textSize.width, textSize.height)];
-                _wtContentViewHeight = top + textSize.height;
+                [contentLabel setFrame:CGRectMake(left, top + 10, textSize.width, textSize.height)];
+                _wtContentViewHeight = top + textSize.height + 20;
             }
         }
         
