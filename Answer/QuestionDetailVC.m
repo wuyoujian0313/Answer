@@ -50,6 +50,21 @@
     [self layoutDetailView];
     [self layoutCommentView];
     [self requestQuestionDetail];
+    
+    if (_isCanAnswer) {
+        _containerView.hidden = NO;
+        [_detailTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight - 44)];
+    } else {
+        _containerView.hidden = YES;
+        [_detailTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
+    }
+}
+
+- (void)requestSetBestAnswer {
+    //http://122.226.44.97/tuwen_web/service/setBestAnswer?uId=3&userId=1127&tWuserId=1128&ansId=4&moneycount=12
+    
+    // API_SetBestAnswer
+    
 }
 
 - (void)requestQuestionDetail {
@@ -110,7 +125,10 @@
     
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           [User sharedUser].user.uId,@"userId",
-                          _tuWenId,@"uId",_commentString,@"content",nil];
+                          _tuWenId,@"uId",
+                          _commentString,@"content",
+                          _tWuserId,@"tWuserId",
+                          nil];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Answer
                                              forParam:param
                                              delegate:self
@@ -277,6 +295,15 @@
     [UIView commitAnimations];
 }
 
+- (void)setBestButtonAction:(UIButton*)sender event:(UIEvent*)event {
+    
+    NSSet *touches = [event allTouches];
+    UITouch *touch = [touches anyObject];
+    
+    CGPoint currentTouchPosition = [touch locationInView:_detailTableView];
+    NSIndexPath *indexPath = [_detailTableView indexPathForRowAtPoint:currentTouchPosition];
+}
+
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -295,21 +322,58 @@
     if (cell == nil) {
         cell = [[AnswerTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
         LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, cell.frame.size.height -kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
         [line setTag:100];
         line.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin;
         [cell.contentView addSubview:line];
     }
     
-    AnswerInfo *answerInfo = [_answerList objectAtIndex:indexPath.row];
-    NSString *userId = answerInfo.userId;
     
+    AnswerInfo *answerInfo = [_answerList objectAtIndex:indexPath.row];
+    
+    if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"0"]) {
+        [cell setIsShowBestBtn:YES];
+        
+        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        UIButton *bestBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+        [bestBtn addTarget:self action:@selector(setBestButtonAction:event:) forControlEvents:UIControlEventTouchUpInside];
+        [bestBtn setFrame:CGRectMake(0, 0, 60, 50)];
+        [bestBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+        [bestBtn setTitle:@"设置最佳" forState:UIControlStateNormal];
+        [bestBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+        cell.accessoryView = bestBtn;
+    } else if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"1"]) {
+        
+        if (answerInfo.isBestAnswer && [answerInfo.isBestAnswer isEqualToString:@"1"]) {
+            [cell setIsShowBestBtn:YES];
+            cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            
+            UIButton *bestBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+            bestBtn.enabled = NO;
+            [bestBtn setFrame:CGRectMake(0, 0, 60, 50)];
+            [bestBtn setTitle:@"最佳答案" forState:UIControlStateNormal];
+            [bestBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+            [bestBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+            cell.accessoryView = bestBtn;
+        } else {
+            [cell setIsShowBestBtn:NO];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryView = nil;
+        }
+    } else  {
+        [cell setIsShowBestBtn:NO];
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.accessoryView = nil;
+    }
+    
+    NSString *userId = answerInfo.userId;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",userId];
     // 理论上只有一个
-    
     UserInfo *answer = nil;
     NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
     if (users && [users count]) {

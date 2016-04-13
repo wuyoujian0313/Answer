@@ -10,4 +10,6 @@
 
 @interface AnswerTableViewCell : UITableViewCell
 
+@property(nonatomic, assign) BOOL isShowBestBtn;
+
 @end
