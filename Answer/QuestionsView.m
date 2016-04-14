@@ -94,9 +94,7 @@
 }
 
 - (void)reloadQuestionView {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [_questionTableView reloadData];
-    });
+    [_questionTableView reloadData];
 }
 
 - (void)clearTableViewData {

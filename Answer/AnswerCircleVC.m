@@ -62,6 +62,7 @@
 }
 
 -(void)reloadQuestionView {
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         [_questionView reloadQuestionView];
     });

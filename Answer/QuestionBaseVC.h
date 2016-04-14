@@ -25,6 +25,4 @@
 
 - (void)stopPlay;
 
-- (void)shareMenu;
-
 @end

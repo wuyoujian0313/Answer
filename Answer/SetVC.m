@@ -139,6 +139,7 @@
         }
         case 1: {
             // 推荐给好友
+            [self shareMenu];
             break;
         }
         case 2: {

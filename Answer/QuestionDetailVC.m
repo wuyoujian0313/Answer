@@ -346,49 +346,79 @@
         [cell.contentView addSubview:line];
     }
     
-    
     AnswerInfo *answerInfo = [_answerList objectAtIndex:indexPath.row];
+    NSString *twUserId = _questionInfo.userId;
+    if ([[User sharedUser] isMe:twUserId]) {
     
-    if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"0"]) {
-        [cell setIsShowBestBtn:YES];
-        
-        cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        UIButton *bestBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-        [bestBtn addTarget:self action:@selector(setBestButtonAction:event:) forControlEvents:UIControlEventTouchUpInside];
-        [bestBtn setFrame:CGRectMake(0, 0, 60, 50)];
-        [bestBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
-        [bestBtn setTitle:@"设置最佳" forState:UIControlStateNormal];
-        [bestBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
-        cell.accessoryView = bestBtn;
-    } else if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"1"]) {
-        
-        if (answerInfo.isBestAnswer && [answerInfo.isBestAnswer isEqualToString:@"1"]) {
+        if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"0"]) {
             [cell setIsShowBestBtn:YES];
+            
             cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             
             UIButton *bestBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-            bestBtn.enabled = NO;
+            [bestBtn addTarget:self action:@selector(setBestButtonAction:event:) forControlEvents:UIControlEventTouchUpInside];
             [bestBtn setFrame:CGRectMake(0, 0, 60, 50)];
-            [bestBtn setTitle:@"最佳答案" forState:UIControlStateNormal];
             [bestBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+            [bestBtn setTitle:@"设置最佳" forState:UIControlStateNormal];
             [bestBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
             cell.accessoryView = bestBtn;
-        } else {
+        } else if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"1"]) {
+            
+            if (answerInfo.isBestAnswer && [answerInfo.isBestAnswer isEqualToString:@"1"]) {
+                [cell setIsShowBestBtn:YES];
+                cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                UIButton *bestBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                bestBtn.enabled = NO;
+                [bestBtn setFrame:CGRectMake(0, 0, 60, 50)];
+                [bestBtn setTitle:@"最佳答案" forState:UIControlStateNormal];
+                [bestBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+                [bestBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+                cell.accessoryView = bestBtn;
+            } else {
+                [cell setIsShowBestBtn:NO];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryView = nil;
+            }
+        } else  {
             [cell setIsShowBestBtn:NO];
             cell.accessoryType = UITableViewCellAccessoryNone;
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
             cell.accessoryView = nil;
         }
-    } else  {
-        [cell setIsShowBestBtn:NO];
-        cell.accessoryType = UITableViewCellAccessoryNone;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.accessoryView = nil;
+    } else {
+        if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"1"]) {
+            
+            if (answerInfo.isBestAnswer && [answerInfo.isBestAnswer isEqualToString:@"1"]) {
+                [cell setIsShowBestBtn:YES];
+                cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                
+                UIButton *bestBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+                bestBtn.enabled = NO;
+                [bestBtn setFrame:CGRectMake(0, 0, 60, 50)];
+                [bestBtn setTitle:@"最佳答案" forState:UIControlStateNormal];
+                [bestBtn.titleLabel setFont:[UIFont systemFontOfSize:12]];
+                [bestBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+                cell.accessoryView = bestBtn;
+            } else {
+                [cell setIsShowBestBtn:NO];
+                cell.accessoryType = UITableViewCellAccessoryNone;
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.accessoryView = nil;
+            }
+        } else  {
+            [cell setIsShowBestBtn:NO];
+            cell.accessoryType = UITableViewCellAccessoryNone;
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            cell.accessoryView = nil;
+        }
     }
     
+
     NSString *userId = answerInfo.userId;
     NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",userId];
     // 理论上只有一个

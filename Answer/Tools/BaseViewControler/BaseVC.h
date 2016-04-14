@@ -30,6 +30,8 @@
 
 - (void)popBack;
 
+- (void)shareMenu;
+
 
 #pragma mark - 子类是实现
 - (void)regieditKeyboardNotification;

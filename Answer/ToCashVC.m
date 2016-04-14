@@ -207,8 +207,6 @@
 
 - (void)requestToCash {
     
-    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
-    
     //// http://localhost:8080/tuwen_web/fundFlow/withdrawCash?userId=32&targetAccount=23334@12.com&amount=100.31
     
     NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
@@ -219,11 +217,22 @@
     }
     
     if (_rechangeTextField.text) {
+        CGFloat balance = [[User sharedUser].account.balance floatValue];
+        CGFloat toCash = [_rechangeTextField.text floatValue];
+        if (toCash > balance) {
+            [FadePromptView showPromptStatus:@"提现金额不能大于账号余额" duration:2.0 finishBlock:^{
+                //
+                [_rechangeTextField becomeFirstResponder];
+                
+            }];
+            
+            return ;
+        }
         [param setObject:_rechangeTextField.text forKey:@"amount"];
     }
     
 
-    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_ToCash
                                              forParam:param
                                              delegate:self
@@ -245,7 +254,7 @@
     [SVProgressHUD dismiss];
     
     if ([customInfo isEqualToString:@"ToCash"] && result) {
-        [FadePromptView showPromptStatus:result.message duration:2.0 finishBlock:^{
+        [FadePromptView showPromptStatus:@"提现成功，我们会在1-3个工作日汇款，请勿重复提现" duration:2.0 finishBlock:^{
             //
         }];
     }
