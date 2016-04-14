@@ -170,6 +170,19 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
             return;
         }
         
+        if (_pwd2TextField.text == nil || [_pwd2TextField.text length] <= 0) {
+            [SVProgressHUD showErrorWithStatus:@"请再次输入密码"];
+            [_pwd2TextField becomeFirstResponder];
+            return;
+        }
+        
+        if (_pwdTextField.text && _pwd2TextField.text && ![_pwdTextField.text isEqualToString:_pwd2TextField.text]) {
+            
+            [SVProgressHUD showErrorWithStatus:@"两次输入的密码不一致"];
+            [_pwdTextField becomeFirstResponder];
+            return;
+        }
+        
         
         BOOL isPhone = [_phoneTextField.text isValidateMobile];
         if (!isPhone) {
