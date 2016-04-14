@@ -295,7 +295,6 @@
         MessageInfo *msgInfo = [_messageList objectAtIndex:indexPath.row];
         QuestionDetailVC *vc = [[QuestionDetailVC alloc] init];
         vc.tuWenId = msgInfo.tuwenId;
-        vc.isCanAnswer = NO;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

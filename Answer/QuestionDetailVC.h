@@ -11,7 +11,4 @@
 
 @interface QuestionDetailVC : QuestionBaseVC
 @property(nonatomic,copy) NSString *tuWenId;
-@property(nonatomic,copy) NSString *tWuserId;
-
-@property(nonatomic,assign) BOOL   isCanAnswer;
 @end

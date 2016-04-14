@@ -36,8 +36,9 @@
 @property(nonatomic,strong)NSMutableArray               *answerList;
 @property(nonatomic,strong)NSArray                      *userList;
 
-@property (nonatomic, strong) QuestionInfo              *questionInfo;
-@property (nonatomic, strong) UserInfo                  *userInfo;
+@property(nonatomic, strong) QuestionInfo              *questionInfo;
+@property(nonatomic, strong) UserInfo                  *userInfo;
+@property(nonatomic, copy) NSString *tWuserId;
 
 @end
 
@@ -50,21 +51,29 @@
     [self layoutDetailView];
     [self layoutCommentView];
     [self requestQuestionDetail];
-    
-    if (_isCanAnswer) {
-        _containerView.hidden = NO;
-        [_detailTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight - 44)];
-    } else {
-        _containerView.hidden = YES;
-        [_detailTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
-    }
 }
 
-- (void)requestSetBestAnswer {
-    //http://122.226.44.97/tuwen_web/service/setBestAnswer?uId=3&userId=1127&tWuserId=1128&ansId=4&moneycount=12
-    
+- (void)requestSetBestAnswer:(NSString*)ansId ansUserId:(NSString*)userId {
     // API_SetBestAnswer
+//    uid     被回答的图问的Id
+//    ansId   答案的id
+//    userId  回答者的id
+//    tWuserId提出图问者的id
+//    moneycount  打赏的金额
     
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"tWuserId",
+                          _tuWenId,@"uId",
+                          ansId,@"ansId",
+                          userId,@"userId",
+                          _questionInfo.reward,@"moneycount",
+                          nil];
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_SetBestAnswer
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[NetResultBase alloc] init]
+                                           customInfo:@"SetBestAnswer"];
 }
 
 - (void)requestQuestionDetail {
@@ -183,6 +192,7 @@
         QuestionDetailResult * detail = (QuestionDetailResult*)result;
         self.userInfo = detail.user;
         self.questionInfo = detail.tuwen;
+        self.tWuserId = _questionInfo.userId;
         self.answerList = [[NSMutableArray alloc] initWithArray:detail.answers];
         self.userList = detail.userList;
         
@@ -203,6 +213,11 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationGuanzhu object:nil];
         [FadePromptView showPromptStatus:@"关注成功" duration:1.0 finishBlock:^{
             
+        }];
+    } else if ([customInfo isEqualToString:@"SetBestAnswer"]) {
+        [FadePromptView showPromptStatus:@"设置成功，之后会打赏对应的赏给回答者" duration:1.0 finishBlock:^{
+            //
+            [self requestQuestionDetail];
         }];
     }
 }
@@ -302,6 +317,9 @@
     
     CGPoint currentTouchPosition = [touch locationInView:_detailTableView];
     NSIndexPath *indexPath = [_detailTableView indexPathForRowAtPoint:currentTouchPosition];
+    
+    AnswerInfo *answerInfo = [_answerList objectAtIndex:indexPath.row];
+    [self requestSetBestAnswer:answerInfo.uId ansUserId:answerInfo.userId];
 }
 
 
