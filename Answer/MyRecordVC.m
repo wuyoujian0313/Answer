@@ -128,19 +128,19 @@
     [cell.textLabel setTextColor:[UIColor colorWithHex:0x56b5f5]];
     if ([info.type isEqualToString:@"0"]) {
         //红包支付
-        NSString *str = [NSString stringWithFormat:@"%@%@向'%@'打赏%@元",str1,str2,info.targetAccount,info.cost];
+        NSString *str = [NSString stringWithFormat:@"%@%@向'%@'打赏%@元",str1,str2,info.targetAccount,info.amount];
         cell.textLabel.text = str;
     } else if ([info.type isEqualToString:@"1"]) {
         //红包获取
-        NSString *str = [NSString stringWithFormat:@"%@%@从'%@'获打赏%@元",str1,str2,info.targetAccount,info.cost];
+        NSString *str = [NSString stringWithFormat:@"%@%@从'%@'获打赏%@元",str1,str2,info.targetAccount,info.amount];
         cell.textLabel.text = str;
     } else if ([info.type isEqualToString:@"2"]) {
         //充值
-        NSString *str = [NSString stringWithFormat:@"%@%@充值%@元",str1,str2,info.cost];
+        NSString *str = [NSString stringWithFormat:@"%@%@充值%@元",str1,str2,info.amount];
         cell.textLabel.text = str;
     } else if ([info.type isEqualToString:@"3"]) {
         //提现
-        NSString *str = [NSString stringWithFormat:@"%@%@向'%@'提现%@元",str1,str2,info.targetAccount,info.cost];
+        NSString *str = [NSString stringWithFormat:@"%@%@向'%@'提现%@元",str1,str2,info.targetAccount,info.amount];
         cell.textLabel.text = str;
     }
     

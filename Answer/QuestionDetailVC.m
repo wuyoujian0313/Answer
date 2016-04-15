@@ -23,7 +23,7 @@
 
 
 
-@interface QuestionDetailVC ()<QuestionInfoViewDelegate,UITableViewDataSource,UITableViewDelegate,HPGrowingTextViewDelegate,NetworkTaskDelegate>
+@interface QuestionDetailVC ()<QuestionInfoViewDelegate,UITableViewDataSource,UITableViewDelegate,HPGrowingTextViewDelegate,NetworkTaskDelegate,UIAlertViewDelegate>
 
 @property(nonatomic,strong)UITableView                  *detailTableView;
 @property(nonatomic,copy)NSString                       *guanzhuFriendId;
@@ -39,7 +39,7 @@
 @property(nonatomic, strong) QuestionInfo              *questionInfo;
 @property(nonatomic, strong) UserInfo                  *userInfo;
 @property(nonatomic, copy) NSString *tWuserId;
-
+@property(nonatomic, assign) NSInteger bestAnswerIndex;
 @end
 
 @implementation QuestionDetailVC
@@ -184,6 +184,15 @@
                                            customInfo:@"Guanzhu"];
 }
 
+#pragma mark - UIAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex != alertView.cancelButtonIndex) {
+        AnswerInfo *answerInfo = [_answerList objectAtIndex:_bestAnswerIndex];
+        [self requestSetBestAnswer:answerInfo.uId ansUserId:answerInfo.userId];
+    }
+}
+
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
@@ -318,8 +327,18 @@
     CGPoint currentTouchPosition = [touch locationInView:_detailTableView];
     NSIndexPath *indexPath = [_detailTableView indexPathForRowAtPoint:currentTouchPosition];
     
-    AnswerInfo *answerInfo = [_answerList objectAtIndex:indexPath.row];
-    [self requestSetBestAnswer:answerInfo.uId ansUserId:answerInfo.userId];
+    if (indexPath) {
+        _bestAnswerIndex = indexPath.row;
+        
+        NSString *msg = [NSString stringWithFormat:@"您确定设置为最佳答案，成功之后会给对方打赏%@元",
+                         _questionInfo.reward];
+        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"设置最佳答案"
+                                                             message:msg
+                                                            delegate:self
+                                                   cancelButtonTitle:@"取消"
+                                                   otherButtonTitles:@"确定", nil];
+        [alertView show];
+    }
 }
 
 
