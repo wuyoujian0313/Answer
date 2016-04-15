@@ -8,6 +8,8 @@
 
 #import "MyRecordVC.h"
 #import "NetworkTask.h"
+#import "User.h"
+#import "RewardListResult.h"
 
 @interface MyRecordVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 @property(nonatomic,strong)UITableView          *recordTableView;
@@ -22,6 +24,21 @@
     [self setNavTitle:@"交易记录"];
     
     [self layoutRecordTableView];
+    [self requestRecord];
+}
+
+- (void)requestRecord {
+    
+    // http://122.226.44.97/tuwen_web/fundFlow/getReward?userId=32
+    NSMutableDictionary *param = [[NSMutableDictionary alloc] init];
+    [param setObject:[User sharedUser].user.uId forKey:@"userId"];    
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetReward
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[RewardListResult alloc] init]
+                                           customInfo:@"getRecord"];
 }
 
 - (void)layoutRecordTableView {
@@ -53,6 +70,13 @@
 #pragma mark - NetworkTaskDelegate
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
+    if ([customInfo isEqualToString:@"getRecord"]) {
+        //
+        RewardListResult *rewardInfo = (RewardListResult*)result;
+        self.recordList = rewardInfo.rewards;
+        
+        [_recordTableView reloadData];
+    }
 }
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
@@ -86,6 +110,51 @@
         LineView *line = [[LineView alloc] initWithFrame:CGRectMake(0, 50-kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
         [cell.contentView addSubview:line];
     }
+    
+    RewardInfo * info = [_recordList objectAtIndex:indexPath.row];
+    NSString *timeString = info.updateDate;
+    NSDate *updateDate = [NSDate dateWithTimeIntervalSince1970:[timeString longLongValue]/1000];
+    
+    //
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSInteger unitFlags = NSMonthCalendarUnit | NSDayCalendarUnit;
+    NSDateComponents *comps = [calendar components:unitFlags fromDate:updateDate];
+    NSString *str1 = [NSString stringWithFormat:@"%02d月",(int)comps.month];
+    NSString *str2 = [NSString stringWithFormat:@"%02d日",(int)comps.day];
+    
+    
+    //
+    [cell.textLabel setFont:[UIFont systemFontOfSize:12]];
+    [cell.textLabel setTextColor:[UIColor colorWithHex:0x56b5f5]];
+    if ([info.type isEqualToString:@"0"]) {
+        //红包支付
+        NSString *str = [NSString stringWithFormat:@"%@%@向'%@'打赏%@元",str1,str2,info.targetAccount,info.cost];
+        cell.textLabel.text = str;
+    } else if ([info.type isEqualToString:@"1"]) {
+        //红包获取
+        NSString *str = [NSString stringWithFormat:@"%@%@从'%@'获打赏%@元",str1,str2,info.targetAccount,info.cost];
+        cell.textLabel.text = str;
+    } else if ([info.type isEqualToString:@"2"]) {
+        //充值
+        NSString *str = [NSString stringWithFormat:@"%@%@充值%@元",str1,str2,info.cost];
+        cell.textLabel.text = str;
+    } else if ([info.type isEqualToString:@"3"]) {
+        //提现
+        NSString *str = [NSString stringWithFormat:@"%@%@向'%@'提现%@元",str1,str2,info.targetAccount,info.cost];
+        cell.textLabel.text = str;
+    }
+    
+    NSString *status = @"";
+    if ([info.status isEqualToString:@"1"]) {
+        status = @"成功";
+    } else if ([info.status isEqualToString:@"2"]) {
+        status = @"失败";
+    } else if ([info.status isEqualToString:@"3"]) {
+        status = @"等待付款";
+    }
+    [cell.detailTextLabel setFont:[UIFont systemFontOfSize:12]];
+    [cell.detailTextLabel setText:status];
+    
 
     return cell;
 }

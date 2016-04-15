@@ -10,6 +10,6 @@
 #import "RewardInfo.h"
 
 @interface RewardListResult : NetResultBase
-@property (nonatomic, strong, getter=rewards) NSArray *BaiduParserArray(rewards,RewardInfo);
+@property (nonatomic, strong, getter=rewards) NSArray *BaiduParserArray(rewardList,RewardInfo);
 
 @end

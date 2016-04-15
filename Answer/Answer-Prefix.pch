@@ -80,12 +80,13 @@
 #define API_GetNewMsgCount          @"service/getNewMsgCount"
 #define API_GetSystemMessage        @"service/getSystemMessage"
 #define API_DelSystemMessage        @"service/delSystemMessage"
-
-
 #define API_SetBestAnswer           @"service/setBestAnswer"
 
+// 提现
 #define API_ToCash                  @"fundFlow/withdrawCash"
+// 账户信息
 #define API_GetAccount              @"fundFlow/getAccount"
+// 交易记录
 #define API_GetReward               @"fundFlow/getReward"
 
 

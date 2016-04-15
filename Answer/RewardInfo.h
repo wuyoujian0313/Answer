@@ -10,12 +10,17 @@
 
 @interface RewardInfo : NSObject
 
-@property (nonatomic, copy) NSString          *uuid;
+@property (nonatomic, copy) NSString            *uuid;
 @property (nonatomic, copy) NSString            *uId;
-@property (nonatomic, copy) NSString          *tuwenId;
-@property (nonatomic, copy) NSString          *type;
-@property (nonatomic, copy) NSString          *amount;
-@property (nonatomic, copy) NSString      *updateDate;
+@property (nonatomic, copy) NSString            *tuwenId;
+@property (nonatomic, copy) NSString            *type; // 类型
+@property (nonatomic, copy) NSString            *status; // 状态
+@property (nonatomic, copy) NSString            *amount;
+@property (nonatomic, copy) NSString            *updateDate;
+@property (nonatomic, copy) NSString            *createDate;
+@property (nonatomic, copy) NSString            *out_trade_no;
+@property (nonatomic, copy) NSString            *cost;
+@property (nonatomic, copy) NSString            *targetAccount;
 
 
 @end

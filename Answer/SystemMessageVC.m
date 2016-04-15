@@ -250,8 +250,8 @@
     
     NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor blackColor] };
     
-    NSString *str1 = [NSString stringWithFormat:@"%2ld日",(long)comps.day];
-    NSString *str2 = [NSString stringWithFormat:@"%2ld月",(long)comps.month];
+    NSString *str1 = [NSString stringWithFormat:@"%02d日",(int)comps.day];
+    NSString *str2 = [NSString stringWithFormat:@"%02d月",(int)comps.month];
     NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
     NSRange range1 = [str rangeOfString:str1];
     NSRange range2 = [str rangeOfString:str2];

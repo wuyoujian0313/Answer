@@ -1121,8 +1121,9 @@
 		E1D188B91C0ED4880043DE9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E19E87871CA97CD600731308 /* 180.png */,
 				E1F880971C426BC0000BC291 /* frameworks */,
+				E19E87871CA97CD600731308 /* 180.png */,
+				E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */,
 				E1D188C51C0ED4880043DE9C /* Images.xcassets */,
 				E1D188CA1C0ED4880043DE9C /* Info.plist */,
 				E1D188F01C0ED6630043DE9C /* InfoPlist.strings */,
@@ -1156,7 +1157,6 @@
 				E1D188BD1C0ED4880043DE9C /* AppDelegate.m */,
 				E14410611C27DAF1000EE19A /* MainController.h */,
 				E14410621C27DAF1000EE19A /* MainController.m */,
-				E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */,
 				E1C21E761C0F25510042E1F3 /* common */,
 				E1C21E751C0F25390042E1F3 /* 登录&注册 */,
 				E1C21E701C0F242C0042E1F3 /* 图问 */,
