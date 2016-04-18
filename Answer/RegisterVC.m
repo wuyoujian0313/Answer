@@ -98,7 +98,6 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
     [tableView setDelegate:self];
     [tableView setDataSource:self];
     [tableView setBackgroundColor:[UIColor clearColor]];
-    [tableView setBounces:NO];
     [tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     [self.view addSubview:tableView];
     
@@ -204,6 +203,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
         }
         
         //
+        [self.view endEditing:YES];
         NSMutableDictionary *param = [[NSMutableDictionary alloc] initWithCapacity:0];
         NSString *phoneString = [NSString stringWithFormat:@"%@",_phoneTextField.text];
         [param setObject:phoneString forKey:@"phoneNumber"];
@@ -279,6 +279,8 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         [_phoneTextField becomeFirstResponder];
         return;
     }
+    
+    [self.view endEditing:YES];
     [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
     [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetVerifyCode
                                              forParam:[NSDictionary dictionaryWithObject:codeString forKey:@"phoneNumber"]
