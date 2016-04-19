@@ -13,6 +13,7 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
 #import <AlipaySDK/AlipaySDK.h>
+#import "User.h"
 
 @interface AppDelegate ()<WXApiDelegate>
 @end
@@ -117,6 +118,9 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    User *user = [User sharedUser];
+    [user saveToUserDefault];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation

@@ -100,6 +100,10 @@
     }
     
     [userDefaults synchronize];
+    
+    
+    User *user = [User sharedUser];
+    [user saveToUserDefault];
 }
 
 - (void)reloadQuestionDataFromLocal {
@@ -123,6 +127,9 @@
             self.userList = [[NSMutableArray alloc] initWithArray:arr];
         }
     }
+    
+    User *user = [User sharedUser];
+    [user loadFromUserDefault];
     
     
     [self reloadQuestionView];
