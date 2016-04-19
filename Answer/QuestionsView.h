@@ -29,4 +29,7 @@
 
 - (void)reloadQuestionView;
 
+- (void)clearCacheData;
+- (void)clearTableViewData;
+
 @end

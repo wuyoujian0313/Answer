@@ -10,6 +10,8 @@
 #import "QuestionTableViewCell.h"
 #import "User.h"
 
+#define saveQuestionListToLocalKey      @"saveQuestionListToLocalKey"
+#define saveUserListToLocalKey      @"saveUserListToLocalKey"
 
 @interface QuestionsView ()<UITableViewDataSource,UITableViewDelegate,NSCacheDelegate,MJRefreshBaseViewDelegate>
 
@@ -31,6 +33,7 @@
 -(void)dealloc {
     [_refreshHeader free];
     [_refreshFootder free];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -62,9 +65,67 @@
         
         [self addRefreshHeadder];
         [self addRefreshFootder];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadQuestionDataFromLocal) name:UIApplicationWillEnterForegroundNotification object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveQuestionDataToLocal) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        
+        //
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteQuestionDataFromLocal) name:UIApplicationWillTerminateNotification object:nil];
     }
     
     return self;
+}
+
+- (void)deleteQuestionDataFromLocal {
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:nil forKey:saveQuestionListToLocalKey];
+    [userDefaults setObject:nil forKey:saveUserListToLocalKey];
+    [userDefaults synchronize];
+}
+
+- (void)saveQuestionDataToLocal {
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    if (_questionList) {
+        NSData *listData = [NSKeyedArchiver archivedDataWithRootObject:_questionList];
+        [userDefaults setObject:listData forKey:saveQuestionListToLocalKey];
+    }
+    
+    if (_userList) {
+        //
+        NSData *listData = [NSKeyedArchiver archivedDataWithRootObject:_userList];
+        [userDefaults setObject:listData forKey:saveUserListToLocalKey];
+    }
+    
+    [userDefaults synchronize];
+}
+
+- (void)reloadQuestionDataFromLocal {
+    
+    [self clearTableViewData];
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    NSData *listData = [userDefaults objectForKey:saveQuestionListToLocalKey];
+    if (listData && [listData isKindOfClass:[NSData class]]) {
+        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:listData];
+        if (arr) {
+            self.questionList = [[NSMutableArray alloc] initWithArray:arr];
+        }
+    }
+    
+    NSData *usersData = [userDefaults objectForKey:saveUserListToLocalKey];
+    if (usersData && [usersData isKindOfClass:[NSData class]]) {
+        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:usersData];
+        if (arr) {
+            self.userList = [[NSMutableArray alloc] initWithArray:arr];
+        }
+    }
+    
+    
+    [self reloadQuestionView];
 }
 
 -(void)addRefreshHeadder {
@@ -97,11 +158,15 @@
     [_questionTableView reloadData];
 }
 
+- (void)clearCacheData {
+    [_cellCache removeAllObjects];
+    _cellCache = nil;
+}
+
 - (void)clearTableViewData {
     [_questionList removeAllObjects];
     [_userList removeAllObjects];
-    [_cellCache removeAllObjects];
-    _cellCache = nil;
+    [self clearCacheData];
 }
 
 - (void)addQuestionsResult:(QuestionsResult *)result {
@@ -128,8 +193,8 @@
         }
     }
 
-    [self endRefresh];
     [_questionTableView reloadData];
+    [self endRefresh];
 }
 
 #pragma mark - MJRefreshBaseViewDelegate
@@ -183,12 +248,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    if (indexPath.row < [_questionList count]) {
-        return [self tableView:tableView preparedCellForIndexPath:indexPath];
-    }
-    
-    //
-    return nil;
+    return [self tableView:tableView preparedCellForIndexPath:indexPath];;
 }
 
 
@@ -203,7 +263,7 @@
     NSString *key = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
     QuestionTableViewCell *cell = [_cellCache objectForKey:key];
     if (cell == nil) {
-        static NSString *cellIdentifier = @"QuestionTableCell";
+        NSString *cellIdentifier = key;
         cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
         if (cell == nil) {
             cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
@@ -212,35 +272,33 @@
             
             [_cellCache setObject:cell forKey:key];
         }
-        
-        
     }
     
     // 设置数据
     cell.delegate = _delegate;
-    QuestionInfo *questionInfo = [_questionList objectAtIndex:indexPath.row];
-    
-    if (_haveUserView) {
+    if ([_questionList count] > indexPath.row) {
+        QuestionInfo *questionInfo = [_questionList objectAtIndex:indexPath.row];
         
-        if ([questionInfo.userId isEqualToString:[User sharedUser].user.uId]) {
-            // 是自己的问题
-            [cell setQuestionInfo:questionInfo userInfo:[User sharedUser].user];
-        } else {
-            //
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
+        if (_haveUserView) {
             
-            // 理论上只有一个
-            NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
-            if (users && [users count]) {
-                [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
+            if ([questionInfo.userId isEqualToString:[User sharedUser].user.uId]) {
+                // 是自己的问题
+                [cell setQuestionInfo:questionInfo userInfo:[User sharedUser].user];
             } else {
-                [cell setQuestionInfo:questionInfo userInfo:nil];
+                //
+                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
+                
+                // 理论上只有一个
+                NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
+                if (users && [users count] > 0) {
+                    [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
+                } else {
+                    [cell setQuestionInfo:questionInfo userInfo:nil];
+                }
             }
+        } else {
+            [cell setQuestionInfo:questionInfo userInfo:nil];
         }
-        
-        
-    } else {
-        [cell setQuestionInfo:questionInfo userInfo:nil];
     }
     
     return cell;

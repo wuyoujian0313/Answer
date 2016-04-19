@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface QuestionInfo : NSObject
+@interface QuestionInfo : NSObject<NSCoding>
 
 @property (nonatomic, copy) NSString        *uuid;
 @property (nonatomic, copy) NSString        *uId;

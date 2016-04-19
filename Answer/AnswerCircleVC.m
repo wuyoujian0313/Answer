@@ -50,16 +50,12 @@
     
     //
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(requestQuestionList)
+                                             selector:@selector(addNewQuestionNotification)
                                                  name:NotificationAddNewQuestion
                                                object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reloadQuestionView)
-                                                 name:UIApplicationWillEnterForegroundNotification
-                                               object:nil];
-    
 }
+
 
 -(void)reloadQuestionView {
     
@@ -78,6 +74,11 @@
                                              delegate:self
                                             resultObj:[[MyFriendsResult alloc] init]
                                            customInfo:@"GetFriends"];
+}
+
+- (void)addNewQuestionNotification {
+    [_questionView clearTableViewData];
+    [self requestQuestionList];
 }
 
 - (void)requestQuestionList {

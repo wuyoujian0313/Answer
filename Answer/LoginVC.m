@@ -51,7 +51,7 @@
     self.navigationItem.leftBarButtonItem = nil;
     [self setNavTitle:@"登录"];
     [self layoutLoginTableView];
-    [self layoutToRegisterView]; 
+    [self layoutToRegisterView];
 }
 
 - (void)layoutToRegisterView {

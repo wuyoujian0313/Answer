@@ -119,19 +119,24 @@
             
             //从缓存取
             NSString *imageUrl = _userInfo.headImage;
-            UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
-            
-            if (cacheimage == nil) {
-                cacheimage = [UIImage imageNamed:@"defaultHeadImage"];
+            if (imageUrl && [imageUrl length] > 0) {
+                UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
                 
-                [photoImage  sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    if (image) {
-                        photoImage.image = image;
-                        [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
-                    }
-                }];
-            } else {
-                photoImage.image = cacheimage;
+                if (cacheimage == nil) {
+                    cacheimage = [UIImage imageNamed:@"defaultHeadImage"];
+                    
+                    __weak UIImageView *wPhotoImage = photoImage;
+                    
+                    [photoImage  sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        if (image) {
+                            UIImageView *sPhotoImage = wPhotoImage;
+                            sPhotoImage.image = image;
+                            [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+                        }
+                    }];
+                } else {
+                    photoImage.image = cacheimage;
+                }
             }
         }
         
@@ -260,20 +265,26 @@
             SDImageCache * imageCache = [SDImageCache sharedImageCache];
             
             //从缓存取
-            UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
-            
-            if (cacheimage == nil) {
-                cacheimage = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
+            if (imageUrlString && [imageUrlString length] > 0) {
+                UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
                 
-                [contentImage  sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                    if (image) {
-                        contentImage.image = image;
-                        [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrlString];
-                    }
-                }];
-            } else {
-                contentImage.image = cacheimage;
+                if (cacheimage == nil) {
+                    cacheimage = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
+                    
+                    __weak UIImageView *wContentImage = contentImage;
+                    [contentImage  sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        if (image) {
+                            
+                            UIImageView *sContentImage = wContentImage;
+                            sContentImage.image = image;
+                            [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrlString];
+                        }
+                    }];
+                } else {
+                    contentImage.image = cacheimage;
+                }
             }
+            
             
             top += 120;
             
