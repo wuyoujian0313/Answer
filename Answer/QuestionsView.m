@@ -104,35 +104,41 @@
     
     User *user = [User sharedUser];
     [user saveToUserDefault];
+    
+    //
+    [self clearTableViewData];
 }
 
 - (void)reloadQuestionDataFromLocal {
     
-    [self clearTableViewData];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
     
-    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    
-    NSData *listData = [userDefaults objectForKey:saveQuestionListToLocalKey];
-    if (listData && [listData isKindOfClass:[NSData class]]) {
-        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:listData];
-        if (arr) {
-            self.questionList = [[NSMutableArray alloc] initWithArray:arr];
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        
+        NSData *listData = [userDefaults objectForKey:saveQuestionListToLocalKey];
+        if (listData && [listData isKindOfClass:[NSData class]]) {
+            NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:listData];
+            if (arr) {
+                self.questionList = [[NSMutableArray alloc] initWithArray:arr];
+            }
         }
-    }
-    
-    NSData *usersData = [userDefaults objectForKey:saveUserListToLocalKey];
-    if (usersData && [usersData isKindOfClass:[NSData class]]) {
-        NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:usersData];
-        if (arr) {
-            self.userList = [[NSMutableArray alloc] initWithArray:arr];
+        
+        NSData *usersData = [userDefaults objectForKey:saveUserListToLocalKey];
+        if (usersData && [usersData isKindOfClass:[NSData class]]) {
+            NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:usersData];
+            if (arr) {
+                self.userList = [[NSMutableArray alloc] initWithArray:arr];
+            }
         }
-    }
-    
-    User *user = [User sharedUser];
-    [user loadFromUserDefault];
-    
-    
-    [self reloadQuestionView];
+        
+        User *user = [User sharedUser];
+        [user loadFromUserDefault];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //
+            //[self reloadQuestionView];
+        });
+    });
 }
 
 -(void)addRefreshHeadder {
@@ -276,9 +282,9 @@
             cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            
-            [_cellCache setObject:cell forKey:key];
         }
+        
+        [_cellCache setObject:cell forKey:key];
     }
     
     // 设置数据
@@ -307,6 +313,8 @@
             [cell setQuestionInfo:questionInfo userInfo:nil];
         }
     }
+    
+    
     
     return cell;
 }

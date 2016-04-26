@@ -182,6 +182,14 @@
             [_userInfoView setFrame:CGRectZero];
             _userInfoViewHeight = 0;
         }
+    } else {
+        
+        //
+        if (_haveUserInfo) {
+            _userInfoViewHeight = 40;
+        } else {
+            _userInfoViewHeight = 0;
+        }
     }
 }
 
@@ -334,6 +342,33 @@
         }
         
         [_wtContentView setFrame:CGRectMake(0, _userInfoViewHeight + _spaceViewHeight, self.frame.size.width, _wtContentViewHeight)];
+    } else {
+        
+        if (_questionInfo.mediaType && ([_questionInfo.mediaType integerValue] == 1 || [_questionInfo.mediaType integerValue] == 2)) {
+            
+            CGFloat top = 5;
+
+            top += 120;
+        
+            if (_isFoldText) {
+                _wtContentViewHeight = top + 45;
+            } else {
+                CGSize textSize = [_questionInfo.content sizeWithFontCompatible:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(self.frame.size.width - 20, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+            
+                _wtContentViewHeight = top + textSize.height + 20;
+            }
+            
+        } else if (_questionInfo.mediaType && [_questionInfo.mediaType integerValue] == 0) {
+    
+            CGFloat top = 5;
+            top += 55;
+            if (_isFoldText) {
+                _wtContentViewHeight = top + 45;
+            } else {
+                CGSize textSize = [_questionInfo.content sizeWithFontCompatible:[UIFont systemFontOfSize:14] constrainedToSize:CGSizeMake(self.frame.size.width - 20, CGFLOAT_MAX) lineBreakMode:NSLineBreakByWordWrapping];
+                _wtContentViewHeight = top + textSize.height + 20;
+            }
+        }
     }
 }
 
@@ -517,6 +552,10 @@
         _funcViewHeight = 60;
         
         [_funcView setFrame:CGRectMake(0, _userInfoViewHeight + _wtContentViewHeight + _spaceViewHeight, self.frame.size.width, _funcViewHeight)];
+    } else {
+        
+        // 20 - 40 设置高度
+        _funcViewHeight = 60;
     }
 }
 
@@ -531,6 +570,8 @@
         }
         
         [_spaceView setFrame:CGRectMake(0, 0, self.frame.size.width, 12)];
+        _spaceViewHeight = 12;
+    } else {
         _spaceViewHeight = 12;
     }
 }
@@ -600,10 +641,10 @@
 - (void)layoutSubviews {
     
     [super layoutSubviews];
-    [self layoutSpaceView:self];
-    [self layoutUserView:self];
-    [self layoutWtContentView:self];
-    [self layoutFuncView:self];
+    [self layoutSpaceView:nil];
+    [self layoutUserView:nil];
+    [self layoutWtContentView:nil];
+    [self layoutFuncView:nil];
 
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, [self viewHeight]);
 }
