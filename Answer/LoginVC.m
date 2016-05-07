@@ -10,6 +10,7 @@
 #import "LineView.h"
 #import "NetworkTask.h"
 #import "RegisterVC.h"
+#import "ForgotPasswordVC.h"
 #import "LoginResult.h"
 #import "AppDelegate.h"
 #import "OHAttributedLabel.h"
@@ -159,15 +160,15 @@
     [view addSubview:loginBtn];
     
     
-//    UIButton *forgetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
-//    [forgetBtn setBackgroundColor:[UIColor clearColor]];
-//    [forgetBtn setTag:102];
-//    [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
-//    [forgetBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
-//    [forgetBtn setTitleColor:[UIColor colorWithHex:0x666666] forState:UIControlStateNormal];
-//    [forgetBtn setFrame:CGRectMake(11, 15 + 45 + 10, _loginTableView.frame.size.width - 22, 14)];
-//    [forgetBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
-//    [view addSubview:forgetBtn];
+    UIButton *forgetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    [forgetBtn setBackgroundColor:[UIColor clearColor]];
+    [forgetBtn setTag:102];
+    [forgetBtn setTitle:@"忘记密码" forState:UIControlStateNormal];
+    [forgetBtn.titleLabel setFont:[UIFont systemFontOfSize:14]];
+    [forgetBtn setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
+    [forgetBtn setFrame:CGRectMake(_loginTableView.frame.size.width - 80, 40 + 45 + 10, 80, 40)];
+    [forgetBtn addTarget:self action:@selector(buttonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [view addSubview:forgetBtn];
     
     
     [_loginTableView setTableFooterView:view];
@@ -216,6 +217,9 @@
                                                  delegate:self
                                                 resultObj:[[LoginResult alloc] init]
                                                customInfo:@"login"];
+    } else if(tag ==102) {
+        ForgotPasswordVC *vc = [[ForgotPasswordVC alloc] init];
+        [self.navigationController pushViewController:vc animated:YES];
     }
 }
 

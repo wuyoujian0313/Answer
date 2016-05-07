@@ -1,20 +1,20 @@
 //
-//  RegisterVC.m
+//  ForgotPasswordVC.m
 //  Answer
 //
-//  Created by wuyj on 15/12/2.
-//  Copyright © 2015年 wuyj. All rights reserved.
+//  Created by wuyj on 16/07/5.
+//  Copyright © 2016年 wuyj. All rights reserved.
 //
 
-#import "RegisterVC.h"
+#import "ForgotPasswordVC.h"
 #import "LineView.h"
 #import "OHAttributedLabel.h"
 #import "NetworkTask.h"
 #import "NetResultBase.h"
-#import "RegisterResult.h"
+#import "ForgotPwdResult.h"
 #import "User.h"
 
-@interface RegisterVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
+@interface ForgotPasswordVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
 
 @property(nonatomic,strong)UITableView          *registerTableView;
 @property(nonatomic,strong)UITextField          *codeTextField;
@@ -31,10 +31,10 @@
 @property (nonatomic, assign) CFRunLoopTimerRef     timer;				// 消息循环定时器
 
 
-void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info);
+void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
 @end
 
-@implementation RegisterVC
+@implementation ForgotPasswordVC
 
 -(void)dealloc {
     if (_runLoop != nil && _timer != nil) {
@@ -53,7 +53,7 @@ void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info);
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [self setNavTitle:@"注册"];
+    [self setNavTitle:@"找回密码"];
     [self layoutRegisterTableView];
     [self layoutToLoginView];
 }
@@ -164,13 +164,13 @@ void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info);
         
         
         if (_pwdTextField.text == nil || [_pwdTextField.text length] <= 0) {
-            [SVProgressHUD showErrorWithStatus:@"请输入密码"];
+            [SVProgressHUD showErrorWithStatus:@"请输入新密码"];
             [_pwdTextField becomeFirstResponder];
             return;
         }
         
         if (_pwd2TextField.text == nil || [_pwd2TextField.text length] <= 0) {
-            [SVProgressHUD showErrorWithStatus:@"请再次输入密码"];
+            [SVProgressHUD showErrorWithStatus:@"请再次输入新密码"];
             [_pwd2TextField becomeFirstResponder];
             return;
         }
@@ -214,10 +214,10 @@ void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info);
         [param setObject:pwdString forKey:@"password"];
         
         [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeBlack];
-        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_Register
+        [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_UpdatePwd
                                                  forParam:param
                                                  delegate:self
-                                                resultObj:[[RegisterResult alloc] init] customInfo:@"register"];
+                                                resultObj:[[ForgotPwdResult alloc] init] customInfo:@"updatePwd"];
         
     }
 }
@@ -243,26 +243,26 @@ void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info);
     _runLoop = CFRunLoopGetCurrent();
     CFRunLoopTimerContext context = {0, (__bridge void *)(self), NULL, NULL, NULL};
     _timer = CFRunLoopTimerCreate(kCFAllocatorDefault, 1, 1.0, 0, 0,
-                                  &safeVerifyCFTimerCallback, &context);
+                                  &safeVerifyPhoneCodeCFTimerCallback, &context);
     
     CFRunLoopAddTimer(_runLoop, _timer, kCFRunLoopCommonModes);
 }
 
 // 时钟回调函数
-void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
+void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
     // 剩余时间减1
-    RegisterVC *registerVC = (__bridge id)info;
+    ForgotPasswordVC *forgotPwdVC = (__bridge id)info;
     
     // 时间秒数减1
-    [registerVC setLessTime:[registerVC lessTime] - 1];
+    [forgotPwdVC setLessTime:[forgotPwdVC lessTime] - 1];
     
     // 更新倒计时时间
-    [registerVC updateLessTime];
+    [forgotPwdVC updateLessTime];
     
-    if ([registerVC lessTime] <= 0) {
-        CFRunLoopRemoveTimer([registerVC runLoop], [registerVC timer], kCFRunLoopCommonModes);
-        [registerVC setRunLoop:nil];
-        [registerVC setTimer:nil];
+    if ([forgotPwdVC lessTime] <= 0) {
+        CFRunLoopRemoveTimer([forgotPwdVC runLoop], [forgotPwdVC timer], kCFRunLoopCommonModes);
+        [forgotPwdVC setRunLoop:nil];
+        [forgotPwdVC setTimer:nil];
     }
 }
 
@@ -326,8 +326,8 @@ void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         // 启动倒计时
         [self timerStart];
         
-    } else if ([customInfo isEqualToString:@"register"]) {
-        [FadePromptView showPromptStatus:@"谢谢您，注册成功！" duration:1.0 positionY:screenHeight- 300 finishBlock:^{
+    } else if ([customInfo isEqualToString:@"updatePwd"]) {
+        [FadePromptView showPromptStatus:@"成功找回密码，请记住新密码！" duration:1.5 positionY:screenHeight- 300 finishBlock:^{
             //
             [self.navigationController popToRootViewControllerAnimated:YES];
         }];
@@ -532,7 +532,7 @@ void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField addTarget:self action:@selector(inputChange:) forControlEvents:UIControlEventEditingChanged];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
-            [textField setPlaceholder:@"请输入密码(6-18位)"];
+            [textField setPlaceholder:@"请输入新密码(6-18位)"];
             [textField setClearsOnBeginEditing:YES];
             [cell.contentView addSubview:textField];
             
@@ -563,7 +563,7 @@ void safeVerifyCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
             [textField setTextColor:[UIColor colorWithHex:0x666666]];
             [textField addTarget:self action:@selector(inputChange:) forControlEvents:UIControlEventEditingChanged];
             [textField setClearButtonMode:UITextFieldViewModeAlways];
-            [textField setPlaceholder:@"请再次输入密码(6-18位)"];
+            [textField setPlaceholder:@"请再次输入新密码(6-18位)"];
             [textField setClearsOnBeginEditing:YES];
             [cell.contentView addSubview:textField];
             

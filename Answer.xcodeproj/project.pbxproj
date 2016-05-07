@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		70BC27091CBBE88200C16B04 /* GetNewMsgCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BC27081CBBE88200C16B04 /* GetNewMsgCountResult.m */; };
+		AF2415D91CDDA36B0090C88E /* ForgotPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415D81CDDA36B0090C88E /* ForgotPasswordVC.m */; };
+		AF2415DC1CDDE9AC0090C88E /* ForgotPwdResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415DB1CDDE9AC0090C88E /* ForgotPwdResult.m */; };
 		E120F8E61C4A25270024FC87 /* RechangeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */; };
 		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
@@ -200,6 +202,10 @@
 /* Begin PBXFileReference section */
 		70BC27071CBBE88200C16B04 /* GetNewMsgCountResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetNewMsgCountResult.h; sourceTree = "<group>"; };
 		70BC27081CBBE88200C16B04 /* GetNewMsgCountResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetNewMsgCountResult.m; sourceTree = "<group>"; };
+		AF2415D71CDDA36B0090C88E /* ForgotPasswordVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordVC.h; sourceTree = "<group>"; };
+		AF2415D81CDDA36B0090C88E /* ForgotPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordVC.m; sourceTree = "<group>"; };
+		AF2415DA1CDDE9AC0090C88E /* ForgotPwdResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPwdResult.h; sourceTree = "<group>"; };
+		AF2415DB1CDDE9AC0090C88E /* ForgotPwdResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPwdResult.m; sourceTree = "<group>"; };
 		E120F8E41C4A25270024FC87 /* RechangeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechangeTableViewCell.h; sourceTree = "<group>"; };
 		E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechangeTableViewCell.m; sourceTree = "<group>"; };
 		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
@@ -905,6 +911,8 @@
 				E1D670D51C3A778F0055EAFD /* BaiduMapLocationResult.m */,
 				70BC27071CBBE88200C16B04 /* GetNewMsgCountResult.h */,
 				70BC27081CBBE88200C16B04 /* GetNewMsgCountResult.m */,
+				AF2415DA1CDDE9AC0090C88E /* ForgotPwdResult.h */,
+				AF2415DB1CDDE9AC0090C88E /* ForgotPwdResult.m */,
 			);
 			name = APIModels;
 			sourceTree = "<group>";
@@ -1060,6 +1068,8 @@
 				E1C21E561C0F16A40042E1F3 /* LoginVC.m */,
 				E1C21E581C0F16F60042E1F3 /* RegisterVC.h */,
 				E1C21E591C0F16F60042E1F3 /* RegisterVC.m */,
+				AF2415D71CDDA36B0090C88E /* ForgotPasswordVC.h */,
+				AF2415D81CDDA36B0090C88E /* ForgotPasswordVC.m */,
 			);
 			name = "登录&注册";
 			sourceTree = "<group>";
@@ -1626,6 +1636,7 @@
 				E172432F1C33B77100A00F8C /* AnswerTableViewCell.m in Sources */,
 				E14410631C27DAF1000EE19A /* MainController.m in Sources */,
 				E1C21E691C0F233F0042E1F3 /* MyFriendsVC.m in Sources */,
+				AF2415DC1CDDE9AC0090C88E /* ForgotPwdResult.m in Sources */,
 				E19762051C2673220093A935 /* OHTouchesGestureRecognizer.m in Sources */,
 				E17E4A271C79BD33003D20AE /* Order.m in Sources */,
 				E1C21E4B1C0F0A430042E1F3 /* QuestionVC.m in Sources */,
@@ -1650,6 +1661,7 @@
 				E19762061C2673220093A935 /* OHASBasicHTMLParser.m in Sources */,
 				E1B78A351C22608300A2E384 /* TTTColorFormatter.m in Sources */,
 				E19762031C2673220093A935 /* OHAttributedLabel.m in Sources */,
+				AF2415D91CDDA36B0090C88E /* ForgotPasswordVC.m in Sources */,
 				E1B78A601C2263B600A2E384 /* MJRefreshConst.m in Sources */,
 				E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */,
 				E1D189631C0EE6F60043DE9C /* SDWebImageDownloaderOperation.m in Sources */,

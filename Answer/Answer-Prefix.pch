@@ -42,7 +42,7 @@
 
 #define NeedAudio
 
-#define kNetworkServerIP            @"http://101.69.181.210"
+#define kNetworkServerIP            @"http://101.69.181.210:80"
 #define kNetworkAPIServer           kNetworkServerIP@"/tuwen_web"
 
 #define kSharedURL                  @"http://mp.weixin.qq.com/s?__biz=MzI0MDIxODQwNA==&mid=402448879&idx=1&sn=68af9498ea6dd3c5d58ff50135a41fce&scene=0&previewkey=N8Sopmdh7ICqBwQYX9JqVMNS9bJajjJKzz%2F0By7ITJA%3D#wechat_redirect"
@@ -81,6 +81,7 @@
 #define API_GetSystemMessage        @"service/getSystemMessage"
 #define API_DelSystemMessage        @"service/delSystemMessage"
 #define API_SetBestAnswer           @"service/setBestAnswer"
+#define API_UpdatePwd               @"service/updatePwd"
 
 // 提现
 #define API_ToCash                  @"fundFlow/withdrawCash"
