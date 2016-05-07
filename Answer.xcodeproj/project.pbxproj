@@ -10,6 +10,7 @@
 		70BC27091CBBE88200C16B04 /* GetNewMsgCountResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 70BC27081CBBE88200C16B04 /* GetNewMsgCountResult.m */; };
 		AF2415D91CDDA36B0090C88E /* ForgotPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415D81CDDA36B0090C88E /* ForgotPasswordVC.m */; };
 		AF2415DC1CDDE9AC0090C88E /* ForgotPwdResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415DB1CDDE9AC0090C88E /* ForgotPwdResult.m */; };
+		AF2415DF1CDE119C0090C88E /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415DE1CDE119C0090C88E /* MessageTableViewCell.m */; };
 		E120F8E61C4A25270024FC87 /* RechangeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */; };
 		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
@@ -206,6 +207,8 @@
 		AF2415D81CDDA36B0090C88E /* ForgotPasswordVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordVC.m; sourceTree = "<group>"; };
 		AF2415DA1CDDE9AC0090C88E /* ForgotPwdResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPwdResult.h; sourceTree = "<group>"; };
 		AF2415DB1CDDE9AC0090C88E /* ForgotPwdResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPwdResult.m; sourceTree = "<group>"; };
+		AF2415DD1CDE119C0090C88E /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		AF2415DE1CDE119C0090C88E /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 		E120F8E41C4A25270024FC87 /* RechangeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechangeTableViewCell.h; sourceTree = "<group>"; };
 		E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechangeTableViewCell.m; sourceTree = "<group>"; };
 		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
@@ -1024,6 +1027,8 @@
 				E1C21E4D1C0F0A5A0042E1F3 /* MessageVC.m */,
 				E1C21E641C0F23090042E1F3 /* SystemMessageVC.h */,
 				E1C21E651C0F23090042E1F3 /* SystemMessageVC.m */,
+				AF2415DD1CDE119C0090C88E /* MessageTableViewCell.h */,
+				AF2415DE1CDE119C0090C88E /* MessageTableViewCell.m */,
 			);
 			name = "消息";
 			sourceTree = "<group>";
@@ -1558,6 +1563,7 @@
 				E1B78A651C228CC700A2E384 /* AudioPlayControl.m in Sources */,
 				E17243361C33BAFB00A00F8C /* HPTextViewInternal.m in Sources */,
 				E17E4A261C79BD33003D20AE /* openssl_wrapper.m in Sources */,
+				AF2415DF1CDE119C0090C88E /* MessageTableViewCell.m in Sources */,
 				E14C20F71C1EEE63003925B5 /* LoginoutResult.m in Sources */,
 				E1B78A511C22623900A2E384 /* XHViewState.m in Sources */,
 				E1C21E4E1C0F0A5A0042E1F3 /* MessageVC.m in Sources */,

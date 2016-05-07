@@ -336,6 +336,7 @@
         MyFriendsVC *vc = [[MyFriendsVC alloc] init];
         vc.enterType = EnterType_FromPublishQuestion;
         vc.delegate = self;
+        vc.selectedIdsString = _friendIdsString;
         [self.navigationController pushViewController:vc animated:YES];
     } else if (sender.tag == 303) {
         // 红包设置

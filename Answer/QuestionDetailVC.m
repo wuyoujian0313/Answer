@@ -369,7 +369,8 @@
     NSString *twUserId = _questionInfo.userId;
     if ([[User sharedUser] isMe:twUserId]) {
     
-        if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"0"]) {
+        if (_questionInfo.hasBestAnswer && [_questionInfo.hasBestAnswer isEqualToString:@"0"]
+            && ![[User sharedUser] isMe:answerInfo.userId]) {
             [cell setIsShowBestBtn:YES];
             
             cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;

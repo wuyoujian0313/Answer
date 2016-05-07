@@ -24,6 +24,7 @@ typedef NS_ENUM(NSInteger,EnterType) {
 @interface MyFriendsVC : BaseVC
 
 @property (nonatomic, assign) EnterType     enterType;
+@property (nonatomic, copy) NSString        *selectedIdsString;
 @property (nonatomic, weak) id<SelectedFriendIdsDelegate> delegate;
 
 

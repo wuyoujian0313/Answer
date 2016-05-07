@@ -31,10 +31,21 @@
     // Do any additional setup after loading the view.
     if (_enterType == EnterType_FromMe) {
         [self setNavTitle:@"我的好友"];
+        
+        self.selectFriendIds = nil;
+        self.selectedIdsString = nil;
     } else {
         [self setNavTitle:@"@我的好友"];
         self.selectFriendIds = [[NSMutableArray alloc] initWithCapacity:0];
+        
+        if (_selectedIdsString && [_selectedIdsString length]) {
+            NSArray *selectedIds = [_selectedIdsString componentsSeparatedByString:@","];
+            if (selectedIds && [selectedIds count]) {
+                [_selectFriendIds addObjectsFromArray:selectedIds];
+            }
+        }
     }
+    
     
     [self layoutFriendTableView];
     [self requestMyFriendsList];
@@ -232,6 +243,14 @@
     }
     
     UserInfo * user = [_friendList objectAtIndex:indexPath.row];
+    UIButton *selectBtn = (UIButton *)cell.accessoryView;
+    
+    if ([_selectFriendIds containsObject:user.uId]) {
+        [selectBtn setImage:[UIImage imageNamed:@"selected"] forState:UIControlStateNormal];
+    } else {
+        [selectBtn setImage:[UIImage imageNamed:@"unSelected"] forState:UIControlStateNormal];
+    }
+    
     //从缓存取
     //取图片缓存
     SDImageCache * imageCache = [SDImageCache sharedImageCache];
