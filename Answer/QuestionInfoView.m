@@ -113,44 +113,53 @@
         [photoImage setFrame:CGRectMake(left, top, 30, 30)];
         
         if (_userInfo) {
-            
-            //取图片缓存
-            SDImageCache * imageCache = [SDImageCache sharedImageCache];
-            
-            //从缓存取
-            NSString *imageUrl = _userInfo.headImage;
-            if (imageUrl && [imageUrl length] > 0) {
-                UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
+            if (_questionInfo.isAnonymous && [_questionInfo.isAnonymous isEqualToString:@"1"]) {
+                photoImage.image = [UIImage imageNamed:@"defaultHeadImage"];
+            } else {
+                //取图片缓存
+                SDImageCache * imageCache = [SDImageCache sharedImageCache];
                 
-                if (cacheimage == nil) {
-                    cacheimage = [UIImage imageNamed:@"defaultHeadImage"];
+                //从缓存取
+                NSString *imageUrl = _userInfo.headImage;
+                if (imageUrl && [imageUrl length] > 0) {
+                    UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
                     
-                    __weak UIImageView *wPhotoImage = photoImage;
-                    
-                    [photoImage  sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                        if (image) {
-                            UIImageView *sPhotoImage = wPhotoImage;
-                            sPhotoImage.image = image;
-                            [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
-                        }
-                    }];
-                } else {
-                    photoImage.image = cacheimage;
+                    if (cacheimage == nil) {
+                        cacheimage = [UIImage imageNamed:@"defaultHeadImage"];
+                        
+                        __weak UIImageView *wPhotoImage = photoImage;
+                        
+                        [photoImage  sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                            if (image) {
+                                UIImageView *sPhotoImage = wPhotoImage;
+                                sPhotoImage.image = image;
+                                [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+                            }
+                        }];
+                    } else {
+                        photoImage.image = cacheimage;
+                    }
                 }
             }
+            
         }
         
         left += 30 + 10;
         [nameLabel setFrame:CGRectMake(left, top, 180, 30)];
-        if (_userInfo.nickName && [_userInfo.nickName length]) {
-            [nameLabel setText:_userInfo.nickName];
+        
+        if (_questionInfo.isAnonymous && [_questionInfo.isAnonymous isEqualToString:@"1"]) {
+            [nameLabel setText:@"匿名"];
         } else {
-            if (_userInfo.userName && [_userInfo.userName length]) {
-                [nameLabel setText:_userInfo.userName];
-            } else if (_userInfo.phoneNumber && [_userInfo.phoneNumber length]) {
-                [nameLabel setText:_userInfo.phoneNumber];
+            if (_userInfo.nickName && [_userInfo.nickName length]) {
+                [nameLabel setText:_userInfo.nickName];
             } else {
-                [nameLabel setText:@"匿名"];
+                if (_userInfo.userName && [_userInfo.userName length]) {
+                    [nameLabel setText:_userInfo.userName];
+                } else if (_userInfo.phoneNumber && [_userInfo.phoneNumber length]) {
+                    [nameLabel setText:_userInfo.phoneNumber];
+                } else {
+                    [nameLabel setText:@"匿名"];
+                }
             }
         }
         
@@ -160,7 +169,6 @@
             [levelLabel setText:[NSString stringWithFormat:@"%@级",_userInfo.level]];
         }
         
-    
         if ([[User sharedUser] isMe:_userInfo.uId]) {
             attentionBtn.hidden = YES;
         } else {
