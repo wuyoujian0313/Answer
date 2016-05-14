@@ -13,6 +13,9 @@
 @property (nonatomic, copy) NSString        *uuid;
 @property (nonatomic, copy) NSString        *uId;
 @property (nonatomic, copy) NSString        *userId;
+@property (nonatomic, copy) NSString        *nickName;
+@property (nonatomic, copy) NSString        *phoneNumber;
+@property (nonatomic, copy) NSString        *headImage;
 @property (nonatomic, copy) NSString        *mediaType;//2 图片，1 视频 ，0音频
 @property (nonatomic, copy, getter=mediaURL) NSString        *mediaURL;
 @property (nonatomic, copy, getter=thumbnail) NSString       *thumbnail;

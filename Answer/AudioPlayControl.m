@@ -24,15 +24,13 @@
     
     if (self) {
         self.bgView = [[UIImageView alloc] initWithFrame:CGRectZero];
-        //[_bgView setImage:[UIImage imageNamed:@"audio_bg"]];
-        [_bgView setAutoresizesSubviews:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight];
         [_bgView.layer setCornerRadius:4.0];
         [_bgView.layer setBorderColor:[UIColor colorWithHex:0x666666].CGColor];
         [_bgView.layer setBorderWidth:kLineHeight1px];
         [self addSubview:_bgView];
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-        [_timeLabel setBackgroundColor:[UIColor clearColor]];
+        [_timeLabel setBackgroundColor:[UIColor whiteColor]];
         [_timeLabel setUserInteractionEnabled:NO];
         [_timeLabel setTextColor:[UIColor colorWithHex:0x666666]];
         [_timeLabel setFont:[UIFont systemFontOfSize:14]];
@@ -63,7 +61,7 @@
 -(void)layoutSubviews {
     [super layoutSubviews];
     [_bgView setFrame:CGRectMake(0, (self.frame.size.height - 28)/2.0, self.frame.size.width, 28)];
-    [_timeLabel setFrame:CGRectMake(10, 0, 100, self.bounds.size.height)];
+    [_timeLabel setFrame:CGRectMake(10, (self.frame.size.height - 20)/2.0, 40, 20)];
     [_playView setFrame:CGRectMake(self.frame.size.width - 30, (self.frame.size.height - 19)/2.0, 17, 19)];
 }
 

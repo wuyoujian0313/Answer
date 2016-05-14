@@ -73,4 +73,8 @@
     return [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,_thumbnail];
 }
 
+- (NSString *)headImage {
+    return [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,_headImage];
+}
+
 @end

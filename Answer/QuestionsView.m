@@ -11,19 +11,16 @@
 #import "User.h"
 
 #define saveQuestionListToLocalKey      @"saveQuestionListToLocalKey"
-#define saveUserListToLocalKey      @"saveUserListToLocalKey"
 
 @interface QuestionsView ()<UITableViewDataSource,UITableViewDelegate,NSCacheDelegate,MJRefreshBaseViewDelegate>
 
 @property (nonatomic, strong) UITableView           *questionTableView;
 @property (nonatomic, assign) BOOL                  haveUserView;
-@property (nonatomic, strong) NSCache               *cellCache;
+@property (nonatomic, strong) NSCache               *cellHeightCache;
 
 @property (nonatomic, strong) MJRefreshHeaderView   *refreshHeader;
 @property (nonatomic, strong) MJRefreshFooterView   *refreshFootder;
-
 @property (nonatomic, strong) NSMutableArray        *questionList;
-@property (nonatomic, strong) NSMutableArray        *userList;
 
 @end
 
@@ -53,8 +50,7 @@
         self.delegate = delegate;
         self.clipsToBounds = YES;
         self.questionList = [[NSMutableArray alloc] init];
-        self.userList = [[NSMutableArray alloc] init];
-        
+
         UITableView * tableView = [[UITableView alloc] initWithFrame:self.bounds style:UITableViewStylePlain];
         [self setQuestionTableView:tableView];
         [tableView setDelegate:self];
@@ -72,6 +68,11 @@
         
         //
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deleteQuestionDataFromLocal) name:UIApplicationWillTerminateNotification object:nil];
+        
+        if (self.cellHeightCache == nil) {
+            self.cellHeightCache = [[NSCache alloc] init];
+            _cellHeightCache.delegate = self;
+        }
     }
     
     return self;
@@ -80,7 +81,6 @@
 - (void)deleteQuestionDataFromLocal {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:nil forKey:saveQuestionListToLocalKey];
-    [userDefaults setObject:nil forKey:saveUserListToLocalKey];
     [userDefaults synchronize];
 }
 
@@ -93,14 +93,7 @@
         [userDefaults setObject:listData forKey:saveQuestionListToLocalKey];
     }
     
-    if (_userList) {
-        //
-        NSData *listData = [NSKeyedArchiver archivedDataWithRootObject:_userList];
-        [userDefaults setObject:listData forKey:saveUserListToLocalKey];
-    }
-    
     [userDefaults synchronize];
-    
     
     User *user = [User sharedUser];
     [user saveToUserDefault];
@@ -123,20 +116,12 @@
             }
         }
         
-        NSData *usersData = [userDefaults objectForKey:saveUserListToLocalKey];
-        if (usersData && [usersData isKindOfClass:[NSData class]]) {
-            NSArray *arr = [NSKeyedUnarchiver unarchiveObjectWithData:usersData];
-            if (arr) {
-                self.userList = [[NSMutableArray alloc] initWithArray:arr];
-            }
-        }
-        
         User *user = [User sharedUser];
         [user loadFromUserDefault];
         
+        // 回到主线程
         dispatch_async(dispatch_get_main_queue(), ^{
             //
-            //[self reloadQuestionView];
         });
     });
 }
@@ -157,7 +142,7 @@
     [_refreshHeader beginRefreshing];
 }
 
--(void)endRefresh {
+- (void)endRefresh {
     if ([_refreshHeader isRefreshing]) {
         [_refreshHeader endRefreshing];
     }
@@ -172,38 +157,24 @@
 }
 
 - (void)clearCacheData {
-    [_cellCache removeAllObjects];
-    _cellCache = nil;
+    [_cellHeightCache removeAllObjects];
+    _cellHeightCache = nil;
 }
 
 - (void)clearTableViewData {
     [_questionList removeAllObjects];
-    [_userList removeAllObjects];
     [self clearCacheData];
 }
 
 - (void)addQuestionsResult:(QuestionsResult *)result {
     
     if (result.twList && [result.twList count]) {
-        if ([result.twList count] <= 30) {
+        if ([result.twList count] < 30) {
             [_refreshFootder setHidden:YES];
         } else {
             [_refreshFootder setHidden:NO];
         }
         [_questionList addObjectsFromArray:result.twList];
-    }
-    
-    if (result.userList && [result.userList count]) {
-        
-        for (UserInfo * user in result.userList) {
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",user.uId];
-            
-            // 数组里不存在用户
-            NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
-            if (users == nil || [users count] == 0) {
-                [_userList addObject:user];
-            }
-        }
     }
 
     [_questionTableView reloadData];
@@ -228,9 +199,7 @@
 }
 
 #pragma mark - NSCacheDelegate
-- (void)cache:(NSCache *)cache willEvictObject:(id)obj {
-
-}
+- (void)cache:(NSCache *)cache willEvictObject:(id)obj {}
 
 
 #pragma mark - UITableViewDataSource
@@ -244,18 +213,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
-    if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:userInfo:)]) {
+    if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:)]) {
         
         QuestionInfo *questionInfo = [_questionList objectAtIndex:indexPath.row];
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
-        
-        // 理论上只有一个
-        NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
-        if (users && [users count]) {
-            [_delegate questionInfoViewAction:QuestionInfoViewAction_ScanDetail questionInfo:questionInfo userInfo:[users objectAtIndex:0]];
-        } else {
-            [_delegate questionInfoViewAction:QuestionInfoViewAction_ScanDetail questionInfo:questionInfo userInfo:nil];
-        } 
+        [_delegate questionInfoViewAction:QuestionInfoViewAction_ScanDetail questionInfo:questionInfo];
     }
 }
 
@@ -267,56 +228,47 @@
 
 - (QuestionTableViewCell *)tableView:(UITableView *)tableView preparedCellForIndexPath:(NSIndexPath *)indexPath {
     
-    if (self.cellCache == nil) {
-        self.cellCache = [[NSCache alloc] init];
-        _cellCache.delegate = self;
-        _cellCache.evictsObjectsWithDiscardedContent = YES;
-    }
-    
-    NSString *key = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section, (long)indexPath.row];
-    QuestionTableViewCell *cell = [_cellCache objectForKey:key];
+    static NSString *cellIdentifier = @"QuestionTableViewCell";
+    QuestionTableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        NSString *cellIdentifier = key;
-        cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-        if (cell == nil) {
-            cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[QuestionTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
         
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        }
-        
-        [_cellCache setObject:cell forKey:key];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     
     // 设置数据
     cell.delegate = _delegate;
     if ([_questionList count] > indexPath.row) {
         QuestionInfo *questionInfo = [_questionList objectAtIndex:indexPath.row];
-        
-        if (_haveUserView) {
-            
-            if ([questionInfo.userId isEqualToString:[User sharedUser].user.uId]) {
-                // 是自己的问题
-                [cell setQuestionInfo:questionInfo userInfo:[User sharedUser].user];
-            } else {
-                //
-                NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",questionInfo.userId];
-                
-                // 理论上只有一个
-                NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
-                if (users && [users count] > 0) {
-                    [cell setQuestionInfo:questionInfo userInfo:[users objectAtIndex:0]];
-                } else {
-                    [cell setQuestionInfo:questionInfo userInfo:nil];
-                }
-            }
-        } else {
-            [cell setQuestionInfo:questionInfo userInfo:nil];
-        }
+        [cell setQuestionInfo:questionInfo haveUserView:_haveUserView];
     }
     
-    
-    
     return cell;
+}
+
+- (CGFloat)cellHeightForIndexPath:(NSIndexPath *)indexPath {
+    
+    NSString *key = [NSString stringWithFormat:@"%ld-%ld",(long)indexPath.section,(long)indexPath.row];
+    NSNumber *heightNum = [_cellHeightCache objectForKey:key];
+    if (heightNum) {
+        return [heightNum floatValue];
+    }
+    
+    CGFloat height = 0;
+    if ([_questionList count] > indexPath.row) {
+        QuestionInfo *questionInfo = [_questionList objectAtIndex:indexPath.row];
+        height = [QuestionTableViewCell cellHeightByQuestionInfo:questionInfo haveUserView:_haveUserView];
+    }
+    
+    if (self.cellHeightCache == nil) {
+        self.cellHeightCache = [[NSCache alloc] init];
+        _cellHeightCache.delegate = self;
+    }
+    
+    [_cellHeightCache setObject:[NSNumber numberWithFloat:height] forKey:key];
+
+    
+    return height;
 }
 
 
@@ -324,8 +276,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < [_questionList count]) {
-        QuestionTableViewCell *cell = [self tableView:tableView preparedCellForIndexPath:indexPath];
-        return [cell cellHeight];
+        return [self cellHeightForIndexPath:indexPath];
     }
     
     return 0;
@@ -333,8 +284,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < [_questionList count]) {
-        QuestionTableViewCell *cell = [self tableView:tableView preparedCellForIndexPath:indexPath];
-        return [cell cellHeight];
+        return [self cellHeightForIndexPath:indexPath];
     }
     
     return 0;

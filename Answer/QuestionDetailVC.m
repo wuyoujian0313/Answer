@@ -162,7 +162,7 @@
     infoView.delegate = self;
     self.questionInfoView = infoView;
     
-    [_questionInfoView setQuestionInfo:_questionInfo userInfo:_userInfo isFoldText:NO];
+    [_questionInfoView setQuestionInfo:_questionInfo haveUserView:YES isFoldText:NO];
     [_questionInfoView setFrame:CGRectMake(0, 0, _detailTableView.frame.size.width, [_questionInfoView viewHeight])];
     
     [_detailTableView setTableHeaderView:_questionInfoView];
@@ -520,7 +520,7 @@
 
 
 #pragma mark - QuestionInfoViewCellDelegate
-- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question {
     
     switch (action) {
             

@@ -1082,12 +1082,12 @@
 		E1C21E761C0F25510042E1F3 /* common */ = {
 			isa = PBXGroup;
 			children = (
-				E1C21E6D1C0F23FF0042E1F3 /* QuestionsView.h */,
-				E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */,
 				E18F60D81C32CB2700BB53AF /* QuestionInfoView.h */,
 				E18F60D91C32CB2700BB53AF /* QuestionInfoView.m */,
 				E16E6D301C2198A000751E1D /* QuestionTableViewCell.h */,
 				E16E6D311C2198A000751E1D /* QuestionTableViewCell.m */,
+				E1C21E6D1C0F23FF0042E1F3 /* QuestionsView.h */,
+				E1C21E6E1C0F23FF0042E1F3 /* QuestionsView.m */,
 				E1B78A631C228CC700A2E384 /* AudioPlayControl.h */,
 				E1B78A641C228CC700A2E384 /* AudioPlayControl.m */,
 				E1EB9A141C2C091A00200059 /* QuestionListVC.h */,

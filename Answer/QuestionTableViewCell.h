@@ -14,7 +14,7 @@
 @interface QuestionTableViewCell : UITableViewCell
 
 @property (nonatomic, weak) id<QuestionInfoViewDelegate>  delegate;
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo;
-- (CGFloat)cellHeight;
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave;
++ (CGFloat)cellHeightByQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave;
 
 @end

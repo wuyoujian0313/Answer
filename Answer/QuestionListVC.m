@@ -24,7 +24,7 @@
 @property (nonatomic, assign) BOOL                          firstLocation;
 @property (nonatomic, strong) NSTimer                       *timer;
 @property (nonatomic, copy) NSString                        *guanzhuFriendId;
-@property(nonatomic,assign)NSInteger                        more;
+@property (nonatomic, assign) NSInteger                     more;
 @end
 
 @implementation QuestionListVC
@@ -235,6 +235,10 @@
 
 
 -(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    if([customInfo isEqualToString:@"GetTuWenList"]) {
+        [_questionView endRefresh];
+    }
+    
     [SVProgressHUD dismiss];
     [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
         //
@@ -256,7 +260,7 @@
 }
 
 #pragma mark - QuestionTableViewCellDelegate
-- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question {
     
     switch (action) {
             

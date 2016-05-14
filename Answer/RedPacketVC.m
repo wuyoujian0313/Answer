@@ -188,7 +188,7 @@
     UIButton* button = [UIButton buttonWithType:UIButtonTypeCustom];
     [button addTarget:self action:@selector(redPacketAction:) forControlEvents:UIControlEventTouchUpInside];
     [button setTitle:@"其他金额" forState:UIControlStateNormal];
-    [button setTitleColor:[UIColor blueColor] forState:UIControlStateNormal];
+    [button setTitleColor:[UIColor colorWithHex:0x56b5f5] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
     [button.titleLabel setFont:[UIFont boldSystemFontOfSize:18]];
     [button setTag:1000];

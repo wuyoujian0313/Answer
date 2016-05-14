@@ -30,31 +30,44 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
-        QuestionInfoView *infoView = [[QuestionInfoView alloc] initWithFrame:CGRectZero];
-        self.infoView = infoView;
-        [self.contentView addSubview:infoView];
+        __weak QuestionTableViewCell *wSelf = self;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            QuestionTableViewCell *sSelf = wSelf;
+            
+            QuestionInfoView *infoView = [[QuestionInfoView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 0)];
+            sSelf.infoView = infoView;
+            [sSelf addSubview:infoView];
+        });
     }
     
     return self;
 }
 
 
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo {
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave {
     
-    [self.infoView setQuestionInfo:questionInfo userInfo:userInfo];
-    [self.infoView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    [self.contentView setFrame:self.bounds];
-    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
+    __weak QuestionTableViewCell *wSelf = self;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        QuestionTableViewCell *sSelf = wSelf;
+        
+        [sSelf.infoView setFrame:CGRectMake(0, 0, screenWidth, self.frame.size.height)];
+        [sSelf.infoView setQuestionInfo:questionInfo haveUserView:isHave];
+        [sSelf setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, screenWidth, self.frame.size.height)];
+    });
 }
 
-- (CGFloat)cellHeight {
-    return [self.infoView viewHeight];
+
+
++ (CGFloat)cellHeightByQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave {
+    QuestionInfoView *infoView = [QuestionInfoView sharedQuestionInfoView];
+    return [infoView viewHeightByQuestionInfo:questionInfo haveUserView:isHave isFoldText:YES];
 }
 
 - (void)layoutSubviews {
     [super layoutSubviews];
     [self.infoView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    [self.contentView setFrame:self.bounds];
     [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
 }
 

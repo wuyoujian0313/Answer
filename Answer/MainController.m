@@ -115,7 +115,6 @@
     
     self.homeVC = [[UITabBarController alloc] init];
     [_homeVC.tabBar setBarTintColor:[UIColor lightTextColor]];
-    //UIColor *color = [UIColor colorWithHex:0x12b8f6];
     [_homeVC.tabBar setTintColor:[UIColor colorWithHex:0x12b8f6]];
     [_homeVC setDelegate:self];
     

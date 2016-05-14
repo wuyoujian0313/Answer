@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger,QuestionInfoViewAction) {
 @class QuestionInfo;
 @class UserInfo;
 @protocol QuestionInfoViewDelegate <NSObject>
-- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo;
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question;
 @end
 
 

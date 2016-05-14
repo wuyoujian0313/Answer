@@ -22,7 +22,6 @@
 @property (nonatomic, strong) UIView                *spaceView;
 @property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 @property (nonatomic, strong) QuestionInfo          *questionInfo;
-@property (nonatomic, strong) UserInfo              *userInfo;
 @property (nonatomic, assign) BOOL                  haveUserInfo;
 @property (nonatomic, assign) BOOL                  isFoldText;
 
@@ -36,6 +35,16 @@
 
 - (void)dealloc {
     [_tapGesture.view removeGestureRecognizer:_tapGesture];
+}
+
++ (QuestionInfoView *)sharedQuestionInfoView {
+    
+    static QuestionInfoView *sharedObj = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        sharedObj = [[self alloc] init];
+    });
+    return sharedObj;
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
@@ -76,26 +85,29 @@
             [_userInfoView addSubview:photoImage];
         }
         
+//        UILabel  *levelLabel = (UILabel *)[_userInfoView viewWithTag:102];
+//        if (levelLabel == nil) {
+//            levelLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+//            [levelLabel setBackgroundColor:[UIColor whiteColor]];
+//            [levelLabel setTag:102];
+//            [levelLabel setTextAlignment:NSTextAlignmentCenter];
+//            [levelLabel setTextColor:[UIColor grayColor]];
+//            [levelLabel setFont:[UIFont systemFontOfSize:14]];
+//            [_userInfoView addSubview:levelLabel];
+//        }
+//        
+//        //
+//        levelLabel.hidden = YES;
+        
         UILabel  *nameLabel = (UILabel *)[_userInfoView viewWithTag:101];
         if (nameLabel == nil) {
             nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            [nameLabel setBackgroundColor:[UIColor clearColor]];
+            [nameLabel setBackgroundColor:[UIColor whiteColor]];
             [nameLabel setTag:101];
             [nameLabel setTextAlignment:NSTextAlignmentLeft];
             [nameLabel setTextColor:[UIColor grayColor]];
             [nameLabel setFont:[UIFont systemFontOfSize:14]];
             [_userInfoView addSubview:nameLabel];
-        }
-        
-        UILabel  *levelLabel = (UILabel *)[_userInfoView viewWithTag:102];
-        if (levelLabel == nil) {
-            levelLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            [levelLabel setBackgroundColor:[UIColor clearColor]];
-            [levelLabel setTag:102];
-            [levelLabel setTextAlignment:NSTextAlignmentCenter];
-            [levelLabel setTextColor:[UIColor grayColor]];
-            [levelLabel setFont:[UIFont systemFontOfSize:14]];
-            [_userInfoView addSubview:levelLabel];
         }
         
         UIButton *attentionBtn = (UIButton *)[_userInfoView viewWithTag:QuestionInfoViewAction_Attention];
@@ -112,36 +124,46 @@
         CGFloat top = 5;
         [photoImage setFrame:CGRectMake(left, top, 30, 30)];
         
-        if (_userInfo) {
+        photoImage.hidden = YES;
+        if (_questionInfo.userId) {
             if (_questionInfo.isAnonymous && [_questionInfo.isAnonymous isEqualToString:@"1"]) {
+                photoImage.hidden = NO;
                 photoImage.image = [UIImage imageNamed:@"defaultHeadImage"];
             } else {
                 //取图片缓存
-                SDImageCache * imageCache = [SDImageCache sharedImageCache];
-                
-                //从缓存取
-                NSString *imageUrl = _userInfo.headImage;
-                if (imageUrl && [imageUrl length] > 0) {
-                    UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
+                __weak UIImageView *wPhotoImage = photoImage;
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     
-                    if (cacheimage == nil) {
-                        cacheimage = [UIImage imageNamed:@"defaultHeadImage"];
+                    SDImageCache * imageCache = [SDImageCache sharedImageCache];
+                    UIImageView *sPhotoImage = wPhotoImage;
+                    //从缓存取
+                    NSString *imageUrl = _questionInfo.headImage;
+                    if (imageUrl && [imageUrl length] > 0) {
+                        UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
                         
-                        __weak UIImageView *wPhotoImage = photoImage;
-                        
-                        [photoImage  sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                            if (image) {
-                                UIImageView *sPhotoImage = wPhotoImage;
-                                sPhotoImage.image = image;
-                                [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
-                            }
-                        }];
-                    } else {
-                        photoImage.image = cacheimage;
+                        if (cacheimage == nil) {
+                            sPhotoImage.hidden = NO;
+                            sPhotoImage.image = [UIImage imageNamed:@"defaultHeadImage"];
+
+                            [photoImage  sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                                if (image) {
+                    
+                                    [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                        sPhotoImage.image = image;
+                                    });
+                                }
+                            }];
+                        } else {
+                           
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                sPhotoImage.hidden = NO;
+                                sPhotoImage.image = cacheimage;
+                            });
+                        }
                     }
-                }
+                });
             }
-            
         }
         
         left += 30 + 10;
@@ -150,13 +172,11 @@
         if (_questionInfo.isAnonymous && [_questionInfo.isAnonymous isEqualToString:@"1"]) {
             [nameLabel setText:@"匿名"];
         } else {
-            if (_userInfo.nickName && [_userInfo.nickName length]) {
-                [nameLabel setText:_userInfo.nickName];
+            if (_questionInfo.nickName && [_questionInfo.nickName length]) {
+                [nameLabel setText:_questionInfo.nickName];
             } else {
-                if (_userInfo.userName && [_userInfo.userName length]) {
-                    [nameLabel setText:_userInfo.userName];
-                } else if (_userInfo.phoneNumber && [_userInfo.phoneNumber length]) {
-                    [nameLabel setText:_userInfo.phoneNumber];
+                if (_questionInfo.phoneNumber && [_questionInfo.phoneNumber length]) {
+                    [nameLabel setText:_questionInfo.phoneNumber];
                 } else {
                     [nameLabel setText:@"匿名"];
                 }
@@ -164,15 +184,15 @@
         }
         
         left += 180;
-        [levelLabel setFrame:CGRectMake(left, top, (self.frame.size.width - 2*left), 20)];
-        if (_userInfo.level && [_userInfo.level length]) {
-            [levelLabel setText:[NSString stringWithFormat:@"%@级",_userInfo.level]];
-        }
+//        [levelLabel setFrame:CGRectMake(left, top, (self.frame.size.width - 2*left), 20)];
+//        if (_userInfo.level && [_userInfo.level length]) {
+//            [levelLabel setText:[NSString stringWithFormat:@"%@级",_userInfo.level]];
+//        }
         
-        if ([[User sharedUser] isMe:_userInfo.uId]) {
+        if ([[User sharedUser] isMe:_questionInfo.userId]) {
             attentionBtn.hidden = YES;
         } else {
-            if (![[User sharedUser] isFriend:_userInfo.uId]) {
+            if (![[User sharedUser] isFriend:_questionInfo.userId]) {
                 [attentionBtn setImageEdgeInsets:UIEdgeInsetsMake((40-17)/2.0, 0, (40-17)/2.0, 40-33)];
                 [attentionBtn setFrame:CGRectMake(self.frame.size.width - 43, 0, 40, 40)];
                 attentionBtn.hidden = NO;
@@ -248,7 +268,7 @@
         UILabel  *contentLabel = (UILabel *)[_wtContentView viewWithTag:203];
         if (contentLabel == nil) {
             contentLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            [contentLabel setBackgroundColor:[UIColor clearColor]];
+            [contentLabel setBackgroundColor:[UIColor whiteColor]];
             [contentLabel setTag:203];
             [contentLabel setTextColor:[UIColor grayColor]];
             [contentLabel setFont:[UIFont systemFontOfSize:14]];
@@ -277,29 +297,47 @@
             [playBtn setFrame:CGRectMake(left, top, 120, 120)];
             [playBtn setImageEdgeInsets:UIEdgeInsetsMake(30, 30, 30, 30)];
             
-            //取图片缓存
-            SDImageCache * imageCache = [SDImageCache sharedImageCache];
             
-            //从缓存取
-            if (imageUrlString && [imageUrlString length] > 0) {
-                UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
+            contentImage.hidden = YES;
+            __weak UIImageView *wContentImage = contentImage;
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                //取图片缓存
+                SDImageCache * imageCache = [SDImageCache sharedImageCache];
                 
-                if (cacheimage == nil) {
-                    cacheimage = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
+                UIImageView *sContentImage = wContentImage;
+                //从缓存取
+                if (imageUrlString && [imageUrlString length] > 0) {
+                    UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
                     
-                    __weak UIImageView *wContentImage = contentImage;
-                    [contentImage  sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                        if (image) {
-                            
-                            UIImageView *sContentImage = wContentImage;
-                            sContentImage.image = image;
-                            [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrlString];
-                        }
-                    }];
-                } else {
-                    contentImage.image = cacheimage;
+                    if (cacheimage == nil) {
+                        sContentImage.image = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
+                        sContentImage.hidden = NO;
+                    
+                        [sContentImage sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                            if (image) {
+                                
+//                                UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%dx%d",120,120]];
+//                                [[SDImageCache sharedImageCache] storeImage:imageScale forKey:imageUrlString];
+//                                dispatch_async(dispatch_get_main_queue(), ^{
+//                                    sContentImage.image = imageScale;
+//                                });
+
+                                [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrlString];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    sContentImage.image = image;
+                                });
+
+                            }
+                        }];
+                    } else {
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            sContentImage.hidden = NO;
+                            sContentImage.image = cacheimage;
+                        });
+                    }
                 }
-            }
+            });
             
             
             top += 120;
@@ -396,7 +434,7 @@
         UILabel  *locationLabel = (UILabel *)[_funcView viewWithTag:300];
         if (locationLabel == nil) {
             locationLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            [locationLabel setBackgroundColor:[UIColor clearColor]];
+            [locationLabel setBackgroundColor:[UIColor whiteColor]];
             [locationLabel setTag:300];
             [locationLabel setTextColor:[UIColor grayColor]];
             [locationLabel setFont:[UIFont systemFontOfSize:10]];
@@ -458,21 +496,23 @@
             [_funcView addSubview:rewardBtn];
         }
         
+        
+        
+        UILabel  *timeLabel = (UILabel *)[_funcView viewWithTag:307];
+        if (timeLabel == nil) {
+            timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+            [timeLabel setBackgroundColor:[UIColor whiteColor]];
+            [timeLabel setTag:307];
+            [timeLabel setTextColor:[UIColor grayColor]];
+            [timeLabel setFont:[UIFont systemFontOfSize:10]];
+            [_funcView addSubview:timeLabel];
+        }
+        
         LineView *line3 = (LineView *)[_funcView viewWithTag:306];
         if (line3 == nil) {
             line3 = [[LineView alloc] initWithFrame:CGRectZero];
             [line3 setTag:306];
             [_funcView addSubview:line3];
-        }
-        
-        UILabel  *timeLabel = (UILabel *)[_funcView viewWithTag:307];
-        if (timeLabel == nil) {
-            timeLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-            [timeLabel setBackgroundColor:[UIColor clearColor]];
-            [timeLabel setTag:307];
-            [timeLabel setTextColor:[UIColor grayColor]];
-            [timeLabel setFont:[UIFont systemFontOfSize:10]];
-            [_funcView addSubview:timeLabel];
         }
         
         UIButton *answerBtn = (UIButton*)[_funcView viewWithTag:QuestionInfoViewAction_Answer];
@@ -609,17 +649,12 @@
     }
     
     
-    if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:userInfo:)]) {
-        [_delegate questionInfoViewAction:tag questionInfo:_questionInfo userInfo:_userInfo];
+    if (_delegate && [_delegate respondsToSelector:@selector(questionInfoViewAction:questionInfo:)]) {
+        [_delegate questionInfoViewAction:tag questionInfo:_questionInfo];
     }
 }
 
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo isFoldText:(BOOL)isfold {
-    if (userInfo) {
-        _haveUserInfo = YES;
-    } else {
-        _haveUserInfo = NO;
-    }
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave isFoldText:(BOOL)isfold {
     
     _isFoldText = isfold;
     _userInfoViewHeight = 0;
@@ -628,34 +663,64 @@
     _spaceViewHeight = 0;
     
     self.questionInfo = questionInfo;
-    self.userInfo = userInfo;
     
     [self layoutSpaceView:self];
-    [self layoutUserView:self];
+    if (isHave) {
+        _haveUserInfo = YES;
+        [self layoutUserView:self];
+    } else {
+        _haveUserInfo = NO;
+    }
+    
     [self layoutWtContentView:self];
     [self layoutFuncView:self];
     
     self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, [self viewHeight]);
 }
 
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo {
-    [self setQuestionInfo:questionInfo userInfo:userInfo isFoldText:YES];
+- (CGFloat)viewHeightByQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave isFoldText:(BOOL)isfold {
+    
+    
+    _isFoldText = isfold;
+    _userInfoViewHeight = 0;
+    _wtContentViewHeight = 0;
+    _funcViewHeight = 0;
+    _spaceViewHeight = 0;
+    
+    [self layoutSpaceView:nil];
+    self.questionInfo = questionInfo;
+    if (isHave) {
+        _haveUserInfo = YES;
+        [self layoutUserView:nil];
+    } else {
+        _haveUserInfo = NO;
+    }
+    
+    
+    [self layoutWtContentView:nil];
+    [self layoutFuncView:nil];
+    
+    return [self viewHeight];
+}
+
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave {
+    [self setQuestionInfo:questionInfo haveUserView:isHave isFoldText:YES];
 }
 
 - (CGFloat)viewHeight {
     return _userInfoViewHeight + _wtContentViewHeight + _funcViewHeight + _spaceViewHeight;
 }
 
-- (void)layoutSubviews {
-    
-    [super layoutSubviews];
-    [self layoutSpaceView:nil];
-    [self layoutUserView:nil];
-    [self layoutWtContentView:nil];
-    [self layoutFuncView:nil];
-
-    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, [self viewHeight]);
-}
+//- (void)layoutSubviews {
+//    
+//    [super layoutSubviews];
+//    [self layoutSpaceView:nil];
+//    [self layoutUserView:nil];
+//    [self layoutWtContentView:nil];
+//    [self layoutFuncView:nil];
+//
+//    self.frame = CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, [self viewHeight]);
+//}
 
 
 @end

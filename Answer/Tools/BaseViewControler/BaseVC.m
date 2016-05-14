@@ -7,7 +7,7 @@
 //
 
 #import "BaseVC.h"
-
+#import "SDImageCache.h"
 #import <ShareSDK/ShareSDK.h>
 #import <ShareSDKUI/ShareSDK+SSUI.h>
 #import <ShareSDKUI/SSUIShareActionSheetStyle.h>
@@ -115,7 +115,6 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    
     UIView *rootView = [[UIView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
     [rootView setBackgroundColor:[UIColor colorWithHex:0xebeef0]];
     [self.view addSubview:rootView];
@@ -174,6 +173,9 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    
+    [[SDImageCache sharedImageCache] clearMemory];
+
 }
 
 - (void)setNavTitle:(NSString*)title {
@@ -191,7 +193,7 @@
 - (void)setNavTitle:(NSString*)title titleColor:(UIColor *)color {
     UILabel* label=[[UILabel alloc]initWithFrame:CGRectMake(0, 0, 100, 30)];
     label.backgroundColor=[UIColor clearColor];
-    label.font = [UIFont systemFontOfSize:17];
+    label.font = [UIFont systemFontOfSize:18];
     label.textColor = color;
     label.text = title;
     label.textAlignment=NSTextAlignmentCenter;

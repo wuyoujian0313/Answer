@@ -15,9 +15,12 @@
 
 @property (nonatomic, weak) id<QuestionInfoViewDelegate>  delegate;
 
-// 默认折叠文字
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo;
++ (QuestionInfoView *)sharedQuestionInfoView;
 
-- (void)setQuestionInfo:(QuestionInfo*)questionInfo userInfo:(UserInfo*)userInfo isFoldText:(BOOL)isfold;
+// 默认折叠文字
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave;
+- (void)setQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave isFoldText:(BOOL)isfold;
 - (CGFloat)viewHeight;
+
+- (CGFloat)viewHeightByQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave isFoldText:(BOOL)isfold;
 @end

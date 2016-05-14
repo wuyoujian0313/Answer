@@ -14,6 +14,7 @@
 #import "User.h"
 #import "QuestionDetailVC.h"
 #import "MyFriendsResult.h"
+#import "SDImageCache.h"
 
 @interface AnswerCircleVC ()<QuestionInfoViewDelegate,NetworkTaskDelegate,MJRefreshBaseViewDelegate>
 @property(nonatomic,strong)QuestionsView                *questionView;
@@ -125,6 +126,7 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+    [[SDImageCache sharedImageCache] clearMemory];
 }
 
 
@@ -160,6 +162,8 @@
         //
         if ([customInfo isEqualToString:@"GetFriends"]) {
             [_questionView beginRefreshing];
+        } else if([customInfo isEqualToString:@"GetTuWenList"]) {
+            [_questionView endRefresh];
         }
     }];
 }
@@ -181,7 +185,7 @@
 
 
 #pragma mark - QuestionInfoViewCellDelegate
-- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question userInfo:(UserInfo*)userInfo {
+- (void)questionInfoViewAction:(QuestionInfoViewAction)action questionInfo:(QuestionInfo*)question {
     
     switch (action) {
             
