@@ -124,45 +124,40 @@
         CGFloat top = 5;
         [photoImage setFrame:CGRectMake(left, top, 30, 30)];
         
-        photoImage.hidden = YES;
+        photoImage.image = nil;
         if (_questionInfo.userId) {
             if (_questionInfo.isAnonymous && [_questionInfo.isAnonymous isEqualToString:@"1"]) {
-                photoImage.hidden = NO;
                 photoImage.image = [UIImage imageNamed:@"defaultHeadImage"];
             } else {
                 //取图片缓存
                 __weak UIImageView *wPhotoImage = photoImage;
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                SDImageCache * imageCache = [SDImageCache sharedImageCache];
+                
+                //从缓存取
+                NSString *imageUrl = _questionInfo.headImage;
+                if (imageUrl && [imageUrl length] > 0) {
+                    UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
                     
-                    SDImageCache * imageCache = [SDImageCache sharedImageCache];
-                    UIImageView *sPhotoImage = wPhotoImage;
-                    //从缓存取
-                    NSString *imageUrl = _questionInfo.headImage;
-                    if (imageUrl && [imageUrl length] > 0) {
-                        UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
+                    if (cacheimage == nil) {
+                        photoImage.image = [UIImage imageNamed:@"defaultHeadImage"];
                         
-                        if (cacheimage == nil) {
-                            sPhotoImage.hidden = NO;
-                            sPhotoImage.image = [UIImage imageNamed:@"defaultHeadImage"];
-
-                            [photoImage  sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                                if (image) {
-                    
-                                    [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
-                                    dispatch_async(dispatch_get_main_queue(), ^{
-                                        sPhotoImage.image = image;
-                                    });
-                                }
-                            }];
-                        } else {
-                           
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                sPhotoImage.hidden = NO;
-                                sPhotoImage.image = cacheimage;
-                            });
-                        }
+                        [photoImage sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                            if (image) {
+                                UIImageView *sPhotoImage = wPhotoImage;
+                                [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+                                dispatch_async(dispatch_get_main_queue(), ^{
+                                    sPhotoImage.image = image;
+                                });
+                            }
+                        }];
+                    } else {
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            UIImageView *sPhotoImage = wPhotoImage;
+                            sPhotoImage.image = cacheimage;
+                        });
                     }
-                });
+                }
             }
         }
         
@@ -298,46 +293,37 @@
             [playBtn setImageEdgeInsets:UIEdgeInsetsMake(30, 30, 30, 30)];
             
             
-            contentImage.hidden = YES;
+            contentImage.image = nil;
             __weak UIImageView *wContentImage = contentImage;
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                //取图片缓存
-                SDImageCache * imageCache = [SDImageCache sharedImageCache];
+            //取图片缓存
+            SDImageCache * imageCache = [SDImageCache sharedImageCache];
+            
+            
+            //从缓存取
+            if (imageUrlString && [imageUrlString length] > 0) {
+                UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
                 
-                UIImageView *sContentImage = wContentImage;
-                //从缓存取
-                if (imageUrlString && [imageUrlString length] > 0) {
-                    UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
+                if (cacheimage == nil) {
+                    contentImage.image = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
+                    [contentImage sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+                        if (image) {
+                            
+                            UIImageView *sContentImage = wContentImage;
+                            [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrlString];
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                sContentImage.image = image;
+                            });
+                            
+                        }
+                    }];
+                } else {
                     
-                    if (cacheimage == nil) {
-                        sContentImage.image = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
-                        sContentImage.hidden = NO;
-                    
-                        [sContentImage sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                            if (image) {
-                                
-//                                UIImage *imageScale = [image resizedImageByMagick:[NSString stringWithFormat:@"%dx%d",120,120]];
-//                                [[SDImageCache sharedImageCache] storeImage:imageScale forKey:imageUrlString];
-//                                dispatch_async(dispatch_get_main_queue(), ^{
-//                                    sContentImage.image = imageScale;
-//                                });
-
-                                [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrlString];
-                                dispatch_async(dispatch_get_main_queue(), ^{
-                                    sContentImage.image = image;
-                                });
-
-                            }
-                        }];
-                    } else {
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            sContentImage.hidden = NO;
-                            sContentImage.image = cacheimage;
-                        });
-                    }
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        UIImageView *sContentImage = wContentImage;
+                        sContentImage.image = cacheimage;
+                    });
                 }
-            });
+            }
             
             
             top += 120;

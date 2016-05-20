@@ -33,28 +33,28 @@
     [_audioPlayer stop];
 }
 
-- (void)playVideo {
+- (void)playVideo:(NSURL*)videoURL {
 
     __weak QuestionBaseVC *weakSelf = self;
     dispatch_async(dispatch_get_main_queue(), ^{
         QuestionBaseVC *sself = weakSelf;
         
-        if (sself.videoURL != nil) {
+        if (videoURL != nil) {
             
             FileCache *sharedCache = [FileCache sharedFileCache];
-            NSString *cachePath = [sharedCache diskCachePathForKey:[sself.videoURL absoluteString]];
+            NSString *cachePath = [sharedCache diskCachePathForKey:[videoURL absoluteString]];
             cachePath = [cachePath stringByAppendingPathExtension:@"mp4"];
             
             NSData *data = [sharedCache dataFromCacheForPath:cachePath];
             if (data == nil) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    NSData *ndata = [NSData dataWithContentsOfURL:sself.videoURL];
+                    NSData *ndata = [NSData dataWithContentsOfURL:videoURL];
                     [sharedCache writeData:ndata path:cachePath];
                 });
                 
                 
-                sself.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:self.videoURL];
+                sself.moviePlayer = [[MPMoviePlayerViewController alloc] initWithContentURL:videoURL];
                 
                 [[NSNotificationCenter defaultCenter] addObserver:sself selector:@selector(movieFinishedCallback:) name:MPMoviePlayerPlaybackDidFinishNotification object:sself.moviePlayer.moviePlayer];
                 [sself.moviePlayer.moviePlayer setControlStyle: MPMovieControlStyleFullscreen];
@@ -82,7 +82,7 @@
     _moviePlayer = nil;
 }
 
-- (void)playReordFile {
+- (void)playReordFile:(NSURL*)audioURL {
     
     [_audioPlayer stop];
 #if TARGET_IPHONE_SIMULATOR
@@ -96,11 +96,11 @@
         QuestionBaseVC *sself = weakSelf;
         
         FileCache *sharedCache = [FileCache sharedFileCache];
-        NSData *data = [sharedCache dataFromCacheForKey:[sself.audioURL absoluteString]];
+        NSData *data = [sharedCache dataFromCacheForKey:[audioURL absoluteString]];
         if (data == nil) {
             
-            data = [NSData dataWithContentsOfURL:sself.audioURL];
-            [sharedCache writeData:data forKey:[sself.audioURL absoluteString]];
+            data = [NSData dataWithContentsOfURL:audioURL];
+            [sharedCache writeData:data forKey:[audioURL absoluteString]];
         }
         
         sself.audioPlayer = [[AVAudioPlayer alloc] initWithData:data error:&playerError];

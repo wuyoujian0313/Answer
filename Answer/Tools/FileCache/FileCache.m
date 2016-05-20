@@ -20,9 +20,9 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
     NSFileManager *_fileManager;
 }
 
-@property(strong, nonatomic) NSCache            *memoryCache;
-@property(strong, nonatomic) dispatch_queue_t   rwQueue;
-@property(copy, nonatomic) NSString             *diskCachePath;
+@property(nonatomic, strong) NSCache            *memoryCache;
+@property(nonatomic, strong) dispatch_queue_t   rwQueue;
+@property(nonatomic, copy) NSString             *diskCachePath;
 
 @end
 
@@ -112,7 +112,7 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
 }
 
 - (void)writeData:(NSData *)data path:(NSString *)path {
-    if (!path||!path) {
+    if (!data||!path) {
         return;
     }
     
@@ -125,6 +125,7 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
         }
         [_fileManager createFileAtPath:path contents:data attributes:nil];
     });
+    
 }
 
 - (NSData *)dataFromCacheForKey:(NSString *)key {

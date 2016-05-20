@@ -114,7 +114,9 @@
             
             [self removeFromSuperview];
             
-            _finishBlock();
+            if (_finishBlock) {
+                _finishBlock();
+            }
         }];
         
     });

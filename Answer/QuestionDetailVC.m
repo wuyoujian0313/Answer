@@ -34,10 +34,8 @@
 @property(nonatomic,copy)NSString                       *commentString;
 @property(nonatomic,strong)UIButton                     *sendBtn;
 @property(nonatomic,strong)NSMutableArray               *answerList;
-@property(nonatomic,strong)NSArray                      *userList;
 
 @property(nonatomic, strong) QuestionInfo              *questionInfo;
-@property(nonatomic, strong) UserInfo                  *userInfo;
 @property(nonatomic, copy) NSString *tWuserId;
 @property(nonatomic, assign) NSInteger bestAnswerIndex;
 @end
@@ -54,13 +52,6 @@
 }
 
 - (void)requestSetBestAnswer:(NSString*)ansId ansUserId:(NSString*)userId {
-    // API_SetBestAnswer
-//    uid     被回答的图问的Id
-//    ansId   答案的id
-//    userId  回答者的id
-//    tWuserId提出图问者的id
-//    moneycount  打赏的金额
-    
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           [User sharedUser].user.uId,@"tWuserId",
                           _tuWenId,@"uId",
@@ -199,16 +190,13 @@
     
     if ([customInfo isEqualToString:@"getTuWenDetail"]) {
         QuestionDetailResult * detail = (QuestionDetailResult*)result;
-        self.userInfo = detail.user;
         self.questionInfo = detail.tuwen;
         self.tWuserId = _questionInfo.userId;
         self.answerList = [[NSMutableArray alloc] initWithArray:detail.answers];
-        self.userList = detail.userList;
-        
         [self setTableViewHeaderView];
         [_detailTableView reloadData];
     } else if ([customInfo isEqualToString:@"Answer"]) {
-        //AnswerResult * anResult = (AnswerResult*)result;
+
         [self requestQuestionDetail];
         _commentTextView.text = nil;
         _commentString = nil;
@@ -439,46 +427,37 @@
     }
     
 
-    NSString *userId = answerInfo.userId;
-    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"uId==%@",userId];
-    // 理论上只有一个
-    UserInfo *answer = nil;
-    NSArray *users = [_userList filteredArrayUsingPredicate:predicate];
-    if (users && [users count]) {
-        answer = [users objectAtIndex:0];
+    //从缓存取
+    //取图片缓存
+    SDImageCache * imageCache = [SDImageCache sharedImageCache];
+    NSString *imageUrl  = answerInfo.headImage;
+    UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
+    
+    if (default_image == nil) {
+        default_image = [UIImage imageNamed:@"defaultHeadImage"];
         
-        //从缓存取
-        //取图片缓存
-        SDImageCache * imageCache = [SDImageCache sharedImageCache];
-        NSString *imageUrl  = answer.headImage;
-        UIImage *default_image = [imageCache imageFromDiskCacheForKey:imageUrl];
-        
-        if (default_image == nil) {
-            default_image = [UIImage imageNamed:@"defaultHeadImage"];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:default_image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
-            [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:default_image completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                
-                if (image) {
-                    cell.imageView.image = image;
-                    [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
-                }
-            }];
-        } else {
-            cell.imageView.image = default_image;
-        }
-        
-        NSString *content = answerInfo.content;
-        cell.textLabel.text = content;
-        
-        CGSize size = [content sizeWithFontCompatible:cell.textLabel.font constrainedToSize:CGSizeMake(tableView.frame.size.width - 60, CGFLOAT_MAX) lineBreakMode:cell.textLabel.lineBreakMode];
-        LineView *line = (LineView*)[cell.contentView viewWithTag:100];
-        CGFloat height = size.height + 20;
-        if (height - 50 < 0.0) {
-            height = 50;
-        }
-        
-        [line setFrame:CGRectMake(0, height - kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
+            if (image) {
+                cell.imageView.image = image;
+                [[SDImageCache sharedImageCache] storeImage:image forKey:imageUrl];
+            }
+        }];
+    } else {
+        cell.imageView.image = default_image;
     }
+    
+    NSString *content = answerInfo.content;
+    cell.textLabel.text = content;
+    
+    CGSize size = [content sizeWithFontCompatible:cell.textLabel.font constrainedToSize:CGSizeMake(tableView.frame.size.width - 60, CGFLOAT_MAX) lineBreakMode:cell.textLabel.lineBreakMode];
+    LineView *line = (LineView*)[cell.contentView viewWithTag:100];
+    CGFloat height = size.height + 20;
+    if (height - 50 < 0.0) {
+        height = 50;
+    }
+    
+    [line setFrame:CGRectMake(0, height - kLineHeight1px, tableView.frame.size.width, kLineHeight1px)];
     
     return cell;
 }
@@ -529,13 +508,11 @@
             break;
         }
         case QuestionInfoViewAction_PlayAudio:
-            self.audioURL = [NSURL URLWithString:question.mediaURL];
-            [self playReordFile];
+            [self playReordFile:[NSURL URLWithString:question.mediaURL]];
             
             break;
         case QuestionInfoViewAction_PlayVideo:
-            self.videoURL = [NSURL URLWithString:question.mediaURL];
-            [self playVideo];
+            [self playVideo:[NSURL URLWithString:question.mediaURL]];
             
             break;
         case QuestionInfoViewAction_Answer:

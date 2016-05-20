@@ -123,8 +123,7 @@
     NSString* filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
     filePath = [filePath stringByAppendingPathExtension:@"m4a"];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-    self.audioURL = fileURL;
-    [self playReordFile];
+    [self playReordFile:fileURL];
 }
 
 - (void)playVideo:(UIButton*)sender {
@@ -132,8 +131,7 @@
     NSString *videoPath = [[FileCache sharedFileCache] diskCachePathForKey:_videoKeyString];
     videoPath = [videoPath stringByAppendingPathExtension:@"mp4"];
     NSURL *fileURL = [NSURL fileURLWithPath:videoPath];
-    self.videoURL = fileURL;
-    [self playVideo];
+    [self playVideo:fileURL];
 }
 
 - (void)tapPhotoAction:(UITapGestureRecognizer *)sender {

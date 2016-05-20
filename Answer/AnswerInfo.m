@@ -10,4 +10,8 @@
 
 @implementation AnswerInfo
 
+- (NSString *)headImage {
+    return [NSString stringWithFormat:@"%@/%@",kNetworkServerIP,_headImage];
+}
+
 @end

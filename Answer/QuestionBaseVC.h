@@ -15,13 +15,11 @@
 @interface QuestionBaseVC : BaseVC
 
 @property(nonatomic,strong)AVAudioPlayer                *audioPlayer;
-@property(nonatomic,strong)NSURL                        *audioURL;
-@property(nonatomic,strong)NSURL                        *videoURL;
 @property(nonatomic,strong)MPMoviePlayerViewController  *moviePlayer;
 
 
-- (void)playVideo;
-- (void)playReordFile;
+- (void)playVideo:(NSURL*)videoURL;
+- (void)playReordFile:(NSURL*)audioURL;
 
 - (void)stopPlay;
 

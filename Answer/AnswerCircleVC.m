@@ -194,13 +194,11 @@
             break;
         }
         case QuestionInfoViewAction_PlayAudio:
-            self.audioURL = [NSURL URLWithString:question.mediaURL];
-            [self playReordFile];
+            [self playReordFile:[NSURL URLWithString:question.mediaURL]];
             
             break;
         case QuestionInfoViewAction_PlayVideo:
-            self.videoURL = [NSURL URLWithString:question.mediaURL];
-            [self playVideo];
+            [self playVideo:[NSURL URLWithString:question.mediaURL]];
             
             break;
         case QuestionInfoViewAction_Answer:

@@ -18,6 +18,10 @@
         self.uId         = [coder decodeObjectForKey:@"uId"];
         self.userId      = [coder decodeObjectForKey:@"userId"];
         
+        self.headImage      = [coder decodeObjectForKey:@"headImage"];
+        self.phoneNumber      = [coder decodeObjectForKey:@"phoneNumber"];
+        self.nickName      = [coder decodeObjectForKey:@"nickName"];
+        
         self.mediaType        = [coder decodeObjectForKey:@"mediaType"];
         self.mediaURL         = [coder decodeObjectForKey:@"mediaURL"];
         self.thumbnail      = [coder decodeObjectForKey:@"thumbnail"];
@@ -45,6 +49,9 @@
     [coder encodeObject:_uuid forKey:@"uuid"];
     [coder encodeObject:_uId forKey:@"uId"];
     [coder encodeObject:_userId forKey:@"userId"];
+    [coder encodeObject:_headImage forKey:@"headImage"];
+    [coder encodeObject:_phoneNumber forKey:@"phoneNumber"];
+    [coder encodeObject:_nickName forKey:@"nickName"];
     
     [coder encodeObject:_mediaType forKey:@"mediaType"];
     [coder encodeObject:_mediaURL forKey:@"mediaURL"];

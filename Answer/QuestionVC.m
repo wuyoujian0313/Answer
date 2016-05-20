@@ -255,8 +255,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
         NSString* filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
         filePath = [filePath stringByAppendingPathExtension:@"m4a"];
         NSURL *fileURL = [NSURL fileURLWithPath:filePath];
-        self.audioURL = fileURL;
-        [self playReordFile];
+        [self playReordFile:fileURL];
         
     } else if (_status == RecordStatus_playing) {
         [sender setImage:[UIImage imageNamed:@"play"] forState:UIControlStateNormal];

@@ -17,5 +17,8 @@
 @property (nonatomic, copy) NSString            *isBestAnswer;
 @property (nonatomic, copy) NSString            *content;
 @property (nonatomic, copy) NSString            *updateDate;
+@property (nonatomic, copy) NSString        *nickName;
+@property (nonatomic, copy) NSString        *phoneNumber;
+@property (nonatomic, copy) NSString        *headImage;
 
 @end
