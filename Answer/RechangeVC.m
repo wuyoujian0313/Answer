@@ -24,6 +24,7 @@
 @property (nonatomic, strong) UINavigationBar               *navBar;
 @property (nonatomic, strong) UITextField                   *rechangeTextField;
 @property (nonatomic, assign) NSInteger                     selIndex;
+@property (nonatomic, strong) UIButton                      *rechangeBtn;
 
 @end
 
@@ -85,11 +86,14 @@
     [_rechangeTableView setTableHeaderView:view];
 }
 
+
 -(void)setTableViewFooterView:(NSInteger)height {
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _rechangeTableView.frame.size.width, height)];
     view.backgroundColor = [UIColor clearColor];
     
     UIButton *rechangeBtn = [UIButton buttonWithType:UIButtonTypeCustom];
+    self.rechangeBtn = rechangeBtn;
+    _rechangeBtn.enabled = NO;
     [rechangeBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0x56b5f5]] forState:UIControlStateNormal];
     [rechangeBtn.layer setCornerRadius:5.0];
     [rechangeBtn setTag:101];
@@ -178,91 +182,6 @@
     [_rechangeTextField resignFirstResponder];
 }
 
-
-- (void)weixinPay {
-    
-    
-
-    
-    
-    PayReq *request = [[PayReq alloc] init];
-    request.partnerId = @"10000100";
-    request.prepayId = @"1101000000140415649af9fc314aa427";
-    request.package = @"Sign=WXPay";
-    request.nonceStr = @"a462b76e7436e98e0ed6e13c64b4fd1c";
-    request.timeStamp = [NSDate timeIntervalSinceReferenceDate];
-    request.sign = @"582282D72DD2B03AD892830965F428CB16E7A256";
-    [WXApi sendReq:request];
-}
-
-- (void)alipay {
-    
-    /*============================================================================*/
-    /*=======================需要填写商户app申请的===================================*/
-    /*============================================================================*/
-    NSString *partner = @"";
-    NSString *seller = @"";
-    NSString *privateKey = @"";
-    /*============================================================================*/
-    /*============================================================================*/
-    /*============================================================================*/
-    
-    //partner和seller获取失败,提示
-    if ([partner length] == 0 ||
-        [seller length] == 0 ||
-        [privateKey length] == 0) {
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"提示"
-                                                        message:@"缺少partner或者seller或者私钥。"
-                                                       delegate:self
-                                              cancelButtonTitle:@"确定"
-                                              otherButtonTitles:nil];
-        [alert show];
-        return;
-    }
-    
-    /*
-     *生成订单信息及签名
-     */
-    //将商品信息赋予AlixPayOrder的成员变量
-    Order *order = [[Order alloc] init];
-    order.partner = partner;
-    order.seller = seller;
-//    order.tradeNO = [self generateTradeNO]; //订单ID（由商家自行制定）
-//    order.productName = product.subject; //商品标题
-//    order.productDescription = product.body; //商品描述
-//    order.amount = [NSString stringWithFormat:@"%.2f",product.price]; //商品价格
-//    order.notifyURL =  @"http://www.xxx.com"; //回调URL
-    
-    order.service = @"mobile.securitypay.pay";
-    order.paymentType = @"1";
-    order.inputCharset = @"utf-8";
-    order.itBPay = @"30m";
-    order.showUrl = @"m.alipay.com";
-    
-    //应用注册scheme,在AlixPayDemo-Info.plist定义URL types
-    NSString *appScheme = @"alisdkdemo";
-    
-    //将商品信息拼接成字符串
-    NSString *orderSpec = [order description];
-    NSLog(@"orderSpec = %@",orderSpec);
-    
-    //获取私钥并将商户信息签名,外部商户可以根据情况存放私钥和签名,只需要遵循RSA签名规范,并将签名字符串base64编码和UrlEncode
-    id<DataSigner> signer = CreateRSADataSigner(privateKey);
-    NSString *signedString = [signer signString:orderSpec];
-    
-    //将签名成功字符串格式化为订单字符串,请严格按照该格式
-    NSString *orderString = nil;
-    if (signedString != nil) {
-        orderString = [NSString stringWithFormat:@"%@&sign=\"%@\"&sign_type=\"%@\"",
-                       orderSpec, signedString, @"RSA"];
-        
-        [[AlipaySDK defaultService] payOrder:orderString fromScheme:appScheme callback:^(NSDictionary *resultDic) {
-            NSLog(@"reslut = %@",resultDic);
-        }];
-    }
-}
-
 - (void)rechangeAction:(UIButton*)sender {
     
 //    appid                 "wx7a296d05150143e5";
@@ -274,13 +193,37 @@
 //    body                 //商品描述
 //    spbill_create_ip       //订单生成的机器 IP
 //    fee_type=CNY        //货币类型
+    [_rechangeTextField resignFirstResponder];
+    NSInteger value = [_rechangeTextField.text integerValue];
+    if (value == 0) {
+        
+        _rechangeTextField.text = nil;
+        [_rechangeTextField becomeFirstResponder];
+        
+        [FadePromptView showPromptStatus:@"请输入大于0的充值金额" duration:1.5 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            //
+            
+        }];
+        
+        return;
+    } else if (value > 100) {
+        _rechangeTextField.text = nil;
+        [_rechangeTextField becomeFirstResponder];
+        
+        [FadePromptView showPromptStatus:@"一次充值不能超过100元" duration:1.5 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+            //
+            
+        }];
+        
+        return;
+    }
     
     NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
                           [User sharedUser].user.uId,@"userId",
                           WeiXinSDKAppId,@"appid",
                           WeiXinSDKAppSecret,@"appsecret",
                           WeiXinBusinessNo,@"partner",
-                          @"1",@"money",
+                          [NSString stringWithFormat:@"%d",value*100],@"money",
                           @"WEB",@"device_info",
                           @"充值",@"body",
                           [DeviceInfo getIPAddress:YES],@"spbill_create_ip",
@@ -432,23 +375,46 @@
 }
 
 #pragma mark - UITextFieldDelegate
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
     
-    NSMutableString *textString = [NSMutableString stringWithString:textField.text];
-    [textString replaceCharactersInRange:range withString:string];
-    
-    if ([textString length] > 3) {
-        
-        [FadePromptView showPromptStatus:@"最大金额100元" duration:1.0 finishBlock:^{
-            //
-            [textField becomeFirstResponder];
-        }];
-        
-        return NO;
+    if (textField == _rechangeTextField) {
+        _rechangeBtn.enabled = NO;
+        [_rechangeBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0xe8e8e8]] forState:UIControlStateNormal];
     }
     
     return YES;
 }
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    
+    if (textField == _rechangeTextField) {
+        NSMutableString *textString = [NSMutableString stringWithString:textField.text];
+        [textString replaceCharactersInRange:range withString:string];
+        if ([textString length] > 0) {
+            _rechangeBtn.enabled = YES;
+            
+            [_rechangeBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0x56b5f5]] forState:UIControlStateNormal];
+        } else {
+            _rechangeBtn.enabled = NO;
+            [_rechangeBtn setBackgroundImage:[UIImage imageFromColor:[UIColor colorWithHex:0xe8e8e8]] forState:UIControlStateNormal];
+        }
+        
+        if ([textString integerValue] > 100) {
+            
+            [FadePromptView showPromptStatus:@"最大金额100元" duration:1.0 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
+                //
+                [textField becomeFirstResponder];
+            }];
+            
+            return NO;
+        }
+        
+        return YES;
+    }
+    
+    return YES;
+}
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {

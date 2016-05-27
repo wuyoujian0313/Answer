@@ -25,12 +25,28 @@
     if ([resp isKindOfClass:[PayResp class]]){
         PayResp*response=(PayResp*)resp;
         switch(response.errCode){
+                
+//                WXSuccess           = 0,    /**< 成功    */
+//                WXErrCodeCommon     = -1,   /**< 普通错误类型    */
+//                WXErrCodeUserCancel = -2,   /**< 用户点击取消并返回    */
+//                WXErrCodeSentFail   = -3,   /**< 发送失败    */
+//                WXErrCodeAuthDeny   = -4,   /**< 授权失败    */
+//                WXErrCodeUnsupport  = -5,   /**< 微信不支持    */
             case WXSuccess:
                 //服务器端查询支付通知或查询API返回的结果再提示成功
-                NSLog(@"支付成功");
+                [FadePromptView showPromptStatus:@"通过微信充值成功！" duration:1.5 finishBlock:^{
+                    //
+                }];
+                break;
+            case WXErrCodeUserCancel:
+                [FadePromptView showPromptStatus:@"取消充值！" duration:1.5 finishBlock:^{
+                    //
+                }];
                 break;
             default:
-                NSLog(@"支付失败，retcode=%d",resp.errCode);
+                [FadePromptView showPromptStatus:@"充值失败！" duration:1.5 finishBlock:^{
+                    //
+                }];
                 break;
         }
     }
@@ -121,15 +137,27 @@
 }
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
-    return  [WXApi handleOpenURL:url delegate:self];
+    if ([[url absoluteString] hasPrefix:WeiXinSDKAppId]) {
+        return  [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    return YES;
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
-    return [WXApi handleOpenURL:url delegate:self];
+    if ([[url absoluteString] hasPrefix:WeiXinSDKAppId]) {
+        return  [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    return YES;
 }
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
-    return  [WXApi handleOpenURL:url delegate:self];
+    if ([[url absoluteString] hasPrefix:WeiXinSDKAppId]) {
+        return  [WXApi handleOpenURL:url delegate:self];
+    }
+    
+    return YES;
 }
 
 @end

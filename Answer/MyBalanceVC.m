@@ -10,11 +10,12 @@
 #import "User.h"
 #import "ToCashVC.h"
 #import "RechangeVC.h"
+#import "UserAccountResult.h"
+#import "NetworkTask.h"
 
-@interface MyBalanceVC ()<UITableViewDataSource,UITableViewDelegate>
-@property (nonatomic, strong) UITableView                   *balanceTableView;
-
-
+@interface MyBalanceVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
+@property (nonatomic, strong) UITableView   *balanceTableView;
+@property (nonatomic, strong) UILabel       *balanceValue;
 @end
 
 @implementation MyBalanceVC
@@ -24,6 +25,24 @@
     // Do any additional setup after loading the view.
     [self setNavTitle:@"我的余额"];
     [self layoutBalanceTableView];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self requestBalanceData];
+}
+
+- (void)requestBalanceData {
+    
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"userId",
+                          nil];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetAccount
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[UserAccountResult alloc] init]
+                                           customInfo:@"Balance"];
 }
 
 
@@ -40,6 +59,26 @@
     
     [self setTableViewHeaderView:140];
     [self setTableViewFooterView:0];
+}
+
+- (void)setBalanceValueToShow {
+    
+    NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont systemFontOfSize:30], NSForegroundColorAttributeName:[UIColor colorWithHex:0xff8915] };
+    
+    NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor colorWithHex:0xff8915] };
+    
+    NSString *str1 = [User sharedUser].account.balance;
+    if (str1 == nil || [str1 length] == 0) {
+        str1 = @"0.00";
+    }
+    NSString *str2 = @"元";
+    NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
+    NSRange range1 = [str rangeOfString:str1];
+    NSRange range2 = [str rangeOfString:str2];
+    NSMutableAttributedString *att1 = [[NSMutableAttributedString alloc] initWithString:str];
+    [att1 addAttributes:attributes1 range:range1];
+    [att1 addAttributes:attributes2 range:range2];
+    _balanceValue.attributedText = att1;
 }
 
 -(void)setTableViewHeaderView:(NSInteger)height {
@@ -61,24 +100,10 @@
     [whiteView addSubview:labelValue];
     
     UILabel *balanceValue = [[UILabel alloc] initWithFrame:CGRectMake(6, 30, 300, 30)];
+    self.balanceValue = balanceValue;
     balanceValue.backgroundColor = [UIColor whiteColor];
     
-    NSDictionary *attributes1 = @{ NSFontAttributeName:[UIFont systemFontOfSize:30], NSForegroundColorAttributeName:[UIColor colorWithHex:0xff8915] };
-    
-    NSDictionary *attributes2 = @{ NSFontAttributeName:[UIFont systemFontOfSize:14], NSForegroundColorAttributeName:[UIColor colorWithHex:0xff8915] };
-    
-    NSString *str1 = [User sharedUser].account.balance;
-    if (str1 == nil || [str1 length] == 0) {
-        str1 = @"0.00";
-    }
-    NSString *str2 = @"元";
-    NSString *str = [NSString stringWithFormat:@"%@%@",str1,str2];
-    NSRange range1 = [str rangeOfString:str1];
-    NSRange range2 = [str rangeOfString:str2];
-    NSMutableAttributedString *att1 = [[NSMutableAttributedString alloc] initWithString:str];
-    [att1 addAttributes:attributes1 range:range1];
-    [att1 addAttributes:attributes2 range:range2];
-    balanceValue.attributedText = att1;
+    [self setBalanceValueToShow];
     [whiteView addSubview:balanceValue];
     
     CGFloat btnWidth = (whiteView.frame.size.width - 18)/2.0;
@@ -145,5 +170,26 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 0;
 }
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"Balance"] && result) {
+        UserAccountResult *account = (UserAccountResult*)result;
+        [[User sharedUser].account setBalance:account.balance];
+        [[User sharedUser] saveToUserDefault];
+        
+        [self setBalanceValueToShow];
+    }
+}
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:@"同步账户信息失败" duration:1.0 finishBlock:^{
+        //
+    }];
+}
+
 
 @end

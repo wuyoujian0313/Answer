@@ -14,4 +14,5 @@
 @property (nonatomic, copy) NSString     *balance;
 @property (nonatomic, copy) NSString     *receivePacket;
 @property (nonatomic, copy) NSString     *sendPacket;
+@property (nonatomic, copy) NSString     *freeze;
 @end

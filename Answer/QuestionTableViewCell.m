@@ -30,15 +30,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //
-        __weak QuestionTableViewCell *wSelf = self;
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-            QuestionTableViewCell *sSelf = wSelf;
-            
-            QuestionInfoView *infoView = [[QuestionInfoView alloc] initWithFrame:CGRectMake(0, 0, [DeviceInfo screenWidth], 0)];
-            sSelf.infoView = infoView;
-            [sSelf addSubview:infoView];
-        });
+        QuestionInfoView *infoView = [[QuestionInfoView alloc] initWithFrame:CGRectMake(0, 0, [DeviceInfo screenWidth], 0)];
+        
+        self.infoView = infoView;
+        [self addSubview:infoView];
     }
     
     return self;
