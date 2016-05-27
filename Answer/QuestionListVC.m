@@ -173,7 +173,7 @@
         haveUserView = NO;
     }
     
-    self.questionView = [[QuestionsView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, screenWidth, screenHeight - navigationBarHeight) haveUserView:haveUserView delegate:self];
+    self.questionView = [[QuestionsView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight],[DeviceInfo screenWidth], [DeviceInfo screenHeight] - [DeviceInfo navigationBarHeight]) haveUserView:haveUserView delegate:self];
     _questionView.refreshDelegate = self;
     
     [self.view addSubview:_questionView];

@@ -121,7 +121,7 @@
 }
 
 - (void)layoutNavBarView {
-    self.navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, screenHeight, self.view.frame.size.width, 44)];
+    self.navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, [DeviceInfo screenHeight], self.view.frame.size.width, 44)];
     [_navBar setBackgroundColor:[UIColor whiteColor]];
     [_navBar setHidden:YES];
     
@@ -143,7 +143,7 @@
 
 - (void)layoutPanelView {
 
-    UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(20, 160, screenWidth - 40, 2*70 + 20 + 60 + 40)];
+    UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(20, 160, [DeviceInfo screenWidth] - 40, 2*70 + 20 + 60 + 40)];
     [panelView setBackgroundColor:[UIColor clearColor]];
     [self.view addSubview:panelView];
     
@@ -161,7 +161,7 @@
     [panelView addSubview:textField];
     
     
-    CGFloat buttonWidth = (screenWidth - 40 - 20)/3.0;
+    CGFloat buttonWidth = ([DeviceInfo screenWidth] - 40 - 20)/3.0;
     CGFloat left = 0;
     CGFloat top = 40;
     for (int i = 0; i < 6; i ++ ) {

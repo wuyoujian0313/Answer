@@ -53,7 +53,7 @@
     flowLayout.footerReferenceSize = CGSizeZero;
     
     
-    self.mainMenuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight) collectionViewLayout:flowLayout];
+    self.mainMenuView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight]) collectionViewLayout:flowLayout];
     
     [self.mainMenuView registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"headerView"];
     
@@ -123,7 +123,7 @@
 
 //设置元素大小
 -(CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake(screenWidth/3.0,100);
+    return CGSizeMake([DeviceInfo screenWidth]/3.0,100);
 }
 
 

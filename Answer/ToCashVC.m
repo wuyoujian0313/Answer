@@ -43,7 +43,7 @@
 }
 
 - (void)layoutNavBarView {
-    self.navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, screenHeight, self.view.frame.size.width, 44)];
+    self.navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, [DeviceInfo screenHeight], self.view.frame.size.width, 44)];
     [_navBar setBackgroundColor:[UIColor whiteColor]];
     [_navBar setHidden:YES];
     
@@ -60,7 +60,7 @@
 
 - (void)layoutBalanceTableView {
     
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight) style:UITableViewStyleGrouped];
+    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight]) style:UITableViewStyleGrouped];
     [self setBalanceTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -157,7 +157,7 @@
     _navBar.frame = containerFrame;
     
     
-    [_balanceTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - keyboardBounds.size.height - 44 - navigationBarHeight)];
+    [_balanceTableView setFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - keyboardBounds.size.height - 44 - [DeviceInfo navigationBarHeight])];
     
     [_balanceTableView scrollToRowAtIndexPath:_currentFieldIndex atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     
@@ -181,7 +181,7 @@
     
     _navBar.hidden = YES;
     
-    [_balanceTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
+    [_balanceTableView setFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight])];
     
     [UIView commitAnimations];
 }

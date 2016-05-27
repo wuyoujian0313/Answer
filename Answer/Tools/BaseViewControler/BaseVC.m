@@ -115,7 +115,7 @@
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
-    UIView *rootView = [[UIView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
+    UIView *rootView = [[UIView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight])];
     [rootView setBackgroundColor:[UIColor colorWithHex:0xebeef0]];
     [self.view addSubview:rootView];
     

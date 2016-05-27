@@ -93,7 +93,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
 
 - (void)layoutRegisterTableView {
     
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height- navigationBarHeight - 35) style:UITableViewStylePlain];
+    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height- [DeviceInfo navigationBarHeight] - 35) style:UITableViewStylePlain];
     [self setRegisterTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -186,7 +186,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
         BOOL isPhone = [_phoneTextField.text isValidateMobile];
         if (!isPhone) {
             
-            [FadePromptView showPromptStatus:@"输入的不是手机号码" duration:0.6 positionY:screenHeight- 300 finishBlock:^{
+            [FadePromptView showPromptStatus:@"输入的不是手机号码" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
                 //
             }];
             [_phoneTextField becomeFirstResponder];
@@ -194,7 +194,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info);
         }
         
         if ([_pwdTextField.text length] < 6 || [_pwdTextField.text length] > 18) {
-            [FadePromptView showPromptStatus:@"密码长度限制在6-18位" duration:0.6 positionY:screenHeight- 300 finishBlock:^{
+            [FadePromptView showPromptStatus:@"密码长度限制在6-18位" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
                 //
             }];
         
@@ -273,7 +273,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
     
     BOOL isPhoneNumber = [codeString isValidateMobile];
     if (!isPhoneNumber) {
-        [FadePromptView showPromptStatus:@"输入的不是手机号码" duration:0.6 positionY:screenHeight- 300 finishBlock:^{
+        [FadePromptView showPromptStatus:@"输入的不是手机号码" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
             //
         }];
         [_phoneTextField becomeFirstResponder];
@@ -297,7 +297,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
 -(void)keyboardWillHide:(NSNotification *)note{
     [super keyboardWillHide:note];
     
-    [_registerTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
+    [_registerTableView setFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight])];
 }
 
 -(void)keyboardDidShow:(NSNotification *)note{
@@ -308,7 +308,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
     
     keyboardBounds = [self.view convertRect:keyboardBounds toView:nil];
     
-    [_registerTableView setFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - keyboardBounds.size.height - navigationBarHeight)];
+    [_registerTableView setFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - keyboardBounds.size.height - [DeviceInfo navigationBarHeight])];
     
     [_registerTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
@@ -327,7 +327,7 @@ void safeVerifyPhoneCodeCFTimerCallback(CFRunLoopTimerRef timer, void *info) {
         [self timerStart];
         
     } else if ([customInfo isEqualToString:@"updatePwd"]) {
-        [FadePromptView showPromptStatus:@"成功找回密码，请记住新密码！" duration:1.5 positionY:screenHeight- 300 finishBlock:^{
+        [FadePromptView showPromptStatus:@"成功找回密码，请记住新密码！" duration:1.5 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
             //
             [self.navigationController popToRootViewControllerAnimated:YES];
         }];

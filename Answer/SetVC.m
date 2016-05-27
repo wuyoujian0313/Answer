@@ -29,7 +29,7 @@
 
 - (void)layoutSetTableView {
     
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight - 49) style:UITableViewStylePlain];
+    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight] - 49) style:UITableViewStylePlain];
     [self setSetTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -160,7 +160,7 @@
 -(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
     [SVProgressHUD dismiss];
     if ([customInfo isEqualToString:@"loginout"]) {
-        [FadePromptView showPromptStatus:@"退出成功" duration:1.0 positionY:screenHeight- 300 finishBlock:^{
+        [FadePromptView showPromptStatus:@"退出成功" duration:1.0 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
             //
             [[User sharedUser] clearUser];
             AppDelegate *app = [AppDelegate shareMyApplication];

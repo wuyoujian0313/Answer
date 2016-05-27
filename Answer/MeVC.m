@@ -48,7 +48,7 @@
 
 - (void)layoutMeTableView {
     
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight - 49) style:UITableViewStylePlain];
+    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight] - 49) style:UITableViewStylePlain];
     [self setMeTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -146,7 +146,7 @@
     [nickNameLabel addGestureRecognizer:tap];
     
     
-    CGFloat w = screenWidth / 4.0;
+    CGFloat w = [DeviceInfo screenWidth] / 4.0;
     top += 20 + 10;
     left = 0;
     UIView *idView = [self createLabelWithFrame:CGRectMake(left, top, w, 45) text:@"ID" value:[User sharedUser].user.uId];

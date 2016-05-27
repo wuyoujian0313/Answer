@@ -117,7 +117,7 @@
 }
 
 - (void)layoutQuestionView {
-    self.questionView = [[QuestionsView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, screenWidth, screenHeight - navigationBarHeight - 49) delegate:self];
+    self.questionView = [[QuestionsView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], [DeviceInfo screenWidth], [DeviceInfo screenHeight] - [DeviceInfo navigationBarHeight] - 49) delegate:self];
     _questionView.refreshDelegate = self;
     
     [self.view addSubview:_questionView];

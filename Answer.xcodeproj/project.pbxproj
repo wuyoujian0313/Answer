@@ -11,6 +11,8 @@
 		AF2415D91CDDA36B0090C88E /* ForgotPasswordVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415D81CDDA36B0090C88E /* ForgotPasswordVC.m */; };
 		AF2415DC1CDDE9AC0090C88E /* ForgotPwdResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415DB1CDDE9AC0090C88E /* ForgotPwdResult.m */; };
 		AF2415DF1CDE119C0090C88E /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415DE1CDE119C0090C88E /* MessageTableViewCell.m */; };
+		AF280E371CF569EA0072652B /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF280E361CF569EA0072652B /* DeviceInfo.m */; };
+		AFB0C6E71CF5E193005A9B7A /* WXPayResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB0C6E61CF5E193005A9B7A /* WXPayResult.m */; };
 		E120F8E61C4A25270024FC87 /* RechangeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */; };
 		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
@@ -209,6 +211,10 @@
 		AF2415DB1CDDE9AC0090C88E /* ForgotPwdResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPwdResult.m; sourceTree = "<group>"; };
 		AF2415DD1CDE119C0090C88E /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
 		AF2415DE1CDE119C0090C88E /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
+		AF280E351CF569EA0072652B /* DeviceInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeviceInfo.h; sourceTree = "<group>"; };
+		AF280E361CF569EA0072652B /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
+		AFB0C6E51CF5E193005A9B7A /* WXPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXPayResult.h; sourceTree = "<group>"; };
+		AFB0C6E61CF5E193005A9B7A /* WXPayResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXPayResult.m; sourceTree = "<group>"; };
 		E120F8E41C4A25270024FC87 /* RechangeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechangeTableViewCell.h; sourceTree = "<group>"; };
 		E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechangeTableViewCell.m; sourceTree = "<group>"; };
 		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
@@ -654,6 +660,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AF280E341CF569EA0072652B /* DeviceInfo */ = {
+			isa = PBXGroup;
+			children = (
+				AF280E351CF569EA0072652B /* DeviceInfo.h */,
+				AF280E361CF569EA0072652B /* DeviceInfo.m */,
+			);
+			path = DeviceInfo;
+			sourceTree = "<group>";
+		};
 		E14C20E81C1EE6AC003925B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -916,6 +931,8 @@
 				70BC27081CBBE88200C16B04 /* GetNewMsgCountResult.m */,
 				AF2415DA1CDDE9AC0090C88E /* ForgotPwdResult.h */,
 				AF2415DB1CDDE9AC0090C88E /* ForgotPwdResult.m */,
+				AFB0C6E51CF5E193005A9B7A /* WXPayResult.h */,
+				AFB0C6E61CF5E193005A9B7A /* WXPayResult.m */,
 			);
 			name = APIModels;
 			sourceTree = "<group>";
@@ -1186,6 +1203,7 @@
 		E1D188F51C0EE6F60043DE9C /* Tools */ = {
 			isa = PBXGroup;
 			children = (
+				AF280E341CF569EA0072652B /* DeviceInfo */,
 				E1B297951C37DD0700872FF0 /* SZTextView */,
 				E17243301C33BAFB00A00F8C /* HPGrowingTextView */,
 				E19762091C26825F0093A935 /* SVProgressHUD */,
@@ -1480,7 +1498,7 @@
 				TargetAttributes = {
 					E1D188B51C0ED4870043DE9C = {
 						CreatedOnToolsVersion = 7.1;
-						DevelopmentTeam = 7DUX67X748;
+						DevelopmentTeam = PQKYEKPNF9;
 					};
 					E1D188CE1C0ED4880043DE9C = {
 						CreatedOnToolsVersion = 7.1;
@@ -1600,6 +1618,7 @@
 				E17E4A241C79BD33003D20AE /* MD5DataSigner.m in Sources */,
 				E1D189521C0EE6F60043DE9C /* BaseVC.m in Sources */,
 				E1C21E511C0F0A910042E1F3 /* DiscoverVC.m in Sources */,
+				AFB0C6E71CF5E193005A9B7A /* WXPayResult.m in Sources */,
 				E1D670D61C3A778F0055EAFD /* BaiduMapLocationResult.m in Sources */,
 				E14C21181C1EFB02003925B5 /* DeleteMessageResult.m in Sources */,
 				E1D1896B1C0EE6F60043DE9C /* UIImageView+WebCache.m in Sources */,
@@ -1651,6 +1670,7 @@
 				E1B78A331C22608300A2E384 /* TTTAddressFormatter.m in Sources */,
 				E1D1895D1C0EE6F60043DE9C /* MKAnnotationView+WebCache.m in Sources */,
 				E1D189561C0EE6F60043DE9C /* UIImage+Utility.m in Sources */,
+				AF280E371CF569EA0072652B /* DeviceInfo.m in Sources */,
 				E1A054AB1C1F0D2500A6DD56 /* RewardListResult.m in Sources */,
 				E1D1894A1C0EE6F60043DE9C /* AFHTTPRequestOperationManager.m in Sources */,
 				E19762201C26B2FC0093A935 /* SetVC.m in Sources */,
@@ -1834,8 +1854,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wu YouJian (EK2QWBZ82K)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wu YouJian (5P7XN5JH2L)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/QQSDK",
@@ -1855,9 +1875,9 @@
 				);
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.answer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "32c6fda4-41cb-49ca-bf26-2c3320bb3249";
+				PROVISIONING_PROFILE = "5b75c709-f601-45c3-a4f5-5b3cf5e15c5f";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1870,8 +1890,8 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing WeiMeiTianCheng Technology Co., Ltd.";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/QQSDK",
@@ -1892,9 +1912,9 @@
 				);
 				OTHER_CFLAGS = "";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.answer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b209d096-03c7-4420-bc10-bf610ac0bebd";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

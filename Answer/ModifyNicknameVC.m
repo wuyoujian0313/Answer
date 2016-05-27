@@ -29,7 +29,7 @@
     [self setNavTitle:@"修改昵称"];
     self.view.backgroundColor = [UIColor colorWithHex:0xf6f6f6];
     
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, navigationBarHeight + 8, self.view.frame.size.width, 50)];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight] + 8, self.view.frame.size.width, 50)];
     bgView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:bgView];
     
@@ -51,7 +51,7 @@
     LineView *line1 = [[LineView alloc] initWithFrame:CGRectMake(0, 50, self.view.frame.size.width,kLineHeight1px)];
     [bgView addSubview:line1];
     
-    self.remainNumLabel = [[UILabel alloc] initWithFrame:CGRectMake(11, 60 + navigationBarHeight, self.view.frame.size.width - 22, 15)];
+    self.remainNumLabel = [[UILabel alloc] initWithFrame:CGRectMake(11, 60 + [DeviceInfo navigationBarHeight], self.view.frame.size.width - 22, 15)];
     _remainNumLabel.backgroundColor = [UIColor clearColor];
     _remainNumLabel.text = [NSString stringWithFormat:@"可输%d个字",MaxNickLength];
     _remainNumLabel.textColor = [UIColor colorWithHex:0xcccccc];

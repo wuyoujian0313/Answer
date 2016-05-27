@@ -19,11 +19,11 @@
     // Do any additional setup after loading the view.
     [self setNavTitle:@"关于图问"];
     
-    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 240)/2.0, 20 + navigationBarHeight, 240, 150)];
+    UIImageView *logoImageView = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - 240)/2.0, 20 + [DeviceInfo navigationBarHeight], 240, 150)];
     [logoImageView setImage:[UIImage imageNamed:@"180"]];
     [self.view addSubview:logoImageView];
     
-    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10 + navigationBarHeight + 150 + 40, self.view.frame.size.width - 20, 0)];
+    UILabel *contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10 + [DeviceInfo navigationBarHeight] + 150 + 40, self.view.frame.size.width - 20, 0)];
     
     NSString *contentString = @"图问是由北京卓安志天科技有限公司于2016年创建，为用户提供基于图片问答的社交服务。图问是以用户体验为主旨，以人工智能为核心，旨在研发一款基于图片问答的智能系统。";
     
@@ -61,7 +61,7 @@
     
     
     
-//    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight)];
+//    UIWebView *webView = [[UIWebView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight])];
 //    
 //    webView.delegate = self;
 //    [webView setScalesPageToFit:YES];

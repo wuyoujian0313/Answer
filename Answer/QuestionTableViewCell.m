@@ -35,7 +35,7 @@
             
             QuestionTableViewCell *sSelf = wSelf;
             
-            QuestionInfoView *infoView = [[QuestionInfoView alloc] initWithFrame:CGRectMake(0, 0, screenWidth, 0)];
+            QuestionInfoView *infoView = [[QuestionInfoView alloc] initWithFrame:CGRectMake(0, 0, [DeviceInfo screenWidth], 0)];
             sSelf.infoView = infoView;
             [sSelf addSubview:infoView];
         });
@@ -52,9 +52,9 @@
         
         QuestionTableViewCell *sSelf = wSelf;
         
-        [sSelf.infoView setFrame:CGRectMake(0, 0, screenWidth, self.frame.size.height)];
+        [sSelf.infoView setFrame:CGRectMake(0, 0, [DeviceInfo screenWidth], self.frame.size.height)];
         [sSelf.infoView setQuestionInfo:questionInfo haveUserView:isHave];
-        [sSelf setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, screenWidth, self.frame.size.height)];
+        [sSelf setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, [DeviceInfo screenWidth], self.frame.size.height)];
     });
 }
 

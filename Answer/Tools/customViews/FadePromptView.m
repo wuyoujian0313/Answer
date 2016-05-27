@@ -7,10 +7,7 @@
 
 #import "FadePromptView.h"
 #import "NSString+Utility.h"
-
-
-#define screenHeight [UIScreen mainScreen].bounds.size.height
-#define screenWidth [UIScreen mainScreen].bounds.size.width
+#import "DeviceInfo.h"
 
 
 @interface FadePromptView()
@@ -62,7 +59,7 @@
     FadePromptView *promptView = [[FadePromptView alloc] initWithFrame:CGRectZero];
     [[[UIApplication sharedApplication] keyWindow] addSubview:promptView];
     promptView.finishBlock = [finish copy];
-    [promptView show:status duration:seconds positionY:screenHeight - 100];
+    [promptView show:status duration:seconds positionY:[DeviceInfo screenHeight] - 100];
 }
 
 +(void)showPromptStatus:(NSString*)status duration:(NSTimeInterval)seconds positionY:(CGFloat)y  finishBlock:(finishPrompt)finish {
@@ -82,7 +79,7 @@
         
         CGFloat w = size.width + 30;
         CGFloat h = size.height + 16;
-        CGFloat x = (screenWidth - w )/2.0;
+        CGFloat x = ([DeviceInfo screenWidth] - w )/2.0;
         yy = yy  - h;
         
         self.promptLabel.text = status;

@@ -90,7 +90,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     // 录音
     AVAudioSession *session = [AVAudioSession sharedInstance];
     
-    if (IsIOS8) {
+    if ([DeviceInfo isOS8]) {
         AVAudioSessionRecordPermission permission = [session recordPermission];
         if (permission == AVAudioSessionRecordPermissionDenied) {
             
@@ -225,7 +225,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
         
         [UIView animateWithDuration:0.6 animations:^{
             //
-            [self.tabBarController.tabBar setFrame:CGRectMake(0, screenHeight, screenWidth, 49)];
+            [self.tabBarController.tabBar setFrame:CGRectMake(0, [DeviceInfo screenHeight],[DeviceInfo screenWidth], 49)];
         }];
 
         
@@ -281,7 +281,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     //
     [UIView animateWithDuration:0.6 animations:^{
         //
-        [self.tabBarController.tabBar setFrame:CGRectMake(0, screenHeight-49, screenWidth, 49)];
+        [self.tabBarController.tabBar setFrame:CGRectMake(0, [DeviceInfo screenHeight]-49, [DeviceInfo screenWidth], 49)];
     }];
 
 }
@@ -397,7 +397,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
             switch ([exportSession status]) {
                 case AVAssetExportSessionStatusFailed:    
                 case AVAssetExportSessionStatusCancelled: {
-                    [FadePromptView showPromptStatus:@"视频转码失败" duration:1.0 positionY:screenHeight- 300 finishBlock:^{
+                    [FadePromptView showPromptStatus:@"视频转码失败" duration:1.0 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
                         //
                     }];
                     break;
@@ -453,7 +453,7 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
 
 - (void)layoutFuncView {
     
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(10, 120, screenWidth - 20, 260)];
+    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(10, 120, [DeviceInfo screenWidth] - 20, 260)];
     [bgView setBackgroundColor:[UIColor whiteColor]];
     [bgView.layer setBorderColor:[UIColor colorWithHex:0xcccccc].CGColor];
     [bgView.layer setBorderWidth:kLineHeight1px];
@@ -462,13 +462,13 @@ typedef NS_ENUM(NSInteger,RecordStatus) {
     [self.view addSubview:bgView];
     
     
-    UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth - 20, 40)];
+    UIView *panelView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, [DeviceInfo screenWidth] - 20, 40)];
     [panelView setBackgroundColor:[UIColor colorWithHex:0x606060]];
     [panelView.layer setBorderColor:[UIColor colorWithHex:0x606060].CGColor];
     [panelView.layer setBorderWidth:kLineHeight1px];
     [bgView addSubview:panelView];
     
-    CGFloat buttonWidth = (screenWidth - 20)/3.0;
+    CGFloat buttonWidth = ([DeviceInfo screenWidth] - 20)/3.0;
     CGFloat left = 0;
     
     //    UIButton *audioButton = [self createButton:[UIImage imageNamed:@"audio"] target:self selector:@selector(questionAction:) frame:CGRectMake(left, 0, buttonWidth, 40)];

@@ -187,7 +187,7 @@
     if (tag == 101) {
         // 登录
         if (_nameTextField.text == nil || [_nameTextField.text length] <= 0) {
-            [FadePromptView showPromptStatus:@"请输入手机号" duration:0.6 positionY:screenHeight- 300 finishBlock:^{
+            [FadePromptView showPromptStatus:@"请输入手机号" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
                 //
             }];
             [_nameTextField becomeFirstResponder];
@@ -195,7 +195,7 @@
         }
         
         if (_pwdTextField.text == nil || [_pwdTextField.text length] <= 0) {
-            [FadePromptView showPromptStatus:@"请输入手机号" duration:0.6 positionY:screenHeight- 300 finishBlock:^{
+            [FadePromptView showPromptStatus:@"请输入手机号" duration:0.6 positionY:[DeviceInfo screenHeight]- 300 finishBlock:^{
                 //
             }];
             [_pwdTextField becomeFirstResponder];

@@ -12,9 +12,13 @@
 #import <AlipaySDK/AlipaySDK.h>
 #import "Order.h"
 #import "DataSigner.h"
+#import "WXPayResult.h"
+#import "NetworkTask.h"
+#import "User.h"
 
 
-@interface RechangeVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+
+@interface RechangeVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate,NetworkTaskDelegate>
 @property (nonatomic, strong) UITableView                   *rechangeTableView;
 @property (nonatomic, strong) NSArray                       *rechangeMethods;
 @property (nonatomic, strong) UINavigationBar               *navBar;
@@ -37,7 +41,7 @@
 
 - (void)layoutRechangeTableView {
     
-    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, navigationBarHeight, self.view.frame.size.width, self.view.frame.size.height - navigationBarHeight) style:UITableViewStylePlain];
+    UITableView * tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight]) style:UITableViewStylePlain];
     [self setRechangeTableView:tableView];
     [tableView setDelegate:self];
     [tableView setDataSource:self];
@@ -147,7 +151,7 @@
 }
 
 - (void)layoutNavBarView {
-    self.navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, screenHeight, self.view.frame.size.width, 44)];
+    self.navBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, [DeviceInfo screenHeight], self.view.frame.size.width, 44)];
     [_navBar setBackgroundColor:[UIColor whiteColor]];
     [_navBar setHidden:YES];
     
@@ -165,9 +169,9 @@
 - (void)createRechangeMethods {
     NSMutableDictionary *item1 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"weixin",@"image",@"微信支付",@"title",@"推荐已安装微信客户端的用户使用",@"subTitle",@YES,@"seleted", nil];
     
-    NSMutableDictionary *item2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"zhifubao",@"image",@"支付宝支付",@"title",@"推荐已安装支付宝客户端的用户使用",@"subTitle",@YES,@"seleted", nil];
+//    NSMutableDictionary *item2 = [NSMutableDictionary dictionaryWithObjectsAndKeys:@"zhifubao",@"image",@"支付宝支付",@"title",@"推荐已安装支付宝客户端的用户使用",@"subTitle",@YES,@"seleted", nil];
     
-    self.rechangeMethods = [[NSArray alloc] initWithObjects:item1,item2,nil];
+    self.rechangeMethods = [[NSArray alloc] initWithObjects:item1,nil];
 }
 
 - (void)navBarAction:(UIBarButtonItem*)sender {
@@ -176,6 +180,10 @@
 
 
 - (void)weixinPay {
+    
+    
+
+    
     
     PayReq *request = [[PayReq alloc] init];
     request.partnerId = @"10000100";
@@ -256,6 +264,37 @@
 }
 
 - (void)rechangeAction:(UIButton*)sender {
+    
+//    appid                 "wx7a296d05150143e5";
+//    appsecret             "dce5699086e990df3104052ce298f573";
+//    partner            //用户商号  "1326100701";
+//    userId             //用户id
+//    money              //金额  （单位 分，不带小数点）
+//    device_info        //设备号   非必输
+//    body                 //商品描述
+//    spbill_create_ip       //订单生成的机器 IP
+//    fee_type=CNY        //货币类型
+    
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"userId",
+                          WeiXinSDKAppId,@"appid",
+                          WeiXinSDKAppSecret,@"appsecret",
+                          WeiXinBusinessNo,@"partner",
+                          @"1",@"money",
+                          @"WEB",@"device_info",
+                          @"充值",@"body",
+                          [DeviceInfo getIPAddress:YES],@"spbill_create_ip",
+                          @"CNY",@"fee_type",
+                          nil];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_WXPrePay
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[WXPayResult alloc] init]
+                                           customInfo:@"WXPay"];
+    
+    
 }
 
 - (void)selectButtonAction:(UIButton*)sender event:(UIEvent*)event {
@@ -283,6 +322,31 @@
     [method setObject:selected forKey:@"selected"];
     
     [_rechangeTableView reloadData];
+}
+
+#pragma mark - NetworkTaskDelegate
+-(void)netResultSuccessBack:(NetResultBase *)result forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    
+    if ([customInfo isEqualToString:@"WXPay"] && result) {
+        WXPayResult *wxPay = (WXPayResult*)result;
+        
+        PayReq *request = [[PayReq alloc] init];
+        request.partnerId =  wxPay.partnerid;
+        request.prepayId = wxPay.prepayid;
+        request.package = wxPay.package;
+        request.nonceStr = wxPay.noncestr;
+        request.timeStamp = [wxPay.timestamp intValue];
+        request.sign = wxPay.sign;
+        [WXApi sendReq:request];
+    }
+}
+
+-(void)netResultFailBack:(NSString *)errorDesc errorCode:(NSInteger)errorCode forInfo:(id)customInfo {
+    [SVProgressHUD dismiss];
+    [FadePromptView showPromptStatus:errorDesc duration:1.0 finishBlock:^{
+        //
+    }];
 }
 
 
