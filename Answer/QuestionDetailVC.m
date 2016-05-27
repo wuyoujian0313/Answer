@@ -210,9 +210,18 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationGuanzhu object:nil];
         [FadePromptView showPromptStatus:@"关注成功" duration:1.0 finishBlock:^{
             
+            [_questionInfoView hiddenAttentBtn];
         }];
     } else if ([customInfo isEqualToString:@"SetBestAnswer"]) {
-        [FadePromptView showPromptStatus:@"设置成功，之后会打赏对应的赏给回答者" duration:1.0 finishBlock:^{
+        
+        NSString *msg = nil;
+        if ([_questionInfo.reward integerValue] == 0) {
+            msg = @"设置最佳答案成功";
+        } else {
+            msg = @"设置成功，之后会打赏对应的赏给回答者";
+        }
+        
+        [FadePromptView showPromptStatus:msg duration:1.0 finishBlock:^{
             //
             [self requestQuestionDetail];
         }];
@@ -312,20 +321,55 @@
     NSSet *touches = [event allTouches];
     UITouch *touch = [touches anyObject];
     
+    [_commentTextView resignFirstResponder];
+    
     CGPoint currentTouchPosition = [touch locationInView:_detailTableView];
     NSIndexPath *indexPath = [_detailTableView indexPathForRowAtPoint:currentTouchPosition];
     
     if (indexPath) {
         _bestAnswerIndex = indexPath.row;
         
-        NSString *msg = [NSString stringWithFormat:@"您确定设置为最佳答案，成功之后会给对方打赏%@元",
-                         _questionInfo.reward];
-        UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"设置最佳答案"
-                                                             message:msg
-                                                            delegate:self
-                                                   cancelButtonTitle:@"取消"
-                                                   otherButtonTitles:@"确定", nil];
-        [alertView show];
+        // 验证账号余额够不够
+        NSString *msg = nil;
+        if ([_questionInfo.reward integerValue] == 0) {
+            msg = @"您确定设置为最佳答案";
+        } else {
+            msg = [NSString stringWithFormat:@"您确定设置为最佳答案，成功之后会给对方打赏%@元",
+                   _questionInfo.reward];
+            
+            User *user = [User sharedUser];
+            NSString *balance = user.account.balance;
+            if ([balance integerValue] == 0 || [balance integerValue] < [_questionInfo.reward integerValue]) {
+                [FadePromptView showPromptStatus:@"账号余额不够，请充值！" duration:2.0 finishBlock:^{
+                    //
+                }];
+                
+                return;
+            }
+        }
+        
+        
+        User *user = [User sharedUser];
+        NSString *balance = user.account.balance;
+        if ([balance integerValue] == 0 || [balance integerValue] < [_questionInfo.reward integerValue]) {
+            [FadePromptView showPromptStatus:@"账号余额不够，请充值！" duration:2.0 finishBlock:^{
+                //
+            }];
+        } else {
+            NSString *msg = nil;
+            if ([_questionInfo.reward integerValue] == 0) {
+                msg = @"您确定设置为最佳答案";
+            } else {
+                msg = [NSString stringWithFormat:@"您确定设置为最佳答案，成功之后会给对方打赏%@元",
+                       _questionInfo.reward];
+            }
+            UIAlertView * alertView = [[UIAlertView alloc] initWithTitle:@"设置最佳答案"
+                                                                 message:msg
+                                                                delegate:self
+                                                       cancelButtonTitle:@"取消"
+                                                       otherButtonTitles:@"确定", nil];
+            [alertView show];
+        }
     }
 }
 

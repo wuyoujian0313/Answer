@@ -64,6 +64,13 @@
     return self;
 }
 
+- (void)hiddenAttentBtn {
+    UIButton *attentionBtn = (UIButton *)[_userInfoView viewWithTag:QuestionInfoViewAction_Attention];
+    if ([attentionBtn isKindOfClass:[UIButton class]]) {
+        attentionBtn.hidden = YES;
+    }
+}
+
 
 // tag == 100
 - (void)layoutUserView:(UIView *)viewParent {

@@ -23,4 +23,6 @@
 - (CGFloat)viewHeight;
 
 - (CGFloat)viewHeightByQuestionInfo:(QuestionInfo*)questionInfo haveUserView:(BOOL)isHave isFoldText:(BOOL)isfold;
+
+- (void)hiddenAttentBtn;
 @end
