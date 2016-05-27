@@ -19,6 +19,7 @@
 #import "UserInfo.h"
 #import "NetworkTask.h"
 #import "AnswerResult.h"
+#import "UserAccountResult.h"
 
 
 
@@ -175,6 +176,20 @@
                                            customInfo:@"Guanzhu"];
 }
 
+- (void)requestBalanceData {
+    
+    NSDictionary* param =[[NSDictionary alloc] initWithObjectsAndKeys:
+                          [User sharedUser].user.uId,@"userId",
+                          nil];
+    
+    [SVProgressHUD showWithMaskType:SVProgressHUDMaskTypeClear];
+    [[NetworkTask sharedNetworkTask] startPOSTTaskApi:API_GetAccount
+                                             forParam:param
+                                             delegate:self
+                                            resultObj:[[UserAccountResult alloc] init]
+                                           customInfo:@"Balance"];
+}
+
 #pragma mark - UIAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
     
@@ -224,7 +239,12 @@
         [FadePromptView showPromptStatus:msg duration:1.0 finishBlock:^{
             //
             [self requestQuestionDetail];
+            [self requestBalanceData];
         }];
+    } else if ([customInfo isEqualToString:@"Balance"]) {
+        UserAccountResult *account = (UserAccountResult*)result;
+        [[User sharedUser].account setBalance:account.balance];
+        [[User sharedUser] saveToUserDefault];
     }
 }
 

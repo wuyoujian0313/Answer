@@ -284,8 +284,10 @@
             [self.navigationController pushViewController:vc animated:YES];
             break;
         }
-        case QuestionInfoViewAction_Sharing:
+        case QuestionInfoViewAction_Sharing:{
+            [self shareMenu];
             break;
+        }
         case QuestionInfoViewAction_RedPackage:
             break;
         case QuestionInfoViewAction_Location:

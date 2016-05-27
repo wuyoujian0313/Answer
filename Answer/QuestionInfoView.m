@@ -146,7 +146,7 @@
                     UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrl];
                     
                     if (cacheimage == nil) {
-                        photoImage.image = [UIImage imageNamed:@"defaultHeadImage"];
+                        cacheimage = [UIImage imageNamed:@"defaultHeadImage"];
                         
                         [photoImage sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                             if (image) {
@@ -311,7 +311,7 @@
                 UIImage * cacheimage = [imageCache imageFromDiskCacheForKey:imageUrlString];
                 
                 if (cacheimage == nil) {
-                    contentImage.image = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
+                    cacheimage = [UIImage imageFromColor:[UIColor colorWithHex:0xcccccc]];
                     [contentImage sd_setImageWithURL:[NSURL URLWithString:imageUrlString] placeholderImage:cacheimage completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
                         if (image) {
                             
