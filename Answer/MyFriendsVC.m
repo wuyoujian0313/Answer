@@ -316,7 +316,9 @@
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         
         QuestionListVC *vc = [[QuestionListVC alloc] init];
-        vc.type = PageType_FriendQuestionList;
+        UserInfo * user = [_friendList objectAtIndex:indexPath.row];
+        vc.type = PageType_MyFriendQuestionList;
+        vc.friendId = user.uId;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }

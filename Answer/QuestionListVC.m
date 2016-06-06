@@ -44,7 +44,7 @@
     _more = 1;
     
     // Do any additional setup after loading the view.
-    if (_type == PageType_FriendQuestionList) {
+    if (_type == PageType_FriendQuestionList || _type == PageType_MyFriendQuestionList) {
         [self setNavTitle:@"好友问题"];
         [_questionView beginRefreshing];
     } else if ( _type == PageType_MyQuestionList) {
@@ -118,6 +118,14 @@
         [param setValue:@"1" forKey:@"longitude"];//无效
         
         wtype = @"friend";
+        
+    } else if (_type == PageType_MyFriendQuestionList) {
+        
+        [param setValue:_friendId forKey:@"friendId"];//指定好友id
+        [param setValue:@"1" forKey:@"latitude"];//无效
+        [param setValue:@"1" forKey:@"longitude"];//无效
+        
+        wtype = @"singlefriend";
         
     } else if ( _type == PageType_MyQuestionList) {
         
