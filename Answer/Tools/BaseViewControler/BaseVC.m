@@ -41,8 +41,6 @@
 }
 
 - (void)shareMenu {
-    
-    
 //    // 授权
 //    [ShareSDK authorize:SSDKPlatformTypeWechat settings:@{SSDKAuthSettingKeyScopes : @[@"snsapi_userinfo"]} onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
 //        //
@@ -55,9 +53,7 @@
 //    [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
 //        //
 //    }];
-    
-    
-    return;
+//    return;
     
     //1、创建分享参数
     NSString *url = kSharedURL;

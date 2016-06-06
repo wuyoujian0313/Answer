@@ -220,7 +220,7 @@
                           WeiXinSDKAppId,@"appid",
                           WeiXinSDKAppSecret,@"appsecret",
                           WeiXinBusinessNo,@"partner",
-                          [NSString stringWithFormat:@"%d",value*100],@"money",
+                          [NSString stringWithFormat:@"%ld",value*100],@"money",
                           @"WEB",@"device_info",
                           @"充值",@"body",
                           [DeviceInfo getIPAddress:YES],@"spbill_create_ip",

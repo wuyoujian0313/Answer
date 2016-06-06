@@ -515,7 +515,7 @@
 
 #define IOS_CELLULAR    @"pdp_ip0"
 #define IOS_WIFI        @"en0"
-#define IOS_WIFI1        @"en1"
+#define IOS_WIFI1       @"en1"
 #define IOS_VPN         @"utun0"
 #define IP_ADDR_IPv4    @"ipv4"
 #define IP_ADDR_IPv6    @"ipv6"
@@ -525,8 +525,8 @@
 + (NSString *)getIPAddress:(BOOL)preferIPv4 {
     
     NSArray *searchArray = preferIPv4 ?
-    @[ IOS_VPN @"/" IP_ADDR_IPv4, IOS_VPN @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6,IOS_WIFI1 @"/" IP_ADDR_IPv4, IOS_WIFI1 @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6 ] :
-    @[ IOS_VPN @"/" IP_ADDR_IPv6, IOS_VPN @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv4,IOS_WIFI1 @"/" IP_ADDR_IPv6, IOS_WIFI1 @"/" IP_ADDR_IPv4, IOS_CELLULAR @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv4 ] ;
+    @[ IOS_VPN @"/" IP_ADDR_IPv4, IOS_WIFI @"/" IP_ADDR_IPv4, IOS_WIFI1 @"/" IP_ADDR_IPv4,  IOS_CELLULAR @"/" IP_ADDR_IPv4 ] :
+    @[ IOS_VPN @"/" IP_ADDR_IPv6, IOS_WIFI @"/" IP_ADDR_IPv6, IOS_WIFI1 @"/" IP_ADDR_IPv6, IOS_CELLULAR @"/" IP_ADDR_IPv6 ] ;
     
     NSDictionary *addresses = [self getIPAddresses];
     NSLog(@"addresses: %@", addresses);
