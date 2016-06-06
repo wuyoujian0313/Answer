@@ -43,13 +43,21 @@
 - (void)shareMenu {
     
     
-    //    // 授权
-    //    [ShareSDK authorize:SSDKPlatformTypeWechat settings:@{SSDKAuthSettingKeyScopes : @[@"snsapi_userinfo"]} onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
-    //        //
-    //    }];
-    //
-    //
-    //    return;
+//    // 授权
+//    [ShareSDK authorize:SSDKPlatformTypeWechat settings:@{SSDKAuthSettingKeyScopes : @[@"snsapi_userinfo"]} onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+//        //
+//    }];
+//    
+//    
+//    return;
+    
+//    // 授权
+//    [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+//        //
+//    }];
+    
+    
+    return;
     
     //1、创建分享参数
     NSString *url = kSharedURL;

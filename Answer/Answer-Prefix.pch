@@ -49,7 +49,8 @@
 #define kSharedURL                  @"http://mp.weixin.qq.com/s?__biz=MzI0MDIxODQwNA==&mid=402448879&idx=1&sn=68af9498ea6dd3c5d58ff50135a41fce&scene=0&previewkey=N8Sopmdh7ICqBwQYX9JqVMNS9bJajjJKzz%2F0By7ITJA%3D#wechat_redirect"
 
 // 百度地图
-#define BaiduMapLocationAK          @"xvluEhl0pPdKpmxlEPTQZsnn"
+#define BaiduMapLocationAK          @"yMP7TknXI07T8Yi6SvY2OVRxrCC61D3I"
+// xvluEhl0pPdKpmxlEPTQZsnn answer的AK
 #define BaiduGeocoderURL            @"http://api.map.baidu.com/geocoder/v2/?"
 
 // 分享相关

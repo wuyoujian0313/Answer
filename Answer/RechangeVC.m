@@ -9,9 +9,6 @@
 #import "RechangeVC.h"
 #import "RechangeTableViewCell.h"
 #import "WXApi.h"
-#import <AlipaySDK/AlipaySDK.h>
-#import "Order.h"
-#import "DataSigner.h"
 #import "WXPayResult.h"
 #import "NetworkTask.h"
 #import "User.h"
@@ -272,16 +269,22 @@
     [SVProgressHUD dismiss];
     
     if ([customInfo isEqualToString:@"WXPay"] && result) {
-        WXPayResult *wxPay = (WXPayResult*)result;
-        
-        PayReq *request = [[PayReq alloc] init];
-        request.partnerId =  wxPay.partnerid;
-        request.prepayId = wxPay.prepayid;
-        request.package = wxPay.package;
-        request.nonceStr = wxPay.noncestr;
-        request.timeStamp = [wxPay.timestamp intValue];
-        request.sign = wxPay.sign;
-        [WXApi sendReq:request];
+        if ([WXApi isWXAppInstalled]) {
+            WXPayResult *wxPay = (WXPayResult*)result;
+            
+            PayReq *request = [[PayReq alloc] init];
+            request.partnerId =  wxPay.partnerid;
+            request.prepayId = wxPay.prepayid;
+            request.package = wxPay.package;
+            request.nonceStr = wxPay.noncestr;
+            request.timeStamp = [wxPay.timestamp intValue];
+            request.sign = wxPay.sign;
+            [WXApi sendReq:request];
+        } else {
+            [FadePromptView showPromptStatus:@"您的手机未安装微信客户端，请安装" duration:2.0 finishBlock:^{
+                //
+            }];
+        }
     }
 }
 

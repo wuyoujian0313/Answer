@@ -12,7 +12,6 @@
 #import <TencentOpenAPI/QQApiInterface.h>
 #import <TencentOpenAPI/TencentOAuth.h>
 #import "WXApi.h"
-#import <AlipaySDK/AlipaySDK.h>
 #import "User.h"
 
 @interface AppDelegate ()<WXApiDelegate>

@@ -71,7 +71,7 @@
         [weakSelf beginGPS];
     });
     
-    _isAnonymous = YES;
+    _isAnonymous = NO;
     _firstLocation = YES;
     
     //设置定时检测，5分钟调用一次接口
@@ -118,15 +118,16 @@
     [self.view addSubview:tableView];
 }
 
--(void)playReordFile:(AudioPlayControl*)sender {
+-(void)playAudioAction:(AudioPlayControl*)sender {
     
     NSString* filePath = [[FileCache sharedFileCache] diskCachePathForKey:_recordFileKey];
     filePath = [filePath stringByAppendingPathExtension:@"m4a"];
     NSURL *fileURL = [NSURL fileURLWithPath:filePath];
+    [sender startPlayAnimation];
     [self playReordFile:fileURL];
 }
 
-- (void)playVideo:(UIButton*)sender {
+- (void)playVideoAction:(UIButton*)sender {
 
     NSString *videoPath = [[FileCache sharedFileCache] diskCachePathForKey:_videoKeyString];
     videoPath = [videoPath stringByAppendingPathExtension:@"mp4"];
@@ -468,7 +469,7 @@
             [audioControl setTag:100];
             self.audioControl = audioControl;
             [audioControl setHidden:YES];
-            [audioControl addTarget:self action:@selector(playReordFile:) forControlEvents:UIControlEventTouchUpInside];
+            [audioControl addTarget:self action:@selector(playAudioAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:audioControl];
             
             UIImageView *contentImage = [[UIImageView alloc] initWithFrame:CGRectZero];
@@ -484,7 +485,7 @@
             [playBtn setHidden:YES];
             [playBtn setImageEdgeInsets:UIEdgeInsetsMake(30, 30, 30, 30)];
             [playBtn setImage:[UIImage imageNamed:@"video"] forState:UIControlStateNormal];
-            [playBtn addTarget:self action:@selector(playVideo:) forControlEvents:UIControlEventTouchUpInside];
+            [playBtn addTarget:self action:@selector(playVideoAction:) forControlEvents:UIControlEventTouchUpInside];
             [cell.contentView addSubview:playBtn];
         }
         
