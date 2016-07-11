@@ -201,7 +201,7 @@
         info1.fileName = [key1 stringByAppendingPathExtension:@"m4a"];
         info1.mimeType = mimeType;
         info1.fileData = imageData;
-        info1.key = @"fileName";
+        info1.fileKey = @"fileName";
         
         [uploadFiles addObject:info1];
         
@@ -213,7 +213,7 @@
         UIImage *image = [UIImage imageFromColor:[UIColor blackColor]];
         NSData *thumbnailData = UIImagePNGRepresentation(image);
         info2.fileData = thumbnailData;
-        info2.key = @"thumbnail";
+        info2.fileKey = @"thumbnail";
         
         [uploadFiles addObject:info2];
         
@@ -231,7 +231,7 @@
         info1.fileName = [key1 stringByAppendingPathExtension:@"png"];
         info1.mimeType = mimeType;
         info1.fileData = imageData;
-        info1.key = @"fileName";
+        info1.fileKey = @"fileName";
         
         [uploadFiles addObject:info1];
         
@@ -243,7 +243,7 @@
         UIImage *thumbnail = [UIImage imageFromColor:[UIColor blackColor]];
         NSData *thumbnailData = UIImagePNGRepresentation(thumbnail);
         info2.fileData = thumbnailData;
-        info2.key = @"thumbnail";
+        info2.fileKey = @"thumbnail";
         
         [uploadFiles addObject:info2];
         
@@ -262,7 +262,7 @@
         info1.fileName = [key1 stringByAppendingPathExtension:@"mp4"];
         info1.mimeType = mimeType;
         info1.fileData = imageData;
-        info1.key = @"fileName";
+        info1.fileKey = @"fileName";
         
         [uploadFiles addObject:info1];
         
@@ -276,7 +276,7 @@
         UIImage *thumbnail = [imageCache imageFromDiskCacheForKey:_imageKey];
         NSData *thumbnailData = UIImagePNGRepresentation(thumbnail);
         info2.fileData = thumbnailData;
-        info2.key = @"thumbnail";
+        info2.fileKey = @"thumbnail";
         
         [uploadFiles addObject:info2];
     }

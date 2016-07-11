@@ -67,4 +67,9 @@
  */
 + (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle;
 
+/**
+ *  取消按钮是否隐藏，默认不隐藏
+ */
++ (void)isCancelButtomHidden:(BOOL)isCancelButtomHidden;
+
 @end

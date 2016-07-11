@@ -115,14 +115,9 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
     if (!data||!path) {
         return;
     }
-    
-    // 放入内存中
-    [self.memoryCache setObject:data forKey:path];
+
     // 放入磁盘中
     dispatch_async(_rwQueue, ^{
-        if (![_fileManager fileExistsAtPath:_diskCachePath]) {
-            [_fileManager createDirectoryAtPath:_diskCachePath withIntermediateDirectories:YES attributes:nil error:NULL];
-        }
         [_fileManager createFileAtPath:path contents:data attributes:nil];
     });
     
@@ -147,11 +142,6 @@ static const NSInteger kCacheMaxAge = 60 * 60 * 24 * 7; //每周清除一次
 }
 
 - (NSData *)dataFromCacheForPath:(NSString *)path {
-    id data = [self.memoryCache objectForKey:path];
-    if (data) {
-        return data;
-    }
-    
     NSData *diskData = [NSData dataWithContentsOfFile:path];
     if (diskData) {
         return diskData;

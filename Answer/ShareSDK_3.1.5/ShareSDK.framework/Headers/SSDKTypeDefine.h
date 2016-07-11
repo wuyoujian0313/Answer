@@ -209,6 +209,10 @@ typedef NS_ENUM(NSUInteger, SSDKPlatformType){
      */
     SSDKPlatformSubTypeKakaoStory       = 45,
     /**
+     *  Facebook Messenger
+     */
+    SSDKPlatformTypeFacebookMessenger   = 46,
+    /**
      *  支付宝好友
      */
     SSDKPlatformTypeAliPaySocial        = 50,
@@ -321,6 +325,11 @@ typedef NS_ENUM(NSUInteger, SSDKContentType){
      *  视频
      */
     SSDKContentTypeVideo        = 6,
+    
+    /**
+     *  文件类型(暂时仅微信可用)
+     */
+    SSDKContentTypeFile         = 7
 
 };
 

@@ -21,9 +21,9 @@ typedef NS_ENUM(NSInteger, NetStatusCode) {
 
 @interface UploadFileInfo : NSObject
 @property(nonatomic,copy) NSString      *fileName;
-@property(nonatomic,strong) NSString    *mimeType;
+@property(nonatomic,copy) NSString      *mimeType;
 @property(nonatomic,strong) NSData      *fileData;
-@property(nonatomic,strong) NSString    *key;
+@property(nonatomic,copy) NSString      *fileKey;
 @end
 
 

@@ -13,6 +13,7 @@
 		AF2415DF1CDE119C0090C88E /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AF2415DE1CDE119C0090C88E /* MessageTableViewCell.m */; };
 		AF280E371CF569EA0072652B /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF280E361CF569EA0072652B /* DeviceInfo.m */; };
 		AFB0C6E71CF5E193005A9B7A /* WXPayResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB0C6E61CF5E193005A9B7A /* WXPayResult.m */; };
+		AFE809DE1D2A2F830006BC83 /* NetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE809DD1D2A2F830006BC83 /* NetworkTask.m */; };
 		E120F8E61C4A25270024FC87 /* RechangeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */; };
 		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
@@ -127,7 +128,6 @@
 		E1D189571C0EE6F60043DE9C /* FadePromptView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189181C0EE6F60043DE9C /* FadePromptView.m */; };
 		E1D189581C0EE6F60043DE9C /* LineView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1891B1C0EE6F60043DE9C /* LineView.m */; };
 		E1D189591C0EE6F60043DE9C /* NetResultBase.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D1891E1C0EE6F60043DE9C /* NetResultBase.m */; };
-		E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189201C0EE6F60043DE9C /* NetworkTask.m */; };
 		E1D1895B1C0EE6F60043DE9C /* NSObject+Utility.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189231C0EE6F60043DE9C /* NSObject+Utility.m */; };
 		E1D1895C1C0EE6F60043DE9C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189261C0EE6F60043DE9C /* Reachability.m */; };
 		E1D1895D1C0EE6F60043DE9C /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E1D189291C0EE6F60043DE9C /* MKAnnotationView+WebCache.m */; };
@@ -201,6 +201,8 @@
 		AF280E361CF569EA0072652B /* DeviceInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeviceInfo.m; sourceTree = "<group>"; };
 		AFB0C6E51CF5E193005A9B7A /* WXPayResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXPayResult.h; sourceTree = "<group>"; };
 		AFB0C6E61CF5E193005A9B7A /* WXPayResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXPayResult.m; sourceTree = "<group>"; };
+		AFE809DC1D2A2F830006BC83 /* NetworkTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTask.h; sourceTree = "<group>"; };
+		AFE809DD1D2A2F830006BC83 /* NetworkTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTask.m; sourceTree = "<group>"; };
 		E120F8E41C4A25270024FC87 /* RechangeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechangeTableViewCell.h; sourceTree = "<group>"; };
 		E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechangeTableViewCell.m; sourceTree = "<group>"; };
 		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
@@ -426,8 +428,6 @@
 		E1D1891B1C0EE6F60043DE9C /* LineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LineView.m; sourceTree = "<group>"; };
 		E1D1891D1C0EE6F60043DE9C /* NetResultBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetResultBase.h; sourceTree = "<group>"; };
 		E1D1891E1C0EE6F60043DE9C /* NetResultBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetResultBase.m; sourceTree = "<group>"; };
-		E1D1891F1C0EE6F60043DE9C /* NetworkTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTask.h; sourceTree = "<group>"; };
-		E1D189201C0EE6F60043DE9C /* NetworkTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTask.m; sourceTree = "<group>"; };
 		E1D189221C0EE6F60043DE9C /* NSObject+Utility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+Utility.h"; sourceTree = "<group>"; };
 		E1D189231C0EE6F60043DE9C /* NSObject+Utility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Utility.m"; sourceTree = "<group>"; };
 		E1D189251C0EE6F60043DE9C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
@@ -1061,8 +1061,8 @@
 			children = (
 				E1D1891D1C0EE6F60043DE9C /* NetResultBase.h */,
 				E1D1891E1C0EE6F60043DE9C /* NetResultBase.m */,
-				E1D1891F1C0EE6F60043DE9C /* NetworkTask.h */,
-				E1D189201C0EE6F60043DE9C /* NetworkTask.m */,
+				AFE809DC1D2A2F830006BC83 /* NetworkTask.h */,
+				AFE809DD1D2A2F830006BC83 /* NetworkTask.m */,
 				E1D189211C0EE6F60043DE9C /* NSObject+Utility */,
 			);
 			path = Network;
@@ -1435,7 +1435,7 @@
 				E1B78A391C22608300A2E384 /* TTTTimeIntervalFormatter.m in Sources */,
 				E1C21E6C1C0F23940042E1F3 /* MyWalletVC.m in Sources */,
 				E1D189651C0EE6F60043DE9C /* SDWebImagePrefetcher.m in Sources */,
-				E1D1895A1C0EE6F60043DE9C /* NetworkTask.m in Sources */,
+				AFE809DE1D2A2F830006BC83 /* NetworkTask.m in Sources */,
 				E19762061C2673220093A935 /* OHASBasicHTMLParser.m in Sources */,
 				E1B78A351C22608300A2E384 /* TTTColorFormatter.m in Sources */,
 				E19762031C2673220093A935 /* OHAttributedLabel.m in Sources */,
@@ -1627,7 +1627,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43b59f74-4457-419f-b047-fd03b418574f";
+				PROVISIONING_PROFILE = "68d3e67a-ab5a-41da-935b-8ec9db0d814b";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1664,7 +1664,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "43b59f74-4457-419f-b047-fd03b418574f";
+				PROVISIONING_PROFILE = "68d3e67a-ab5a-41da-935b-8ec9db0d814b";
 			};
 			name = Release;
 		};

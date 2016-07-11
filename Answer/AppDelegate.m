@@ -137,7 +137,7 @@
 
 - (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
     if ([[url absoluteString] hasPrefix:WeiXinSDKAppId]) {
-        return  [WXApi handleOpenURL:url delegate:self];
+        return [WXApi handleOpenURL:url delegate:self];
     }
     
     return YES;
@@ -145,7 +145,7 @@
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     if ([[url absoluteString] hasPrefix:WeiXinSDKAppId]) {
-        return  [WXApi handleOpenURL:url delegate:self];
+        return [WXApi handleOpenURL:url delegate:self];
     }
     
     return YES;
@@ -153,7 +153,7 @@
 
 - (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary<NSString*, id> *)options {
     if ([[url absoluteString] hasPrefix:WeiXinSDKAppId]) {
-        return  [WXApi handleOpenURL:url delegate:self];
+        return [WXApi handleOpenURL:url delegate:self];
     }
     
     return YES;

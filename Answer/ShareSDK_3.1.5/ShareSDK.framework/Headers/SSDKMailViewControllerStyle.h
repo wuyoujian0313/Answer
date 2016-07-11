@@ -11,7 +11,7 @@
 @interface SSDKMailViewControllerStyle : NSObject
 
 /**
- *  获取授权视图风格共享实例
+ *  风格共享实例
  *
  *  @return 风格类实例
  */

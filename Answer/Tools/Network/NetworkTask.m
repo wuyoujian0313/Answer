@@ -236,7 +236,7 @@
     [_afManager POST:urlString parameters:param constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         
         for (UploadFileInfo *info in files) {
-            [formData appendPartWithFileData:info.fileData name:info.key fileName:info.fileName mimeType:info.mimeType];
+            [formData appendPartWithFileData:info.fileData name:info.fileKey fileName:info.fileName mimeType:info.mimeType];
         }
 
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {

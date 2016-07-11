@@ -125,6 +125,58 @@
                  forPlatformSubType:(SSDKPlatformType)platformSubType;
 
 /**
+ *  设置微信分享参数
+ *
+ *  @param text                 文本
+ *  @param title                标题
+ *  @param url                  分享链接
+ *  @param thumbImage           缩略图，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage
+ *  @param image                图片，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage
+ *  @param musicFileURL         音乐文件链接地址
+ *  @param extInfo              扩展信息
+ *  @param fileData             文件数据，可以为NSData、UIImage、NSString、NSURL（文件路径）、SSDKData、SSDKImage
+ *  @param emoticonData         表情数据，可以为NSData、UIImage、NSURL（文件路径）、SSDKData、SSDKImage
+ *  @param sourceFileExtension  源文件后缀名
+ *  @param sourceFileData       源文件数据，可以为NSData、NSString、NSURL（文件路径）、SSDKData
+ *  @param type                 分享类型，支持SSDKContentTypeText、SSDKContentTypeImage、SSDKContentTypeWebPage、SSDKContentTypeApp、SSDKContentTypeAudio和SSDKContentTypeVideo
+ *  @param platformType 平台子类型，只能传入SSDKPlatformTypeWechatSession、SSDKPlatformTypeWechatTimeline和SSDKPlatformTypeWechatFav其中一个
+ *
+ *  分享文本时：
+ *  设置type为SSDKContentTypeText, 并填入text参数
+ *
+ *  分享图片时：
+ *  设置type为SSDKContentTypeImage, 非gif图片时：填入title和image参数，如果为gif图片则需要填写title和emoticonData参数
+ *
+ *  分享网页时：
+ *  设置type为SSDKContentTypeWebPage, 并设置text、title、url以及thumbImage参数，如果尚未设置thumbImage则会从image参数中读取图片并对图片进行缩放操作。
+ *
+ *  分享应用时：
+ *  设置type为SSDKContentTypeApp，并设置text、title、extInfo（可选）以及fileData（可选）参数。
+ *
+ *  分享音乐时：
+ *  设置type为SSDKContentTypeAudio，并设置text、title、url以及musicFileURL（可选）参数。
+ *
+ *  分享视频时：
+ *  设置type为SSDKContentTypeVideo，并设置text、title、url参数
+ *
+ *  分享文件时：
+ *  设置type为SSDKContentTypeFile（例如.mp3、.mp4、.pdf、.docx的分享），设置title、sourceFileExtension、sourceFileData，以及thumbImage参数，如果尚未设置thumbImage则会从image参数中读取图片并对图片进行缩放操作参数
+ */
+- (void)SSDKSetupWeChatParamsByText:(NSString *)text
+                              title:(NSString *)title
+                                url:(NSURL *)url
+                         thumbImage:(id)thumbImage
+                              image:(id)image
+                       musicFileURL:(NSURL *)musicFileURL
+                            extInfo:(NSString *)extInfo
+                           fileData:(id)fileData
+                       emoticonData:(id)emoticonData
+                sourceFileExtension:(NSString *)fileExtension
+                     sourceFileData:(id)sourceFileData
+                               type:(SSDKContentType)type
+                 forPlatformSubType:(SSDKPlatformType)platformSubType;
+
+/**
  *  设置Twitter分享参数
  *
  *  @param text      分享内容
@@ -158,6 +210,28 @@
                            type:(SSDKContentType)type
              forPlatformSubType:(SSDKPlatformType)platformSubType;
 
+/**
+ *  设置QQ分享参数
+ *
+ *  @param text            分享内容
+ *  @param title           分享标题
+ *  @param url             分享链接
+ *  @param audioFlashURL   分享音频时缩略图播放源,仅平台子类型为SSDKPlatformSubTypeQQFriend,且分享类型为Audio时生效
+ *  @param videoFlashURL   分享视频时缩略图播放源,仅平台子类型为SSDKPlatformSubTypeQQFriend,且分享类型为Video时生效
+ *  @param thumbImage      缩略图，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage
+ *  @param image           图片，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage
+ *  @param type            分享类型, 仅支持Text（仅QQFriend）、Image（仅QQFriend）、WebPage、Audio、Video类型
+ *  @param platformSubType 平台子类型，只能传入SSDKPlatformSubTypeQZone或者SSDKPlatformSubTypeQQFriend其中一个
+ */
+- (void)SSDKSetupQQParamsByText:(NSString *)text
+                          title:(NSString *)title
+                            url:(NSURL *)url
+                  audioFlashURL:(NSURL *)audioFlashURL
+                  videoFlashURL:(NSURL *)videoFlashURL
+                     thumbImage:(id)thumbImage
+                          image:(id)image
+                           type:(SSDKContentType)type
+             forPlatformSubType:(SSDKPlatformType)platformSubType;
 /**
  *  设置Facebook分享参数
  *
@@ -279,20 +353,12 @@
 /**
  *  设置GooglePlus分享参数
  *
- *  @param text       文本
- *  @param image      分享图片，当type为Image时，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage。当type为WebPage时，只能为网络图片，可以传入NSString（图片路径）、NSURL（图片路径）
- *  @param url        分享链接，仅在type为WebPage时有效
- *  @param title      链接标题，仅在type为WebPage并且设置deepLinkId时生效。
- *  @param urlDesc    链接描述，仅在type为WebPage并且设置deepLinkId时生效。
- *  @param deepLinkId DeepLink标识， 仅在type为WebPage时有效
- *  @param type  分享类型，仅支持Text、Image、WebPage类型
+ *  @param text     文本
+ *  @param url      分享链接，仅在type为WebPage时有效
+ *  @param type     分享类型，仅支持Text、WebPage类型
  */
 - (void)SSDKSetupGooglePlusParamsByText:(NSString *)text
-                                  image:(id)image
                                     url:(NSURL *)url
-                                  title:(NSString *)title
-                                urlDesc:(NSString *)urlDesc
-                             deepLinkId:(NSString *)deepLinkId
                                    type:(SSDKContentType)type;
 
 /**
@@ -609,5 +675,20 @@
                           toUserId:(NSString *)userId
                               type:(SSDKContentType)type
                 forPlatformSubType:(SSDKPlatformType)platformSubType;
+
+/**
+ *  设置Facebook Messenger分享参数
+ *
+ *  @param image 分享图片，可以为UIImage、NSString（图片路径）、NSURL（图片路径）、SSDKImage。
+ *  @param image 分享gif图，可以为NSData、NSString、NSURL（文件路径）、SSDKData。
+ *  @param audio 分享音频, 可以为NSData、NSString、NSURL（文件路径）、SSDKData。
+ *  @param video 分享视频, 可以为NSData、NSString、NSURL（文件路径）、SSDKData。
+ *  @param type  分享类型，仅支持Image、Audio、Video
+ */
+- (void)SSDKSetupFacebookMessengerParamsByImage:(id)image
+                                            gif:(id)gif
+                                          audio:(id)audio
+                                          video:(id)video
+                                           type:(SSDKContentType)type;
 
 @end

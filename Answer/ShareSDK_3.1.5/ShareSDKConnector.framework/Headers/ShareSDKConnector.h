@@ -46,14 +46,6 @@
 + (void)connectRenren:(Class)rennClientClass;
 
 /**
- *  连接Google＋以供ShareSDK可以正常使用Google＋的相关功能（包括授权、分享）
- *
- *  @param signClass  Google＋SDK中的类型,应先导入GooglePlus.framework,再传入[GPPSignIn class]到此参数
- *  @param shareClass Google＋SDK中的类型,应先导入GooglePlus.framework,再传入[GPPShare class]到此参数
- */
-+ (void)connectGooglePlus:(Class)signClass shareClass:(Class)shareClass;
-
-/**
  *  链接支付宝好友以供ShareSDK可以正常使用支付宝进行分享
  *
  *  @param apOpenApiClass 支付宝好友SDK中的类型，应先导入libAPOpenSdk.a，再将[APOpenApi class]传入到此参数。注：此参数不能为nil，否则会导致无法正常分享。
@@ -73,5 +65,12 @@
  *  @param yxApiClass 易信SDK中的类型，应先导入YXApi.h，再将[YXApi class]传入到参数中。
  */
 + (void)connectYiXin:(Class)yxApiClass;
+
+/**
+ *  链接Facebook Messenger以供ShareSDK可以正常使用Facebook Messenger的相关功能
+ *
+ *  @param fbmApiClass Facebook Messenger SDK中的类型，应先导入FBSDKMessengerShareKit.framework，再将[FBSDKMessengerSharer class]传入到参数中。
+ */
++ (void)connectFacebookMessenger:(Class)fbmApiClass;
 
 @end

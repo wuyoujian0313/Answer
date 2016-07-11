@@ -14,9 +14,13 @@
 #import <ShareSDKUI/SSUIShareActionSheetCustomItem.h>
 #import <ShareSDK/ShareSDK+Base.h>
 
+#import "WechatAuthSDK.h"
+#import "WXApi.h"
+#import "WXApiObject.h"
 
 
-@interface BaseVC ()
+
+@interface BaseVC ()<WXApiDelegate>
 
 @end
 
@@ -40,18 +44,47 @@
     return UIStatusBarStyleDefault;
 }
 
+-(void) onResp:(BaseResp*)resp {
+    
+}
+
 - (void)shareMenu {
 //    // 授权
 //    [ShareSDK authorize:SSDKPlatformTypeWechat settings:@{SSDKAuthSettingKeyScopes : @[@"snsapi_userinfo"]} onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
 //        //
 //    }];
-//    
+//
 //    
 //    return;
     
-//    // 授权
+    //[WXApi registerApp:@"wxc81059749922d85e"];
+    
+//    SendAuthReq* req = [[SendAuthReq alloc] init];
+//    req.scope = @"snsapi_userinfo"; // @"post_timeline,sns"
+//    req.state = @"wuyoujian";
+//    [WXApi sendReq:req];
+//    
+//    OpenWebviewReq *req = [[OpenWebviewReq alloc] init];
+//    req.url = @"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc81059749922d85e&redirect_uri=http://www.mascot.duapp.com&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+//    [WXApi sendReq:req];
+//    return;
+//    
+     //授权
+//    [ShareSDK authorize:SSDKPlatformTypeWechat settings:@{SSDKAuthSettingKeyScopes : @[@"snsapi_userinfo"]} onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
+//        //
+//        NSLog(@"%@",[user rawData]);
+//        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"UID"
+//                                                            message:user.uid
+//                                                           delegate:nil
+//                                                  cancelButtonTitle:@"确定"
+//                                                  otherButtonTitles:nil];
+//        [alertView show];
+//    }];
+
+    
 //    [ShareSDK getUserInfo:SSDKPlatformTypeWechat onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
 //        //
+//        
 //    }];
 //    return;
     

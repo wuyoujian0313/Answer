@@ -43,7 +43,7 @@
 
 #define NeedAudio
 
-#define kNetworkServerIP            @"http://101.69.181.210:9990"
+#define kNetworkServerIP            @"http://101.69.181.210:80"
 #define kNetworkAPIServer           kNetworkServerIP@"/tuwen_web"
 
 #define kSharedURL                  @"http://mp.weixin.qq.com/s?__biz=MzI0MDIxODQwNA==&mid=402448879&idx=1&sn=68af9498ea6dd3c5d58ff50135a41fce&scene=0&previewkey=N8Sopmdh7ICqBwQYX9JqVMNS9bJajjJKzz%2F0By7ITJA%3D#wechat_redirect"
@@ -58,6 +58,7 @@
 
 #define QQSDKAppKey                 @"alkvsxWc7Eh7GwGk"
 #define QQSDKAppId                  @"1105106734"
+
 
 #define WeiXinSDKAppSecret          @"dce5699086e990df3104052ce298f573"
 #define WeiXinSDKAppId              @"wx7a296d05150143e5"
