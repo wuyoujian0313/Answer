@@ -14,6 +14,8 @@
 		AF280E371CF569EA0072652B /* DeviceInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = AF280E361CF569EA0072652B /* DeviceInfo.m */; };
 		AFB0C6E71CF5E193005A9B7A /* WXPayResult.m in Sources */ = {isa = PBXBuildFile; fileRef = AFB0C6E61CF5E193005A9B7A /* WXPayResult.m */; };
 		AFE809DE1D2A2F830006BC83 /* NetworkTask.m in Sources */ = {isa = PBXBuildFile; fileRef = AFE809DD1D2A2F830006BC83 /* NetworkTask.m */; };
+		AFF7FC951D54E3A60049147F /* WithdrawVC.m in Sources */ = {isa = PBXBuildFile; fileRef = AFF7FC941D54E3A60049147F /* WithdrawVC.m */; };
+		AFF7FC971D54E4030049147F /* twQRcode.jpg in Resources */ = {isa = PBXBuildFile; fileRef = AFF7FC961D54E4030049147F /* twQRcode.jpg */; };
 		E120F8E61C4A25270024FC87 /* RechangeTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */; };
 		E14410631C27DAF1000EE19A /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = E14410621C27DAF1000EE19A /* MainController.m */; };
 		E14C20EB1C1EE8A6003925B5 /* LoginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = E14C20EA1C1EE8A6003925B5 /* LoginResult.m */; };
@@ -203,6 +205,9 @@
 		AFB0C6E61CF5E193005A9B7A /* WXPayResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXPayResult.m; sourceTree = "<group>"; };
 		AFE809DC1D2A2F830006BC83 /* NetworkTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkTask.h; sourceTree = "<group>"; };
 		AFE809DD1D2A2F830006BC83 /* NetworkTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkTask.m; sourceTree = "<group>"; };
+		AFF7FC931D54E3A60049147F /* WithdrawVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WithdrawVC.h; sourceTree = "<group>"; };
+		AFF7FC941D54E3A60049147F /* WithdrawVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WithdrawVC.m; sourceTree = "<group>"; };
+		AFF7FC961D54E4030049147F /* twQRcode.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = twQRcode.jpg; sourceTree = "<group>"; };
 		E120F8E41C4A25270024FC87 /* RechangeTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RechangeTableViewCell.h; sourceTree = "<group>"; };
 		E120F8E51C4A25270024FC87 /* RechangeTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RechangeTableViewCell.m; sourceTree = "<group>"; };
 		E14410611C27DAF1000EE19A /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Answer/MainController.h; sourceTree = SOURCE_ROOT; };
@@ -838,6 +843,8 @@
 				E1A441221C3CB67A00C3ECD3 /* MyRecordVC.m */,
 				E1A441241C3CB6CA00C3ECD3 /* ToCashVC.h */,
 				E1A441251C3CB6CA00C3ECD3 /* ToCashVC.m */,
+				AFF7FC931D54E3A60049147F /* WithdrawVC.h */,
+				AFF7FC941D54E3A60049147F /* WithdrawVC.m */,
 				E1A441271C3CB71800C3ECD3 /* MyBalanceVC.h */,
 				E1A441281C3CB71800C3ECD3 /* MyBalanceVC.m */,
 				E1A4412A1C3CB9B000C3ECD3 /* AboutVC.h */,
@@ -917,6 +924,7 @@
 			children = (
 				E1F880971C426BC0000BC291 /* frameworks */,
 				E19E87871CA97CD600731308 /* 180.png */,
+				AFF7FC961D54E4030049147F /* twQRcode.jpg */,
 				E1D189701C0EE8A40043DE9C /* Answer-Prefix.pch */,
 				E1D188C51C0ED4880043DE9C /* Images.xcassets */,
 				E1D188CA1C0ED4880043DE9C /* Info.plist */,
@@ -1304,6 +1312,7 @@
 				E19761FF1C2673220093A935 /* LICENSE in Resources */,
 				E1D188C61C0ED4880043DE9C /* Images.xcassets in Resources */,
 				E1E9DAE31C453007009C618C /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				AFF7FC971D54E4030049147F /* twQRcode.jpg in Resources */,
 				E1B78A321C22608300A2E384 /* FormatterKit.strings in Resources */,
 				E1E9DAE71C453007009C618C /* ShareSDK.bundle in Resources */,
 				E1D188EE1C0ED6630043DE9C /* InfoPlist.strings in Resources */,
@@ -1441,6 +1450,7 @@
 				E19762031C2673220093A935 /* OHAttributedLabel.m in Sources */,
 				AF2415D91CDDA36B0090C88E /* ForgotPasswordVC.m in Sources */,
 				E1B78A601C2263B600A2E384 /* MJRefreshConst.m in Sources */,
+				AFF7FC951D54E3A60049147F /* WithdrawVC.m in Sources */,
 				E1A054B11C1F0EC400A6DD56 /* ChangeHeadImgResult.m in Sources */,
 				E1D189631C0EE6F60043DE9C /* SDWebImageDownloaderOperation.m in Sources */,
 				E14C211B1C1EFB27003925B5 /* MyFriendsResult.m in Sources */,
@@ -1627,7 +1637,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "68d3e67a-ab5a-41da-935b-8ec9db0d814b";
+				PROVISIONING_PROFILE = "b209d096-03c7-4420-bc10-bf610ac0bebd";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1641,7 +1651,7 @@
 				CLANG_CXX_LIBRARY = "libstdc++";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Wu YouJian (5P7XN5JH2L)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Beijing WeiMeiTianCheng Technology Co., Ltd.";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Answer/ShareSDK_3.1.5/extends/QQSDK",
@@ -1664,7 +1674,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "68d3e67a-ab5a-41da-935b-8ec9db0d814b";
+				PROVISIONING_PROFILE = "b209d096-03c7-4420-bc10-bf610ac0bebd";
 			};
 			name = Release;
 		};

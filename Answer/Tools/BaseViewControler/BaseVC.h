@@ -18,6 +18,9 @@
 - (UIBarButtonItem*)configBackButton;
 
 
+- (void)setContentViewBackgroundColor:(UIColor*)color;
+
+
 - (UIButton*)configRightBarButtonWithImage:(UIImage*)image selectImage:(UIImage*)selectIamge target:(id)target selector:(SEL)selector frame:(CGRect)frame;
 - (UIButton*)configLeftBarButtonWithImage:(UIImage*)image selectImage:(UIImage*)selectIamge target:(id)target selector:(SEL)selector;
 

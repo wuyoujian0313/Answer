@@ -13,6 +13,7 @@
 #import "MyRecordVC.h"
 #import "ToCashVC.h"
 #import "MyBalanceVC.h"
+#import "WithdrawVC.h"
 
 
 @interface MyWalletVC ()<UICollectionViewDelegate,UICollectionViewDataSource>
@@ -140,7 +141,8 @@
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 2) {
         //提现
-        ToCashVC *vc = [[ToCashVC alloc] init];
+        WithdrawVC *vc = [[WithdrawVC alloc] init];
+        //ToCashVC *vc = [[ToCashVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (indexPath.row == 3) {
         //提现

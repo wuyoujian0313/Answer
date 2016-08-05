@@ -57,7 +57,7 @@
 
 #pragma mark - UITableViewDataSource
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 2;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -98,15 +98,15 @@
     UILabel *titleLabel = (UILabel *)[cell.contentView viewWithTag:101];
     NSInteger row = indexPath.row;
     switch (row) {
+//        case 0:
+//            imageView.image = [UIImage imageNamed:@"about"];
+//            titleLabel.text = @"关于图问";
+//            break;
         case 0:
-            imageView.image = [UIImage imageNamed:@"about"];
-            titleLabel.text = @"关于图问";
-            break;
-        case 1:
             imageView.image = [UIImage imageNamed:@"shareToFriend"];
             titleLabel.text = @"推荐给好友";
             break;
-        case 2:
+        case 1:
             imageView.image = [UIImage imageNamed:@"logout"];
             titleLabel.text = @"退出";
             break;
@@ -131,18 +131,18 @@
     
     NSInteger row = indexPath.row;
     switch (row) {
+//        case 0: {
+//            // 关于图问
+//            AboutVC *vc = [[AboutVC alloc] init];
+//            [self.navigationController pushViewController:vc animated:YES];
+//            break;
+//        }
         case 0: {
-            // 关于图问
-            AboutVC *vc = [[AboutVC alloc] init];
-            [self.navigationController pushViewController:vc animated:YES];
-            break;
-        }
-        case 1: {
             // 推荐给好友
             [self shareMenu];
             break;
         }
-        case 2: {
+        case 1: {
             // 退出
             
             UIActionSheet *sheet=[[UIActionSheet alloc] initWithTitle:@"确认退出登录？" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:@"退出登录" otherButtonTitles:nil];

@@ -12,6 +12,7 @@
 #import "RechangeVC.h"
 #import "UserAccountResult.h"
 #import "NetworkTask.h"
+#import "WithdrawVC.h"
 
 @interface MyBalanceVC ()<UITableViewDataSource,UITableViewDelegate,NetworkTaskDelegate>
 @property (nonatomic, strong) UITableView   *balanceTableView;
@@ -136,7 +137,8 @@
 
 - (void)buttonAction:(UIButton*)sender {
     if (sender.tag == 101) {
-        ToCashVC *vc = [[ToCashVC alloc] init];
+        WithdrawVC *vc = [[WithdrawVC alloc] init];
+        //ToCashVC *vc = [[ToCashVC alloc] init];
         [self.navigationController pushViewController:vc animated:YES];
     } else if (sender.tag == 102) {
         RechangeVC *vc = [[RechangeVC alloc] init];

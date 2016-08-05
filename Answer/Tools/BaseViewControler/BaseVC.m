@@ -21,7 +21,7 @@
 
 
 @interface BaseVC ()<WXApiDelegate>
-
+@property (nonatomic, strong) UIView *contentView;
 @end
 
 @implementation BaseVC
@@ -58,17 +58,19 @@
 //    return;
     
     //[WXApi registerApp:@"wxc81059749922d85e"];
-    
 //    SendAuthReq* req = [[SendAuthReq alloc] init];
 //    req.scope = @"snsapi_userinfo"; // @"post_timeline,sns"
 //    req.state = @"wuyoujian";
 //    [WXApi sendReq:req];
-//    
+    
+//    NSString *strURL = @"http://www.mobsec.cn/tuwen_web/manage/pay.jsp";
+//    strURL = [strURL urlEncodingWithStringEncoding:NSUTF8StringEncoding];
+////    
 //    OpenWebviewReq *req = [[OpenWebviewReq alloc] init];
-//    req.url = @"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc81059749922d85e&redirect_uri=http://www.mascot.duapp.com&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+//    req.url = [NSString stringWithFormat:@"https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxc81059749922d85e&redirect_uri=%@&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect",strURL];
 //    [WXApi sendReq:req];
 //    return;
-//    
+
      //授权
 //    [ShareSDK authorize:SSDKPlatformTypeWechat settings:@{SSDKAuthSettingKeyScopes : @[@"snsapi_userinfo"]} onStateChanged:^(SSDKResponseState state, SSDKUser *user, NSError *error) {
 //        //
@@ -150,12 +152,17 @@
      ];
 }
 
+- (void)setContentViewBackgroundColor:(UIColor*)color {
+    [self.contentView setBackgroundColor:color];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.view setBackgroundColor:[UIColor whiteColor]];
     
     UIView *rootView = [[UIView alloc] initWithFrame:CGRectMake(0, [DeviceInfo navigationBarHeight], self.view.frame.size.width, self.view.frame.size.height - [DeviceInfo navigationBarHeight])];
+    self.contentView = rootView;
     [rootView setBackgroundColor:[UIColor colorWithHex:0xebeef0]];
     [self.view addSubview:rootView];
     
