@@ -19,7 +19,7 @@
     // Do any additional setup after loading the view.
     
     [self setNavTitle:@"提现"];
-    //[self setContentViewBackgroundColor:[UIColor whiteColor]];
+    [self setContentViewBackgroundColor:[UIColor whiteColor]];
     
     UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(60, 60 + [DeviceInfo navigationBarHeight], self.view.frame.size.width - 120, self.view.frame.size.width - 120)];
     [imageView setImage:[UIImage imageNamed:@"twQRcode.jpg"]];
