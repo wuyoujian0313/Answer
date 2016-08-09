@@ -1637,7 +1637,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b209d096-03c7-4420-bc10-bf610ac0bebd";
+				PROVISIONING_PROFILE = "a3009f90-bdd3-4300-a8ea-05ea78f5fc9d";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -1674,7 +1674,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.weimeitc.tuwen;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b209d096-03c7-4420-bc10-bf610ac0bebd";
+				PROVISIONING_PROFILE = "a3009f90-bdd3-4300-a8ea-05ea78f5fc9d";
 			};
 			name = Release;
 		};
